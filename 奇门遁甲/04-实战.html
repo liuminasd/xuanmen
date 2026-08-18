@@ -982,7 +982,8 @@
   var bar = document.getElementById('progressBar');
   window.addEventListener('scroll', function(){
     var h = document.documentElement;
-    var pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    var denom = h.scrollHeight - h.clientHeight;
+    var pct = denom > 0 ? (h.scrollTop / denom) * 100 : 0;
     bar.style.width = Math.min(pct, 100) + '%';
   });
 
