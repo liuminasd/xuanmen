@@ -14,7 +14,8 @@ const PORT = process.env.PORT || 3456;
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(session({
-  secret: 'xuanmen-learning-platform-2024',
+  // 密钥优先读环境变量；未设置时用开发默认值（本地 localhost 场景安全，生产部署务必设置 SESSION_SECRET）
+  secret: process.env.SESSION_SECRET || 'xuanmen-learning-platform-2024',
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 } // 7天

@@ -8,3 +8,6 @@ server/node_modules/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# 运行时数据（JSON 数据库，每次运行会变动，不应入库）
+server/data/
