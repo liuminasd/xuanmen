@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="奇门遁甲深潜修炼 — 由术入道心法、断局三重境界、一心一盘一事心法、法理情三层体系、入手九诀、四阶段学习法、进阶书单。">
+<title>奇门遁甲 · 深潜修炼</title>
+<link rel="stylesheet" href="../共享样式/base.css">
+<link rel="stylesheet" href="../共享样式/components.css">
+<style>
+:root{--font-ui:"Noto Serif SC","Songti SC","STSong",serif}
+body{font-family:var(--font-ui);padding-bottom:60px}
+
+/* ── 顶部导航 ── */
+.topnav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(8,7,13,.98),rgba(12,11,21,.95));border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;backdrop-filter:blur(10px)}
+.topnav-back{color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;padding:5px 12px;border:1px solid var(--gold);border-radius:14px;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.topnav-back:hover{background:var(--gold);color:#111}
+.topnav-title{color:var(--text-dim);font-size:.76rem;letter-spacing:.06em;white-space:nowrap}
+.topnav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.topnav-links a{color:var(--text-alt);text-decoration:none;font-size:.74rem;padding:4px 12px;border:1px solid var(--border);border-radius:12px;transition:all .2s}
+.topnav-links a:hover{border-color:var(--gold);color:var(--gold)}
+@media(max-width:600px){.topnav{padding:8px 10px;gap:8px}.topnav-links{margin-left:0}}
+
+/* ── Hero ── */
+.hero{text-align:center;padding:48px 20px 28px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.hero h1{font-size:2.4em;color:var(--gold-lt);letter-spacing:6px;font-weight:300}
+.hero .sub{color:var(--text-dim);margin-top:6px;letter-spacing:3px;font-size:.95em}
+.hero .line{width:50px;height:1px;background:var(--gold);margin:12px auto;opacity:.4}
+
+.container{max-width:960px;margin:0 auto;padding:0 24px}
+
+/* ── 章节标题 ── */
+.sec-hdr{margin:52px 0 24px;padding:0 0 12px;position:relative}
+.sec-hdr::after{content:"";position:absolute;bottom:0;left:0;width:60px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.sec-hdr h2{font-size:1.35rem;color:var(--gold-lt);letter-spacing:3px;font-weight:300;display:flex;align-items:center;gap:12px}
+.sec-hdr .num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--gold-bg);border:1px solid var(--gold);color:var(--gold);font-size:1rem;font-weight:600}
+.sec-hdr .sub{color:var(--text-dim);font-size:.76rem;margin-top:4px;letter-spacing:2px;padding-left:48px}
+
+/* ── 通用正文 ── */
+.sec{margin:20px 0}
+.sec h3{color:var(--gold);font-size:1.05rem;font-weight:400;letter-spacing:2px;margin:22px 0 12px;padding:0 0 0 14px;border-left:2px solid var(--gold)}
+.sec h4{color:var(--gold-lt);font-size:.92rem;margin:18px 0 10px;font-weight:400}
+.sec p{color:var(--text-alt);font-size:.86rem;margin:8px 0;line-height:1.9}
+.sec p strong,.sec li strong{color:#e8d8b0;font-weight:500}
+.sec ul,.sec ol{padding-left:22px;margin:8px 0}
+.sec li{color:var(--text-alt);font-size:.84rem;margin:5px 0;line-height:1.8}
+
+/* ── 强调框 ── */
+.em{background:var(--card);border:1px solid rgba(212,176,106,.08);border-radius:var(--radius);padding:15px 18px;margin:12px 0;font-size:.84rem;color:var(--text-alt)}
+.em strong{color:var(--gold-lt)}
+
+/* ── 引用块 ── */
+blockquote{background:var(--card-alt);border-left:2px solid var(--gold);padding:13px 18px;border-radius:0 var(--radius) var(--radius) 0;color:var(--text-alt);font-style:italic;font-size:.84rem;margin:14px 0}
+blockquote strong{color:var(--gold-lt);font-style:normal}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:.82em;margin:12px 0}
+th{background:var(--gold-bg);color:var(--gold);padding:9px 12px;text-align:left;border-bottom:1px solid rgba(212,176,106,.15);font-weight:400;letter-spacing:1px}
+th:first-child{border-radius:var(--radius) 0 0 0}
+th:last-child{border-radius:0 var(--radius) 0 0}
+td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:hover td{background:rgba(255,255,255,.01)}
+td:first-child{color:#e0d8c0;font-weight:500;white-space:nowrap}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0}
+@media(max-width:720px){.g2{grid-template-columns:1fr}}
+
+/* ── 心法卡片 ── */
+.xf-card{background:linear-gradient(160deg,rgba(10,9,20,.92),rgba(21,19,38,.96));border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;margin:18px 0;position:relative;overflow:hidden;transition:all .3s}
+.xf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5}
+.xf-card:hover{border-color:rgba(212,176,106,.25);box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.xf-card .xf-title{color:var(--gold);font-size:1rem;letter-spacing:3px;margin-bottom:14px;display:flex;align-items:center;gap:8px;font-weight:400}
+.xf-card .xf-body{color:var(--text-alt);font-size:.86rem;line-height:1.9}
+.xf-card .xf-highlight{display:block;text-align:center;font-size:1.25rem;color:var(--gold-lt);letter-spacing:2px;padding:16px 0;font-family:"KaiTi","STKaiti","Noto Serif SC",serif;font-weight:600;text-shadow:0 0 24px rgba(212,176,106,.08)}
+.xf-card .xf-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px}
+.xf-card .xf-col{flex:1;min-width:180px}
+
+/* ── 境界阶梯 ── */
+.realm-steps{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.realm-step{flex:1;min-width:180px;max-width:300px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 18px;text-align:center;transition:all .35s;position:relative;overflow:hidden}
+.realm-step::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;transition:all .3s}
+.realm-step:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.3)}
+.realm-step.r1::before{background:linear-gradient(90deg,transparent,rgba(80,152,200,.6),transparent)}
+.realm-step.r1:hover{border-color:rgba(80,152,200,.4)}
+.realm-step.r2::before{background:linear-gradient(90deg,transparent,rgba(212,176,106,.6),transparent)}
+.realm-step.r2:hover{border-color:rgba(212,176,106,.4)}
+.realm-step.r3::before{background:linear-gradient(90deg,transparent,rgba(78,168,104,.6),transparent)}
+.realm-step.r3:hover{border-color:rgba(78,168,104,.4)}
+.realm-step .r-num{font-size:2.2rem;font-weight:300;margin-bottom:8px}
+.realm-step.r1 .r-num{color:rgba(80,152,200,.7)}
+.realm-step.r2 .r-num{color:rgba(212,176,106,.7)}
+.realm-step.r3 .r-num{color:rgba(78,168,104,.7)}
+.realm-step h4{font-size:.95rem;color:var(--gold-lt);margin-bottom:4px;font-weight:400;letter-spacing:2px}
+.realm-step p{font-size:.76rem;color:var(--text-dim);line-height:1.6}
+.realm-arrow{display:flex;align-items:center;color:var(--text-dim);font-size:1.6rem;font-weight:100}
+
+/* ── 九诀流程 ── */
+.jj-flow{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:18px 0}
+.jj-node{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;text-align:center;min-width:85px;transition:all .3s;cursor:default;position:relative}
+.jj-node:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.jj-node .jj-num{font-size:.62rem;color:var(--text-dim);letter-spacing:.06em;margin-bottom:4px}
+.jj-node .jj-icon{font-size:1.3rem;display:block;margin-bottom:3px}
+.jj-node .jj-label{font-size:.76rem;color:var(--gold-lt);font-weight:500;letter-spacing:.04em}
+.jj-node .jj-sub{font-size:.62rem;color:var(--text-dim);display:block;margin-top:2px}
+.jj-arr{color:var(--text-dim);font-size:1rem;flex-shrink:0}
+
+/* ── 口诀卡片（继承01页风格） ── */
+.mnemonic{background:linear-gradient(135deg,rgba(212,176,106,.08),rgba(212,176,106,.02));border:1px solid rgba(212,176,106,.2);border-radius:var(--radius-lg);padding:20px 24px;margin:18px 0;position:relative;overflow:hidden;transition:all .3s}
+.mnemonic::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--gold),var(--gold-dk));border-radius:4px 0 0 4px}
+.mnemonic:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.mnemonic .m-title{color:var(--gold);font-size:.88rem;font-weight:600;letter-spacing:3px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.mnemonic .m-content{color:var(--gold-lt);font-size:.95rem;line-height:2.1;letter-spacing:.05em;text-align:center;font-family:"KaiTi","STKaiti","Noto Serif SC",serif;font-weight:600;text-shadow:0 0 20px rgba(212,176,106,.1)}
+.mnemonic .m-explain{color:var(--text-dim);font-size:.76rem;margin-top:10px;line-height:1.8}
+.mnemonic .m-explain strong{color:var(--text-alt)}
+
+/* ── 误区警示 ── */
+.warning-card{background:rgba(224,85,74,.03);border:1px solid rgba(224,85,74,.15);border-radius:var(--radius);padding:18px 22px;margin:12px 0;transition:all .3s}
+.warning-card:hover{border-color:rgba(224,85,74,.3);background:rgba(224,85,74,.05)}
+.warning-card h4{color:#e0887a;font-size:.88rem;margin-bottom:6px;font-weight:400;letter-spacing:1px}
+.warning-card p{color:var(--text-alt);font-size:.82rem;line-height:1.8}
+
+/* ── 书单 ── */
+.book-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:16px 0}
+.book-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:all .3s;display:flex;gap:14px;align-items:flex-start}
+.book-card:hover{border-color:rgba(212,176,106,.25);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.book-card .bk-cover{flex-shrink:0;width:48px;height:68px;background:var(--card-alt);border:1px solid var(--border);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--text-dim)}
+.book-card .bk-info{flex:1}
+.book-card .bk-title{color:var(--gold-lt);font-size:.88rem;font-weight:500;margin-bottom:2px;letter-spacing:.04em}
+.book-card .bk-author{color:var(--text-dim);font-size:.7rem;margin-bottom:6px}
+.book-card .bk-desc{color:var(--text-alt);font-size:.76rem;line-height:1.7}
+.book-card .bk-tag{display:inline-block;font-size:.58rem;padding:1px 8px;border-radius:8px;margin-top:6px;letter-spacing:.06em}
+.bk-tag.entry{background:rgba(80,152,200,.1);color:var(--blue);border:1px solid rgba(80,152,200,.15)}
+.bk-tag.mid{background:rgba(212,176,106,.1);color:var(--gold);border:1px solid rgba(212,176,106,.15)}
+.bk-tag.adv{background:rgba(78,168,104,.1);color:var(--green);border:1px solid rgba(78,168,104,.15)}
+.bk-tag.classic{background:rgba(224,85,74,.08);color:#e0887a;border:1px solid rgba(224,85,74,.12)}
+
+/* ── 四阶段学习 ── */
+.phase-steps{display:flex;flex-direction:column;gap:10px;margin:16px 0}
+.phase-step{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;transition:all .3s;display:flex;gap:16px;align-items:flex-start}
+.phase-step:hover{border-color:rgba(212,176,106,.2)}
+.phase-step .ph-num{flex-shrink:0;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:600;letter-spacing:1px}
+.phase-step .ph-num.p1{background:rgba(80,152,200,.1);color:var(--blue);border:1px solid rgba(80,152,200,.2)}
+.phase-step .ph-num.p2{background:rgba(212,176,106,.1);color:var(--gold);border:1px solid rgba(212,176,106,.2)}
+.phase-step .ph-num.p3{background:rgba(78,168,104,.1);color:var(--green);border:1px solid rgba(78,168,104,.2)}
+.phase-step .ph-num.p4{background:rgba(160,100,220,.08);color:#b090d0;border:1px solid rgba(160,100,220,.2)}
+.phase-step .ph-body{flex:1}
+.phase-step .ph-body h4{color:var(--gold-lt);font-size:.92rem;margin-bottom:4px;font-weight:400;letter-spacing:1px}
+.phase-step .ph-body p{color:var(--text-alt);font-size:.8rem;line-height:1.7}
+
+/* ── 法理情三层 ── */
+.layer-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}
+@media(max-width:768px){.layer-cards{grid-template-columns:1fr}}
+.layer-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 18px;text-align:center;transition:all .3s;position:relative;overflow:hidden}
+.layer-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;opacity:.5;transition:all .3s}
+.layer-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.3)}
+.layer-card.l1::before{background:linear-gradient(90deg,transparent,rgba(80,152,200,.5),transparent)}
+.layer-card.l1:hover{border-color:rgba(80,152,200,.35)}
+.layer-card.l2::before{background:linear-gradient(90deg,transparent,rgba(212,176,106,.5),transparent)}
+.layer-card.l2:hover{border-color:rgba(212,176,106,.35)}
+.layer-card.l3::before{background:linear-gradient(90deg,transparent,rgba(78,168,104,.5),transparent)}
+.layer-card.l3:hover{border-color:rgba(78,168,104,.35)}
+.layer-card .lc-icon{font-size:2rem;display:block;margin-bottom:8px}
+.layer-card h4{color:var(--gold-lt);font-size:.92rem;margin-bottom:6px;font-weight:400;letter-spacing:2px}
+.layer-card p{color:var(--text-dim);font-size:.76rem;line-height:1.7}
+
+/* ── 渐进式详情 ── */
+details{border:1px solid var(--border);border-radius:var(--radius);margin:12px 0;overflow:hidden}
+details[open]{border-color:rgba(212,176,106,.2)}
+summary{cursor:pointer;padding:14px 18px;color:var(--gold-lt);font-size:.88rem;font-weight:400;letter-spacing:2px;background:var(--card);transition:all .2s;user-select:none}
+summary:hover{background:rgba(212,176,106,.03)}
+details[open] summary{border-bottom:1px solid var(--border)}
+.detail-body{padding:16px 18px}
+
+/* ── 底部 ── */
+footer{text-align:center;padding:40px 20px;color:var(--text-dim);font-size:.74rem;letter-spacing:2px;border-top:1px solid var(--border);margin-top:48px}
+
+@media(max-width:640px){
+  .hero h1{font-size:1.5em}.hero{padding:36px 16px 24px}
+  .container{padding:0 12px}
+  .sec-hdr h2{font-size:1.15rem}
+  table{font-size:.72em}td,th{padding:6px 8px}
+  .jj-flow{gap:4px}.jj-node{min-width:65px;padding:10px 8px}.jj-node .jj-label{font-size:.68rem}
+  .jj-arr{font-size:.7rem}
+  .realm-steps{flex-direction:column;align-items:center}.realm-arrow{transform:rotate(90deg)}
+  .xf-card .xf-row{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <a href="../index.html" class="topnav-back">← 玄门</a>
+  <span class="topnav-title">奇门遁甲 · 深潜修炼</span>
+  <div class="topnav-links">
+    <a href="index.html">总览</a>
+    <a href="01-基础入门.html">基础入门</a>
+    <a href="02-五步学习.html">五步学习</a>
+    <a href="题库.html">题库</a>
+  </div>
+</header>
+
+<div class="page-progress" id="pageProgress"></div>
+<button id="backTop">↑</button>
+
+<div class="hero">
+  <h1>深 潜 修 炼</h1>
+  <p class="sub">由术入道 · 三层贯通 · 九诀入手 · 四阶进阶</p>
+  <div class="line"></div>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- 第一章：由术入道 — 心法篇                                    -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="sec-hdr">
+  <h2><span class="num">①</span> 由术入道 · 心法篇</h2>
+  <p class="sub">术为渡河筏 · 道是彼岸土 · 超越技法直入心髓</p>
+</div>
+
+<div class="sec">
+
+  <div class="xf-card">
+    <div class="xf-title">🛶 术为渡河筏 道是彼岸土</div>
+    <span class="xf-highlight">术为渡河筏 &nbsp; 道是彼岸土<br>既至彼岸已 &nbsp; 筏当舍之去</span>
+    <div class="xf-body">
+      <p>奇门遁甲的一切技法——排盘、五行生克、用神取象、吉凶判断——都是<strong>「术」</strong>，是渡河的工具。但这些工具本身不是终点。真正的目的地——<strong>「道」</strong>——是对天地运行规律的深刻体悟，是在纷繁符号背后看到<strong>时空能量的流动本质</strong>。</p>
+      <p>初学者最易犯的错误：<strong>执着于术而迷失于道</strong>。背诵了所有的口诀、掌握了全套排盘技巧，却在面对真实生活问题时茫然无措。因为术只是语言，道才是智慧。</p>
+      <p>什么是「道」在奇门中的体现？</p>
+      <ul>
+        <li><strong>阴阳之道：</strong>一切符号皆有阴阳两面，吉中有凶、凶中藏吉</li>
+        <li><strong>五行之道：</strong>生克制化是宇宙能量流转的基本法则，不可违背</li>
+        <li><strong>时空之道：</strong>同一符号在不同时空下的含义截然不同</li>
+        <li><strong>人事之道：</strong>盘是死的，人是活的。盘面要与现实处境相互印证</li>
+      </ul>
+      <p>当你不再死记硬背「某星在某宫主吉」，而是能<strong>感受</strong>到那个星在那个时空点上散发出的能量气息时，你便已渡河登岸。</p>
+    </div>
+  </div>
+
+  <h3>🔑 心法三要</h3>
+  <div class="xf-card">
+    <div class="xf-body">
+      <div class="xf-row">
+        <div class="xf-col">
+          <h4 style="color:var(--gold-lt);font-weight:400;margin-bottom:6px">一、诚</h4>
+          <p style="margin-top:0;font-size:.82rem">起盘之前，心要诚。不是对神秘力量的盲从，而是<strong>对自己所问之事的真实面对</strong>。欺心之问必得乱象之答。</p>
+        </div>
+        <div class="xf-col">
+          <h4 style="color:var(--gold-lt);font-weight:400;margin-bottom:6px">二、静</h4>
+          <p style="margin-top:0;font-size:.82rem">断局之时，心要静。不让自己的欲望、恐惧、偏见污染解读。<strong>看见什么就是什么</strong>，不加不减。</p>
+        </div>
+        <div class="xf-col">
+          <h4 style="color:var(--gold-lt);font-weight:400;margin-bottom:6px">三、敬</h4>
+          <p style="margin-top:0;font-size:.82rem">落盘之后，心存敬。无论吉凶，都是天地信息的一种呈现。<strong>不因吉而狂，不因凶而沮</strong>。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- 第二章：断局三重境界                                        -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="sec-hdr">
+  <h2><span class="num">②</span> 断局三重境界</h2>
+  <p class="sub">见山是山 → 见山不是山 → 见山还是山</p>
+</div>
+
+<div class="sec">
+
+  <p>断局能力并非线性增长，而是经历三次质变——这便是奇门断局的<strong>三重境界</strong>。每跃一层，眼中的盘面便彻底改观。</p>
+
+  <div class="realm-steps">
+    <div class="realm-step r1">
+      <div class="r-num">壹</div>
+      <h4>见山是山</h4>
+      <p>对照口诀逐条判断。看到天蓬落宫就说"凶"，看到休门就说"吉"。<br><br>此时的你，<strong>盘是盘、你是你</strong>，盘面是一堆独立符号的机械组合。</p>
+    </div>
+    <span class="realm-arrow">→</span>
+    <div class="realm-step r2">
+      <div class="r-num">贰</div>
+      <h4>见山不是山</h4>
+      <p>不再只看单一符号，而是看到生克流转、能量升降、宫位互动。天蓬未必凶、休门未必吉。<br><br>你开始<strong>感觉到盘面的呼吸</strong>，但常常陷入"怎么看都对"的困惑。</p>
+    </div>
+    <span class="realm-arrow">→</span>
+    <div class="realm-step r3">
+      <div class="r-num">叁</div>
+      <h4>见山还是山</h4>
+      <p>万象归来，大道至简。一眼扫过盘面便能抓住核心矛盾。不需要层层推导，直觉即判断。<br><br>盘面融入身心，<strong>你与盘不再二分</strong>。每一次断局都是与时空的对话。</p>
+    </div>
+  </div>
+
+  <details>
+    <summary>📖 三重境界的进阶标志</summary>
+    <div class="detail-body">
+      <table>
+      <thead><tr><th>维度</th><th>第一重：见山是山</th><th>第二重：见山不是山</th><th>第三重：见山还是山</th></tr></thead>
+      <tr><td><strong>断局时间</strong></td><td>15-30分钟</td><td>5-10分钟</td><td>30秒-2分钟</td></tr>
+      <tr><td><strong>关注点</strong></td><td>单个符号吉凶</td><td>符号间生克关系</td><td>全局能量格局</td></tr>
+      <tr><td><strong>典型特征</strong></td><td>逐条翻书对照</td><td>综合但有困惑</td><td>直觉式全局把握</td></tr>
+      <tr><td><strong>准确率</strong></td><td>30%-50%</td><td>50%-70%</td><td>70%-90%</td></tr>
+      <tr><td><strong>突破标志</strong></td><td>能独立排盘</td><td>能分析复杂关系</td><td>直觉即判断</td></tr>
+      <tr><td><strong>所需时间</strong></td><td>0-6个月</td><td>1-3年</td><td>3年以上</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <blockquote>
+    <strong>💡 禅门公案与奇门断局：</strong>青原惟信禅师说：<em>"老僧三十年前未参禅时，见山是山，见水是水。及至后来亲见知识，有个人处，见山不是山，见水不是水。而今得个休歇处，依前见山只是山，见水只是水。"</em> ——奇门断局的成长，与此如出一辙。
+  </blockquote>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- 第三章："一心一盘一事" 用盘心法                             -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="sec-hdr">
+  <h2><span class="num">③</span> 「一心一盘一事」用盘心法</h2>
+  <p class="sub">专注即是力量 · 一念一局一天地</p>
+</div>
+
+<div class="sec">
+
+  <div class="xf-card">
+    <div class="xf-title">🎯 核心法则</div>
+    <span class="xf-highlight">一心 &nbsp; 一盘 &nbsp; 一事<br>心不二用 · 盘不二看 · 事不二问</span>
+    <div class="xf-body">
+      <p>这是奇门用盘最重要的实操心法。许多学习者断不准，不是因为学艺不精，而是因为<strong>违背了"一一对应"原则</strong>。</p>
+    </div>
+  </div>
+
+  <h3>一心：起盘时心念纯粹</h3>
+  <p>起局之前，将心中杂念清空，<strong>只留一个问题</strong>。不要一边起盘一边想着"万一结果是A怎么办""如果结果不好我就换种问法"——这些杂念会<strong>扭曲盘面信息</strong>。盘面映照的是你起盘瞬间的心念状态，心若不纯，盘必不准。</p>
+
+  <h3>一盘：一个盘面对应一个问题</h3>
+  <p>同一个盘面，不要拿来反复解读不同的问题。虽然从技术上说，同一个时家盘确实可以分析多个事项，但对初学者而言，<strong>一盘一事</strong>是最稳妥的训练方式。等功力深厚之后，自然能一盘多断。</p>
+
+  <h3>一事：一次只问一件事</h3>
+  <p>不要在一个盘面里塞进"我今年财运如何、感情好不好、要不要换工作"三个问题。问题越聚焦，用神越明确，判断越精准。这也符合术数的一条铁律：<strong>问事越具体，答案越清楚</strong>。</p>
+
+  <div class="em">
+    <strong>🔧 实操训练：</strong>每次起局前，在一张纸上写下你唯一想问的那一件事（不超过20个字），然后闭上眼睛静默10秒，再开始排盘。这个简单的仪式，能显著提升断局的准确性。
+  </div>
+
+  <details>
+    <summary>⚖️ 何时可以一盘多断？</summary>
+    <div class="detail-body">
+      <p>当你进入断局第二重境界后期时，可以开始尝试一盘多断。判断你是否准备好的标志是：</p>
+      <ul>
+        <li>单题断局准确率稳定在60%以上</li>
+        <li>面对一盘多断时，能清晰分离各事项的用神而不混淆</li>
+        <li>不被第一个判断结果带偏第二个判断</li>
+        <li>能在10分钟内完成一个完整单题断局</li>
+      </ul>
+      <p>在此之前，坚持"一心一盘一事"是最高效的进阶之路。</p>
+    </div>
+  </details>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- 第四章：法理情三层体系                                       -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="sec-hdr">
+  <h2><span class="num">④</span> 法理情 · 三层断局体系</h2>
+  <p class="sub">法是规矩 · 理是逻辑 · 情是体悟</p>
+</div>
+
+<div class="sec">
+
+  <p>奇门断局不能只看一层，而应<strong>法理情三层贯通</strong>。三层缺一不可，单纯依赖任何一层都会导致偏颇。</p>
+
+  <div class="layer-cards">
+    <div class="layer-card l1">
+      <span class="lc-icon">📐</span>
+      <h4>法 · 技法层</h4>
+      <p>排盘规则、五行生克、旺衰判断、吉凶标准——这是<strong>硬功夫</strong>。法是地基，无法则一切空谈。<br><br><em>「不以规矩，不成方圆」</em></p>
+    </div>
+    <div class="layer-card l2">
+      <span class="lc-icon">🧠</span>
+      <h4>理 · 逻辑层</h4>
+      <p>符号为何如此排列？生克之链如何推导？——这是<strong>推理力</strong>。理是桥梁，连接技法与智慧。<br><br><em>「知其然，更知其所以然」</em></p>
+    </div>
+    <div class="layer-card l3">
+      <span class="lc-icon">💛</span>
+      <h4>情 · 体悟层</h4>
+      <p>对人事的体察、对情境的把握、对问事者处境的共情——这是<strong>洞察力</strong>。情是灵魂，使断语落地生根。<br><br><em>「通情达理，方为明断」</em></p>
+    </div>
+  </div>
+
+  <h3>三层的递进关系</h3>
+  <div class="phase-steps">
+    <div class="phase-step">
+      <div class="ph-num p1">法</div>
+      <div class="ph-body">
+        <h4>第一步：打好法的根基</h4>
+        <p>排盘不出错、符号记清楚、五行生克烂熟于心。此阶段大约需要<strong>3-6个月</strong>的刻意练习。法的标准是「对错」——排对了吗？符号判断对了吗？</p>
+      </div>
+    </div>
+    <div class="phase-step">
+      <div class="ph-num p2">理</div>
+      <div class="ph-body">
+        <h4>第二步：建构理的框架</h4>
+        <p>在法的基础上追问「为什么」：为什么这个符号在这个位置是吉？为什么两个看似矛盾的信号会同时出现？此阶段大约需要<strong>6-12个月</strong>。理的标准是「通不通」——推理链条完整吗？逻辑有漏洞吗？</p>
+      </div>
+    </div>
+    <div class="phase-step">
+      <div class="ph-num p3">情</div>
+      <div class="ph-body">
+        <h4>第三步：注入情的温度</h4>
+        <p>技法正确、逻辑通顺之后，还需要考虑「人」的维度。问事者的性格、处境的特殊性、心理的真实状态——这些无法从盘面直接读取，但决定了断语的<strong>可接受性和可执行性</strong>。此阶段的修行没有时间上限。</p>
+      </div>
+    </div>
+  </div>
+
+  <blockquote>
+    <strong>⚠️ 常见陷阱：</strong>许多人终其一生停留在「法」的层面，变成了「排盘机器」——盘面排得精准无比，但断出来的结论空洞无物、不接地气。技法再精，若缺了「情」这一层，就只是纸上谈兵。
+  </blockquote>
+
+  <details>
+    <summary>🧪 三层体系自检表</summary>
+    <div class="detail-body">
+      <table>
+      <thead><tr><th>层次</th><th>自检问题</th><th>通过标志</th></tr></thead>
+      <tr><td><strong>法</strong></td><td>我能不出错地独立排出一个完整的时家转盘吗？</td><td>10次排盘中9次完全正确</td></tr>
+      <tr><td><strong>法</strong></td><td>我能脱口而出每个天干/八门/九星的五行属性和基本吉凶吗？</td><td>不用翻书，3秒内反应</td></tr>
+      <tr><td><strong>理</strong></td><td>我能解释为什么某个宫位吉/凶，并能追溯整个生克链吗？</td><td>能画出完整的关系链路图</td></tr>
+      <tr><td><strong>理</strong></td><td>面对盘中看似矛盾的信号，我能给出合理的综合分析吗？</td><td>综合判断不依赖单独符号</td></tr>
+      <tr><td><strong>情</strong></td><td>我的断语对方能听懂吗？能落实为具体行动建议吗？</td><td>断语有温度、有方向、可操作</td></tr>
+      <tr><td><strong>情</strong></td><td>面对凶象，我能不加重对方焦虑，同时给出建设性的化解思路吗？</td><td>断凶不断人路</td></tr>
+      </table>
+    </div>
+  </details>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- 第五章：入手九诀 — 断局全流程                                -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="sec-hdr">
+  <h2><span class="num">⑤</span> 入手九诀 · 断局全流程</h2>
+  <p class="sub">定局 → 布宫 → 转盘 → 查墓 → 旺衰 → 符使 → 主客 → 应期 → 化解</p>
+</div>
+
+<div class="sec">
+
+  <p>「入手九诀」是奇门断局的标准操作流程。从起局到化解，九个步骤环环相扣。下面逐一拆解每一步的核心要点与常见误区。</p>
+
+  <!-- 九诀流程图 -->
+  <div class="jj-flow">
+    <div class="jj-node"><span class="jj-num">诀一</span><span class="jj-icon">📅</span><span class="jj-label">定局认气</span><span class="jj-sub">节气·阴阳遁</span></div>
+    <span class="jj-arr">→</span>
+    <div class="jj-node"><span class="jj-num">诀二</span><span class="jj-icon">🗺</span><span class="jj-label">飞布九宫</span><span class="jj-sub">地盘·三奇六仪</span></div>
+    <span class="jj-arr">→</span>
+    <div class="jj-node"><span class="jj-num">诀三</span><span class="jj-icon">🔄</span><span class="jj-label">转盘布门</span><span class="jj-sub">天盘·八门·九星</span></div>
+    <span class="jj-arr">→</span>
+    <div class="jj-node"><span class="jj-num">诀四</span><span class="jj-icon">🔍</span><span class="jj-label">查击刑入墓</span><span class="jj-sub">特殊格局</span></div>
+    <span class="jj-arr">→</span>
+    <div class="jj-node"><span class="jj-num">诀五</span><span class="jj-icon">📊</span><span class="jj-label">分析旺衰</span><span class="jj-sub">月令·宫位</span></div>
+  </div>
+  <div class="jj-flow" style="margin-top:4px">
+    <div class="jj-node"><span class="jj-num">诀六</span><span class="jj-icon">🎯</span><span class="jj-label">定符使吉凶</span><span class="jj-sub">值符·值使</span></div>
+    <span class="jj-arr">→</span>
+    <div class="jj-node"><span class="jj-num">诀七</span><span class="jj-icon">⚔️</span><span class="jj-label">分主客</span><span class="jj-sub">天盘·地盘</span></div>
+    <span class="jj-arr">→</span>
+    <div class="jj-node"><span class="jj-num">诀八</span><span class="jj-icon">⏳</span><span class="jj-label">断应期</span><span class="jj-sub">宫数·冲合</span></div>
+    <span class="jj-arr">→</span>
+    <div class="jj-node"><span class="jj-num">诀九</span><span class="jj-icon">🌿</span><span class="jj-label">运筹化解</span><span class="jj-sub">方位·时空</span></div>
+  </div>
+
+  <!-- 逐诀详解 -->
+  <h3>诀一：定局认气</h3>
+  <p>根据起局时间的<strong>节气</strong>确定是阳遁还是阴遁，以及具体的局数。这是整个断局的基石——<strong>局定错了，后面全错</strong>。关键点：冬至一阳生，用阳遁；夏至一阴生，用阴遁。认气指的是<strong>感受当下时空的能量基调</strong>——是升发（阳遁）还是收敛（阴遁）。</p>
+
+  <h3>诀二：飞布九宫</h3>
+  <p>将<strong>三奇六仪</strong>（戊己庚辛壬癸乙丙丁）按局数规则排入九宫地盘。这是盘面的"底层结构"，后续所有天盘、人盘、神盘都以此为地基。新手最容易在此步出错——把乙丙丁的奇仪顺序搞混。建议反复练习，直到能<strong>闭眼默排</strong>。</p>
+
+  <h3>诀三：转盘布门</h3>
+  <p>在完成地盘后，依次排出<strong>天盘（九星）→ 人盘（八门）→ 神盘（八神）</strong>。这是奇门盘面的四层完整构建。天盘反映天时能量，人盘反映人事吉凶，神盘反映隐性力量。排完这一步后，一个完整的奇门盘面便呈现眼前。</p>
+
+  <div class="mnemonic">
+    <div class="m-title">📜 九宫排盘口诀</div>
+    <div class="m-content">坎一坤二震三巽四<br>中五乾六兑七艮八离九<br>阳遁顺排 阴遁逆排<br>戊起甲子 顺逆飞布</div>
+    <div class="m-explain"><strong>释义：</strong>牢记九宫序数。阳遁时三奇六仪依序顺排九宫，阴遁时依序逆排。戊为甲子之符首，排盘从戊开始依次飞布各宫。</div>
+  </div>
+
+  <h3>诀四：查击刑入墓</h3>
+  <p>这是断局中极关键的<strong>特殊格局检查</strong>。击刑（地支相刑）和入墓（五行入墓）会极大削弱或改变符号的原本含义。一个看似大吉的符号，若同时击刑或入墓，其吉力将大打折扣甚至反转。需要逐一检查每个宫位的天干地支组合。</p>
+
+  <details>
+    <summary>📊 击刑与入墓速查</summary>
+    <div class="detail-body">
+      <table>
+      <thead><tr><th>类型</th><th>组合</th><th>含义</th></tr></thead>
+      <tr><td><strong>击刑</strong></td><td>甲子戊在震三、甲戌己在坤二、甲申庚在艮八、甲午辛在离九、甲辰壬在巽四、甲寅癸在巽四</td><td>六仪所在宫位与自身地支相刑，主受挫、受阻</td></tr>
+      <tr><td><strong>入墓</strong></td><td>甲乙木入未（坤二）、丙丁火入戌（乾六）、戊己土入辰（巽四）、庚辛金入丑（艮八）、壬癸水入辰（巽四）</td><td>五行能量被埋没，有力使不出</td></tr>
+      </table>
+      <p style="font-size:.78rem;color:var(--text-dim);margin-top:8px">注：以上为基本规则，实际断局中还需结合旬空、马星等动态因素综合判断。</p>
+    </div>
+  </details>
+
+  <h3>诀五：分析旺衰</h3>
+  <p>判断各宫位符号的<strong>旺衰状态</strong>。主要看两个维度：一是<strong>月令旺衰</strong>（当令者旺），二是<strong>落宫生克</strong>（得宫生者旺，被宫克者衰）。旺衰是吉凶判断的重要权重因子——旺则吉力倍增，衰则吉力大减，衰极则吉反为凶。</p>
+
+  <div class="mnemonic">
+    <div class="m-title">📜 五行旺衰口诀</div>
+    <div class="m-content">当令者旺 &nbsp; 我生者相<br>生我者休 &nbsp; 克我者囚<br>我克者死</div>
+    <div class="m-explain"><strong>例句：</strong>春季木当令，木旺、火相、水休、金囚、土死。依此类推四季五行旺衰状态。</div>
+  </div>
+
+  <h3>诀六：定符使吉凶</h3>
+  <p><strong>值符</strong>（天盘值符星）和<strong>值使</strong>（值使门）是整个盘面的核心枢纽。值符代表大环境的天时趋势，值使代表人事的执行通道。判断值符、值使的落宫旺衰、得奇得门、是否有击刑入墓，可以快速把握<strong>整个盘面的总体吉凶基调</strong>。</p>
+
+  <h3>诀七：分主客</h3>
+  <p>这是奇门断局的高级技巧，也是区别于其他术数的核心特色之一。<strong>天盘为客、地盘为主</strong>。求测者为客（主动方）还是主（被动方），决定了看哪个盘面的符号。一般而言：主动做事看天盘，被动等待看地盘；问事之成败看天盘，问自身状态看地盘。</p>
+
+  <div class="em">
+    <strong>🎯 主客实战应用：</strong>求职面试——自己是客（天盘看自己的符号），公司是主（地盘看公司的符号）。两方落宫生克即胜负之势。若己方符号得生得门而旺，且克对方落宫，则胜算大。
+  </div>
+
+  <h3>诀八：断应期</h3>
+  <p>判断事情发生的<strong>时间节点</strong>。主要方法有：宫位数断（看用神落宫数，如坎一宫主1/6之数）、地支冲合断（用神逢冲或逢合之时）、旬空填实断（旬空之宫填实之日为应期）。断应期是初学者最大的挑战，建议先从<strong>定性判断</strong>（事情成不成）开始，逐步过渡到定量判断（什么时候成）。</p>
+
+  <h3>诀九：运筹化解</h3>
+  <p>断局不是终点，<strong>运筹化解</strong>才是奇门遁甲的终极价值。根据盘面信息，给出切实可行的行动建议：选择有利的<strong>方位、时间、人事策略</strong>，避开不利的时空点。化解的原则是<strong>顺势而为、趋吉避凶</strong>，而非强行逆天改命。</p>
+
+  <blockquote>
+    <strong>🌊 运筹精要：</strong>最好的化解不是"做法"，而是<strong>在正确的时空点做正确的事</strong>。奇门的价值不在于神秘的法术，而在于帮你找到那个最有利的"时"和"位"。
+  </blockquote>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- 第六章：四阶段学习法                                        -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="sec-hdr">
+  <h2><span class="num">⑥</span> 四阶段学习法</h2>
+  <p class="sub">筑基 → 贯通 → 实战 → 悟道</p>
+</div>
+
+<div class="sec">
+
+  <p>区别于基础的"五步学习法"（学习方法论层面），四阶段学习法是针对<strong>奇门遁甲内容本身</strong>的进阶路径设计。每个阶段有明确的学习重点、训练方式和完成标志。</p>
+
+  <div class="phase-steps">
+    <div class="phase-step">
+      <div class="ph-num p1">I</div>
+      <div class="ph-body">
+        <h4>第一阶段：筑基（第1-3个月）</h4>
+        <p><strong>核心任务：</strong>熟记所有基础符号——阴阳五行、天干地支、八卦九宫、八门九星八神、三奇六仪。<br>
+        <strong>训练方式：</strong>每日默写 + 速查卡片。不要求理解深层原理，但必须<strong>脱口而出</strong>。<br>
+        <strong>完成标志：</strong>闭眼能默画九宫格并标注所有静态信息；任何符号的五行属性3秒内反应。</p>
+      </div>
+    </div>
+    <div class="phase-step">
+      <div class="ph-num p2">II</div>
+      <div class="ph-body">
+        <h4>第二阶段：贯通（第4-6个月）</h4>
+        <p><strong>核心任务：</strong>理解各符号之间的关联——五行生克链、宫星门神四层互动、格局判断。<br>
+        <strong>训练方式：</strong>每天手排一盘 + 画出本盘的生克关系图。建立<strong>"关系思维"</strong>替代"孤岛思维"。<br>
+        <strong>完成标志：</strong>面对任意一个盘面，能在10分钟内画出主要宫位之间的生克链路图。</p>
+      </div>
+    </div>
+    <div class="phase-step">
+      <div class="ph-num p3">III</div>
+      <div class="ph-body">
+        <h4>第三阶段：实战（第7-12个月）</h4>
+        <p><strong>核心任务：</strong>大量案例练习——从模拟案例逐步过渡到真实场景。<br>
+        <strong>训练方式：</strong>每周至少3个完整断局（排盘→用神→分析→结论）。建立<strong>个人案例库</strong>，事后追踪验证。<br>
+        <strong>完成标志：</strong>独立完成50个案例，准确率稳定在60%以上；能写出完整的断局报告。</p>
+      </div>
+    </div>
+    <div class="phase-step">
+      <div class="ph-num p4">IV</div>
+      <div class="ph-body">
+        <h4>第四阶段：悟道（1年以上）</h4>
+        <p><strong>核心任务：</strong>超越技法，将奇门思维融入日常生活与决策。<br>
+        <strong>训练方式：</strong>减少"刻意断局"，增加"随心起局"；关注盘面与生活的<strong>共鸣点</strong>而非机械对照。<br>
+        <strong>完成标志：</strong>不再依赖九诀流程也能快速断局；断语自然、有温度、可落地；开始形成个人独特的断局风格。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>⚡ 常见误区警示</h3>
+
+  <div class="warning-card">
+    <h4>⚠️ 误区一：贪多求快</h4>
+    <p>一周看完三本书、一个月就想学完排盘+断局。结果是每个环节都只学了皮毛，一到实战就卡壳。<strong>正确做法：</strong>筑基阶段宁可慢，也要每个符号记住并理解。万丈高楼平地起，根基不牢，后面全是空中楼阁。</p>
+  </div>
+
+  <div class="warning-card">
+    <h4>⚠️ 误区二：只看不练</h4>
+    <p>看了大量的书籍和视频，说起来头头是道，但从未真正独立起过一个盘、断过一个局。知识的虚假饱和——<strong>"知道"太多，"做到"为零</strong>。正确做法：每学一个知识点，立刻动手排一次盘、分析一次宫位。</p>
+  </div>
+
+  <div class="warning-card">
+    <h4>⚠️ 误区三：执着于凶</h4>
+    <p>一旦看到天蓬+死门+白虎就断定是凶局，产生恐惧心理。忽略了<strong>旺衰、格局、用神</strong>的综合调节。同样一个符号组合，在不同时空、不同宫位、不同旺衰下，含义可能截然相反。记住：<strong>孤阳不生，孤阴不长，绝凶之局很少见</strong>。</p>
+  </div>
+
+  <div class="warning-card">
+    <h4>⚠️ 误区四：照搬古人</h4>
+    <p>古代奇门主要服务于军事和皇家大事，而现代人的问题更多涉及事业、感情、日常生活。直接套用古书断语往往<strong>水土不服</strong>。正确做法：理解古书背后的<strong>原理和思维方式</strong>，然后灵活应用到现代场景中。法是古的，理是通的，情是当下的。</p>
+  </div>
+
+  <div class="warning-card">
+    <h4>⚠️ 误区五：忽视反馈闭环</h4>
+    <p>断完一个局就过去了，不去追踪事情的真实发展。没有反馈就没有进步——你不知道自己断对了还是断错了。<strong>正确做法：</strong>建立<strong>断局日志</strong>，记录每一次断局的全部过程和结论，并在事后（应期过后）回来验证、标注、反思。这是从"学了"到"学会"最关键的环节。</p>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- 第七章：进阶书单                                            -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="sec-hdr">
+  <h2><span class="num">⑦</span> 进阶书单</h2>
+  <p class="sub">从入门到精通 · 经典与当代并重</p>
+</div>
+
+<div class="sec">
+
+  <p>以下书单按学习阶段排列。建议按顺序阅读，不要跳跃——每本书都建立在上一本的基础之上。标注<strong>「必读」</strong>的为不可跳过之作。</p>
+
+  <h3>📗 入门筑基（第一阶段）</h3>
+  <div class="book-grid">
+    <div class="book-card">
+      <div class="bk-cover">📖</div>
+      <div class="bk-info">
+        <div class="bk-title">神奇之门</div>
+        <div class="bk-author">张志春 著</div>
+        <div class="bk-desc">当代奇门遁甲入门圣经。语言通俗、案例丰富，从零基础到手排盘全覆盖。最适合中国人的奇门第一本书。</div>
+        <span class="bk-tag entry">必读 · 入门首选</span>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="bk-cover">📖</div>
+      <div class="bk-info">
+        <div class="bk-title">开悟之门</div>
+        <div class="bk-author">张志春 著</div>
+        <div class="bk-desc">《神奇之门》的姊妹篇，偏重心法与哲学层面，帮助读者理解奇门背后的思维方式而不仅仅是技法。</div>
+        <span class="bk-tag entry">入门必读</span>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="bk-cover">📖</div>
+      <div class="bk-info">
+        <div class="bk-title">奇门遁甲入门教程</div>
+        <div class="bk-author">刘文元 著</div>
+        <div class="bk-desc">系统性强，适合按章节循序渐进。对排盘步骤的讲解尤为详尽，配有大量图表辅助理解。</div>
+        <span class="bk-tag entry">入门推荐</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>📙 深入贯通（第二阶段）</h3>
+  <div class="book-grid">
+    <div class="book-card">
+      <div class="bk-cover">📖</div>
+      <div class="bk-info">
+        <div class="bk-title">奇门遁甲现代实例精解</div>
+        <div class="bk-author">杜新会 著</div>
+        <div class="bk-desc">大量现代真实案例，涵盖事业、感情、财运、健康等各个领域。每个案例都附详细分析过程，是「实战思维」的最佳教材。</div>
+        <span class="bk-tag mid">必读 · 案例宝库</span>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="bk-cover">📖</div>
+      <div class="bk-info">
+        <div class="bk-title">奇门遁甲秘笈大全</div>
+        <div class="bk-author">刘伯温（传）</div>
+        <div class="bk-desc">传统经典，收录了大量古代口诀和断法。建议有一定基础后再阅读，否则容易被古文的"凶险"描述吓退。</div>
+        <span class="bk-tag mid">经典参考</span>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="bk-cover">📖</div>
+      <div class="bk-info">
+        <div class="bk-title">御定奇门宝鉴</div>
+        <div class="bk-author">清代官修 · 郑同 点校</div>
+        <div class="bk-desc">皇家编纂的奇门典籍，体系完整、内容权威。包含《奇门遁甲》与《奇门宝鉴》两部分，是深入研究的必备参考书。</div>
+        <span class="bk-tag classic">典藏级别</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>📕 实战精进（第三阶段）</h3>
+  <div class="book-grid">
+    <div class="book-card">
+      <div class="bk-cover">📖</div>
+      <div class="bk-info">
+        <div class="bk-title">奇门遁甲预测学</div>
+        <div class="bk-author">么学声 著</div>
+        <div class="bk-desc">偏重预测实务，对各类具体问题（婚姻、财运、官运、疾病等）的用神选取和判断有系统论述。</div>
+        <span class="bk-tag mid">专题实战</span>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="bk-cover">📖</div>
+      <div class="bk-info">
+        <div class="bk-title">奇门遁甲高级预测学</div>
+        <div class="bk-author">王凤麟 著</div>
+        <div class="bk-desc">道家奇门流派代表作，强调「读象」思维——不局限于公式化判断，而是培养对盘面的整体直觉感知。</div>
+        <span class="bk-tag adv">进阶必读</span>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="bk-cover">📖</div>
+      <div class="bk-info">
+        <div class="bk-title">奇门遁甲解盘实务</div>
+        <div class="bk-author">叶鸿生 著</div>
+        <div class="bk-desc">现代实战派的代表作之一，案例贴近当代生活，注重「一次到位」的完整断局流程训练。</div>
+        <span class="bk-tag mid">实战推荐</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>📓 悟道升华（第四阶段）</h3>
+  <div class="book-grid">
+    <div class="book-card">
+      <div class="bk-cover">📖</div>
+      <div class="bk-info">
+        <div class="bk-title">周易</div>
+        <div class="bk-author">（先秦经典）</div>
+        <div class="bk-desc">奇门遁甲的哲学根源。不通易理，奇门终究是术；通易理之后，奇门才成为道。推荐王弼注本或黄寿祺《周易译注》。</div>
+        <span class="bk-tag classic">必读 · 哲学根基</span>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="bk-cover">📖</div>
+      <div class="bk-info">
+        <div class="bk-title">道德经</div>
+        <div class="bk-author">老子 著</div>
+        <div class="bk-desc">「道可道，非常道」——在奇门中浸淫日久之后，你会发现老子的每一句话都可以对应到奇门的实践中。悟道的终极伴侣。</div>
+        <span class="bk-tag classic">悟道必读</span>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="bk-cover">📖</div>
+      <div class="bk-info">
+        <div class="bk-title">黄帝内经 · 运气七篇</div>
+        <div class="bk-author">（中医经典）</div>
+        <div class="bk-desc">五运六气理论与奇门遁甲的时空体系如出一辙。阅读此篇能极大加深你对「时空能量流转」的理解，是跨领域的悟道阶梯。</div>
+        <span class="bk-tag classic">跨域悟道</span>
+      </div>
+    </div>
+  </div>
+
+  <blockquote>
+    <strong>📚 阅读建议：</strong>每个阶段精选2-3本细读，比贪多嚼不烂更有效。入门阶段<strong>只看《神奇之门》一本</strong>并反复实践，效果远好于同时翻完五本入门书。记住：<strong>书不在多，在消化</strong>。
+  </blockquote>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- 结语                                                        -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="sec-hdr">
+  <h2><span class="num">∞</span> 结语</h2>
+  <p class="sub">万法归宗 · 道不远人</p>
+</div>
+
+<div class="sec">
+  <div class="xf-card">
+    <div class="xf-body">
+      <p>奇门遁甲是一个<strong>以术入道的修行体系</strong>。它不仅仅是预测工具，更是一面映照天地运行规律的镜子。你在学习奇门的过程中，同时也在学习如何观察世界、理解人事、体悟生命。</p>
+      <p>回头再看开篇那句话：</p>
+      <span class="xf-highlight">术为渡河筏 &nbsp; 道是彼岸土<br>既至彼岸已 &nbsp; 筏当舍之去</span>
+      <p>当你已经不需要口诀就能感受到盘面的呼吸，当你已经不需要逐条对照就能说出准确判断，当你已经能在日常生活中自然而然地运用奇门思维——你就已经渡过了那条河。</p>
+      <p>而那时候你会发现：<strong>道不在彼岸，道在渡河的过程中。</strong></p>
+    </div>
+  </div>
+
+  <div class="mnemonic" style="margin-top:24px">
+    <div class="m-title">🏯 深潜修炼心要</div>
+    <div class="m-content">
+      术为舟楫道为岸<br>
+      三重境界见真山<br>
+      一心一盘问一事<br>
+      法理情通天地宽<br>
+      入手九诀循序进<br>
+      四阶深潜莫轻看<br>
+      书山路远勤为径<br>
+      一朝悟入不二门
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer><p>奇门遁甲 · 深潜修炼 ｜ 由术入道 · 三层贯通 · 九诀入手 · 四阶精进</p></footer>
+
+<script src="../共享样式/app.js"></script>
+</body>
+</html>

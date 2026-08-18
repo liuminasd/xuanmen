@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="奇门遁甲基础入门知识库 — 阴阳五行、天干地支、八卦九宫、八门九星八神、三奇六仪、排盘原理速查。">
+<title>奇门遁甲 · 基础入门</title>
+<link rel="stylesheet" href="../共享样式/base.css">
+<link rel="stylesheet" href="../共享样式/components.css">
+<style>
+  :root{--font-ui:"Noto Serif SC","Songti SC","STSong",serif}
+  body{font-family:var(--font-ui);padding-bottom:60px}
+  .breadcrumb{padding:16px 24px;font-size:.78rem}
+  .breadcrumb a{color:var(--text-dim);text-decoration:none}
+  .breadcrumb a:hover{color:var(--gold)}
+  .breadcrumb span{color:var(--text-dim);margin:0 6px}
+
+  .hero{text-align:center;padding:40px 20px 32px;border-bottom:1px solid var(--border);margin-bottom:32px}
+  .hero h1{font-size:2.2em;color:var(--gold-lt);letter-spacing:5px;font-weight:300}
+  .hero p{color:var(--text-dim);font-size:.9rem;letter-spacing:2px;margin-top:6px}
+  .hero .line{width:50px;height:1px;background:var(--gold);margin:12px auto;opacity:.4}
+
+  .container{max-width:960px;margin:0 auto;padding:0 24px}
+
+  .sec{margin:36px 0}
+  .sec h2{color:var(--gold);font-size:1.2rem;font-weight:400;letter-spacing:3px;
+    padding:0 0 8px 14px;border-left:2px solid var(--gold);margin-bottom:16px}
+  .sec h3{color:var(--gold-lt);font-size:.98rem;margin:20px 0 10px;font-weight:400}
+  .sec p{color:var(--text-alt);font-size:.86rem;margin:8px 0;line-height:1.9}
+  .sec p strong,.sec li strong{color:#e8d8b0;font-weight:500}
+
+  .em{background:var(--card);border:1px solid rgba(212,176,106,.08);border-radius:var(--radius);
+    padding:15px 18px;margin:12px 0;font-size:.84rem;color:var(--text-alt)}
+  .em strong{color:var(--gold-lt)}
+
+  table{width:100%;border-collapse:collapse;font-size:.82em;margin:12px 0}
+  th{background:var(--gold-bg);color:var(--gold);padding:9px 12px;text-align:left;
+    border-bottom:1px solid rgba(212,176,106,.15);font-weight:400;letter-spacing:1px}
+  th:first-child{border-radius:var(--radius) 0 0 0}
+  th:last-child{border-radius:0 var(--radius) 0 0}
+  td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  tr:hover td{background:rgba(255,255,255,.01)}
+  td:first-child{color:#e0d8c0;font-weight:500;white-space:nowrap}
+
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0}
+  @media(max-width:720px){.g2{grid-template-columns:1fr}}
+
+  .gong-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);
+    max-width:300px;margin:12px auto;text-align:center;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+  .gong-grid div{padding:14px 8px;background:var(--bg);font-size:.78rem;color:var(--text-alt)}
+  .gong-grid div strong{display:block;color:var(--gold-lt);font-size:.9rem;margin-bottom:2px}
+
+  aside{background:var(--card);border:1px dashed rgba(212,176,106,.12);border-radius:var(--radius);
+    padding:16px 20px;margin:20px 0;font-size:.82rem;color:var(--text-alt)}
+  aside strong{color:var(--gold-lt)}
+  aside h4{color:var(--gold);font-size:.8rem;letter-spacing:2px;margin-bottom:6px}
+
+  /* 口诀卡片 */
+  .mnemonic{
+    background:linear-gradient(135deg,rgba(212,176,106,.08),rgba(212,176,106,.02));
+    border:1px solid rgba(212,176,106,.2);border-radius:var(--radius-lg);
+    padding:20px 24px;margin:18px 0;position:relative;overflow:hidden;
+    transition:all .3s;
+  }
+  .mnemonic::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+    background:linear-gradient(180deg,var(--gold),var(--gold-dk));border-radius:4px 0 0 4px}
+  .mnemonic:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+  .mnemonic .m-title{color:var(--gold);font-size:.88rem;font-weight:600;letter-spacing:3px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .mnemonic .m-type{display:inline-block;font-size:.62rem;padding:2px 8px;border-radius:8px;
+    background:var(--gold-bg);color:var(--gold);letter-spacing:.1em;font-weight:400}
+  .mnemonic .m-content{color:var(--gold-lt);font-size:.95rem;line-height:2.1;letter-spacing:.05em;
+    text-align:center;font-family:"KaiTi","STKaiti","Noto Serif SC",serif;font-weight:600;
+    text-shadow:0 0 20px rgba(212,176,106,.1)}
+  .mnemonic .m-explain{color:var(--text-dim);font-size:.76rem;margin-top:10px;line-height:1.8}
+  .mnemonic .m-explain strong{color:var(--text-alt)}
+
+  footer{text-align:center;padding:40px 20px;color:var(--text-dim);font-size:.74rem;letter-spacing:2px;border-top:1px solid var(--border);margin-top:48px}
+
+  @media(max-width:640px){
+    .hero h1{font-size:1.5em}.container{padding:0 12px}
+    .sec h2{font-size:1.05rem}table{font-size:.72em}td,th{padding:6px 8px}
+  }
+  .with-sidebar{margin-left:0!important}
+  .topnav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(8,7,13,.98),rgba(12,11,21,.95));border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;backdrop-filter:blur(10px)}
+  .topnav-back{color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;padding:5px 12px;border:1px solid var(--gold);border-radius:14px;white-space:nowrap;transition:all .2s;flex-shrink:0}
+  .topnav-back:hover{background:var(--gold);color:#111}
+  .topnav-title{color:var(--text-dim);font-size:.76rem;letter-spacing:.06em;white-space:nowrap}
+  .topnav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .topnav-links a{color:var(--text-alt);text-decoration:none;font-size:.74rem;padding:4px 12px;border:1px solid var(--border);border-radius:12px;transition:all .2s}
+  .topnav-links a:hover{border-color:var(--gold);color:var(--gold)}
+  @media(max-width:600px){.topnav{padding:8px 10px;gap:8px}.topnav-links{margin-left:0}}
+  .sec-nav{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:14px 0;margin-bottom:20px;border-bottom:1px solid var(--border)}
+  .sec-nav-label{color:var(--text-dim);font-size:.72rem;letter-spacing:.06em;margin-right:6px}
+  .sec-nav a{color:var(--text-alt);text-decoration:none;font-size:.72rem;padding:4px 10px;border:1px solid var(--border);border-radius:10px;transition:all .2s;white-space:nowrap}
+  .sec-nav a:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-bg)}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <a href="../index.html" class="topnav-back">← 玄门</a>
+  <span class="topnav-title">奇门遁甲 · 基础入门</span>
+  <div class="topnav-links">
+    <a href="index.html">总览</a>
+    <a href="02-五步学习.html">五步学习</a>
+    <a href="题库.html">题库</a>
+  </div>
+</header>
+
+<div class="page-progress" id="pageProgress"></div>
+<button id="backTop">↑</button>
+
+<div class="hero">
+  <h1>奇门遁甲基础入门</h1>
+  <p>核心概念速查 · 知识框架搭建</p>
+  <div class="line"></div>
+</div>
+
+<div class="container">
+
+<div class="sec-nav">
+  <span class="sec-nav-label">📑</span>
+  <a href="#sec-1">概述</a>
+  <a href="#sec-2">阴阳五行</a>
+  <a href="#sec-3">天干地支</a>
+  <a href="#sec-4">八卦九宫</a>
+  <a href="#sec-5">八门</a>
+  <a href="#sec-6">九星</a>
+  <a href="#sec-7">八神</a>
+  <a href="#sec-8">三奇六仪</a>
+  <a href="#sec-9">排盘原理</a>
+  <a href="#sec-10">排盘案例</a>
+  <a href="#sec-mn">🧠口诀</a>
+</div>
+
+<div class="sec" id="sec-1">
+<!-- ═══ 一、什么是奇门遁甲 ═══ -->
+<div class="sec">
+<h2>一、什么是奇门遁甲？</h2>
+<p><strong>奇门遁甲</strong>是中国古代最高层次的预测学之一，与六壬、太乙并称「三式」。它源于黄帝战蚩尤的传说，历经数千年发展，形成了一套集天时、地利、人和、神助于一体的时空分析体系。</p>
+<div class="em">
+  <strong>奇</strong>：乙、丙、丁三奇（代表意外之机、转机）<br>
+  <strong>门</strong>：休、生、伤、杜、景、死、惊、开八门（代表人事吉凶的门户）<br>
+  <strong>遁甲</strong>：甲是十天干之首，隐遁于六仪之下（戊己庚辛壬癸），以避开庚金之克
+</div>
+</div>
+
+</div>
+<div class="sec" id="sec-2">
+<!-- ═══ 二、阴阳五行 ═══ -->
+<div class="sec">
+<h2>二、阴阳五行</h2>
+<h3>阴阳</h3>
+<p>万物皆分阴阳，在奇门中体现为：<strong>阳遁</strong>（冬至到夏至，阳气上升，顺排六仪、逆排三奇）与 <strong>阴遁</strong>（夏至到冬至，阴气上升，逆排六仪、顺排三奇）。</p>
+
+<h3>五行生克</h3>
+<table>
+<thead><tr><th>五行</th><th>相生</th><th>相克</th><th>代表方位</th><th>代表颜色</th></tr></thead>
+<tr><td>木</td><td>生火</td><td>克土</td><td>东</td><td>青</td></tr>
+<tr><td>火</td><td>生土</td><td>克金</td><td>南</td><td>赤</td></tr>
+<tr><td>土</td><td>生金</td><td>克水</td><td>中</td><td>黄</td></tr>
+<tr><td>金</td><td>生水</td><td>克木</td><td>西</td><td>白</td></tr>
+<tr><td>水</td><td>生木</td><td>克火</td><td>北</td><td>黑</td></tr>
+</table>
+</div>
+
+</div>
+<div class="sec" id="sec-3">
+<!-- ═══ 三、天干地支 ═══ -->
+<div class="sec">
+<h2>三、天干地支</h2>
+<h3>十天干</h3>
+<table>
+<thead><tr><th>天干</th><th>五行</th><th>阴阳</th><th>方位</th><th>代表含义</th></tr></thead>
+<tr><td>甲</td><td>木</td><td>阳</td><td>东</td><td>首领、贵人、头部</td></tr>
+<tr><td>乙</td><td>木</td><td>阴</td><td>东</td><td>花草、曲折、柔软</td></tr>
+<tr><td>丙</td><td>火</td><td>阳</td><td>南</td><td>太阳、光明、热烈</td></tr>
+<tr><td>丁</td><td>火</td><td>阴</td><td>南</td><td>星火、希望、细致</td></tr>
+<tr><td>戊</td><td>土</td><td>阳</td><td>中</td><td>城墙、厚重、稳固</td></tr>
+<tr><td>己</td><td>土</td><td>阴</td><td>中</td><td>田园、包容、策划</td></tr>
+<tr><td>庚</td><td>金</td><td>阳</td><td>西</td><td>刀剑、阻碍、变革</td></tr>
+<tr><td>辛</td><td>金</td><td>阴</td><td>西</td><td>珠宝、精细、错误</td></tr>
+<tr><td>壬</td><td>水</td><td>阳</td><td>北</td><td>江河、流动、智慧</td></tr>
+<tr><td>癸</td><td>水</td><td>阴</td><td>北</td><td>雨露、渗透、隐秘</td></tr>
+</table>
+
+<h3>十二地支</h3>
+<table>
+<thead><tr><th>地支</th><th>五行</th><th>月份</th><th>时辰</th><th>生肖</th></tr></thead>
+<tr><td>子</td><td>水</td><td>11月</td><td>23-1时</td><td>鼠</td></tr>
+<tr><td>丑</td><td>土</td><td>12月</td><td>1-3时</td><td>牛</td></tr>
+<tr><td>寅</td><td>木</td><td>1月</td><td>3-5时</td><td>虎</td></tr>
+<tr><td>卯</td><td>木</td><td>2月</td><td>5-7时</td><td>兔</td></tr>
+<tr><td>辰</td><td>土</td><td>3月</td><td>7-9时</td><td>龙</td></tr>
+<tr><td>巳</td><td>火</td><td>4月</td><td>9-11时</td><td>蛇</td></tr>
+<tr><td>午</td><td>火</td><td>5月</td><td>11-13时</td><td>马</td></tr>
+<tr><td>未</td><td>土</td><td>6月</td><td>13-15时</td><td>羊</td></tr>
+<tr><td>申</td><td>金</td><td>7月</td><td>15-17时</td><td>猴</td></tr>
+<tr><td>酉</td><td>金</td><td>8月</td><td>17-19时</td><td>鸡</td></tr>
+<tr><td>戌</td><td>土</td><td>9月</td><td>19-21时</td><td>狗</td></tr>
+<tr><td>亥</td><td>水</td><td>10月</td><td>21-23时</td><td>猪</td></tr>
+</table>
+</div>
+
+</div>
+<div class="sec" id="sec-4">
+<!-- ═══ 四、八卦与九宫 ═══ -->
+<div class="sec">
+<h2>四、八卦与九宫</h2>
+<h3>洛书九宫</h3>
+<div class="gong-grid">
+  <div><strong>4 · 巽</strong>东南</div>
+  <div><strong>9 · 离</strong>南</div>
+  <div><strong>2 · 坤</strong>西南</div>
+  <div><strong>3 · 震</strong>东</div>
+  <div><strong>5 · 中</strong>中宫</div>
+  <div><strong>7 · 兑</strong>西</div>
+  <div><strong>8 · 艮</strong>东北</div>
+  <div><strong>1 · 坎</strong>北</div>
+  <div><strong>6 · 乾</strong>西北</div>
+</div>
+
+<h3>后天八卦配九宫</h3>
+<table>
+<thead><tr><th>宫位</th><th>卦名</th><th>方位</th><th>五行</th><th>代表</th></tr></thead>
+<tr><td>1 坎</td><td>坎 ☵</td><td>北</td><td>水</td><td>险陷、隐藏</td></tr>
+<tr><td>2 坤</td><td>坤 ☷</td><td>西南</td><td>土</td><td>顺承、包容</td></tr>
+<tr><td>3 震</td><td>震 ☳</td><td>东</td><td>木</td><td>震动、行动</td></tr>
+<tr><td>4 巽</td><td>巽 ☴</td><td>东南</td><td>木</td><td>入、传播</td></tr>
+<tr><td>5 中</td><td>—</td><td>中</td><td>土</td><td>枢纽、核心</td></tr>
+<tr><td>6 乾</td><td>乾 ☰</td><td>西北</td><td>金</td><td>刚健、领导</td></tr>
+<tr><td>7 兑</td><td>兑 ☱</td><td>西</td><td>金</td><td>喜悦、口舌</td></tr>
+<tr><td>8 艮</td><td>艮 ☶</td><td>东北</td><td>土</td><td>止、阻碍</td></tr>
+<tr><td>9 离</td><td>离 ☲</td><td>南</td><td>火</td><td>明亮、文明</td></tr>
+</table>
+</div>
+
+</div>
+<div class="sec" id="sec-5">
+<!-- ═══ 五、八门 ═══ -->
+<div class="sec">
+<h2>五、八门（人事之门）</h2>
+<table>
+<thead><tr><th>八门</th><th>五行</th><th>吉凶</th><th>代表含义</th></tr></thead>
+<tr><td><strong>休门</strong></td><td>水</td><td style="color:var(--green)">吉</td><td>休息、修养、婚姻、交易</td></tr>
+<tr><td><strong>生门</strong></td><td>土</td><td style="color:var(--green)">大吉</td><td>生机、财运、房产、生产</td></tr>
+<tr><td><strong>伤门</strong></td><td>木</td><td style="color:var(--red)">凶</td><td>伤灾、竞争、搏斗、车辆</td></tr>
+<tr><td><strong>杜门</strong></td><td>木</td><td style="color:var(--blue)">平</td><td>阻塞、保密、技术、武职</td></tr>
+<tr><td><strong>景门</strong></td><td>火</td><td style="color:var(--blue)">平</td><td>文书、消息、宴乐、血光</td></tr>
+<tr><td><strong>死门</strong></td><td>土</td><td style="color:var(--red)">大凶</td><td>死亡、终结、刑戮、固执</td></tr>
+<tr><td><strong>惊门</strong></td><td>金</td><td style="color:var(--red)">凶</td><td>惊恐、官司、口舌、声响</td></tr>
+<tr><td><strong>开门</strong></td><td>金</td><td style="color:var(--green)">大吉</td><td>开创、事业、远行、公开</td></tr>
+</table>
+</div>
+
+</div>
+<div class="sec" id="sec-6">
+<!-- ═══ 六、九星 ═══ -->
+<div class="sec">
+<h2>六、九星（天时能量）</h2>
+<table>
+<thead><tr><th>九星</th><th>五行</th><th>吉凶</th><th>代表含义</th></tr></thead>
+<tr><td><strong>天蓬</strong></td><td>水</td><td style="color:var(--red)">凶</td><td>盗贼、贪婪、风险、大胆</td></tr>
+<tr><td><strong>天芮</strong></td><td>土</td><td style="color:var(--red)">凶</td><td>疾病、问题、学生、修行</td></tr>
+<tr><td><strong>天冲</strong></td><td>木</td><td style="color:var(--blue)">平</td><td>冲动、行动力、军人、速度</td></tr>
+<tr><td><strong>天辅</strong></td><td>木</td><td style="color:var(--green)">吉</td><td>文化、教育、辅助、文昌</td></tr>
+<tr><td><strong>天禽</strong></td><td>土</td><td style="color:var(--green)">吉</td><td>中正、稳定、领导、核心</td></tr>
+<tr><td><strong>天心</strong></td><td>金</td><td style="color:var(--green)">吉</td><td>计划、策划、医生、智慧</td></tr>
+<tr><td><strong>天柱</strong></td><td>金</td><td style="color:var(--red)">凶</td><td>破损、口舌、毁坏、坚守</td></tr>
+<tr><td><strong>天任</strong></td><td>土</td><td style="color:var(--green)">吉</td><td>担当、踏实、稳重、坚持</td></tr>
+<tr><td><strong>天英</strong></td><td>火</td><td style="color:var(--blue)">平</td><td>美丽、火爆、文书、火光</td></tr>
+</table>
+</div>
+
+</div>
+<div class="sec" id="sec-7">
+<!-- ═══ 七、八神 ═══ -->
+<div class="sec">
+<h2>七、八神（神秘力量）</h2>
+<table>
+<thead><tr><th>八神</th><th>吉凶</th><th>代表含义</th></tr></thead>
+<tr><td><strong>值符</strong></td><td style="color:var(--green)">吉</td><td>首领、贵人、核心力量</td></tr>
+<tr><td><strong>螣蛇</strong></td><td style="color:var(--red)">凶</td><td>虚惊、怪异、欺诈、弯曲</td></tr>
+<tr><td><strong>太阴</strong></td><td style="color:var(--green)">吉</td><td>密谋、策划、暗中相助</td></tr>
+<tr><td><strong>六合</strong></td><td style="color:var(--green)">吉</td><td>婚姻、合作、中介、和合</td></tr>
+<tr><td><strong>白虎</strong></td><td style="color:var(--red)">凶</td><td>血光、伤亡、威猛、阻隔</td></tr>
+<tr><td><strong>玄武</strong></td><td style="color:var(--red)">凶</td><td>盗贼、暧昧、欺骗、水患</td></tr>
+<tr><td><strong>九地</strong></td><td style="color:var(--green)">吉</td><td>稳固、迟慢、长久、低下</td></tr>
+<tr><td><strong>九天</strong></td><td style="color:var(--green)">吉</td><td>高远、主动、快速、飞扬</td></tr>
+</table>
+</div>
+
+</div>
+<div class="sec" id="sec-8">
+<!-- ═══ 八、三奇六仪 ═══ -->
+<div class="sec">
+<h2>八、三奇六仪</h2>
+<table>
+<thead><tr><th>符号</th><th>名称</th><th>五行</th><th>特性</th></tr></thead>
+<tr><td><strong>乙</strong></td><td>日奇</td><td>木</td><td>柔顺、谋略、希望</td></tr>
+<tr><td><strong>丙</strong></td><td>月奇</td><td>火</td><td>光明、权威、热烈</td></tr>
+<tr><td><strong>丁</strong></td><td>星奇</td><td>火</td><td>希望、机遇、细致</td></tr>
+<tr><td>戊</td><td>六仪</td><td>土</td><td>钱财、厚重、资本</td></tr>
+<tr><td>己</td><td>六仪</td><td>土</td><td>策划、欲望、陷阱</td></tr>
+<tr><td>庚</td><td>六仪</td><td>金</td><td>阻碍、对手、变革</td></tr>
+<tr><td>辛</td><td>六仪</td><td>金</td><td>错误、罪过、精细</td></tr>
+<tr><td>壬</td><td>六仪</td><td>水</td><td>流动、变化、智慧</td></tr>
+<tr><td>癸</td><td>六仪</td><td>水</td><td>隐秘、聚合、终结</td></tr>
+</table>
+</div>
+
+</div>
+<div class="sec" id="sec-9">
+<!-- ═══ 九、排盘基本原理 ═══ -->
+<div class="sec">
+<h2>九、排盘基本原理</h2>
+<h3>排盘四层结构（由下往上）</h3>
+<div class="em">
+  <strong>地盘（天干）</strong> — 最底层，代表地理环境<br>
+  <strong>天盘（九星）</strong> — 代表天时能量<br>
+  <strong>人盘（八门）</strong> — 代表人事吉凶<br>
+  <strong>神盘（八神）</strong> — 最外层，代表神秘力量
+</div>
+
+<h3>排盘核心五步</h3>
+<div class="em">
+  <strong>① 定局：</strong>根据节气和时辰确定阳遁/阴遁及局数（1-9局）<br>
+  <strong>② 布地盘：</strong>按局数排布戊己庚辛壬癸乙丙丁于九宫<br>
+  <strong>③ 布天盘：</strong>根据时辰的旬首和值符值使确定天盘天干<br>
+  <strong>④ 布人盘：</strong>根据值使门确定八门位置<br>
+  <strong>⑤ 布神盘：</strong>阳遁顺排八神、阴遁逆排八神
+</div>
+
+<aside>
+  <h4>📚 推荐学习资源</h4>
+  <p><strong>入门书：</strong>《神奇之门》（张志春）— 最适合初学者的奇门入门书<br>
+  <strong>进阶书：</strong>《开悟之门》（张志春）— 深入理解奇门背后的哲学<br>
+  <strong>经典：</strong>《烟波钓叟赋》— 奇门遁甲经典歌诀<br>
+  <strong>工具：</strong>手机排盘App（如紫微黄历）— 辅助排盘，验证手动结果</p>
+</aside>
+</div>
+
+<!-- ═══════ 十、排盘实战案例 ═══════ -->
+<div class="sec" id="sec-10">
+<h2>十、排盘实战案例 —— 手把手走一遍</h2>
+<p>下面以 <strong>2024年6月15日（甲辰年五月初十）下午3点（申时）</strong> 为例，完整演示一次时家转盘奇门排盘的全过程。建议跟着步骤自己动手画一遍。</p>
+
+<h3>📋 Step 0：排四柱</h3>
+<div class="em">
+  <strong>年柱：</strong>2024年 = <strong>甲辰</strong>年（年干甲，年支辰）<br>
+  <strong>月柱：</strong>农历五月（午月），年干甲 → 五虎遁口诀"甲己之年丙作首" → 正月丙寅…五月 = <strong>庚午</strong>月<br>
+  <strong>日柱：</strong>查万年历，公历2024.6.15 = <strong>戊寅</strong>日<br>
+  <strong>时柱：</strong>下午3-5点=申时，日干戊 → 五鼠遁口诀"戊癸起戊子" → 子时戊子…申时 = <strong>庚申</strong>时
+</div>
+
+<h3>📐 Step 1：定局 — 阳遁还是阴遁？几局？</h3>
+<p>6月15日在<strong>夏至（约6月21日）之前</strong> → <strong>阳遁</strong>。口诀："冬至一阳生，夏至一阴生。"</p>
+<div class="em">
+  查奇门历书：甲辰年、庚午月、戊寅日 → <strong>阳遁三局</strong><br>
+  三局意味着：戊从<strong>震3宫</strong>开始排地盘。
+</div>
+
+<h3>🗺 Step 2：布地盘</h3>
+<p>阳遁：六仪<strong>顺排</strong>（戊己庚辛壬癸按宫位数递增），三奇<strong>逆排</strong>（丁丙乙按宫位数递减）。</p>
+<div class="em">
+  <strong>戊</strong>起震3 → <strong>己</strong>落巽4 → <strong>庚</strong>落中5 → <strong>辛</strong>落乾6 → <strong>壬</strong>落兑7 → <strong>癸</strong>落艮8 →（六仪排完）→ <strong>丁</strong>落离9 → <strong>丙</strong>落坎1 → <strong>乙</strong>落坤2
+</div>
+<div class="q"><strong>💡 记忆口诀：</strong>"戊己庚辛壬癸，顺排九宫到艮；丁丙乙，逆飞天上日月星。"阳遁六仪顺、三奇逆。阴遁则相反。</div>
+
+<h3>⭐ Step 3：布天盘（九星）</h3>
+<p>先找<strong>旬首</strong>：时辰庚申属哪个六甲旬？甲寅旬（甲寅→乙卯→丙辰→丁巳→戊午→己未→庚申）。旬首为<strong>甲寅癸</strong>（甲寅旬的六仪是癸）。</p>
+<div class="em">
+  <strong>① 地盘癸落艮8宫</strong> → 艮8宫的原位天盘星是<strong>天任星</strong> → <strong>天任=值符（天盘首领）</strong><br>
+  <strong>② 天任星</strong>带着地盘癸飞到时干<strong>庚</strong>所落地盘<strong>中5宫</strong> → 天任落中5<br>
+  <strong>③ 其余八星</strong>按阳遁顺飞补满九宫
+</div>
+
+<h3>🚪 Step 4：布人盘（八门）</h3>
+<p>值符（天任）对应的本位门 = 艮8宫的本位门 = <strong>生门</strong> → <strong>生门=值使（人盘首领）</strong></p>
+<div class="em">
+  <strong>① 庚申时</strong>是甲寅旬的第几个时辰？甲寅(1)→乙卯(2)→丙辰(3)→丁巳(4)→戊午(5)→己未(6)→庚申(<strong>7</strong>)<br>
+  <strong>② 生门从艮8起数7格</strong>（阳遁顺数）→ 8→9→1→2→3→4→5 → 落<strong>中5宫</strong><br>
+  <strong>③ 其余七门</strong>按阳遁顺排满九宫
+</div>
+
+<h3>👻 Step 5：布神盘（八神）</h3>
+<p>八神之首<strong>值符</strong>与天盘值符（天任）<strong>同宫</strong>，即中5宫。其余七神按<strong>阳遁顺排</strong>。</p>
+<div class="em">
+  <strong>值符(中5)</strong> → 螣蛇(乾6) → 太阴(兑7) → 六合(艮8) → 白虎(离9) → 玄武(坎1) → 九地(坤2) → 九天(震3) →（接回巽4）
+</div>
+
+<h3>✅ 完整盘面</h3>
+<table>
+<thead><tr><th>宫位</th><th>地盘干</th><th>天盘星</th><th>人盘门</th><th>神盘</th></tr></thead>
+<tr><td>坎1</td><td>丙</td><td>天芮</td><td>死门</td><td>玄武</td></tr>
+<tr><td>坤2</td><td>乙</td><td>天柱</td><td>惊门</td><td>九地</td></tr>
+<tr><td>震3</td><td>戊</td><td>天英</td><td>开门</td><td>九天</td></tr>
+<tr><td>巽4</td><td>己</td><td>天蓬</td><td>休门</td><td>值符</td></tr>
+<tr><td>中5</td><td>庚</td><td><strong>天任★</strong></td><td><strong>生门★</strong></td><td><strong>值符★</strong></td></tr>
+<tr><td>乾6</td><td>辛</td><td>天冲</td><td>伤门</td><td>螣蛇</td></tr>
+<tr><td>兑7</td><td>壬</td><td>天辅</td><td>杜门</td><td>太阴</td></tr>
+<tr><td>艮8</td><td>癸</td><td>天禽</td><td>景门</td><td>六合</td></tr>
+<tr><td>离9</td><td>丁</td><td>天心</td><td>死门</td><td>白虎</td></tr>
+</table>
+<p style="color:var(--text-dim);font-size:.8rem;margin-top:8px">★标记 = 值符星、值使门、值符神。这三者是断局时最重要的参考点。</p>
+
+<aside>
+  <h4>📌 排盘五步回顾</h4>
+  <p><strong>① 定局：</strong>节气→阳遁/阴遁→局数（1-9）<br>
+  <strong>② 地盘：</strong>戊起某宫，阳顺阴逆排九干<br>
+  <strong>③ 天盘：</strong>旬首→值符星→飞到时干落宫<br>
+  <strong>④ 人盘：</strong>值符→值使门→数到时辰落宫<br>
+  <strong>⑤ 神盘：</strong>值符随天盘→阳顺阴逆排八神<br>
+  <strong>🖐 动手练习：</strong>选今天日期，按上面五步自己排一遍，再对照排盘App验证结果。排3次之后，你就能脱离教程独立排盘了。</p>
+</aside>
+</div>
+
+<!-- ═══════ 口诀助记板块 ═══════ -->
+<div class="sec" id="sec-mn" style="border-top:1px solid var(--border);padding-top:36px;margin-top:44px">
+<h2>🧠 口诀助记 · 多重记忆法</h2>
+<p style="color:var(--text-dim);margin-bottom:20px">以下口诀运用<strong>韵律记忆、分类归纳、故事联想、谐音记忆</strong>等多种方法，帮助快速记住核心知识点。</p>
+
+<!-- 五行生克 -->
+<div class="mnemonic">
+<div class="m-title">🔄 五行生克诀 <span class="m-type">韵律记忆</span></div>
+<div class="m-content">
+金生水来水生木，木生火来火生土，土生金——五行相生转不休。<br>
+金克木来木克土，土克水来水克火，火克金——五行相克永流传。
+</div>
+<div class="m-explain">
+<strong>记法：</strong>张开手掌，从大拇指(金)开始→食指(水)→中指(木)→无名指(火)→小指(土)。相邻为<strong>生</strong>，隔一为<strong>克</strong>。金→水→木→火→土→金循环。<br>
+<strong>谐音联想法：</strong>"金水木火土" = "<strong>今</strong>天<strong>水</strong>里<strong>没</strong>有<strong>火</strong><strong>土</strong>"，多念几遍就记住了。
+</div>
+</div>
+
+<!-- 十天干 -->
+<div class="mnemonic">
+<div class="m-title">🔟 十天干记忆法 <span class="m-type">故事联想 + 谐音</span></div>
+<div class="m-content">
+<strong>甲乙丙丁戊 己庚辛壬癸</strong>
+</div>
+<div class="m-explain">
+<strong>谐音记法：</strong>"<strong>甲乙丙丁</strong>"=大家都认识(甲乙丙丁排顺序)；"<strong>戊己庚辛</strong>"=无极更新(戊己如无极，庚辛如更新)；"<strong>壬癸</strong>"=人鬼(谐音)。<br>
+<strong>分组记忆：</strong>十天干分五组——甲乙(木)、丙丁(火)、戊己(土)、庚辛(金)、壬癸(水)。每组前者为阳，后者为阴。
+</div>
+</div>
+
+<!-- 十二地支 -->
+<div class="mnemonic">
+<div class="m-title">🕐 十二地支掌诀 <span class="m-type">身体记忆</span></div>
+<div class="m-content">
+<strong>子丑寅卯辰巳午 未申酉戌亥</strong>
+</div>
+<div class="m-explain">
+<strong>掌诀法：</strong>伸出左手，无名指根节=子(1)，中指根节=丑(2)，食指根节=寅(3)，食指中节=卯(4)，食指上节=辰(5)，中指上节=巳(6)，无名指上节=午(7)，小指上节=未(8)，小指中节=申(9)，小指根节=酉(10)，无名指根节(外侧)=戌(11)，无名指根节(内侧)=亥(12)。<br>
+<strong>记法：</strong>在手指关节上逐一标注，反复掐指练习10分钟即可熟练。这是最传统的记忆方式——"掐指一算"的由来。
+</div>
+</div>
+
+<!-- 八卦九宫 -->
+<div class="mnemonic">
+<div class="m-title">🗺 八卦九宫方位歌 <span class="m-type">韵律记忆</span></div>
+<div class="m-content">
+一坎二坤三震四巽五中宫，<br>
+六乾七兑八艮九离分九宫。<br>
+戴九履一，左三右七，二四为肩，六八为足。
+</div>
+<div class="m-explain">
+<strong>记法：</strong>把自己当成九宫格——头戴9(离·南)，脚踏1(坎·北)，左手3(震·东)，右手7(兑·西)，左肩4(巽·东南)，右肩2(坤·西南)，左脚8(艮·东北)，右脚6(乾·西北)，肚脐5(中宫)。<br>
+<strong>口诀：</strong>"戴九履一，左三右七，二四为肩，六八为足"——这就是洛书的经典描述，流传千年。
+</div>
+</div>
+
+<!-- 八门 -->
+<div class="mnemonic">
+<div class="m-title">🚪 八门吉凶速记 <span class="m-type">分类分组 + 联想</span></div>
+<div class="m-content">
+<strong style="color:var(--green)">三吉门：开·休·生</strong> — 开门纳福，休养生息，生机勃勃<br>
+<strong style="color:var(--red)">三凶门：死·惊·伤</strong> — 死亡终结，惊恐口舌，伤灾血光<br>
+<strong style="color:var(--blue)">二平门：杜·景</strong> — 杜塞保密，景门文书
+</div>
+<div class="m-explain">
+<strong>故事联想法：</strong>想象进一座城——先从<strong>开</strong>门进城(吉)，找个地方<strong>休</strong>息(吉)，吃饱喝足<strong>生</strong>龙活虎(吉)。看到一个<strong>杜</strong>绝出入的院子(平)，里面<strong>景</strong>色很美在办喜宴(平)。突然听到<strong>惊</strong>叫声(凶)，有人受<strong>伤</strong>了(凶)，结果<strong>死</strong>了人(凶)。
+</div>
+</div>
+
+<!-- 九星 -->
+<div class="mnemonic">
+<div class="m-title">⭐ 九星名记忆诀 <span class="m-type">韵律 + 顺口溜</span></div>
+<div class="m-content">
+<strong>天蓬天芮冲天辅，天禽天心柱任英。</strong>
+</div>
+<div class="m-explain">
+<strong>拆分记法：</strong>九星分三组——<br>
+①"蓬芮冲辅"=碰锐冲辅(谐音) | ②"禽心柱"=琴心柱(想象琴的弦柱) | ③"任英"=人英雄<br>
+<strong>吉凶分组：</strong>吉星——天辅·天禽·天心·天任(辅禽心任→"辅禽信任")<br>凶星——天蓬·天芮·天柱("蓬芮柱"→谐音"碰锐柱"=碰到尖锐的柱子)<br>平星——天冲·天英
+</div>
+</div>
+
+<!-- 八神顺序 -->
+<div class="mnemonic">
+<div class="m-title">👻 八神顺序诀 <span class="m-type">韵律记忆</span></div>
+<div class="m-content">
+<strong>值符螣蛇太阴六，白虎玄武九地九天。</strong>
+</div>
+<div class="m-explain">
+<strong>记法：</strong>八神分四组——<br>
+①值符+螣蛇="直藤蛇" | ②太阴+六合="太六合" | ③白虎+玄武="白虎武" | ④九地+九天="九地天"<br>
+<strong>阳遁顺排，阴遁逆排：</strong>阳顺阴逆是奇门遁甲的核心规律，八神也不例外。记牢"阳顺阴逆"四字。
+</div>
+</div>
+
+<!-- 三奇六仪排列 -->
+<div class="mnemonic">
+<div class="m-title">🔤 三奇六仪排布歌 <span class="m-type">韵律记忆</span></div>
+<div class="m-content">
+<strong>戊己庚辛壬癸 乙丙丁</strong><br>
+六仪在前三奇后，阴阳顺逆各不同。
+</div>
+<div class="m-explain">
+<strong>记法：</strong>六仪(戊己庚辛壬癸)像大部队在前开路，三奇(乙丙丁)像奇兵在后。阳遁时六仪顺排(戊1→己2→庚3...)，三奇逆排(丁→丙→乙)；阴遁相反。<br>
+<strong>谐音：</strong>"戊己庚辛壬癸"=无极更新人鬼(无戊极己更庚新辛人壬鬼癸)；"乙丙丁"=一饼定(打麻将一饼就定了)。
+</div>
+</div>
+
+</div>
+
+</div>
+
+<footer><p>奇门遁甲基础入门 ｜ 搭建知识框架，为五步学习做好准备</p></footer>
+<script src="../共享样式/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,513 @@
+/*══════════════════════════════════════════════════════════
+  玄门学习平台 · 统一设计系统 v2
+  覆盖：令牌 · 重置 · 排版 · 组件 · 工具 · 响应式 · 打印
+  ══════════════════════════════════════════════════════════*/
+
+/* ── 设计令牌 ── */
+:root {
+  /* 底色 */
+  --bg:       #08070d;
+  --bg-alt:   #0c0b15;
+  --surface:  #100f1d;
+  --card:     #151326;
+  --card-alt: #1b1832;
+  --border:   #252240;
+  --border-lt:#302c4e;
+
+  /* 文字 */
+  --text:     #e8e4f4;
+  --text-alt: #9b94b8;
+  --text-dim: #6b6590;
+
+  /* 金色系 */
+  --gold:     #d4b06a;
+  --gold-lt:  #e8d09f;
+  --gold-dk:  #a07830;
+  --gold-glow:rgba(212,176,106,.12);
+  --gold-bg:  rgba(212,176,106,.06);
+
+  /* 功能色 */
+  --red:      #e0554a;
+  --red-bg:   rgba(224,85,74,.08);
+  --green:    #4ea868;
+  --green-bg: rgba(78,168,104,.08);
+  --blue:     #5098c8;
+  --blue-bg:  rgba(80,152,200,.08);
+  --purple:   #9b7ec4;
+
+  /* 尺寸 */
+  --radius:   10px;
+  --radius-sm:6px;
+  --radius-lg:14px;
+  --ease:     cubic-bezier(.4,0,.2,1);
+  --dur:      .25s;
+
+  /* 字体 */
+  --font-ui:  "PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
+  --font-cn:  "Noto Serif SC","Songti SC","STSong","KaiTi",serif;
+
+  /* 侧边栏 */
+  --sidebar-w:240px;
+}
+
+/* ── Reset ── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font-ui);background:var(--bg);color:var(--text);
+  line-height:1.8;min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── 排版 ── */
+h1{font-size:2rem;font-weight:700;letter-spacing:.02em;line-height:1.3}
+h2{font-size:1.4rem;font-weight:700;line-height:1.35;color:var(--gold-lt)}
+h3{font-size:1.1rem;font-weight:600;line-height:1.4;color:var(--gold)}
+h4{font-size:.95rem;font-weight:600;line-height:1.45;color:var(--gold)}
+p{margin:8px 0;line-height:1.85}
+a{color:var(--gold);text-decoration:none;transition:color var(--dur) var(--ease)}
+a:hover{color:var(--gold-lt)}
+ul,ol{padding-left:1.5em;margin:8px 0;line-height:1.85}
+li{margin:5px 0;color:var(--text-alt);line-height:1.75}
+strong{color:#f0e6c8;font-weight:700}
+small{font-size:.82rem;color:var(--text-dim)}
+code{font-family:"SF Mono","Cascadia Code",monospace;font-size:.88em;background:var(--surface);padding:1px 6px;border-radius:3px;color:var(--gold-lt)}
+hr{border:none;border-top:1px solid var(--border);margin:24px 0}
+
+/* ── 知识高亮类 ── */
+/* 关键术语：段落中的核心概念 */
+.key-term{
+  color:var(--gold-lt);font-weight:700;
+  background:rgba(212,176,106,.08);
+  padding:1px 8px;border-radius:4px;
+  border-bottom:1.5px solid var(--gold);
+  white-space:nowrap;
+}
+/* 口诀/公式：独占一行的记忆公式 */
+.formula{
+  display:block;text-align:center;
+  font-size:1.1rem;font-weight:700;color:var(--gold-lt);
+  padding:14px 20px;margin:14px 0;
+  background:linear-gradient(135deg,rgba(212,176,106,.08),rgba(212,176,106,.02));
+  border:1.5px solid rgba(212,176,106,.2);border-radius:var(--radius);
+  letter-spacing:.06em;line-height:1.8;
+}
+/* 重点段落：需要特别关注的解释 */
+.highlight-para{
+  background:linear-gradient(135deg,rgba(212,176,106,.06),transparent);
+  border-left:4px solid var(--gold);
+  padding:12px 18px;margin:14px 0;border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  line-height:1.85;
+}
+.highlight-para strong{color:var(--gold-lt)}
+/* 对比卡片 */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:12px 0}
+.compare-card{padding:16px 20px;border-radius:var(--radius);border:1.5px solid}
+.compare-card h4{margin:0 0 8px;font-size:.95rem}
+.compare-card ul{padding-left:1.2em;font-size:.86rem}
+.compare-card.good{border-color:rgba(78,168,104,.25);background:rgba(78,168,104,.04)}
+.compare-card.good h4{color:var(--green)}
+.compare-card.bad{border-color:rgba(224,85,74,.25);background:rgba(224,85,74,.04)}
+.compare-card.bad h4{color:var(--red)}
+.compare-card.info{border-color:rgba(80,152,200,.25);background:rgba(80,152,200,.04)}
+.compare-card.info h4{color:var(--blue)}
+@media(max-width:600px){.compare-grid{grid-template-columns:1fr}}
+
+/* ── 通用卡片 ── */
+.card{
+  background:linear-gradient(155deg,var(--card),rgba(21,19,38,.95));
+  border:1.5px solid var(--border);border-radius:var(--radius);
+  padding:20px 24px;margin:14px 0;
+  transition:all var(--dur) var(--ease);
+}
+.card:hover{border-color:var(--gold);box-shadow:0 2px 16px rgba(212,176,106,.06)}
+.card.raised:hover{transform:translateY(-2px);box-shadow:0 4px 24px rgba(0,0,0,.35);border-color:var(--gold)}
+.card .card-title{font-size:1rem;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px;color:var(--gold)}
+
+/* ── 通用引导语 ── */
+.lead{
+  padding:14px 20px;background:linear-gradient(135deg,rgba(212,176,106,.08),rgba(212,176,106,.02));
+  border-radius:var(--radius-sm);border-left:4px solid var(--gold);
+  color:var(--gold-lt);font-size:.94rem;line-height:1.85;margin-bottom:18px;
+  font-weight:500;
+}
+.lead strong{color:#f0e6c8}
+
+/* ── 提示框 ── */
+.tip{
+  padding:12px 18px;border-radius:var(--radius-sm);margin:14px 0;
+  font-size:.88rem;line-height:1.85;
+  border-left:4px solid;
+}
+.tip.info {background:linear-gradient(135deg,rgba(212,176,106,.06),rgba(212,176,106,.01));border-color:var(--gold);color:var(--gold-lt)}
+.tip.help {background:linear-gradient(135deg,rgba(80,152,200,.08),rgba(80,152,200,.01));border-color:var(--blue);color:#7ab8e8}
+.tip.warn {background:linear-gradient(135deg,rgba(224,85,74,.08),rgba(224,85,74,.01));border-color:var(--red);color:#f0706a}
+.tip.good {background:linear-gradient(135deg,rgba(78,168,104,.08),rgba(78,168,104,.01));border-color:var(--green);color:#6cc882}
+.tip strong{color:inherit;font-weight:700}
+/* 带图标的提示 */
+.tip::before{font-size:1.05rem;margin-right:8px}
+.tip.info::before{content:"💡 "}
+.tip.help::before{content:"📘 "}
+.tip.warn::before{content:"⚠️ "}
+.tip.good::before{content:"✅ "}
+
+/* ── 按钮 ── */
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:9px 22px;border:none;border-radius:var(--radius-sm);
+  font-family:var(--font-ui);font-size:.86rem;font-weight:600;
+  cursor:pointer;transition:all var(--dur) var(--ease);
+  letter-spacing:.3px;
+}
+.btn-primary{background:linear-gradient(135deg,var(--gold-dk),var(--gold));color:#111}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px var(--gold-glow)}
+.btn-ghost{background:transparent;border:1px solid var(--border-lt);color:var(--text-alt)}
+.btn-ghost:hover{background:rgba(255,255,255,.03);color:var(--text);border-color:var(--gold)}
+.btn-sm{font-size:.76rem;padding:5px 13px}
+.btn-group{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+
+/* ── 标签 ── */
+.tag{
+  display:inline-block;padding:3px 12px;border-radius:12px;
+  font-size:.74rem;font-weight:600;letter-spacing:.4px;
+}
+.tag-gold {background:var(--gold-bg);color:var(--gold);border:1px solid rgba(212,176,106,.2)}
+.tag-green{background:var(--green-bg);color:var(--green)}
+.tag-red  {background:var(--red-bg);color:var(--red)}
+.tag-blue {background:var(--blue-bg);color:var(--blue)}
+
+/* ── 表格 ── */
+.tbl{
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  margin:14px 0;border-radius:var(--radius);
+  border:1.5px solid var(--border);
+}
+.tbl table{width:100%;border-collapse:collapse;font-size:.84rem}
+.tbl th{
+  background:linear-gradient(180deg,rgba(212,176,106,.12),rgba(212,176,106,.04));
+  color:var(--gold-lt);font-weight:700;
+  padding:10px 14px;text-align:left;white-space:nowrap;
+  font-size:.78rem;letter-spacing:.6px;
+  border-bottom:2px solid var(--gold);
+}
+.tbl td{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text-alt)}
+.tbl tr:nth-child(even) td{background:rgba(255,255,255,.01)}
+.tbl tr:hover td{background:var(--gold-bg);color:var(--text)}
+.tbl tr:hover td:first-child{color:var(--gold-lt);font-weight:600}
+.tbl .吉{color:var(--green)!important;font-weight:700}
+.tbl .凶{color:var(--red)!important;font-weight:700}
+.tbl .平{color:var(--blue)!important;font-weight:700}
+
+/* ── 网格 ── */
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+
+/* ── 章节标题 ── */
+.sec-title{
+  font-size:1.4rem;font-weight:700;margin-bottom:20px;
+  display:flex;align-items:center;gap:10px;
+}
+.sec-title::before{
+  content:'';width:4px;height:26px;
+  background:linear-gradient(180deg,var(--gold-lt),var(--gold-dk));
+  border-radius:2px;flex-shrink:0;
+}
+.sub-title{
+  font-size:1.1rem;font-weight:600;color:var(--gold);
+  margin:32px 0 12px;padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;
+}
+.sub-title .dot{width:6px;height:6px;background:var(--gold);border-radius:50%;flex-shrink:0}
+
+/* ── 步骤 ── */
+.step{
+  margin:12px 0;padding:14px 20px;background:linear-gradient(135deg,var(--surface),rgba(212,176,106,.02));
+  border-radius:var(--radius-sm);border-left:4px solid var(--gold);
+  transition:all var(--dur) var(--ease);
+}
+.step:hover{border-left-color:var(--gold-lt);background:linear-gradient(135deg,var(--surface),rgba(212,176,106,.05))}
+.step .step-num{font-size:.7rem;color:var(--gold-lt);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px;display:block}
+.step h4{margin:4px 0;font-size:.92rem;color:var(--text)}
+.step p{font-size:.85rem;color:var(--text-alt);margin:2px 0}
+
+/* ── 进度条 ── */
+.page-progress{
+  position:fixed;top:0;left:0;height:2.5px;z-index:9999;
+  background:linear-gradient(90deg,var(--gold-dk),var(--gold-lt),var(--gold));
+  box-shadow:0 0 6px var(--gold-glow);
+  pointer-events:none;transition:width .1s linear;
+}
+
+/* ── 回到顶部 ── */
+#backTop{
+  position:fixed;bottom:28px;right:28px;z-index:999;
+  width:40px;height:40px;border-radius:50%;
+  background:var(--card);border:1px solid var(--border-lt);
+  color:var(--gold);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;transition:all var(--dur) var(--ease);
+  opacity:0;transform:translateY(16px);pointer-events:none;
+}
+#backTop.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+#backTop:hover{background:var(--gold);color:#111;border-color:var(--gold);transform:translateY(-3px);box-shadow:0 6px 20px rgba(212,176,106,.25)}
+
+/* ── 动画 ── */
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .4s var(--ease)}
+
+/* ── 滚动条 ── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
+::-webkit-scrollbar-thumb:hover{background:var(--border-lt)}
+
+/* ── 选择文本 ── */
+::selection{background:rgba(212,176,106,.3);color:#fff}
+
+/* ── 打印 ── */
+@media print{
+  body{background:#fff!important;color:#222!important;font-size:12px}
+  .page-progress,#backTop,.sidebar,.sidebar-overlay,.sidebar-toggle,
+  .topbar,.controls,.btn-group{display:none!important}
+  .card,.step,.tip{border:1px solid #ccc!important;break-inside:avoid}
+  .tbl{border:1px solid #ccc!important}
+  a{color:#222!important}
+  *{background-image:none!important}
+}
+
+/* ═══════════ 新增组件：故事卡 ═══════════ */
+.story-card{
+  background:linear-gradient(135deg,rgba(80,152,200,.06),rgba(80,152,200,.02));
+  border:1.5px solid rgba(80,152,200,.15);border-radius:var(--radius);
+  padding:18px 22px;margin:16px 0;
+  position:relative;overflow:hidden;
+}
+.story-card::before{
+  content:'📌';position:absolute;top:10px;right:14px;
+  font-size:1.2rem;opacity:.6;
+}
+.story-card .story-title{
+  color:var(--blue);font-weight:700;font-size:.9rem;
+  margin-bottom:8px;letter-spacing:.5px;
+}
+.story-card p{color:var(--text-alt);font-size:.86rem;line-height:1.85;margin:0}
+
+/* ═══════════ 新增组件：口诀卡 ═══════════ */
+.rhyme-card{
+  background:linear-gradient(135deg,rgba(212,176,106,.1),rgba(212,176,106,.03));
+  border:2px solid rgba(212,176,106,.25);border-radius:var(--radius-lg);
+  padding:22px 28px;margin:18px 0;
+  text-align:center;position:relative;
+}
+.rhyme-card::before{
+  content:'';position:absolute;top:0;left:0;width:5px;height:100%;
+  background:linear-gradient(180deg,var(--gold),var(--gold-dk));
+  border-radius:5px 0 0 5px;
+}
+.rhyme-card .rhyme-text{
+  font-family:var(--font-cn);font-size:1.15rem;font-weight:700;
+  color:var(--gold-lt);letter-spacing:.05em;line-height:2.2;
+}
+.rhyme-card .rhyme-note{
+  color:var(--text-dim);font-size:.78rem;margin-top:8px;line-height:1.7;
+}
+
+/* ═══════════ 新增组件：深潜区 ═══════════ */
+.deep-dive{
+  background:linear-gradient(160deg,rgba(155,126,196,.06),rgba(155,126,196,.01));
+  border:1.5px solid rgba(155,126,196,.2);border-radius:var(--radius-lg);
+  padding:24px 28px;margin:24px 0;
+}
+.deep-dive .deep-title{
+  font-size:1rem;font-weight:700;color:var(--purple);
+  margin-bottom:6px;letter-spacing:.04em;
+}
+.deep-dive .deep-sub{
+  font-size:.78rem;color:var(--text-dim);margin-bottom:16px;
+}
+.deep-dive p{color:var(--text-alt);font-size:.86rem;line-height:1.9}
+
+/* ═══════════ 新增组件：闪卡 ═══════════ */
+.flash-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:14px;margin:16px 0;
+}
+.flash-card{
+  perspective:800px;height:180px;cursor:pointer;
+  -webkit-tap-highlight-color:rgba(212,176,106,.15);
+}
+.flash-inner{
+  position:relative;width:100%;height:100%;
+  transition:transform .5s cubic-bezier(.4,0,.2,1);
+  transform-style:preserve-3d;
+}
+.flash-card.flipped .flash-inner{transform:rotateY(180deg)}
+.flash-front,.flash-back{
+  position:absolute;width:100%;height:100%;backface-visibility:hidden;
+  border-radius:var(--radius);display:flex;
+  flex-direction:column;align-items:center;justify-content:center;
+  padding:20px 16px;text-align:center;
+}
+.flash-front{
+  background:var(--card);border:2px solid var(--border);
+  font-size:.95rem;font-weight:700;color:var(--gold-lt);
+}
+.flash-back{
+  background:linear-gradient(155deg,var(--card),var(--card-alt));
+  border:2px solid var(--gold);transform:rotateY(180deg);
+  font-size:.82rem;color:var(--text-alt);line-height:1.7;
+}
+.flash-card:hover .flash-front{border-color:var(--gold)}
+
+/* ═══════════ 新增组件：练习器 ═══════════ */
+.practice-box{
+  background:var(--card);border:2px solid var(--border);
+  border-radius:var(--radius-lg);padding:24px;margin:20px 0;
+}
+.practice-box h3{color:var(--gold);font-size:1rem;margin-bottom:16px;text-align:center}
+.practice-box .input-row{
+  display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+  margin:12px 0;
+}
+.practice-box input,.practice-box select{
+  background:var(--bg);border:1px solid var(--border-lt);border-radius:var(--radius-sm);
+  color:var(--text);padding:8px 14px;font-family:var(--font-ui);font-size:.88rem;
+  min-width:80px;
+}
+.practice-box input:focus,.practice-box select:focus{
+  outline:none;border-color:var(--gold);box-shadow:0 0 0 2px rgba(212,176,106,.1);
+}
+.practice-box .result{
+  margin-top:16px;padding:14px 20px;background:var(--gold-bg);
+  border-radius:var(--radius);text-align:center;
+  font-size:.9rem;color:var(--gold-lt);font-weight:600;
+  min-height:48px;display:flex;align-items:center;justify-content:center;
+}
+
+/* ═══════════ 进度仪表盘 ═══════════ */
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+.dash-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px;text-align:center;transition:all var(--dur);
+}
+.dash-card:hover{border-color:var(--gold)}
+.dash-card .dash-icon{font-size:1.8rem;margin-bottom:6px}
+.dash-card .dash-label{font-size:.74rem;color:var(--text-dim);letter-spacing:.04em}
+.dash-card .dash-value{font-size:1.4rem;font-weight:700;color:var(--gold);margin:4px 0}
+.dash-card .dash-bar{height:5px;background:var(--border);border-radius:3px;margin-top:8px;overflow:hidden}
+.dash-card .dash-fill{height:100%;background:linear-gradient(90deg,var(--gold-dk),var(--gold));border-radius:3px;transition:width .5s}
+
+/* ═══════════ 移动端左侧导航 ═══════════ */
+.mobile-nav{
+  display:none;
+  position:fixed;top:0;left:0;bottom:0;z-index:200;
+  width:260px;background:linear-gradient(180deg,#0a0914,#0d0b18);
+  border-right:1px solid var(--border);overflow-y:auto;
+  transform:translateX(-100%);transition:transform .3s var(--ease);
+  -webkit-overflow-scrolling:touch;
+}
+.mobile-nav.open{transform:translateX(0)}
+.mobile-nav .mnav-header{
+  padding:20px 16px;text-align:center;border-bottom:1px solid var(--border);
+}
+.mobile-nav .mnav-header .logo{color:var(--gold);font-size:1.1rem;font-weight:700}
+.mobile-nav .mnav-item{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 18px;color:var(--text-alt);text-decoration:none;
+  font-size:.84rem;border-bottom:1px solid rgba(255,255,255,.03);
+  transition:all .2s;min-height:48px;
+}
+.mobile-nav .mnav-item:hover,.mobile-nav .mnav-item.active{
+  background:var(--gold-bg);color:var(--gold);
+}
+.mobile-nav .mnav-section{
+  padding:10px 18px 4px;font-size:.68rem;color:var(--text-dim);
+  letter-spacing:.06em;text-transform:uppercase;
+}
+/* 汉堡按钮 */
+.nav-toggle{
+  display:none;position:fixed;top:12px;left:12px;z-index:210;
+  width:40px;height:40px;border-radius:50%;
+  background:var(--card);border:1px solid var(--border-lt);
+  color:var(--gold);cursor:pointer;
+  align-items:center;justify-content:center;font-size:1.2rem;
+}
+.nav-toggle.visible{display:flex}
+/* 遮罩 */
+.nav-overlay{
+  display:none;position:fixed;inset:0;z-index:199;
+  background:rgba(0,0,0,.5);
+}
+.nav-overlay.open{display:block}
+
+/* ── 平板+手机 (≤860px)：启用左侧导航 ── */
+@media(max-width:860px){
+  .nav-toggle{display:flex}
+  .mobile-nav{display:block}
+  /* 桌面顶栏在移动端隐藏次要链接 */
+  .topnav-links{display:none}
+  .topnav{padding-left:52px}
+  /* 主内容区左边距 */
+  .with-mobile-nav{margin-left:0}
+
+/* ── 平板 (≤860px) ── */
+@media(max-width:860px){
+  body{font-size:.95rem}
+  h1{font-size:1.55rem;line-height:1.3}
+  h2{font-size:1.2rem;line-height:1.3}
+  h3{font-size:1rem;line-height:1.35}
+  h4{font-size:.88rem;line-height:1.4}
+  p,li{line-height:1.75}
+  .sec-title{font-size:1.15rem}
+  .sub-title{font-size:.95rem;margin:22px 0 8px}
+  .card{padding:16px 18px}
+  .step{padding:10px 14px}
+  .lead{padding:10px 14px;font-size:.84rem}
+  .tip{padding:8px 12px;font-size:.8rem}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .tbl{-webkit-overflow-scrolling:touch}
+  .tbl table{font-size:.74rem;min-width:500px}
+  .tbl th,.tbl td{padding:6px 8px}
+}
+
+/* ── 手机 (≤480px) ── */
+@media(max-width:480px){
+  body{font-size:.88rem;line-height:1.72}
+  h1{font-size:1.3rem;line-height:1.25}
+  h2{font-size:1.08rem;line-height:1.3}
+  h3{font-size:.92rem;line-height:1.35}
+  h4{font-size:.84rem;line-height:1.4}
+  p{margin:6px 0;line-height:1.72}
+  li{line-height:1.7;margin:3px 0}
+  .sec-title{font-size:1rem}
+  .sub-title{font-size:.88rem;margin:18px 0 6px}
+  .card{padding:14px 12px;margin:8px 0}
+  .step{padding:10px 12px}
+  .step .step-num{font-size:.62rem}
+  .step h4{font-size:.8rem}
+  .step p{font-size:.76rem}
+  .lead{padding:10px 12px;font-size:.78rem;line-height:1.7}
+  .tip{padding:8px 12px;font-size:.74rem;line-height:1.65}
+  .btn{font-size:.76rem;padding:7px 16px}
+  .btn-sm{font-size:.68rem;padding:4px 10px}
+  .btn-group{gap:6px}
+  .tag{font-size:.66rem;padding:2px 8px}
+  #backTop{bottom:14px;right:14px;width:34px;height:34px;font-size:1rem}
+  /* 表格：水平滚动 + 紧凑 */
+  .tbl{margin:8px 0}
+  .tbl table{font-size:.68rem;min-width:380px}
+  .tbl th,.tbl td{padding:5px 6px}
+  /* 列表紧凑 */
+  ul,ol{padding-left:1.2em}
+  /* 网格堆叠 */
+  .g2,.g3,.g4{grid-template-columns:1fr;gap:8px}
+  /* 触控优化 */
+  a,.btn,.nav-card,.hub-card,.dash-card,.flash,.match-item,.seq-item,.sidebar-nav a{
+    cursor:pointer;-webkit-tap-highlight-color:rgba(212,176,106,.15);
+    min-height:40px;display:inline-flex;align-items:center;
+  }
+  a{min-height:auto;display:inline}
+}
+

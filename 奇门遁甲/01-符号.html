@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>奇门遁甲 · 符号体系</title>
+<style>
+  :root {
+    --bg: #1a1a1f;
+    --card-bg: #24242a;
+    --gold: #c9a96e;
+    --gold-light: #e0c88a;
+    --red: #c04040;
+    --green: #4a9c5d;
+    --white: #e0dcd0;
+    --text: #c8c4b8;
+    --muted: #888480;
+    --border: #3a3830;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: "Noto Serif SC", "STSong", "SimSun", "Songti SC", serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.7;
+  }
+  /* ===== HEADER ===== */
+  .header {
+    text-align: center;
+    padding: 32px 16px 20px;
+    background: linear-gradient(180deg, #1e1d18 0%, var(--bg) 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 {
+    font-size: 2rem;
+    color: var(--gold);
+    letter-spacing: 6px;
+    margin-bottom: 6px;
+  }
+  .header .sub {
+    font-size: 0.9rem;
+    color: var(--muted);
+    letter-spacing: 3px;
+  }
+  /* ===== NAV TABS ===== */
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    padding: 14px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(26,26,31,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+  }
+  .tab-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 7px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: all .2s;
+  }
+  .tab-btn:hover { color: var(--gold-light); border-color: var(--gold); }
+  .tab-btn.active { background: var(--gold); color: #1a1a1f; border-color: var(--gold); font-weight: bold; }
+  /* ===== SECTION ===== */
+  .content { max-width: 960px; margin: 0 auto; padding: 20px 16px 60px; }
+  .section { display: none; }
+  .section.active { display: block; animation: fadeIn .35s ease; }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
+  /* ===== TABLES ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 0.88rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th {
+    background: #2a2822;
+    color: var(--gold-light);
+    padding: 12px 10px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-bottom: 2px solid var(--gold);
+  }
+  td {
+    padding: 10px 10px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  tr:last-child td { border-bottom: none; }
+  td.left { text-align: left; line-height: 1.5; }
+  .badge { display:inline-block; padding:2px 10px; border-radius:10px; font-size:0.78rem; font-weight:bold; letter-spacing:1px; }
+  .badge-ji  { background:#2d3a28; color:#6db87d; }
+  .badge-xiong { background:#3a2020; color:#d46b6b; }
+  .badge-ping { background:#2a2a30; color:#a0a090; }
+  .name-cell {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+  }
+  /* ===== COMBINATION CARDS ===== */
+  .combo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .combo-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+  .combo-card .gan {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--gold-light);
+    letter-spacing: 4px;
+    margin-bottom: 4px;
+  }
+  .combo-card .meaning {
+    font-size: 0.85rem;
+    color: var(--text);
+  }
+  .combo-card.combined {
+    border-left: 3px solid var(--red);
+    background: #2a2222;
+  }
+  .combo-card.combined .gan { color: #e08888; }
+  /* ===== MNEMONIC CARD ===== */
+  .mnemonic-card {
+    background: linear-gradient(135deg, #2a2822 0%, #3a3424 50%, #2a2822 100%);
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    padding: 28px 24px;
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .mnemonic-card::before {
+    content: "";
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 80px; height: 80px;
+    border: 1px solid rgba(201,169,110,0.15);
+    border-radius: 50%;
+  }
+  .mnemonic-card::after {
+    content: "";
+    position: absolute;
+    bottom: -20px; left: -20px;
+    width: 60px; height: 60px;
+    border: 1px solid rgba(201,169,110,0.12);
+    border-radius: 50%;
+  }
+  .mnemonic-card .label {
+    font-size: 0.78rem;
+    color: var(--gold);
+    letter-spacing: 4px;
+    position: relative;
+    z-index: 1;
+  }
+  .mnemonic-card .slogan {
+    font-size: 1.6rem;
+    color: var(--gold-light);
+    letter-spacing: 5px;
+    margin: 10px 0;
+    position: relative;
+    z-index: 1;
+    line-height: 1.8;
+  }
+  .mnemonic-card .note {
+    font-size: 0.8rem;
+    color: var(--muted);
+    position: relative;
+    z-index: 1;
+  }
+  /* ===== STORY CARDS ===== */
+  .story-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .story-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    border-left: 4px solid var(--gold);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .story-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+  .story-card .icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+  .story-card .title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .story-card .story {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  /* ===== FLIP CARDS ===== */
+  .flip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 18px;
+    margin: 20px 0;
+  }
+  .flip-container {
+    perspective: 800px;
+    height: 240px;
+    cursor: pointer;
+  }
+  .flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+    transform-style: preserve-3d;
+  }
+  .flip-container.flipped .flip-inner {
+    transform: rotateY(180deg);
+  }
+  .flip-front, .flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+  }
+  .flip-front {
+    background: linear-gradient(145deg, #2a2822 0%, #1e1e24 100%);
+    border: 2px solid var(--gold);
+  }
+  .flip-front .door-name {
+    font-size: 1.8rem;
+    color: var(--gold-light);
+    letter-spacing: 4px;
+    font-weight: bold;
+  }
+  .flip-front .door-type {
+    font-size: 0.8rem;
+    margin-top: 6px;
+    letter-spacing: 2px;
+  }
+  .flip-front .hint {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 12px;
+    letter-spacing: 1px;
+  }
+  .flip-back {
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    transform: rotateY(180deg);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .flip-back .label-row {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+  .flip-back .content-row {
+    margin-bottom: 8px;
+    color: var(--gold-light);
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 600px) {
+    .header h1 { font-size: 1.4rem; letter-spacing: 3px; }
+    .flip-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    .flip-container { height: 200px; }
+    .combo-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    table { font-size: 0.78rem; }
+    th, td { padding: 8px 6px; }
+  }
+  /* ===== TIPS ===== */
+  .tips-box {
+    background: #1e2420;
+    border: 1px solid #3a5840;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 0.85rem;
+    color: #8ab88e;
+    line-height: 1.8;
+  }
+  .tips-box strong { color: var(--green); }
+  /* ===== ANALYSIS EXAMPLE ===== */
+  .example-box {
+    background: #201e24;
+    border: 1px solid #4a3858;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 0.85rem;
+    line-height: 1.8;
+  }
+  .example-box .gan-pair {
+    display: inline-block;
+    background: #2a2222;
+    color: #e08888;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin: 2px 4px;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+  .example-box .gan-pair.good {
+    background: #22302a;
+    color: #78c088;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>奇 门 符 号</h1>
+  <p class="sub">八门 · 九星 · 八神 · 三奇六仪 · 天干断局</p>
+</div>
+
+<!-- ===== TABS ===== -->
+<div class="tabs" id="tabs">
+  <button class="tab-btn active" data-section="bamen">八门</button>
+  <button class="tab-btn" data-section="jiuxing">九星</button>
+  <button class="tab-btn" data-section="bashen">八神</button>
+  <button class="tab-btn" data-section="gan">三奇六仪</button>
+  <button class="tab-btn" data-section="koujue">口诀卡</button>
+  <button class="tab-btn" data-section="story">故事卡</button>
+  <button class="tab-btn" data-section="flash">闪卡练习</button>
+</div>
+
+<!-- ===== CONTENT ===== -->
+<div class="content">
+
+<!-- ========== 八门 ========== -->
+<div class="section active" id="section-bamen">
+  <h3 style="color:var(--gold-light);text-align:center;letter-spacing:4px;margin-bottom:16px;">八 门 一 览</h3>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th>门</th><th>吉凶</th><th>五行</th><th>方位</th><th>宜</th><th>忌</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name-cell">开 门</td>
+        <td><span class="badge badge-ji">大吉</span></td>
+        <td>金</td><td>西北·乾</td>
+        <td class="left">开业、出行、嫁娶、上任、经商、求财</td>
+        <td class="left">隐匿、密谋、安葬</td>
+      </tr>
+      <tr>
+        <td class="name-cell">休 门</td>
+        <td><span class="badge badge-ji">大吉</span></td>
+        <td>水</td><td>北·坎</td>
+        <td class="left">休养、聚会、谈判、和解、招贤、纳财</td>
+        <td class="left">急进、强行、争讼</td>
+      </tr>
+      <tr>
+        <td class="name-cell">生 门</td>
+        <td><span class="badge badge-ji">大吉</span></td>
+        <td>土</td><td>东北·艮</td>
+        <td class="left">求财、种植、治病、建房、养殖、还债</td>
+        <td class="left">丧葬、诉讼</td>
+      </tr>
+      <tr>
+        <td class="name-cell">伤 门</td>
+        <td><span class="badge badge-xiong">凶</span></td>
+        <td>木</td><td>东·震</td>
+        <td class="left">狩猎、捕盗、索债、竞技比赛</td>
+        <td class="left">嫁娶、经商、出行、安葬</td>
+      </tr>
+      <tr>
+        <td class="name-cell">杜 门</td>
+        <td><span class="badge badge-ping">平</span></td>
+        <td>木</td><td>东南·巽</td>
+        <td class="left">躲藏、闭门读书、修道、保密事务</td>
+        <td class="left">出行、交际、求人办事</td>
+      </tr>
+      <tr>
+        <td class="name-cell">景 门</td>
+        <td><span class="badge badge-ping">平</span></td>
+        <td>火</td><td>南·离</td>
+        <td class="left">上书、考试、宴请、宣传、文书、广告</td>
+        <td class="left">密谋、隐匿、暗杀</td>
+      </tr>
+      <tr>
+        <td class="name-cell">死 门</td>
+        <td><span class="badge badge-xiong">大凶</span></td>
+        <td>土</td><td>西南·坤</td>
+        <td class="left">吊丧、行刑、捕猎、固守</td>
+        <td class="left">出行、嫁娶、上任、经商、远行</td>
+      </tr>
+      <tr>
+        <td class="name-cell">惊 门</td>
+        <td><span class="badge badge-xiong">凶</span></td>
+        <td>金</td><td>西·兑</td>
+        <td class="left">诉讼、捕捉、赌博、设伏</td>
+        <td class="left">远行、开张、上任</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tips-box">
+    <strong>记忆要点：</strong>三吉门——<span style="color:#e0c88a;">开、休、生</span>，凡事皆宜，出行经商首选。五凶平门各有偏用，凶门未必全凶——如伤门利捕盗、死门利吊丧、杜门利隐修，用对场合即为吉。
+  </div>
+</div>
+
+<!-- ========== 九星 ========== -->
+<div class="section" id="section-jiuxing">
+  <h3 style="color:var(--gold-light);text-align:center;letter-spacing:4px;margin-bottom:16px;">九 星 一 览</h3>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th>星</th><th>五行</th><th>吉凶</th><th>原始宫位</th><th>本义</th><th>类象延伸</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name-cell">天 蓬</td>
+        <td>水</td>
+        <td><span class="badge badge-xiong">凶</span></td>
+        <td>坎一宫</td>
+        <td>盗贼、胆大、冒险</td>
+        <td class="left">雨水、江湖、水产业、聪明但邪、敢作敢为之人</td>
+      </tr>
+      <tr>
+        <td class="name-cell">天 芮</td>
+        <td>土</td>
+        <td><span class="badge badge-xiong">凶</span></td>
+        <td>坤二宫</td>
+        <td>疾病、学生、问题</td>
+        <td class="left">医院、疾病、学生求学、教师、修行者、土地问题</td>
+      </tr>
+      <tr>
+        <td class="name-cell">天 冲</td>
+        <td>木</td>
+        <td><span class="badge badge-ping">平</span></td>
+        <td>震三宫</td>
+        <td>行动、冲刺、武职</td>
+        <td class="left">运动员、军人、雷厉风行、出行、交通事故、震动</td>
+      </tr>
+      <tr style="background:#1e2420;">
+        <td class="name-cell" style="color:#78c088;">天 辅 ★</td>
+        <td>木</td>
+        <td><span class="badge badge-ji">吉</span></td>
+        <td>巽四宫</td>
+        <td>文化、辅助、教育</td>
+        <td class="left">教师、学校、文化传播、考试、文书、辅导、顾问</td>
+      </tr>
+      <tr style="background:#1e2420;">
+        <td class="name-cell" style="color:#78c088;">天 禽 ★</td>
+        <td>土</td>
+        <td><span class="badge badge-ji">吉</span></td>
+        <td>中五宫</td>
+        <td>中正、统帅、正直</td>
+        <td class="left">中央、领导、元帅、公正之人、官方、核心位置</td>
+      </tr>
+      <tr style="background:#1e2420;">
+        <td class="name-cell" style="color:#78c088;">天 心 ★</td>
+        <td>金</td>
+        <td><span class="badge badge-ji">吉</span></td>
+        <td>乾六宫</td>
+        <td>策划、医生、领导</td>
+        <td class="left">医师、谋士、管理层、西医、算计、金属、圆形物</td>
+      </tr>
+      <tr>
+        <td class="name-cell">天 柱</td>
+        <td>金</td>
+        <td><span class="badge badge-xiong">凶</span></td>
+        <td>兑七宫</td>
+        <td>破坏、口舌、毁折</td>
+        <td class="left">律师、演说家、歌手、破坏、争吵、乐器、牙齿</td>
+      </tr>
+      <tr style="background:#1e2420;">
+        <td class="name-cell" style="color:#78c088;">天 任 ★</td>
+        <td>土</td>
+        <td><span class="badge badge-ji">吉</span></td>
+        <td>艮八宫</td>
+        <td>担当、稳重、踏实</td>
+        <td class="left">农民、山、房地产、稳重之人、农业、畜牧业</td>
+      </tr>
+      <tr>
+        <td class="name-cell">天 英</td>
+        <td>火</td>
+        <td><span class="badge badge-ping">平</span></td>
+        <td>离九宫</td>
+        <td>美丽、文书、焦躁</td>
+        <td class="left">美术、艺术、火光、电器、文书信息、脾气暴躁</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tips-box">
+    <strong>四吉星记忆：</strong><span style="color:#e0c88a;">天辅·天禽·天心·天任</span>——"辅禽心任"为四吉星，凡百事遇之皆有利。配合三吉门（开休生）则吉上加吉。
+  </div>
+</div>
+
+<!-- ========== 八神 ========== -->
+<div class="section" id="section-bashen">
+  <h3 style="color:var(--gold-light);text-align:center;letter-spacing:4px;margin-bottom:16px;">八 神 一 览</h3>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th>神</th><th>次序</th><th>五行</th><th>本义</th><th>出现信号 / 断事含义</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="name-cell">值 符</td>
+        <td>1</td><td>土</td>
+        <td>首领、贵人、元首</td>
+        <td class="left">逢之必遇贵人、领导出面、官方事务；问事有头绪、有主心骨</td>
+      </tr>
+      <tr>
+        <td class="name-cell">螣 蛇</td>
+        <td>2</td><td>火</td>
+        <td>虚惊、怪异、缠绕</td>
+        <td class="left">虚假信息、怪异事件、噩梦、纠缠不休之事；多疑虑、心神不宁</td>
+      </tr>
+      <tr>
+        <td class="name-cell">太 阴</td>
+        <td>3</td><td>金</td>
+        <td>密谋、隐匿、阴私</td>
+        <td class="left">暗中策划、密约、隐私之事；问感情多地下情、暗恋</td>
+      </tr>
+      <tr>
+        <td class="name-cell">六 合</td>
+        <td>4</td><td>木</td>
+        <td>婚姻、中介、合作</td>
+        <td class="left">婚姻喜事、中介撮合、合伙经营；问姻缘逢六合必成</td>
+      </tr>
+      <tr>
+        <td class="name-cell">白 虎</td>
+        <td>5</td><td>金</td>
+        <td>伤病、阻碍、权威</td>
+        <td class="left">伤病见血、车祸意外、强势对手；也代表军警、权威震慑</td>
+      </tr>
+      <tr>
+        <td class="name-cell">玄 武</td>
+        <td>6</td><td>水</td>
+        <td>盗贼、暗昧、暧昧</td>
+        <td class="left">失窃、被骗、隐私泄露、阴谋诡计；也主聪明善谋</td>
+      </tr>
+      <tr>
+        <td class="name-cell">九 地</td>
+        <td>7</td><td>土</td>
+        <td>稳固、迟缓、长久</td>
+        <td class="left">事情缓慢但有根基、长久之事；宜守不宜攻、稳扎稳打</td>
+      </tr>
+      <tr>
+        <td class="name-cell">九 天</td>
+        <td>8</td><td>金</td>
+        <td>高远、张扬、上升</td>
+        <td class="left">远行出国、声名远扬、积极向上；主动出击、高调行事</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tips-box">
+    <strong>判断口诀：</strong>值符主脑管全局，螣蛇虚妄不可信；太阴暗中藏机密，六合姻缘喜事临；白虎血光须防备，玄武盗骗要紧盯；九地慢中求稳固，九天远处扬名声。
+  </div>
+</div>
+
+<!-- ========== 三奇六仪 + 天干断局 ========== -->
+<div class="section" id="section-gan">
+  <h3 style="color:var(--gold-light);text-align:center;letter-spacing:4px;margin-bottom:8px;">三 奇 六 仪</h3>
+  <p style="text-align:center;color:var(--muted);font-size:0.85rem;margin-bottom:20px;">乙丙丁为三奇 · 戊己庚辛壬癸为六仪</p>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
+    <div style="background:var(--card-bg);border-radius:8px;padding:16px;border-left:4px solid #6db87d;">
+      <h4 style="color:#6db87d;letter-spacing:2px;margin-bottom:8px;">三 奇</h4>
+      <p style="font-size:0.85rem;line-height:2;">
+        <span style="color:#e0c88a;font-weight:bold;">乙（日奇）</span>——柔和、妻子、花草、中医<br>
+        <span style="color:#e0c88a;font-weight:bold;">丙（月奇）</span>——权威、光明、烈火、乱子<br>
+        <span style="color:#e0c88a;font-weight:bold;">丁（星奇）</span>——文书、希望、星光、信息
+      </p>
+    </div>
+    <div style="background:var(--card-bg);border-radius:8px;padding:16px;border-left:4px solid #c9a96e;">
+      <h4 style="color:#c9a96e;letter-spacing:2px;margin-bottom:8px;">六 仪</h4>
+      <p style="font-size:0.85rem;line-height:2;">
+        <span style="color:#e0c88a;font-weight:bold;">戊</span>——资金、资本、阳土<br>
+        <span style="color:#e0c88a;font-weight:bold;">己</span>——欲望、私欲、阴土<br>
+        <span style="color:#e0c88a;font-weight:bold;">庚</span>——阻碍、敌人、阳金<br>
+        <span style="color:#e0c88a;font-weight:bold;">辛</span>——错误、罪过、阴金<br>
+        <span style="color:#e0c88a;font-weight:bold;">壬</span>——流动、变化、阳水<br>
+        <span style="color:#e0c88a;font-weight:bold;">癸</span>——暗昧、隐私、阴水
+      </p>
+    </div>
+  </div>
+
+  <h3 style="color:var(--gold-light);text-align:center;letter-spacing:4px;margin:24px 0 8px;">天 干 单 字 断 局</h3>
+  <p style="text-align:center;color:var(--muted);font-size:0.85rem;margin-bottom:16px;">十天干各有所主，一字可断一事</p>
+
+  <div class="combo-grid">
+    <div class="combo-card"><div class="gan">戊 = 资金</div><div class="meaning">资本流动、房产、存款、投资本金</div></div>
+    <div class="combo-card"><div class="gan">己 = 私欲</div><div class="meaning">贪念、私心、小人之心、欲念之事</div></div>
+    <div class="combo-card"><div class="gan">庚 = 阻碍</div><div class="meaning">阻力、敌人、拦路虎、障碍物</div></div>
+    <div class="combo-card"><div class="gan">辛 = 错误</div><div class="meaning">犯错、罪过、失误、法律问题</div></div>
+    <div class="combo-card"><div class="gan">壬 = 流动</div><div class="meaning">变迁、流动、水患、出行变动</div></div>
+    <div class="combo-card"><div class="gan">癸 = 暗昧</div><div class="meaning">隐私、暧昧、暗箱操作、不明朗</div></div>
+    <div class="combo-card"><div class="gan">乙 = 柔和</div><div class="meaning">婉转、妻室、花草之象、柔中带刚</div></div>
+    <div class="combo-card"><div class="gan">丙 = 权威</div><div class="meaning">烈火之势、乱子、光明正大、威权</div></div>
+    <div class="combo-card"><div class="gan">丁 = 希望</div><div class="meaning">星星之火、消息、文书、一线生机</div></div>
+    <div class="combo-card"><div class="gan">甲 = 统帅</div><div class="meaning">首领、元首、主帅（遁于六仪之下）</div></div>
+  </div>
+
+  <h3 style="color:var(--gold-light);text-align:center;letter-spacing:4px;margin:28px 0 8px;">重 点 组 合 断 局</h3>
+  <p style="text-align:center;color:var(--muted);font-size:0.85rem;margin-bottom:16px;">两组天干同宫，含义叠加或转化</p>
+
+  <div class="combo-grid">
+    <div class="combo-card combined">
+      <div class="gan">戊 + 庚</div>
+      <div class="meaning">资金转移 · 换地方 · 钱财遇阻</div>
+    </div>
+    <div class="combo-card combined">
+      <div class="gan">丁 + 癸</div>
+      <div class="meaning">文书麻烦 · 信息错误 · 朱雀投江</div>
+    </div>
+    <div class="combo-card combined">
+      <div class="gan">庚 + 癸</div>
+      <div class="meaning">大格 · 百事不利 · 处处受阻</div>
+    </div>
+    <div class="combo-card combined">
+      <div class="gan">辛 + 壬</div>
+      <div class="meaning">错误扩大 · 一错再错 · 水覆金沉</div>
+    </div>
+    <div class="combo-card combined">
+      <div class="gan">壬 + 戊</div>
+      <div class="meaning">资金流动 · 换工作 · 财力转移</div>
+    </div>
+    <div class="combo-card combined">
+      <div class="gan">己 + 辛</div>
+      <div class="meaning">私欲致错 · 游魂入墓 · 自食其果</div>
+    </div>
+    <div class="combo-card combined">
+      <div class="gan">丙 + 庚</div>
+      <div class="meaning">权威遇阻 · 荧惑入太白 · 争斗</div>
+    </div>
+    <div class="combo-card combined">
+      <div class="gan">庚 + 丙</div>
+      <div class="meaning">阻碍见权威 · 太白入荧 · 冲突升级</div>
+    </div>
+  </div>
+
+  <div class="example-box">
+    <strong style="color:#b8a0d0;">断局示例：</strong><br>
+    <span class="gan-pair">戊+庚</span> 问财运 → 资金有变，可能在转账、换工作，并非亏钱而是钱换了位置。<br>
+    <span class="gan-pair">丁+癸</span> 问文书 → 合同有麻烦，文字有误需重审，"朱雀投江"主文书溺水。<br>
+    <span class="gan-pair good">戊+丙</span> 问事业 → 资金得权威之助，龙回首，大吉之象，投资可获利。
+  </div>
+</div>
+
+<!-- ========== 口诀卡 ========== -->
+<div class="section" id="section-koujue">
+  <h3 style="color:var(--gold-light);text-align:center;letter-spacing:4px;margin-bottom:16px;">口 诀 卡</h3>
+
+  <div class="mnemonic-card">
+    <p class="label">▎ 八 门 · 九 星 速 记 ▎</p>
+    <p class="slogan">三吉门 开 休 生<br>四吉星 辅 禽 心 任</p>
+    <p class="note">三吉门——开、休、生　|　四吉星——天辅、天禽、天心、天任</p>
+  </div>
+
+  <div class="mnemonic-card">
+    <p class="label">▎ 八 门 象 意 歌 ▎</p>
+    <p class="slogan" style="font-size:1.1rem;line-height:2.2;">
+      欲求财利往生门&emsp;寻人访友休门尊<br>
+      开业远行开门吉&emsp;伤门捕猎索债论<br>
+      杜门闭藏宜躲闪&emsp;景门文书宴乐存<br>
+      死门吊丧行刑用&emsp;惊门讼事恐虚闻
+    </p>
+  </div>
+
+  <div class="mnemonic-card">
+    <p class="label">▎ 九 星 歌 诀 ▎</p>
+    <p class="slogan" style="font-size:1.1rem;line-height:2.2;">
+      天蓬水星为大盗&emsp;天芮病星问医道<br>
+      天冲武星宜出征&emsp;天辅文星利科考<br>
+      天禽中星掌帅印&emsp;天心医星主谋略<br>
+      天柱破星口舌起&emsp;天任稳星如山靠<br>
+      天英火星文书至&emsp;辅禽心任四吉耀
+    </p>
+  </div>
+
+  <div class="mnemonic-card">
+    <p class="label">▎ 八 神 顺 序 歌 ▎</p>
+    <p class="slogan" style="font-size:1.1rem;line-height:2.2;">
+      值符螣蛇太阴连&emsp;六合白虎玄武延<br>
+      九地之后九天至&emsp;阳遁顺排阴遁还
+    </p>
+  </div>
+
+  <div class="mnemonic-card">
+    <p class="label">▎ 十 干 克 应 要 诀 ▎</p>
+    <p class="slogan" style="font-size:1rem;line-height:2.4;">
+      戊主钱财与资本&emsp;庚为阻碍不可行<br>
+      辛是错误须谨慎&emsp;壬主流动变更频<br>
+      癸为暗昧藏隐事&emsp;戊庚相见钱移门<br>
+      丁癸相逢文书误&emsp;庚癸大格百事沉
+    </p>
+  </div>
+</div>
+
+<!-- ========== 故事卡 ========== -->
+<div class="section" id="section-story">
+  <h3 style="color:var(--gold-light);text-align:center;letter-spacing:4px;margin-bottom:16px;">生 活 化 比 喻 · 故 事 卡</h3>
+  <p style="text-align:center;color:var(--muted);font-size:0.85rem;margin-bottom:16px;">玄学不玄——用日常场景理解每个符号</p>
+
+  <div class="story-grid">
+    <div class="story-card">
+      <div class="icon">🚪</div>
+      <div class="title">八门 · 人生的八条通道</div>
+      <div class="story">
+        想象你要出门办事：<strong>开门</strong>像高速公路——畅通无阻，适合走远路；<strong>休门</strong>像咖啡馆——适合坐下来慢慢谈；<strong>生门</strong>像银行柜台——进去是为了钱生钱；<strong>伤门</strong>像拳击擂台——只适合打架，别的地方别去；<strong>杜门</strong>像紧闭的书房——适合闭关，别出来社交；<strong>景门</strong>像舞台聚光灯——适合表演展示，别搞小动作；<strong>死门</strong>像殡仪馆——只办一件事，没事别靠近；<strong>惊门</strong>像法院传票——来了就是麻烦事。
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="icon">⭐</div>
+      <div class="title">九星 · 九种人格角色</div>
+      <div class="story">
+        把九星看成你团队里的九个人：<strong>天辅</strong>是培训老师，帮你涨知识；<strong>天禽</strong>是公正的总经理；<strong>天心</strong>是足智多谋的军师；<strong>天任</strong>是老黄牛，干活靠谱不偷懒——这四位是"四吉星"，有他们在事情就稳了。<strong>天蓬</strong>是胆子贼大的冒险家，可能帮你也可能坑你；<strong>天芮</strong>是医院体检报告，让你发现问题；<strong>天冲</strong>是体育生，说干就干但容易冲动；<strong>天柱</strong>是辩论赛选手，口才好但喜欢抬杠；<strong>天英</strong>是设计师，审美在线但脾气火爆。
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="icon">👻</div>
+      <div class="title">八神 · 八种隐形气场</div>
+      <div class="story">
+        八神像你看不见的"幕后推手"：<strong>值符</strong>是董事长出面了——最高层在意这件事；<strong>螣蛇</strong>是半夜收到的诡异短信——虚虚实实，别全信；<strong>太阴</strong>是暗地里策划惊喜的神秘人；<strong>六合</strong>是媒人牵了一根红线；<strong>白虎</strong>是突然冲出来的拦路虎——血光、伤灾的信号；<strong>玄武</strong>是小偷的手伸进了你的口袋；<strong>九地</strong>是老树扎根——慢但稳；<strong>九天</strong>是火箭发射——高调、远行、声名远扬。
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="icon">🔑</div>
+      <div class="title">三奇六仪 · 十个关键词</div>
+      <div class="story">
+        把十天干当成你手机里的十个App：<strong>戊</strong>=银行App（管钱）、<strong>己</strong>=欲望清单（想买的东西）、<strong>庚</strong>=路障导航（哪里堵车哪里修路）、<strong>辛</strong>=违规记录（犯过的错）、<strong>壬</strong>=快递追踪（东西在流动）、<strong>癸</strong>=隐私相册（不可见人之事）。<strong>乙丙丁</strong>是三个加分项：乙像温柔的伴侣、丙像强力聚光灯、丁像黑暗中的手电筒，关键时刻给你一线希望。
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="icon">🧩</div>
+      <div class="title">组合断局 · 化学反应的奥妙</div>
+      <div class="story">
+        天干组合像化学实验：<strong>戊+庚</strong> = 钱遇到了路障 → 转账、换地方存钱；<strong>丁+癸</strong> = 手电筒掉水里 → 文书出问题、信息中断；<strong>庚+癸</strong> = 路障上又盖了一层雾 → 四处碰壁，啥都不顺；<strong>丙+庚</strong> = 烈火撞上钢刀 → 硬碰硬，两败俱伤。记住：单独看是单词，组合看是句子——断局的关键在于看懂"上下文"。
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="icon">💡</div>
+      <div class="title">实战心法 · 符号是地图不是终点</div>
+      <div class="story">
+        符号体系就像学外语的字母表——背熟不等于会说话。真正的断局，要把八门+九星+八神+天干放在一起看，像读一幅画：门是方向、星是环境、神是气场、干是细节。比如<strong>生门+天心+值符+戊</strong> = 有利可图的医疗投资，有贵人相助——这才是奇门遁甲的真正魅力。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 闪卡 ========== -->
+<div class="section" id="section-flash">
+  <h3 style="color:var(--gold-light);text-align:center;letter-spacing:4px;margin-bottom:8px;">八 门 闪 卡 · 翻 转 练 习</h3>
+  <p style="text-align:center;color:var(--muted);font-size:0.85rem;margin-bottom:16px;">点击卡片翻转，正面看门名，背面看内容 —— 背熟为止</p>
+
+  <div class="flip-grid" id="flipGrid"></div>
+
+  <div style="text-align:center;margin-top:24px;">
+    <button onclick="resetAllFlips()" style="
+      background:var(--gold);color:#1a1a1f;border:none;
+      padding:10px 32px;border-radius:20px;cursor:pointer;
+      font-family:inherit;font-size:0.9rem;letter-spacing:2px;font-weight:bold;
+    ">全 部 翻 回</button>
+    <button onclick="flipAll()" style="
+      background:transparent;color:var(--gold);border:1px solid var(--gold);
+      padding:10px 32px;border-radius:20px;cursor:pointer;
+      font-family:inherit;font-size:0.9rem;letter-spacing:2px;margin-left:10px;
+    ">全 部 翻 开</button>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+// ===== TAB SWITCHING =====
+document.getElementById('tabs').addEventListener('click', function(e) {
+  const btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const sectionId = 'section-' + btn.dataset.section;
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(sectionId).classList.add('active');
+});
+
+// ===== FLIP CARD DATA =====
+const bamenData = [
+  { name:'开门', type:'大吉', yiji:'宜：开业·出行·嫁娶·上任·经商·求财', ji:'忌：隐匿·密谋·安葬' },
+  { name:'休门', type:'大吉', yiji:'宜：休养·聚会·谈判·和解·招贤·纳财', ji:'忌：急进·强行·争讼' },
+  { name:'生门', type:'大吉', yiji:'宜：求财·种植·治病·建房·养殖·还债', ji:'忌：丧葬·诉讼' },
+  { name:'伤门', type:'凶',   yiji:'宜：狩猎·捕盗·索债·竞技比赛', ji:'忌：嫁娶·经商·出行·安葬' },
+  { name:'杜门', type:'平',   yiji:'宜：躲藏·闭门读书·修道·保密', ji:'忌：出行·交际·求人办事' },
+  { name:'景门', type:'平',   yiji:'宜：上书·考试·宴请·宣传·文书', ji:'忌：密谋·隐匿·暗杀' },
+  { name:'死门', type:'大凶', yiji:'宜：吊丧·行刑·捕猎·固守', ji:'忌：出行·嫁娶·上任·经商' },
+  { name:'惊门', type:'凶',   yiji:'宜：诉讼·捕捉·赌博·设伏', ji:'忌：远行·开张·上任' }
+];
+
+// ===== BUILD FLIP CARDS =====
+const flipGrid = document.getElementById('flipGrid');
+bamenData.forEach(d => {
+  const typeColor = d.type.includes('吉') ? '#6db87d' : (d.type==='平' ? '#a0a090' : '#d46b6b');
+  const container = document.createElement('div');
+  container.className = 'flip-container';
+  container.innerHTML = `
+    <div class="flip-inner">
+      <div class="flip-front">
+        <div class="door-name">${d.name}</div>
+        <div class="door-type" style="color:${typeColor}">${d.type}</div>
+        <div class="hint">点 击 翻 转</div>
+      </div>
+      <div class="flip-back">
+        <div class="label-row">宜</div>
+        <div class="content-row" style="color:#6db87d">${d.yiji}</div>
+        <div class="label-row" style="margin-top:4px;">忌</div>
+        <div class="content-row" style="color:#d46b6b">${d.ji}</div>
+      </div>
+    </div>
+  `;
+  container.addEventListener('click', function() {
+    this.classList.toggle('flipped');
+  });
+  flipGrid.appendChild(container);
+});
+
+// ===== FLIP CARD UTILITIES =====
+function resetAllFlips() {
+  document.querySelectorAll('.flip-container').forEach(c => c.classList.remove('flipped'));
+}
+function flipAll() {
+  document.querySelectorAll('.flip-container').forEach(c => c.classList.add('flipped'));
+}
+</script>
+
+</body>
+</html>

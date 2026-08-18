@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="奇门遁甲学习地图 — 六层递进 × 盘面架构 × 互动进度，从符号系统到深潜入道。">
+<title>奇门遁甲 · 学习地图</title>
+<link rel="stylesheet" href="../共享样式/base.css">
+<link rel="stylesheet" href="../共享样式/components.css">
+<style>
+  :root{--font-ui:"Noto Serif SC","Songti SC","STSong",serif}
+  body{font-family:var(--font-ui);padding-bottom:60px}
+
+  /* ── 顶部导航 ── */
+  .topnav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(8,7,13,.98),rgba(12,11,21,.95));border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;backdrop-filter:blur(10px)}
+  .topnav-back{color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;padding:5px 12px;border:1px solid var(--gold);border-radius:14px;white-space:nowrap;transition:all .2s;flex-shrink:0}
+  .topnav-back:hover{background:var(--gold);color:#111}
+  .topnav-title{color:var(--text-dim);font-size:.76rem;letter-spacing:.06em;white-space:nowrap}
+  .topnav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .topnav-links a{color:var(--text-alt);text-decoration:none;font-size:.74rem;padding:4px 12px;border:1px solid var(--border);border-radius:12px;transition:all .2s;white-space:nowrap}
+  .topnav-links a:hover{border-color:var(--gold);color:var(--gold)}
+  .topnav-links a.active-page{border-color:var(--gold);color:var(--gold);background:var(--gold-bg)}
+  @media(max-width:860px){
+    .topnav{padding:8px 10px 8px 52px;gap:8px}
+    .topnav-links{display:none}
+  }
+
+  /* ── 移动端左侧导航 ── */
+  .mobile-nav{
+    display:none;
+    position:fixed;top:0;left:0;bottom:0;z-index:200;
+    width:260px;background:linear-gradient(180deg,#0a0914,#0d0b18);
+    border-right:1px solid var(--border);overflow-y:auto;
+    transform:translateX(-100%);transition:transform .3s var(--ease);
+    -webkit-overflow-scrolling:touch;
+  }
+  .mobile-nav.open{transform:translateX(0)}
+  .mobile-nav .mnav-header{
+    padding:20px 16px;text-align:center;border-bottom:1px solid var(--border);
+  }
+  .mobile-nav .mnav-header .logo{color:var(--gold);font-size:1.1rem;font-weight:700;letter-spacing:.06em}
+  .mobile-nav .mnav-section{
+    padding:10px 18px 4px;font-size:.68rem;color:var(--text-dim);
+    letter-spacing:.06em;text-transform:uppercase;
+  }
+  .mobile-nav .mnav-item{
+    display:flex;align-items:center;gap:10px;
+    padding:12px 18px;color:var(--text-alt);text-decoration:none;
+    font-size:.84rem;border-bottom:1px solid rgba(255,255,255,.03);
+    transition:all .2s;min-height:48px;
+  }
+  .mobile-nav .mnav-item:hover,.mobile-nav .mnav-item.active{
+    background:var(--gold-bg);color:var(--gold);
+  }
+  .nav-toggle{
+    display:none;position:fixed;top:12px;left:12px;z-index:210;
+    width:40px;height:40px;border-radius:50%;
+    background:var(--card);border:1px solid var(--border-lt);
+    color:var(--gold);cursor:pointer;
+    align-items:center;justify-content:center;font-size:1.2rem;
+  }
+  @media(max-width:860px){
+    .nav-toggle{display:flex}
+    .mobile-nav{display:block}
+  }
+  .nav-overlay{
+    display:none;position:fixed;inset:0;z-index:199;
+    background:rgba(0,0,0,.5);
+  }
+  .nav-overlay.open{display:block}
+
+  /* ── Hero ── */
+  .hero{
+    text-align:center;padding:56px 20px 36px;
+    background:linear-gradient(160deg,rgba(10,9,20,.95),rgba(21,19,38,.98));
+    border-bottom:1px solid var(--border);margin-bottom:0;position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse 700px 400px at 50% 30%,rgba(212,176,106,.07),transparent 70%);
+    pointer-events:none;
+  }
+  .hero h1{font-size:2.4em;color:var(--gold-lt);letter-spacing:6px;font-weight:300;position:relative}
+  .hero .sub{color:var(--text-dim);margin-top:6px;letter-spacing:3px;font-size:.95em;position:relative}
+  .hero .line{width:50px;height:1px;background:var(--gold);margin:14px auto;opacity:.4;position:relative}
+  .hero .hero-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px;position:relative}
+  .hero .hero-tag{
+    font-size:.7rem;padding:3px 12px;border-radius:12px;
+    background:var(--gold-bg);color:var(--gold);border:1px solid rgba(212,176,106,.15);
+    letter-spacing:.04em;
+  }
+
+  .container{max-width:960px;margin:0 auto;padding:0 24px}
+
+  /* ── 进度仪表盘 ── */
+  .dash-section{padding:32px 0 24px}
+  .dash-section .section-head{
+    text-align:center;margin-bottom:20px;
+  }
+  .dash-section .section-head h2{
+    color:var(--gold);font-size:1.1rem;letter-spacing:4px;font-weight:400;margin:0;
+  }
+  .dash-section .section-head .hint{
+    color:var(--text-dim);font-size:.7rem;margin-top:4px;
+  }
+  .dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:0 0 8px}
+  .dash-card{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:16px 10px;text-align:center;transition:all .25s var(--ease);cursor:pointer;
+  }
+  .dash-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+  .dash-card.completed{border-color:rgba(78,168,104,.3);background:linear-gradient(160deg,rgba(78,168,104,.06),var(--card))}
+  .dash-card .dash-icon{font-size:1.6rem;margin-bottom:4px}
+  .dash-card .dash-label{font-size:.68rem;color:var(--text-dim);letter-spacing:.04em;line-height:1.3}
+  .dash-card .dash-value{font-size:1.1rem;font-weight:700;color:var(--gold);margin:2px 0}
+  .dash-card .dash-bar{height:4px;background:var(--border);border-radius:2px;margin-top:6px;overflow:hidden}
+  .dash-card .dash-fill{height:100%;background:linear-gradient(90deg,var(--gold-dk),var(--gold));border-radius:2px;transition:width .5s}
+  .dash-card.completed .dash-fill{background:var(--green)}
+  .dash-summary{
+    display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+    padding:12px 20px;background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);margin-bottom:16px;
+  }
+  .dash-summary .stat{text-align:center}
+  .dash-summary .stat .num{font-size:1.4rem;font-weight:700;color:var(--gold)}
+  .dash-summary .stat .lbl{font-size:.68rem;color:var(--text-dim)}
+
+  /* ── 学习阶段 Hub 卡片 ── */
+  .section-title{text-align:center;margin:44px 0 20px;color:var(--gold);font-size:1.1rem;letter-spacing:4px}
+  .hub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:0 0 36px}
+  .hub-card{
+    display:block;background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:24px;text-decoration:none;color:inherit;
+    transition:all .3s var(--ease);position:relative;overflow:hidden;
+  }
+  .hub-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s;
+  }
+  .hub-card:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 8px 30px rgba(0,0,0,.3)}
+  .hub-card:hover::before{opacity:1}
+  .hub-card .card-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:10px}
+  .hub-card .card-icon{font-size:2rem;flex-shrink:0;line-height:1}
+  .hub-card .card-head{flex:1}
+  .hub-card .card-head h3{font-size:1.05rem;color:var(--gold);margin:0 0 2px;}
+  .hub-card .card-head .meta-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:4px}
+  .hub-card .meta-tag{
+    font-size:.66rem;padding:2px 8px;border-radius:8px;letter-spacing:.04em;
+    background:rgba(255,255,255,.03);color:var(--text-dim);border:1px solid var(--border);
+    white-space:nowrap;
+  }
+  .hub-card .meta-tag.diff-easy{color:var(--green);border-color:rgba(78,168,104,.2)}
+  .hub-card .meta-tag.diff-mid{color:var(--blue);border-color:rgba(80,152,200,.2)}
+  .hub-card .meta-tag.diff-hard{color:var(--red);border-color:rgba(224,85,74,.2)}
+  .hub-card .meta-tag.time{color:var(--gold);border-color:rgba(212,176,106,.2)}
+  .hub-card p{font-size:.8rem;color:var(--text-alt);line-height:1.65;margin:0 0 6px}
+  .hub-card .card-check{
+    position:absolute;top:12px;right:14px;width:20px;height:20px;border-radius:50%;
+    border:2px solid var(--border);transition:all .2s;z-index:2;
+  }
+  .hub-card.completed .card-check{background:var(--green);border-color:var(--green)}
+  .hub-card.completed .card-check::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.65rem;font-weight:700}
+
+  /* ── 四层盘面架构 ── */
+  .plate-section{padding:0 0 40px}
+  .plate-diagram{
+    background:linear-gradient(160deg,rgba(10,9,20,.95),rgba(21,19,38,.98));
+    border:1px solid var(--border);border-radius:var(--radius-lg);
+    padding:28px 24px;margin:20px 0;
+  }
+  .plate-diagram h2{text-align:center;color:var(--gold);font-size:1.05rem;letter-spacing:4px;margin-bottom:4px;font-weight:400}
+  .plate-diagram .plate-hint{text-align:center;color:var(--text-dim);font-size:.68rem;margin-bottom:20px}
+  .plate-layers{display:flex;flex-direction:column;gap:6px;max-width:520px;margin:0 auto}
+  .plate-layer{
+    display:flex;align-items:center;padding:14px 20px;border-radius:var(--radius);
+    transition:all .25s;cursor:default;
+  }
+  .plate-layer:hover{transform:translateX(4px)}
+  .plate-layer .lv-icon{font-size:1.4rem;margin-right:14px;flex-shrink:0}
+  .plate-layer .lv-info{flex:1}
+  .plate-layer .lv-info .lv-name{font-weight:700;font-size:.9rem;letter-spacing:.04em}
+  .plate-layer .lv-info .lv-desc{font-size:.72rem;color:var(--text-dim);line-height:1.4}
+  .plate-layer .lv-arrow{font-size:1rem;color:var(--text-dim);flex-shrink:0}
+  /* 神盘 */
+  .plate-layer.lv-shen{background:linear-gradient(90deg,rgba(212,176,106,.1),rgba(212,176,106,.02));border:1px solid rgba(212,176,106,.18)}
+  .plate-layer.lv-shen .lv-name{color:var(--gold-lt)}
+  /* 天盘 */
+  .plate-layer.lv-tian{background:linear-gradient(90deg,rgba(80,152,200,.1),rgba(80,152,200,.02));border:1px solid rgba(80,152,200,.18)}
+  .plate-layer.lv-tian .lv-name{color:#7ab8e8}
+  /* 人盘 */
+  .plate-layer.lv-ren{background:linear-gradient(90deg,rgba(78,168,104,.1),rgba(78,168,104,.02));border:1px solid rgba(78,168,104,.18)}
+  .plate-layer.lv-ren .lv-name{color:#6cc882}
+  /* 地盘 */
+  .plate-layer.lv-di{background:linear-gradient(90deg,rgba(155,126,196,.1),rgba(155,126,196,.02));border:1px solid rgba(155,126,196,.18)}
+  .plate-layer.lv-di .lv-name{color:#b89edc}
+  /* 九宫格微缩示意 */
+  .plate-grid-mini{display:flex;align-items:center;justify-content:center;margin-top:20px;gap:8px}
+  .plate-grid-mini .mini-grid{
+    display:grid;grid-template-columns:repeat(3,36px);grid-template-rows:repeat(3,36px);
+    gap:1.5px;border-radius:6px;overflow:hidden;background:var(--gold);
+  }
+  .mini-grid .mg-cell{
+    background:var(--card);display:flex;align-items:center;justify-content:center;
+    font-size:.68rem;color:var(--text-dim);font-weight:600;
+  }
+  .mini-grid .mg-cell.center{background:var(--card-alt);color:var(--gold)}
+  .plate-grid-mini .mg-caption{font-size:.7rem;color:var(--text-dim);writing-mode:vertical-rl;letter-spacing:.08em}
+
+  /* ── 学习路径总览 ── */
+  .path-flow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;align-items:center;margin:16px 0 36px}
+  .path-step{text-align:center;padding:14px 10px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);flex:1;min-width:100px;max-width:130px;transition:all .25s;text-decoration:none;color:inherit;display:block}
+  .path-step:hover{border-color:var(--gold);transform:translateY(-3px)}
+  .path-step .ps-num{font-size:1.6rem;color:var(--gold);font-weight:300}
+  .path-step .ps-title{font-size:.76rem;color:var(--text-alt);margin-top:2px;line-height:1.3}
+  .path-arrow{color:var(--text-dim);font-size:.9rem;flex-shrink:0}
+
+  footer{text-align:center;padding:40px 20px;color:var(--text-dim);font-size:.74rem;letter-spacing:2px;border-top:1px solid var(--border);margin-top:36px}
+
+  @media(max-width:768px){
+    .hero h1{font-size:1.6em}.hero{padding:36px 16px 24px}
+    .container{padding:0 14px}
+    .hub-grid{grid-template-columns:1fr}
+    .dash-grid{grid-template-columns:repeat(3,1fr)}
+    .path-flow{gap:6px}
+    .path-step{min-width:70px;padding:10px 6px}
+    .path-step .ps-num{font-size:1.3rem}
+    .path-step .ps-title{font-size:.68rem}
+    .path-arrow{font-size:.7rem}
+  }
+  @media(max-width:480px){
+    .hero h1{font-size:1.3em;letter-spacing:3px}
+    .hero .sub{font-size:.8rem;letter-spacing:1px}
+    .dash-grid{grid-template-columns:repeat(2,1fr)}
+    .hub-grid{grid-template-columns:1fr}
+    .path-flow{flex-direction:column;align-items:center}
+    .path-arrow{transform:rotate(90deg)}
+    .path-step{max-width:100%;width:100%}
+    .plate-layer{padding:12px 14px}
+    .dash-summary{gap:10px;padding:10px 14px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ 顶部导航 ═══ -->
+<header class="topnav">
+  <a href="../index.html" class="topnav-back">← 玄门</a>
+  <span class="topnav-title">奇门遁甲 · 学习地图</span>
+  <div class="topnav-links">
+    <a href="01-基础入门.html">基础入门</a>
+    <a href="02-五步学习.html">五步学习</a>
+    <a href="题库.html">题库</a>
+  </div>
+</header>
+
+<!-- ═══ 移动端汉堡按钮 ═══ -->
+<button class="nav-toggle" id="navToggle" onclick="toggleMobileNav()" aria-label="菜单">☰</button>
+
+<!-- ═══ 移动端左侧导航 ═══ -->
+<nav class="mobile-nav" id="mobileNav">
+  <div class="mnav-header">
+    <div class="logo">🏯 奇门遁甲</div>
+  </div>
+  <div class="mnav-section">学习阶段</div>
+  <a href="01-基础入门.html" class="mnav-item">📖 基础入门知识库</a>
+  <a href="02-五步学习.html" class="mnav-item">🎯 五步学习法</a>
+  <a href="题库.html" class="mnav-item">📝 互动题库</a>
+  <div class="mnav-section">导航</div>
+  <a href="../index.html" class="mnav-item">☯ 返回玄门</a>
+  <a href="../紫微斗数/index.html" class="mnav-item">🔮 紫微斗数</a>
+  <a href="../梅花易数/index.html" class="mnav-item">🌸 梅花易数</a>
+</nav>
+
+<!-- ═══ 导航遮罩 ═══ -->
+<div class="nav-overlay" id="navOverlay" onclick="closeMobileNav()"></div>
+
+<!-- ═══ 进度条 + 回到顶部 ═══ -->
+<div class="page-progress" id="pageProgress"></div>
+<button id="backTop">↑</button>
+
+<!-- ═══ Hero ═══ -->
+<div class="hero">
+  <h1>🏯 奇门遁甲 · 帝王之术</h1>
+  <p class="sub">融天时地利人和于九宫 · 以时家转盘推演万事吉凶</p>
+  <div class="line"></div>
+  <div class="hero-tags">
+    <span class="hero-tag">六层递进</span>
+    <span class="hero-tag">五步学习法</span>
+    <span class="hero-tag">排盘实战</span>
+    <span class="hero-tag">断局心法</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 进度仪表盘 ═══ -->
+<div class="dash-section">
+  <div class="section-head">
+    <h2>📊 学习进度仪表盘</h2>
+    <p class="hint">点击状态卡片切换完成状态 · 数据自动保存</p>
+  </div>
+  <div class="dash-summary">
+    <div class="stat"><div class="num" id="totalDone">0</div><div class="lbl">已完成</div></div>
+    <div class="stat"><div class="num" id="totalPct">0%</div><div class="lbl">完成率</div></div>
+    <div class="stat"><div class="num" id="totalRemain">7</div><div class="lbl">待攻克</div></div>
+  </div>
+  <div class="dash-grid" id="dashGrid">
+    <!-- JS动态生成 -->
+  </div>
+</div>
+
+<!-- ═══ 学习阶段入口 ═══ -->
+<h2 class="section-title">六 层 递 进 · 学 习 阶 段</h2>
+
+<div class="hub-grid">
+  <!-- 01 符号系统 -->
+  <a href="01-基础入门.html" class="hub-card" data-stage="01" id="hub-01">
+    <span class="card-check"></span>
+    <div class="card-top">
+      <span class="card-icon">🔤</span>
+      <div class="card-head">
+        <h3>01 · 符号系统</h3>
+        <div class="meta-row">
+          <span class="meta-tag diff-easy">★☆☆☆☆ 入门</span>
+          <span class="meta-tag time">⏱ 2~3周</span>
+        </div>
+      </div>
+    </div>
+    <p>阴阳五行、天干地支、八卦九宫、八门九星八神、三奇六仪——构建奇门遁甲完整符号语言体系。</p>
+    <span class="meta-tag" style="display:inline-block;margin-top:4px">📗 15+口诀助记 · 速查卡片</span>
+  </a>
+
+  <!-- 02 排盘基础 -->
+  <a href="01-基础入门.html#sec-9" class="hub-card" data-stage="02" id="hub-02">
+    <span class="card-check"></span>
+    <div class="card-top">
+      <span class="card-icon">📐</span>
+      <div class="card-head">
+        <h3>02 · 排盘基础</h3>
+        <div class="meta-row">
+          <span class="meta-tag diff-mid">★★☆☆☆ 基础</span>
+          <span class="meta-tag time">⏱ 2~3周</span>
+        </div>
+      </div>
+    </div>
+    <p>定局（节气/阳遁阴遁/局数）、地盘排布、天盘人盘神盘——掌握时家转盘完整排布流程。</p>
+    <span class="meta-tag" style="display:inline-block;margin-top:4px">📙 核心技能 · 手工排盘</span>
+  </a>
+
+  <!-- 03 断局框架 -->
+  <a href="02-五步学习.html" class="hub-card" data-stage="03" id="hub-03">
+    <span class="card-check"></span>
+    <div class="card-top">
+      <span class="card-icon">⚖</span>
+      <div class="card-head">
+        <h3>03 · 断局框架</h3>
+        <div class="meta-row">
+          <span class="meta-tag diff-mid">★★★☆☆ 核心</span>
+          <span class="meta-tag time">⏱ 3~4周</span>
+        </div>
+      </div>
+    </div>
+    <p>用神选取、吉凶判断、主客分析、应期推断——建立从盘面到结论的完整分析框架。</p>
+    <span class="meta-tag" style="display:inline-block;margin-top:4px">📙 核心框架 · 十步断局法</span>
+  </a>
+
+  <!-- 04 实战应用 -->
+  <a href="02-五步学习.html" class="hub-card" data-stage="04" id="hub-04">
+    <span class="card-check"></span>
+    <div class="card-top">
+      <span class="card-icon">🎯</span>
+      <div class="card-head">
+        <h3>04 · 实战应用</h3>
+        <div class="meta-row">
+          <span class="meta-tag diff-hard">★★★★☆ 进阶</span>
+          <span class="meta-tag time">⏱ 3~4周</span>
+        </div>
+      </div>
+    </div>
+    <p>择日、出行、事业、感情、健康——多场景实战演练，独立完成排盘到断局全流程。</p>
+    <span class="meta-tag" style="display:inline-block;margin-top:4px">📕 场景实战 · 案例积累</span>
+  </a>
+
+  <!-- 05 深潜入道 -->
+  <a href="02-五步学习.html" class="hub-card" data-stage="05" id="hub-05">
+    <span class="card-check"></span>
+    <div class="card-top">
+      <span class="card-icon">🕉</span>
+      <div class="card-head">
+        <h3>05 · 深潜入道</h3>
+        <div class="meta-row">
+          <span class="meta-tag diff-hard">★★★★★ 精通</span>
+          <span class="meta-tag time">⏱ 持续精进</span>
+        </div>
+      </div>
+    </div>
+    <p>奇门心法、流派比较（转盘/飞盘/鸣法）、古籍研读、外应结合——从技术到境界的升华。</p>
+    <span class="meta-tag" style="display:inline-block;margin-top:4px">📕 高阶心法 · 以术证道</span>
+  </a>
+
+  <!-- 题库 -->
+  <a href="题库.html" class="hub-card" data-stage="quiz" id="hub-quiz">
+    <span class="card-check"></span>
+    <div class="card-top">
+      <span class="card-icon">📝</span>
+      <div class="card-head">
+        <h3>互动题库</h3>
+        <div class="meta-row">
+          <span class="meta-tag diff-mid">综合检验</span>
+          <span class="meta-tag time">⏱ 随时自测</span>
+        </div>
+      </div>
+    </div>
+    <p>基础知识 → 应用理解 → 案例分析，三阶递进测试。每题附详细解析，即时反馈学习效果。</p>
+    <span class="meta-tag" style="display:inline-block;margin-top:4px">📕 28题 · 三阶递进</span>
+  </a>
+</div>
+
+<!-- ═══ 快速路径导航 ═══ -->
+<h2 class="section-title">学 习 路 径 总 览</h2>
+<div class="path-flow">
+  <div class="path-step">
+    <div class="ps-num">①</div>
+    <div class="ps-title">符号系统</div>
+  </div>
+  <span class="path-arrow">→</span>
+  <div class="path-step">
+    <div class="ps-num">②</div>
+    <div class="ps-title">排盘基础</div>
+  </div>
+  <span class="path-arrow">→</span>
+  <div class="path-step">
+    <div class="ps-num">③</div>
+    <div class="ps-title">断局框架</div>
+  </div>
+  <span class="path-arrow">→</span>
+  <div class="path-step">
+    <div class="ps-num">④</div>
+    <div class="ps-title">实战应用</div>
+  </div>
+  <span class="path-arrow">→</span>
+  <div class="path-step">
+    <div class="ps-num">⑤</div>
+    <div class="ps-title">深潜入道</div>
+  </div>
+</div>
+
+<!-- ═══ 四层盘面架构 ═══ -->
+<div class="plate-section">
+  <div class="plate-diagram">
+    <h2>🏗 奇门盘面 · 四层架构</h2>
+    <p class="plate-hint">从上到下：神煞 → 天时 → 人事 → 地理，四层叠加即完整盘面</p>
+    <div class="plate-layers">
+      <!-- 神盘 -->
+      <div class="plate-layer lv-shen">
+        <span class="lv-icon">👻</span>
+        <div class="lv-info">
+          <div class="lv-name">神 盘（八神）</div>
+          <div class="lv-desc">值符 · 螣蛇 · 太阴 · 六合 · 白虎 · 玄武 · 九地 · 九天</div>
+        </div>
+        <span class="lv-arrow">▼</span>
+      </div>
+      <!-- 天盘 -->
+      <div class="plate-layer lv-tian">
+        <span class="lv-icon">⭐</span>
+        <div class="lv-info">
+          <div class="lv-name">天 盘（九星）</div>
+          <div class="lv-desc">天蓬 · 天芮 · 天冲 · 天辅 · 天禽 · 天心 · 天柱 · 天任 · 天英</div>
+        </div>
+        <span class="lv-arrow">▼</span>
+      </div>
+      <!-- 人盘 -->
+      <div class="plate-layer lv-ren">
+        <span class="lv-icon">🚪</span>
+        <div class="lv-info">
+          <div class="lv-name">人 盘（八门）</div>
+          <div class="lv-desc">休 · 生 · 伤 · 杜 · 景 · 死 · 惊 · 开</div>
+        </div>
+        <span class="lv-arrow">▼</span>
+      </div>
+      <!-- 地盘 -->
+      <div class="plate-layer lv-di">
+        <span class="lv-icon">🗺</span>
+        <div class="lv-info">
+          <div class="lv-name">地 盘（九宫·三奇六仪）</div>
+          <div class="lv-desc">戊己庚辛壬癸乙丙丁 · 洛书九宫 · 后天八卦方位</div>
+        </div>
+      </div>
+    </div>
+    <!-- 九宫格微缩示意 -->
+    <div class="plate-grid-mini">
+      <span class="mg-caption">九宫</span>
+      <div class="mini-grid">
+        <div class="mg-cell">4<br>巽</div>
+        <div class="mg-cell">9<br>离</div>
+        <div class="mg-cell">2<br>坤</div>
+        <div class="mg-cell">3<br>震</div>
+        <div class="mg-cell center">5<br>中</div>
+        <div class="mg-cell">7<br>兑</div>
+        <div class="mg-cell">8<br>艮</div>
+        <div class="mg-cell">1<br>坎</div>
+        <div class="mg-cell">6<br>乾</div>
+      </div>
+      <span class="mg-caption">洛书</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- /.container -->
+
+<footer>
+  <p>🏯 奇门遁甲 · 帝王之术 ｜ 六层递进 · 以术证道</p>
+  <p style="font-size:.65rem;opacity:.45;margin-top:4px">"精通三式谓之神" ——《御定奇门宝鉴》</p>
+</footer>
+
+<script src="../共享样式/app.js"></script>
+<script>
+(function(){
+
+  /* ═══ 移动端左侧导航 ═══ */
+  window.toggleMobileNav = function() {
+    var nav = document.getElementById('mobileNav');
+    var ov = document.getElementById('navOverlay');
+    if (!nav) return;
+    var open = !nav.classList.contains('open');
+    nav.classList.toggle('open', open);
+    if (ov) ov.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  window.closeMobileNav = function() {
+    var nav = document.getElementById('mobileNav');
+    var ov = document.getElementById('navOverlay');
+    if (nav) nav.classList.remove('open');
+    if (ov) ov.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  /* ═══ 进度管理 ═══ */
+  var STAGES = ['01','02','03','04','05','quiz'];
+  var STAGE_LABELS = {
+    '01':   { icon:'🔤', name:'符号系统',   desc:'阴阳五行·天干地支·八卦九宫·八门九星八神·三奇六仪' },
+    '02':   { icon:'📐', name:'排盘基础',   desc:'定局·地盘·天盘·人盘·神盘——完整排布流程' },
+    '03':   { icon:'⚖', name:'断局框架',   desc:'用神选取·吉凶判断·主客分析·应期推断' },
+    '04':   { icon:'🎯', name:'实战应用',   desc:'择日·出行·事业·感情——多场景实战演练' },
+    '05':   { icon:'🕉', name:'深潜入道',   desc:'心法·流派·古籍·外应——以术证道' },
+    'quiz': { icon:'📝', name:'互动题库',   desc:'28题·三阶递进·即时反馈' }
+  };
+
+  function loadProgress() {
+    try {
+      return JSON.parse(localStorage.getItem('xm_progress_qimen') || '{}');
+    } catch(e) { return {}; }
+  }
+
+  function saveProgress(data) {
+    try {
+      localStorage.setItem('xm_progress_qimen', JSON.stringify(data));
+    } catch(e) {}
+  }
+
+  function isCompleted(stage) {
+    var data = loadProgress();
+    return !!(data[stage] && data[stage].completed);
+  }
+
+  function toggleStage(stage) {
+    var data = loadProgress();
+    if (data[stage] && data[stage].completed) {
+      data[stage].completed = false;
+    } else {
+      data[stage] = data[stage] || {};
+      data[stage].completed = true;
+      data[stage].ts = Date.now();
+    }
+    saveProgress(data);
+    renderDashboard();
+    updateHubCards();
+  }
+
+  /* ═══ 渲染进度仪表盘 ═══ */
+  function renderDashboard() {
+    var grid = document.getElementById('dashGrid');
+    if (!grid) return;
+
+    var data = loadProgress();
+    var html = '';
+
+    STAGES.forEach(function(s) {
+      var info = STAGE_LABELS[s];
+      var done = !!(data[s] && data[s].completed);
+      var pct = done ? 100 : (data[s] && data[s].score ? data[s].score : 0);
+
+      html += '<div class="dash-card' + (done ? ' completed' : '') + '" onclick="toggleStage(\'' + s + '\')" title="点击切换完成状态">';
+      html += '<div class="dash-icon">' + info.icon + '</div>';
+      html += '<div class="dash-label">' + info.name + '</div>';
+      html += '<div class="dash-bar"><div class="dash-fill" style="width:' + pct + '%"></div></div>';
+      html += '<div class="dash-value">' + (done ? '✓ 已完成' : '学习中') + '</div>';
+      html += '</div>';
+    });
+
+    grid.innerHTML = html;
+
+    // 摘要统计
+    var doneCount = STAGES.filter(function(s){ return !!(data[s] && data[s].completed); }).length;
+    document.getElementById('totalDone').textContent = doneCount;
+    document.getElementById('totalPct').textContent = Math.round(doneCount / STAGES.length * 100) + '%';
+    document.getElementById('totalRemain').textContent = STAGES.length - doneCount;
+  }
+
+  /* ═══ 更新 Hub 卡片状态 ═══ */
+  function updateHubCards() {
+    STAGES.forEach(function(s) {
+      var card = document.getElementById('hub-' + s);
+      if (card) {
+        card.classList.toggle('completed', isCompleted(s));
+      }
+    });
+  }
+
+  /* ═══ 全局暴露 ═══ */
+  window.toggleStage = toggleStage;
+
+  /* ═══ 初始化 ═══ */
+  renderDashboard();
+  updateHubCards();
+
+  /* ═══ 键盘 Esc 关闭导航 ═══ */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var nav = document.getElementById('mobileNav');
+      if (nav && nav.classList.contains('open')) closeMobileNav();
+    }
+  });
+
+  /* ═══ 触控滑动关闭 ═══ */
+  var touchStartX = 0;
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    if (dx < -50 && Math.abs(dx) > Math.abs(e.changedTouches[0].clientY - (e.changedTouches[0].clientY || 0))) {
+      closeMobileNav();
+    }
+  });
+
+})();
+</script>
+</body>
+</html>

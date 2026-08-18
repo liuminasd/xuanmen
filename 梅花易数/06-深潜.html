@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>梅花易数 · 第六层 · 深潜入道</title>
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --card-bg: #1a1a1a;
+    --text: #d4c8a8;
+    --heading: #e8d5a0;
+    --accent: #c9a84c;
+    --accent-glow: #e6c456;
+    --border: #3a3320;
+    --input-bg: #121212;
+    --highlight: #1e1b10;
+    --danger: #c44;
+    --muted: #8a8068;
+    --good: #2ecc71;
+    --warn: #e67e22;
+    --mid: #82b74b;
+    --bad: #e74c3c;
+    --purple: #9b7ec4;
+    --blue: #5098c8;
+    --cyan: #7ec8d0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Serif SC", "Source Han Serif SC", "宋体", SimSun, serif;
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    padding: 2rem 1rem;
+  }
+
+  .container { max-width: 960px; margin: 0 auto; }
+
+  /* ---- 顶栏 ---- */
+  .topbar {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .breadcrumb {
+    font-size: 0.82rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.6rem;
+  }
+  .breadcrumb a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .topbar h1 {
+    font-size: 2.4rem;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: 0.10em;
+  }
+  .topbar .sub {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---- 卡片 ---- */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem 2.2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.45);
+  }
+  .card h2 {
+    font-size: 1.55rem;
+    color: var(--accent);
+    border-left: 4px solid var(--accent);
+    padding-left: 1rem;
+    margin-bottom: 1.3rem;
+    letter-spacing: 0.08em;
+  }
+  .card h3 {
+    font-size: 1.15rem;
+    color: var(--heading);
+    margin: 1.2rem 0 0.6rem;
+    letter-spacing: 0.06em;
+  }
+  .card h4 {
+    font-size: 1.05rem;
+    color: var(--accent-glow);
+    margin: 1rem 0 0.5rem;
+    letter-spacing: 0.05em;
+  }
+  .card p { margin-bottom: 0.6rem; }
+
+  /* ---- 公式区 ---- */
+  .formula {
+    background: #121006;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2rem 1.6rem;
+    margin: 1rem 0;
+    font-size: 1.05rem;
+    text-align: center;
+    letter-spacing: 0.06em;
+    color: var(--heading);
+    line-height: 2;
+  }
+  .formula em {
+    font-style: normal;
+    color: var(--accent-glow);
+    font-weight: 700;
+  }
+
+  /* ---- 重点标注 ---- */
+  .highlight-box {
+    background: linear-gradient(135deg, #221c0a 0%, #1a1608 100%);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 1rem 1.6rem;
+    margin: 1rem 0;
+    color: var(--accent-glow);
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.05rem;
+  }
+
+  /* ---- 信息提示 ---- */
+  .info-box {
+    background: linear-gradient(135deg, #0a1a1c 0%, #081416 100%);
+    border: 1px solid #2c5a60;
+    border-radius: 8px;
+    padding: 1rem 1.6rem;
+    margin: 1rem 0;
+    color: #7ec8d0;
+    font-size: 0.95rem;
+  }
+
+  /* ---- 警示提示 ---- */
+  .warn-box {
+    background: linear-gradient(135deg, #1c140a 0%, #1a1008 100%);
+    border: 1px solid #8b6914;
+    border-radius: 8px;
+    padding: 1rem 1.6rem;
+    margin: 1rem 0;
+    color: #e6c456;
+    font-size: 0.95rem;
+  }
+
+  /* ---- 口诀卡片 ---- */
+  .koujue-card {
+    position: relative;
+    background: linear-gradient(135deg, #1a1608 0%, #120e04 50%, #1a1608 100%);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    margin: 1.5rem 0;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(201,168,76,0.12);
+  }
+  .koujue-card::before {
+    content: '心 法';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #1a1608;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    padding: 2px 20px;
+    border-radius: 10px;
+  }
+  .koujue-card .verse {
+    font-size: 1.25rem;
+    color: var(--heading);
+    line-height: 2.4;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .koujue-card .verse .line { display: block; margin: 0.35rem 0; }
+  .koujue-card .verse .hl-gold   { color: var(--accent-glow); }
+  .koujue-card .verse .hl-green  { color: #2ecc71; }
+  .koujue-card .verse .hl-red    { color: #e74c3c; }
+  .koujue-card .verse .hl-cyan   { color: #7ec8d0; }
+  .koujue-card .verse .hl-purple { color: var(--purple); }
+
+  /* 带标签的口诀卡片 */
+  .koujue-card.tagged::before { content: attr(data-tag); }
+
+  /* ---- 表格 ---- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.55rem 0.6rem;
+    text-align: center;
+  }
+  th {
+    background: #1e1b10;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  tr:nth-child(even) td { background: #141414; }
+  tr:hover td { background: #1e1c12; }
+
+  /* ---- 标签 ---- */
+  .tag {
+    display: inline-block;
+    padding: 2px 12px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .tag-special { background: rgba(201,168,76,0.2); color: var(--accent-glow); }
+  .tag-important { background: rgba(231,76,60,0.15); color: var(--bad); }
+  .tag-note { background: rgba(126,200,208,0.15); color: #7ec8d0; }
+  .tag-good { background: rgba(46,204,113,0.15); color: var(--good); }
+
+  .td-good { background: rgba(46,204,113,0.12) !important; color: var(--good); font-weight: 700; }
+  .td-mid  { background: rgba(130,183,75,0.10) !important; color: var(--mid); font-weight: 700; }
+  .td-warn { background: rgba(230,126,34,0.12) !important; color: var(--warn); font-weight: 700; }
+  .td-bad  { background: rgba(231,76,60,0.12) !important; color: var(--bad); font-weight: 700; }
+
+  /* ---- 三要灵应三栏 ---- */
+  .sanyao-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin: 1.2rem 0;
+  }
+  .sanyao-item {
+    background: #15150e;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1.3rem;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .sanyao-item:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 25px rgba(201,168,76,0.10);
+    transform: translateY(-2px);
+  }
+  .sanyao-item .yao-icon {
+    font-size: 2.6rem;
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+  .sanyao-item .yao-name {
+    font-size: 1.2rem;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.3rem;
+  }
+  .sanyao-item .yao-subtitle {
+    font-size: 0.82rem;
+    color: var(--accent-glow);
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+  .sanyao-item .yao-desc {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.8;
+    text-align: left;
+  }
+  .sanyao-item .yao-corner-badge {
+    position: absolute;
+    top: 12px; right: -28px;
+    background: var(--accent);
+    color: #1a1608;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 32px;
+    transform: rotate(45deg);
+    letter-spacing: 0.08em;
+  }
+  .sanyao-item.heart {
+    border-color: rgba(201,168,76,0.5);
+    box-shadow: 0 0 35px rgba(201,168,76,0.08);
+    grid-column: 1 / -1;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .sanyao-item.heart .yao-icon { font-size: 3rem; }
+
+  /* ---- 力量层级条 ---- */
+  .power-bar-wrap {
+    margin: 1.2rem 0;
+  }
+  .power-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 44px;
+    border-radius: 22px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border);
+  }
+  .power-bar .pseg {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #1a1608;
+    letter-spacing: 0.04em;
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .power-bar .pseg:hover { filter: brightness(1.25); }
+
+  /* ---- 五层境界 进度阶梯 ---- */
+  .realm-ladder {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin: 1.2rem 0;
+  }
+  .realm-step {
+    display: flex;
+    align-items: stretch;
+    gap: 1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s;
+  }
+  .realm-step:hover { transform: translateX(6px); }
+  .realm-step .realm-num-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    position: relative;
+  }
+  .realm-step .realm-num {
+    width: 46px; height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .realm-step .realm-line {
+    width: 2px;
+    flex: 1;
+    background: var(--border);
+    min-height: 16px;
+    margin-top: 4px;
+  }
+  .realm-step:last-child .realm-line { display: none; }
+  .realm-step .realm-content {
+    flex: 1;
+    background: #15150e;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    transition: all 0.3s;
+  }
+  .realm-step.expanded .realm-content {
+    border-color: var(--accent);
+    background: #1b1810;
+  }
+  .realm-step .realm-title {
+    font-size: 1.1rem;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .realm-step .realm-brief {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+    letter-spacing: 0.04em;
+  }
+  .realm-step .realm-detail {
+    display: none;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.9;
+  }
+  .realm-step.expanded .realm-detail { display: block; }
+
+  /* ---- 误区卡片 ---- */
+  .mistake-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .mistake-card {
+    background: #15150e;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.3rem 1.5rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .mistake-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(201,168,76,0.06);
+  }
+  .mistake-card .mistake-num {
+    position: absolute;
+    top: 8px; right: 14px;
+    font-size: 2.6rem;
+    font-weight: 800;
+    color: rgba(201,168,76,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .mistake-card .mistake-title {
+    font-size: 1rem;
+    color: var(--bad);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+    padding-right: 40px;
+  }
+  .mistake-card .mistake-wrong {
+    font-size: 0.85rem;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+    line-height: 1.8;
+  }
+  .mistake-card .mistake-fix {
+    font-size: 0.85rem;
+    color: var(--good);
+    line-height: 1.8;
+    border-left: 3px solid rgba(46,204,113,0.3);
+    padding-left: 0.8rem;
+    margin-top: 0.3rem;
+  }
+  .mistake-card .mistake-fix strong { color: var(--good); }
+
+  /* ---- 书单 ---- */
+  .book-list {
+    margin: 1rem 0;
+  }
+  .book-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    background: #15150e;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0.7rem;
+    transition: all 0.3s;
+  }
+  .book-item:hover {
+    border-color: var(--accent);
+    background: #1b1810;
+  }
+  .book-item .book-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(201,168,76,0.08);
+    border-radius: 8px;
+  }
+  .book-item .book-info { flex: 1; }
+  .book-item .book-title {
+    font-size: 1rem;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .book-item .book-author {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.1rem;
+  }
+  .book-item .book-desc {
+    font-size: 0.84rem;
+    color: var(--text);
+    line-height: 1.7;
+    margin-top: 0.3rem;
+  }
+  .book-item .book-tag {
+    display: inline-block;
+    margin-top: 0.3rem;
+    font-size: 0.7rem;
+    padding: 1px 10px;
+    border-radius: 10px;
+    background: rgba(201,168,76,0.15);
+    color: var(--accent-glow);
+    letter-spacing: 0.05em;
+  }
+
+  /* ---- 心语卡片 ---- */
+  .quote-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .quote-card {
+    background: linear-gradient(135deg, #15150e 0%, #121008 100%);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .quote-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 25px rgba(201,168,76,0.08);
+  }
+  .quote-card::before {
+    content: '"';
+    position: absolute;
+    top: 6px; left: 16px;
+    font-size: 3rem;
+    color: rgba(201,168,76,0.12);
+    line-height: 1;
+    font-family: Georgia, serif;
+  }
+  .quote-card .quote-text {
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 2;
+    padding-left: 0.8rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.04em;
+    font-style: italic;
+  }
+  .quote-card .quote-author {
+    font-size: 0.82rem;
+    color: var(--accent-glow);
+    text-align: right;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+  .quote-card .quote-era {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-align: right;
+  }
+
+  /* ---- 三式贯通 对比卡片 ---- */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.2rem 0;
+  }
+  .comparison-item {
+    background: #15150e;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1.3rem;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .comparison-item:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(201,168,76,0.08);
+  }
+  .comparison-item .comp-icon {
+    font-size: 2.4rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .comparison-item .comp-name {
+    font-size: 1.15rem;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.8rem;
+  }
+  .comparison-item .comp-detail {
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.8;
+    text-align: left;
+  }
+  .comparison-item .comp-detail strong {
+    color: var(--accent-glow);
+  }
+  .comparison-item.plum {
+    border-left: 3px solid var(--accent);
+  }
+  .comparison-item.qimen {
+    border-left: 3px solid var(--purple);
+  }
+  .comparison-item.ziwei {
+    border-left: 3px solid var(--cyan);
+  }
+
+  /* ---- 训练卡片 ---- */
+  .training-card {
+    background: linear-gradient(135deg, #0a1a1c 0%, #081416 100%);
+    border: 1px solid #2c5a60;
+    border-radius: 10px;
+    padding: 1.3rem 1.5rem;
+    margin: 0.8rem 0;
+  }
+  .training-card h4 {
+    color: var(--cyan);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+  .training-card ul {
+    padding-left: 1.5em;
+    color: var(--text);
+    font-size: 0.9rem;
+    line-height: 2;
+  }
+  .training-card ul li { margin: 0.2rem 0; }
+
+  /* ---- 底部导航 ---- */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .bottom-nav a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .bottom-nav a:hover {
+    background: var(--accent);
+    color: #1a1608;
+    border-color: var(--accent);
+  }
+  .bottom-nav .center-link {
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  /* ---- 响应式 ---- */
+  @media (max-width: 700px) {
+    .card { padding: 1.2rem 1rem; }
+    .topbar h1 { font-size: 1.5rem; }
+    .sanyao-grid { grid-template-columns: 1fr; }
+    .sanyao-item.heart { max-width: 100%; }
+    .comparison-grid { grid-template-columns: 1fr; }
+    .mistake-grid { grid-template-columns: 1fr; }
+    .quote-grid { grid-template-columns: 1fr; }
+    table { font-size: 0.75rem; }
+    th, td { padding: 0.4rem 0.35rem; }
+    .koujue-card { padding: 1.5rem 1.2rem; }
+    .koujue-card .verse { font-size: 1rem; }
+    .realm-step { flex-direction: column; gap: 0.3rem; }
+    .realm-step .realm-num-wrap { flex-direction: row; min-width: auto; }
+    .realm-step .realm-line { display: none; }
+    .realm-step .realm-num { width: 36px; height: 36px; font-size: 1rem; }
+    .power-bar { height: auto; flex-direction: column; border-radius: 10px; }
+    .power-bar .pseg { width: 100% !important; height: 36px; font-size: 0.72rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ═══════════ 顶栏 ═══════════ -->
+  <div class="topbar">
+    <div class="breadcrumb">
+      <a href="index.html">梅花易数</a> &raquo; 第六层
+    </div>
+    <h1>深潜入道</h1>
+    <div class="sub">三要灵应 · 外应心法 · 五层境界 · 三式贯通 · 以术证道</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       开篇总诀
+       ═══════════════════════════════════════ -->
+  <div class="koujue-card">
+    <div class="verse">
+      <span class="line"><span class="hl-gold">运耳目心三者之要</span>，<span class="hl-cyan">寂闻澄虑</span>，<span class="hl-green">静观万物</span>。</span>
+      <span class="line"><span class="hl-red">吉凶悔吝生乎动</span>，<span class="hl-gold">刚柔进退见于象</span>。</span>
+      <span class="line" style="font-size:0.85rem; color:var(--muted); margin-top:0.3rem;">——三要灵应总纲：耳听其音 · 目见其形 · 心察其理</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第一部分：三要灵应完整体系
+       ═══════════════════════════════════════ -->
+  <div class="card" id="sanyao">
+    <h2>一、三要灵应完整体系 <span class="tag tag-special" style="margin-left:0.5rem;">核心新增</span></h2>
+    <p>
+      「三要」——<strong>耳目心三者</strong>，是梅花易数占断体系中<strong>最高层次的灵应法则</strong>。
+      占决之际，当<strong>寂闻澄虑、静观万物</strong>，以耳目为天线接收天地消息，以心为总帅统摄全局。
+      三要之法，非技也，乃道也——是连接「卦象推演」与「天人感应」的桥梁。
+    </p>
+
+    <!-- 三栏：耳·目·心 -->
+    <div class="sanyao-grid">
+      <!-- 耳 -->
+      <div class="sanyao-item">
+        <span class="yao-icon">👂</span>
+        <div class="yao-name">耳 — 听其音</div>
+        <div class="yao-subtitle">知吉凶</div>
+        <div class="yao-desc">
+          <strong>声入耳而应于心。</strong>占时突闻之音——喜鹊鸣枝为吉兆，乌鸦啼月为凶征。
+          钟鼓之声主官禄，哭泣之声主哀丧，笑语之声主喜庆，破裂之声主毁败。
+          声音的<strong>方向、远近、清浊、缓急</strong>，皆为外应之机。
+        </div>
+      </div>
+
+      <!-- 目 -->
+      <div class="sanyao-item">
+        <span class="yao-icon">👁</span>
+        <div class="yao-name">目 — 见其形</div>
+        <div class="yao-subtitle">知善恶</div>
+        <div class="yao-desc">
+          <strong>物入目而通于神。</strong>占时所见之物象——圆物主成、缺物主败，新物主始、旧物主终。
+          见花开为生机之象，见叶落为凋零之兆。人物之<strong>喜、怒、哀、乐</strong>见于颜色者，
+          皆可入占。目之所及，无一非象。
+        </div>
+      </div>
+
+      <!-- 心 -->
+      <div class="sanyao-item heart">
+        <span class="yao-corner-badge">总帅</span>
+        <span class="yao-icon">❤</span>
+        <div class="yao-name">心 — 察其理</div>
+        <div class="yao-subtitle">知祸福 · 心为总帅</div>
+        <div class="yao-desc">
+          <strong>心者，一身之主，百神之帅。</strong>耳目虽为天线，<strong>无心的统摄，耳目只是被动接收器</strong>。
+          心静则万象明晰——<em>心浮气躁时占卦，声音入耳而不辨其意，物象入目而不解其机</em>。
+          心之察理，不是逻辑推理，而是<strong>直觉洞见</strong>——一念之间，吉凶立判。
+          故曰：<strong style="color:var(--accent-glow);">运耳目心三者之要，而心为之主。</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- 吉凶决定力量顺序 -->
+    <h3>吉凶决定力量顺序</h3>
+    <p>
+      梅花易数占断中，各种因素的<strong>影响力权重</strong>并非平等。从高到低的正确优先级如下：
+    </p>
+
+    <div class="power-bar-wrap">
+      <div class="power-bar">
+        <div class="pseg" style="width:38%; background: linear-gradient(90deg, #e74c3c, #c0392b);">外应 38% · 天道示象</div>
+        <div class="pseg" style="width:26%; background: linear-gradient(90deg, #e67e22, #d35400);">时间旺衰 26% · 时令节气</div>
+        <div class="pseg" style="width:22%; background: linear-gradient(90deg, #82b74b, #6a9d35);">用卦群生克 22% · 互变综错</div>
+        <div class="pseg" style="width:14%; background: linear-gradient(90deg, #7ec8d0, #5a9a9f);">体用基本生克 14% · 直接体用</div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:8%;">优先级</th>
+          <th style="width:16%;">力量类型</th>
+          <th style="width:12%;">权重</th>
+          <th style="width:28%;">含义</th>
+          <th style="width:36%;">实践说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:800;color:var(--bad);">第一</td>
+          <td style="color:var(--bad);font-weight:700;">外应</td>
+          <td class="td-bad">最高</td>
+          <td>天地直接示象，超越卦理</td>
+          <td>占时有异象突现——外应可以直接<strong>推翻卦象结论</strong>。如卦象大吉而忽闻悲声，则吉中转凶</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--warn);">第二</td>
+          <td style="color:var(--warn);font-weight:700;">时间旺衰</td>
+          <td class="td-warn">很高</td>
+          <td>时令节气决定五行强弱</td>
+          <td>体卦旺相——虽用克体亦不为大凶；体卦休囚——虽用生体亦受福有限</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--mid);">第三</td>
+          <td style="color:var(--mid);font-weight:700;">用卦群生克</td>
+          <td class="td-mid">中等</td>
+          <td>互卦、变卦、综卦、错卦的综合生克</td>
+          <td>一卦之吉不可轻信——须互·变·综·错四卦皆参，判断大势所趋</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--cyan);">第四</td>
+          <td style="color:var(--cyan);font-weight:700;">体用基本生克</td>
+          <td class="" style="color:var(--cyan);">基础</td>
+          <td>本卦体用之间的直接生克关系</td>
+          <td>最基础但非最终——体用生克是<strong>起点</strong>而非终点，须层层叠加外应、旺衰、群卦以修正</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      <em>核心心法：</em>外应可以推翻卦象，但卦象不能否定外应。因为<strong>卦象是人算，外应是天示</strong>——天道直接显象的优先级高于一切术数推演。
+    </div>
+
+    <div class="info-box">
+      <strong>三要灵应的终极秘密：</strong>「寂闻澄虑」不是让你什么都不想，而是让你<strong>放下一切预设</strong>——不预设吉凶、不预设结果、不预设时间。
+      心中空明，方能如镜照物。一旦有了「想要吉」的念头，心镜就蒙了尘，什么灵应都收不到了。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第二部分：外应心法训练
+       ═══════════════════════════════════════ -->
+  <div class="card" id="waiying">
+    <h2>二、外应心法训练</h2>
+    <p>
+      外应，不是玄学迷信，而是<strong>一种可以训练的心理直觉能力</strong>。
+      它建立在对「万物互联」的深刻理解之上——天地万物并非孤立的碎片，而是在同一个时空场中相互感应。
+      以下三个维度的训练，由浅入深，持之以恒者自能「触机而发」。
+    </p>
+
+    <h3>2.1 如何训练「触机」敏感度</h3>
+
+    <div class="training-card">
+      <h4>训练一：每日三记（基础训练 · 每日5分钟）</h4>
+      <ul>
+        <li><strong>晨记：</strong>醒来第一眼看到什么？听到什么声音？心中第一念是什么？记录3项</li>
+        <li><strong>午记：</strong>午间最引起你注意的一件事/一个人/一个声音——为何是它引起了你的注意？</li>
+        <li><strong>晚记：</strong>回顾今日发生的「巧合」——哪些事情你感觉「冥冥中自有安排」？</li>
+      </ul>
+    </div>
+
+    <div class="training-card">
+      <h4>训练二：万象取象（进阶训练 · 随时随地）</h4>
+      <ul>
+        <li><strong>见人即断：</strong>在街头、地铁、咖啡厅——观察陌生人，3秒内凭第一感判断其<strong>情绪状态</strong>（喜/怒/忧/思/恐）</li>
+        <li><strong>闻声即应：</strong>听到任何突发的声响（汽车喇叭、电话铃声、东西掉落），立即在心中问：这个声音的<strong>五行属性</strong>是什么？</li>
+        <li><strong>见物即联：</strong>看到任何引起注意的物体（掉落的叶子、飞过的鸟、破损的物品），将其与当下心中所想的事情<strong>关联</strong></li>
+      </ul>
+    </div>
+
+    <div class="training-card">
+      <h4>训练三：占前入静（实战训练 · 每次占卦前1分钟）</h4>
+      <ul>
+        <li><strong>闭目三息：</strong>缓慢深呼吸三次，将注意力从外部收回到自身</li>
+        <li><strong>放空一念：</strong>告诉自己：「我不预设任何结果」——放下「想要吉」或「怕见凶」的心</li>
+        <li><strong>微睁观机：</strong>缓缓睁眼，任意识放散——注意映入眼帘的<strong>第一物</strong>和传入耳中的<strong>第一声</strong></li>
+      </ul>
+    </div>
+
+    <h3>2.2 日常观察练习方法</h3>
+
+    <div class="formula" style="text-align:left; line-height:2.2; font-size:0.95rem;">
+      <strong>「观物十问」——日常自修心法</strong><br><br>
+      <em>第一问：</em>此物为何在<strong>此时</strong>引起我的注意？（时间之机）<br>
+      <em>第二问：</em>此物在<strong>何方</strong>出现？（方位之机）<br>
+      <em>第三问：</em>此物的<strong>五行属性</strong>是什么？（木火土金水）<br>
+      <em>第四问：</em>此物是<strong>动</strong>是<strong>静</strong>？（动为阳为变，静为阴为止）<br>
+      <em>第五问：</em>此物的<strong>形态</strong>——完整还是残缺？新还是旧？圆还是方？<br>
+      <em>第六问：</em>此物的<strong>颜色</strong>对应什么五行？（青木/红火/黄土/白金/黑水）<br>
+      <em>第七问：</em>此物与当下心中所想的<strong>关联</strong>是什么？<br>
+      <em>第八问：</em>此物让我产生了什么<strong>第一情感反应</strong>？（喜悦/不安/平静/警觉）<br>
+      <em>第九问：</em>此物的出现是否有<strong>重复性</strong>？（同一类事物反复出现）<br>
+      <em>第十问：</em>如果不将此事当「巧合」——它可能在<strong>提醒我什么</strong>？
+    </div>
+
+    <h3>2.3 「第一感最重要」的心理训练</h3>
+
+    <div class="koujue-card tagged" data-tag="第一感心法" style="margin-top:1.2rem;">
+      <div class="verse">
+        <span class="line"><span class="hl-gold">一念初动是天真</span>，<span class="hl-red">再思三想尽灰尘</span>。</span>
+        <span class="line"><span class="hl-green">凡占莫问第二念</span>，<span class="hl-cyan">直觉如电破重云</span>。</span>
+      </div>
+    </div>
+
+    <p>
+      <strong>「第一感」</strong>是人心与天心相通的刹那。为什么第一感最重要？因为<strong>第一感没有经过逻辑加工的污染</strong>——
+      它是大脑在潜意识层面综合了所有信息后给出的整体判断。一旦动用逻辑去「分析」，信息就被切割、扭曲、筛选了。
+    </p>
+
+    <div class="training-card">
+      <h4>第一感强化训练</h4>
+      <ul>
+        <li><strong>闪卡训练：</strong>请朋友快速展示八卦符号（每张不超过0.5秒），<strong>不假思索</strong>说出卦名和五行——训练大脑跳过逻辑直达直觉</li>
+        <li><strong>遮卦训练：</strong>起卦后——在1秒内说出对卦象的<strong>第一感受</strong>（吉/凶/中），先记录再分析，对比两者差异</li>
+        <li><strong>随机断事：</strong>每天随机选一件小事占断——立即说出判断，事后验证准确率。你会发现第一感的准确度惊人</li>
+        <li><strong>「无知」练习：</strong>面对完全不懂的领域（如随机翻开一本外文书），盯着其中一页，<strong>不阅读</strong>，只感受——喜悦？恐惧？平静？</li>
+      </ul>
+    </div>
+
+    <div class="warn-box">
+      <strong>关键警告：</strong>「第一感」不等于「冲动」。冲动是情绪驱动的、不加思考的反应；第一感是<strong>全息直觉</strong>——它经历了潜意识层面的完整处理，只是<strong>跳过了意识层面的逻辑分析</strong>。区分二者的关键在于：冲动的背后是恐惧或贪欲，第一感的背后是<strong>平静与确定</strong>。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第三部分：五层境界修炼
+       ═══════════════════════════════════════ -->
+  <div class="card" id="realms">
+    <h2>三、五层境界修炼</h2>
+    <p>
+      梅花易数的学习不是线性的知识积累，而是<strong>境界的跃迁</strong>。
+      每一层境界的突破，不是「学会了更多」，而是<strong>放下了更多</strong>——
+      放下死记、放下执着、放下技巧、放下自我，最终连「放下」也放下。以下是五层修炼境界：
+    </p>
+
+    <div class="realm-ladder">
+
+      <!-- 第一层 -->
+      <div class="realm-step expanded" id="realm1">
+        <div class="realm-num-wrap">
+          <div class="realm-num" style="background: #e74c3c;">壹</div>
+          <div class="realm-line"></div>
+        </div>
+        <div class="realm-content" onclick="toggleRealm('realm1')">
+          <div class="realm-title">第一层：死记硬背（符号）</div>
+          <div class="realm-brief">八卦符号 · 五行生克 · 天干地支 —— 「照本宣科」阶段</div>
+          <div class="realm-detail">
+            <p><strong>特征：</strong>初学阶段，八卦符号要靠口诀、五行生克要掰手指、起卦要对照步骤。占断时紧张、犹豫，不敢自信。</p>
+            <p><strong>误区：</strong>误以为「背熟了就会了」。实际上，背熟只是<strong>入场券</strong>，离「会」还隔着千万里。很多人在这一层就放弃了——觉得「太复杂」。</p>
+            <p><strong>突破关键：</strong>不停留在背诵层。背熟后立即进入<strong>大量实战</strong>——每天至少起3卦，不管对错，先练手感。此层约需<strong>1~3个月</strong>。</p>
+            <p><strong>此层功夫：</strong>八卦符号倒背如流、五行生克不假思索、天干地支随手即来、先后天方位心中了然。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第二层 -->
+      <div class="realm-step" id="realm2">
+        <div class="realm-num-wrap">
+          <div class="realm-num" style="background: #e67e22;">贰</div>
+          <div class="realm-line"></div>
+        </div>
+        <div class="realm-content" onclick="toggleRealm('realm2')">
+          <div class="realm-title">第二层：融会贯通（关系）</div>
+          <div class="realm-brief">体用互动 · 互变错综 · 万物类象 —— 「触类旁通」阶段</div>
+          <div class="realm-detail">
+            <p><strong>特征：</strong>不再孤立地看一个卦，而是看到<strong>本·互·变·综·错</strong>五卦之间的动态关系。体用生克已经内化为直觉反应——一眼看到卦就知道基本的吉凶格局。</p>
+            <p><strong>变化：</strong>开始形成自己的<strong>取象风格</strong>——有的人偏重形貌取象，有的人偏重五行推演，有的人偏重卦辞爻辞。这是形成个人特色的开始。</p>
+            <p><strong>突破关键：</strong>开始<strong>跨类别取象</strong>——同一卦象，能同时从天时、人事、地理、器物等多个角度解读。此层约需<strong>6个月~2年</strong>。</p>
+            <p><strong>此层功夫：</strong>起卦即见体用、观卦即知大局、类象随手拈来、五卦关系一目了然。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第三层 -->
+      <div class="realm-step" id="realm3">
+        <div class="realm-num-wrap">
+          <div class="realm-num" style="background: #82b74b;">叁</div>
+          <div class="realm-line"></div>
+        </div>
+        <div class="realm-content" onclick="toggleRealm('realm3')">
+          <div class="realm-title">第三层：得心应手（直觉）</div>
+          <div class="realm-brief">触机即断 · 外应入占 · 不假思索 —— 「心手合一」阶段</div>
+          <div class="realm-detail">
+            <p><strong>特征：</strong>技法已完全内化——占断时不需要「想一想」，卦起则断出，如行云流水。外应不再是「额外的参考」，而是<strong>与卦象融合为一体</strong>的判断依据。</p>
+            <p><strong>质变：</strong>开始出现「说不清为什么」的准确判断——不是靠推理，而是<strong>直觉直接给出答案</strong>。事后分析，发现直觉的判断完全符合卦理。</p>
+            <p><strong>突破关键：</strong><strong>信任直觉</strong>——越是到这一层，越要敢信自己的第一感。同时保持<strong>谦逊</strong>——直觉也会出错，不能因为是直觉就迷信。此层约需<strong>3~10年</strong>。</p>
+            <p><strong>此层功夫：</strong>见象即知卦、观物即成占、外应自然入、直觉信手拈。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第四层 -->
+      <div class="realm-step" id="realm4">
+        <div class="realm-num-wrap">
+          <div class="realm-num" style="background: #5098c8;">肆</div>
+          <div class="realm-line"></div>
+        </div>
+        <div class="realm-content" onclick="toggleRealm('realm4')">
+          <div class="realm-title">第四层：以术证道（超越）</div>
+          <div class="realm-brief">术为用 · 道为体 · 占断即修行 —— 「借术入道」阶段</div>
+          <div class="realm-detail">
+            <p><strong>特征：</strong>占断不再是目的，而是<strong>印证天道</strong>的手段。每一次起卦都是在与天地对话——卦象不是用来「预测未来」的，而是用来<strong>理解当下</strong>的。</p>
+            <p><strong>质变：</strong>不再执着于「准不准」——因为明白了<strong>卦象只是天地消息的一个切片</strong>，真正重要的是通过这个切片<strong>感受天地的运行规律</strong>。占断准确率反而因此大幅提升。</p>
+            <p><strong>突破关键：</strong>放下对「术」的执着。学习的目的不是成为「神算」，而是通过术数<strong>体悟大道</strong>——阴阳消长、五行运化、天人感应……这些才是术数背后的真义。此层需要<strong>一生的修行</strong>。</p>
+            <p><strong>此层功夫：</strong>卦即道也、占即修也、吉凶即阴阳也、万物即一心也。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第五层 -->
+      <div class="realm-step" id="realm5">
+        <div class="realm-num-wrap">
+          <div class="realm-num" style="background: linear-gradient(135deg, #9b7ec4, #e6c456);">伍</div>
+        </div>
+        <div class="realm-content" onclick="toggleRealm('realm5')">
+          <div class="realm-title">第五层：天人合一（化境）</div>
+          <div class="realm-brief">无卦无我 · 万物皆象 · 心即宇宙 —— 「无法之法」阶段</div>
+          <div class="realm-detail">
+            <p><strong>特征：</strong>到了这一层——<strong>不需要起卦</strong>。万物在你眼中皆是卦象：一片落叶是一个卦，一阵风是一个卦，一个眼神是一个卦。你不再「使用」梅花易数，因为你<strong>活成了梅花易数</strong>。</p>
+            <p><strong>描述：</strong>这不是可以「追求」的境界，而是前四层功夫积累到一定程度后的<strong>自然跃迁</strong>。邵康节先生所谓「<em>人能于心上起经纶</em>」——心已成天地，何须再问卦？</p>
+            <p><strong>到达：</strong>没有人能说「我已达此境」——因为能说出「我已达」的人，正说明还有一个「我」在执着境界，恰恰<strong>没有到达</strong>。这是可望而不可求的终极化境。</p>
+            <p><strong>此层功夫：</strong><strong style="color:var(--accent-glow);">无法言说，不可思议。</strong></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="koujue-card tagged" data-tag="五层总诀" style="margin-top:1.5rem;">
+      <div class="verse">
+        <span class="line"><span class="hl-gold">一层背上二层通</span>，<span class="hl-green">三层直觉四层空</span>。</span>
+        <span class="line"><span class="hl-purple">五层不在言语内</span>，<span class="hl-cyan">梅花开处是天工</span>。</span>
+        <span class="line" style="font-size:0.78rem; color:var(--muted); margin-top:0.3rem;">——五层境界偈</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第四部分：常见十大误区与纠正
+       ═══════════════════════════════════════ -->
+  <div class="card" id="mistakes">
+    <h2>四、常见十大误区与纠正</h2>
+    <p>
+      学习梅花易数的道路上，几乎每一个人都会走入以下误区。
+      这并非能力问题，而是<strong>思维惯性</strong>使然。认清误区、及时纠正，是进阶的必经之路。
+    </p>
+
+    <div class="mistake-grid">
+
+      <!-- 误区1 -->
+      <div class="mistake-card">
+        <div class="mistake-num">01</div>
+        <div class="mistake-title">误区一：死执卦辞爻辞</div>
+        <div class="mistake-wrong">
+          将《周易》卦辞爻辞当作「标准答案」，逐字对照，生搬硬套。见乾卦就背「元亨利贞」，不管所问何事。
+        </div>
+        <div class="mistake-fix">
+          <strong>纠正：</strong>《周易》经文是<strong>大象指引</strong>，不是公式。梅花易数的核心是<strong>取象</strong>——同一卦占不同的事，取象完全不同。
+          乾为天、为君、为父、为金、为圆……须根据所问之事<strong>选择最贴切的象</strong>，而非死背经文。
+        </div>
+      </div>
+
+      <!-- 误区2 -->
+      <div class="mistake-card">
+        <div class="mistake-num">02</div>
+        <div class="mistake-title">误区二：重术轻道</div>
+        <div class="mistake-wrong">
+          疯狂追求「更准的技法」——起卦要最精确的数字、断卦要最复杂的公式、应期要最精密的计算。把梅花易数当成了数学题。
+        </div>
+        <div class="mistake-fix">
+          <strong>纠正：</strong>技法是船，道是彼岸。船再精致，不划也到不了岸。<strong>占断的最终落脚点是人心与天心的感应</strong>——技法只是辅助工具。
+          心不通，技法再熟也只是在岸上造船。
+        </div>
+      </div>
+
+      <!-- 误区3 -->
+      <div class="mistake-card">
+        <div class="mistake-num">03</div>
+        <div class="mistake-title">误区三：忽视外应</div>
+        <div class="mistake-wrong">
+          起卦后只盯着纸上的卦象看，完全无视占断当时发生的各种异象。外应发生了也当作「巧合」忽略。
+        </div>
+        <div class="mistake-fix">
+          <strong>纠正：</strong><strong>外应>卦象</strong>是铁律。占时若有强烈的外应——如卦象吉而突然窗外有哭声——必须以<strong>外应为准</strong>修正判断。
+          这不是迷信，是<strong>天地消息的直接显现</strong>比人造卦象更真实。
+        </div>
+      </div>
+
+      <!-- 误区4 -->
+      <div class="mistake-card">
+        <div class="mistake-num">04</div>
+        <div class="mistake-title">误区四：忽视旺衰</div>
+        <div class="mistake-wrong">
+          只看体用生克——「用生体吉、用克体凶」——完全不考虑体用卦在当下月令的旺衰状态。
+        </div>
+        <div class="mistake-fix">
+          <strong>纠正：</strong>旺衰是<strong>生克效果的放大器或缓冲器</strong>。体卦旺相——受克减半；体卦休囚——受生亦微。
+          正月木旺——巽震有力；七月金旺——乾兑当权。<strong>离开月令谈生克，等于脱离语境读句子</strong>。
+        </div>
+      </div>
+
+      <!-- 误区5 -->
+      <div class="mistake-card">
+        <div class="mistake-num">05</div>
+        <div class="mistake-title">误区五：只看本卦不看互变</div>
+        <div class="mistake-wrong">
+          起卦后只看本卦的体用生克就下结论，完全忽略互卦（过程）、变卦（结果）、综卦（对方视角）、错卦（反面）。
+        </div>
+        <div class="mistake-fix">
+          <strong>纠正：</strong>本卦只是<strong>事情的开端</strong>。互卦看中间发展过程，变卦看最终结果。综卦看事情的另一面。
+          一句断语——「本卦吉而变卦凶」——开头好结果差；「本卦凶而互卦吉」——开局不利但中途转好。
+        </div>
+      </div>
+
+      <!-- 误区6 -->
+      <div class="mistake-card">
+        <div class="mistake-num">06</div>
+        <div class="mistake-title">误区六：一卦多问</div>
+        <div class="mistake-wrong">
+          起了卦后，问完婚姻又问财运，问完财运又问健康——一个卦恨不得把所有问题都问了。
+        </div>
+        <div class="mistake-fix">
+          <strong>纠正：</strong><strong>一卦一问</strong>是梅花易数的基本原则。一个卦的能量和信息是针对<strong>起卦时那个特定的问题</strong>而显现的。
+          换问题要重新起卦——心存杂念之时，卦象已失其真。
+        </div>
+      </div>
+
+      <!-- 误区7 -->
+      <div class="mistake-card">
+        <div class="mistake-num">07</div>
+        <div class="mistake-title">误区七：过度解读</div>
+        <div class="mistake-wrong">
+          一个简单的「用生体」格局，非要往深处挖掘——「生」是不是表面的？有没有隐藏的「克」？把卦象解读得像悬疑小说。
+        </div>
+        <div class="mistake-fix">
+          <strong>纠正：</strong>梅花易数的精神是<strong>「简易」</strong>——大象已明，不钻牛角尖。生就是生、克就是克、比和就是比和。
+          过度解读往往是<strong>内心不安</strong>的表现——越想找「深意」，越背离易简之道。
+        </div>
+      </div>
+
+      <!-- 误区8 -->
+      <div class="mistake-card">
+        <div class="mistake-num">08</div>
+        <div class="mistake-title">误区八：心浮气躁时占卦</div>
+        <div class="mistake-wrong">
+          情绪激动、焦虑不安、愤怒或恐惧时占卦——带着强烈的情绪预设来「求」一个想要的答案。
+        </div>
+        <div class="mistake-fix">
+          <strong>纠正：</strong><strong>心不静不占</strong>是铁律。心浮气躁时——卦象反映的不是天机，而是你的<strong>情绪投射</strong>。
+          此时占卦，准确率极低。先静心、后占卦——哪怕只静3秒，也比心乱时强百倍。
+        </div>
+      </div>
+
+      <!-- 误区9 -->
+      <div class="mistake-card">
+        <div class="mistake-num">09</div>
+        <div class="mistake-title">误区九：迷信权威</div>
+        <div class="mistake-wrong">
+          「某某大师说这个卦一定是……」「古书上写这个卦必然是……」——放弃自己的独立判断，迷信前人或权威的解读。
+        </div>
+        <div class="mistake-fix">
+          <strong>纠正：</strong>前人之言是<strong>参考</strong>，不是教条。每一卦、每一占、每一时、每一人都是独一无二的。
+          邵康节自己也说「<strong>不可泥于陈言</strong>」——独立之精神，是进阶的必备品质。
+        </div>
+      </div>
+
+      <!-- 误区10 -->
+      <div class="mistake-card">
+        <div class="mistake-num">10</div>
+        <div class="mistake-title">误区十：企图用卦象控制未来</div>
+        <div class="mistake-wrong">
+          占出凶卦后——反复起卦、不断追问「有没有破解之法」「怎么改命」——用算卦来逃避现实，企图控制不可控之事。
+        </div>
+        <div class="mistake-fix">
+          <strong>纠正：</strong>占卦的目的是<strong>知</strong>，不是<strong>控制</strong>。知道了趋势，顺势而为——这是智慧。
+          企图用卦「改命」，是妄想。梅花易数的终极态度：<strong>知天命而尽人事，乐天知命故不忧</strong>。
+        </div>
+      </div>
+
+    </div>
+
+    <div class="highlight-box" style="text-align:left; margin-top:1.2rem;">
+      ⚠ <strong style="color:var(--bad);">总纲：</strong>十大误区的共同根源——<strong>心中有「我」</strong>。死执经文是因为「我」怕错、重术轻道是因为「我」想神、忽视外应是因为「我」太关注自己的思路……
+      当你有朝一日能在占卦时<strong>忘掉自我</strong>——一切误区，自然消散。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第五部分：三式贯通视角
+       ═══════════════════════════════════════ -->
+  <div class="card" id="integration">
+    <h2>五、梅花易数与奇门遁甲、紫微斗数的贯通视角</h2>
+    <p>
+      梅花易数、奇门遁甲、紫微斗数——并称<strong>「玄门三式」</strong>，是中华术数体系的三大巅峰。
+      三者虽各有所长、各有法度，但深层原理<strong>同出一源</strong>——阴阳五行、天干地支、八卦九宫。
+      贯通理解三式，才能跳出单一体系的局限，从更高维度俯瞰玄学的全貌。
+    </p>
+
+    <!-- 三式对比 -->
+    <div class="comparison-grid">
+      <!-- 梅花 -->
+      <div class="comparison-item plum">
+        <span class="comp-icon">🌸</span>
+        <div class="comp-name">梅花易数</div>
+        <div class="comp-detail">
+          <p><strong>核心：</strong>八卦 · 体用生克 · 万物类象</p>
+          <p><strong>时间轴：</strong>当下此刻 — 近期趋势</p>
+          <p><strong>空间轴：</strong>无固定空间，按卦象推方位</p>
+          <p><strong>起盘方式：</strong>即景起卦，随机取数</p>
+          <p><strong>特色：</strong>最灵活、最简易、最重直觉</p>
+          <p><strong>短处：</strong>缺少精确的时间/空间坐标，细节不如奇门精细</p>
+        </div>
+      </div>
+
+      <!-- 奇门 -->
+      <div class="comparison-item qimen">
+        <span class="comp-icon">🏛</span>
+        <div class="comp-name">奇门遁甲</div>
+        <div class="comp-detail">
+          <p><strong>核心：</strong>九宫 · 八门 · 九星 · 八神</p>
+          <p><strong>时间轴：</strong>精确时辰 — 时空一体化</p>
+          <p><strong>空间轴：</strong>九宫方位精确到度</p>
+          <p><strong>起盘方式：</strong>按时辰排盘，历法推算</p>
+          <p><strong>特色：</strong>时空精准、信息丰富、军事起源</p>
+          <p><strong>短处：</strong>排盘复杂、需要历法知识、不够灵活</p>
+        </div>
+      </div>
+
+      <!-- 紫微 -->
+      <div class="comparison-item ziwei">
+        <span class="comp-icon">⭐</span>
+        <div class="comp-name">紫微斗数</div>
+        <div class="comp-detail">
+          <p><strong>核心：</strong>星曜 · 十二宫 · 四化飞星</p>
+          <p><strong>时间轴：</strong>一生大限 — 流年流月</p>
+          <p><strong>空间轴：</strong>十二宫涵盖人生全维度</p>
+          <p><strong>起盘方式：</strong>按生辰排盘，固定命盘</p>
+          <p><strong>特色：</strong>全景人生、层次分明、格局丰富</p>
+          <p><strong>短处：</strong>命盘固定（同一时辰出生者盘同）、细节解读主观性强</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 贯通要点 -->
+    <h3>深层贯通原理</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:18%;">贯通维度</th>
+          <th style="width:27%;">梅花易数</th>
+          <th style="width:27%;">奇门遁甲</th>
+          <th style="width:28%;">紫微斗数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:700;color:var(--heading);">底层哲学</td>
+          <td colspan="3" style="color:var(--accent-glow);font-weight:700;">三者皆以「阴阳五行」为理论根基、「天人感应」为认知前提、「象数理」为方法论</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--heading);">八卦体系</td>
+          <td>核心框架：八纯卦统领万物之象</td>
+          <td>九宫配八卦（中宫为太极），八卦定方位吉凶</td>
+          <td>十二宫虽不直接用八卦，但星曜五行属性根植于八卦体系</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--heading);">五行生克</td>
+          <td>体用生克为总纲——最纯粹直接的五行运用</td>
+          <td>门·星·神·干四层叠加——五行关系极为复杂精密</td>
+          <td>星曜五行 + 宫位五行 + 四化——三重五行交织</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--heading);">天干地支</td>
+          <td>主要用于起卦（年月日时法），断卦中为辅</td>
+          <td>天干地支为核心坐标——时家奇门以时辰干支为起盘根基</td>
+          <td>天干用于四化（禄权科忌），地支定十二宫</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--heading);">直觉比重</td>
+          <td style="color:var(--accent-glow);">最高——「观物取象」全凭直觉洞见</td>
+          <td>中等——有精确盘局可依，但断局仍靠直觉综合</td>
+          <td>较低——命盘信息量大，但格局判断依赖经验直觉</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--heading);">适用场景</td>
+          <td>单一事件占断、短期趋势、灵感决策</td>
+          <td>军事策略、方位选择、时机把握、风水布局</td>
+          <td>命运全局、性格分析、大运走势、人生规划</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>三式综合运用策略</h3>
+
+    <div class="formula" style="text-align:left; line-height:2.2; font-size:0.95rem;">
+      <strong>「三式互补」黄金法则：</strong><br><br>
+      <em>1. 大事用奇门定方略：</em>重大决策先以<strong>奇门遁甲</strong>排盘——察时空吉凶、择最佳时机与方位<br>
+      <em>2. 具体用梅花断细节：</em>确定了方向和时机后，以<strong>梅花易数</strong>起卦——断具体事项的吉凶细节<br>
+      <em>3. 长远用紫微观大势：</em>涉及人生长期规划、性格与命运走向，以<strong>紫微斗数</strong>命盘为纲<br>
+      <em>4. 三者互证不可偏废：</em>三式得出的结论相互印证——一致则可信度极高，矛盾则须深入分析原因
+    </div>
+
+    <div class="info-box">
+      <strong>贯通的关键：</strong>不要将三式视为<strong>竞争关系</strong>（哪个更准），而应视为<strong>互补视角</strong>（三个维度看同一事物）。
+      就像医生诊断：奇门是CT扫描（时空精确定位）、梅花是听诊器（即时灵活判断）、紫微是全身体检（全面长期评估）。三者合一，方为全息诊断。
+    </div>
+
+    <div class="warn-box">
+      <strong>贯通误区：</strong>初学者最容易犯的错误——<strong>贪多嚼不烂</strong>。三式贯通是「精通一式后，再学第二式」——而非「三式同时学个皮毛」。
+      建议学习顺序：<strong>先梅花（最简易）→ 再奇门（最精密）→ 后紫微（最广阔）</strong>。每式至少精研1~2年后再求贯通。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第六部分：进阶推荐书单
+       ═══════════════════════════════════════ -->
+  <div class="card" id="books">
+    <h2>六、进阶推荐书单</h2>
+    <p>
+      以下书单按<strong>由浅入深</strong>的顺序排列，涵盖梅花易数核心经典、易学基础理论、以及延伸至三式贯通的进阶阅读。
+      「<strong>精读</strong>」者须反复研读乃至背诵；「<strong>泛读</strong>」者了解大意即可；「<strong>参读</strong>」者供学有余力者深入探索。
+    </p>
+
+    <div class="book-list">
+
+      <!-- 1 -->
+      <div class="book-item">
+        <div class="book-icon">📖</div>
+        <div class="book-info">
+          <div class="book-title">《梅花易数》</div>
+          <div class="book-author">[宋] 邵雍 著</div>
+          <div class="book-desc">
+            梅花易数的<strong>根本经典</strong>。包含八卦万物类象、三要灵应、体用生克、十八类占断等全部核心内容。此为一切梅花易数学问的源头——不读此书，等于无根之木。
+          </div>
+          <span class="book-tag">必读精读 · 根本原典</span>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="book-item">
+        <div class="book-icon">📖</div>
+        <div class="book-info">
+          <div class="book-title">《周易》（含《易传》十翼）</div>
+          <div class="book-author">周文王 · 孔子等</div>
+          <div class="book-desc">
+            群经之首，大道之源。《系辞传》《说卦传》《序卦传》《杂卦传》为梅花易数提供了<strong>哲学根基与取象方法论</strong>。卦辞爻辞是断卦的重要参考，不可不读。
+          </div>
+          <span class="book-tag">必读精读 · 群经之首</span>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="book-item">
+        <div class="book-icon">📖</div>
+        <div class="book-info">
+          <div class="book-title">《皇极经世》</div>
+          <div class="book-author">[宋] 邵雍 著</div>
+          <div class="book-desc">
+            邵康节的<strong>巅峰之作</strong>，以元会运世之法推演宇宙历史与人类文明的兴衰周期。此书是梅花易数「数」学体系的源头——理解了皇极经世的「数」学，才能真正理解梅花易数为何「以数明理」。
+          </div>
+          <span class="book-tag">进阶精读 · 穷极数理</span>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="book-item">
+        <div class="book-icon">📗</div>
+        <div class="book-info">
+          <div class="book-title">《河洛理数》</div>
+          <div class="book-author">[宋] 陈抟 · 邵雍等</div>
+          <div class="book-desc">
+            河图洛书为中华术数之<strong>总源头</strong>。此书详论河洛之数与八卦、五行、干支的结合运用。五行生成数（1.6水/2.7火/3.8木/4.9金/5.10土）即出于此，是应期推断的重要依据。
+          </div>
+          <span class="book-tag">进阶精读 · 河洛源头</span>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="book-item">
+        <div class="book-icon">📗</div>
+        <div class="book-info">
+          <div class="book-title">《焦氏易林》</div>
+          <div class="book-author">[汉] 焦延寿 著</div>
+          <div class="book-desc">
+            汉代象数易学的集大成。四千零九十六条林辞——每一卦变每一卦皆有一辞，是最丰富的<strong>卦变取象数据库</strong>。读此书可极大拓展取象思维，尤其对变卦的解读启发极大。
+          </div>
+          <span class="book-tag">进阶泛读 · 象学宝库</span>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="book-item">
+        <div class="book-icon">📙</div>
+        <div class="book-info">
+          <div class="book-title">《易隐》</div>
+          <div class="book-author">[清] 曹九锡 著</div>
+          <div class="book-desc">
+            清代纳甲筮法集大成之作，对六亲、六神、飞伏、卦变等有极深入的论述。虽为纳甲体系，但其<strong>精细化断卦思维</strong>对梅花易数的断卦深度提升有重大参考价值。
+          </div>
+          <span class="book-tag">进阶参读 · 纳甲参考</span>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="book-item">
+        <div class="book-icon">📙</div>
+        <div class="book-info">
+          <div class="book-title">《奇门遁甲统宗大全》</div>
+          <div class="book-author">[明] 刘伯温 等</div>
+          <div class="book-desc">
+            奇门遁甲经典集成。梅花易数学习者读此书的重点在于<strong>理解时空坐标与占断的结合方式</strong>——奇门如何将时间精确到时辰、空间精确到方位，对梅花应期推断有极大的启发性。
+          </div>
+          <span class="book-tag">延伸参读 · 奇门经典</span>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="book-item">
+        <div class="book-icon">📙</div>
+        <div class="book-info">
+          <div class="book-title">《紫微斗数全书》</div>
+          <div class="book-author">[宋] 陈抟 著</div>
+          <div class="book-desc">
+            紫微斗数根本经典。学梅花者读此书——重点不在学紫微排盘，而在<strong>理解「宫·星·化」三维互动思维</strong>——这种多维度叠加的分析方法，可以反过来深化梅花的互变综错解读。
+          </div>
+          <span class="book-tag">延伸参读 · 紫微原典</span>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="book-item">
+        <div class="book-icon">📘</div>
+        <div class="book-info">
+          <div class="book-title">《道德经》</div>
+          <div class="book-author">[春秋] 老子 著</div>
+          <div class="book-desc">
+            虽非术数之书，却是<strong>道的根本</strong>。「道生一、一生二、二生三、三生万物」与「易有太极、是生两仪」一脉相承。梅花易数的终极追求——以术证道——道在哪里？在《道德经》里。
+          </div>
+          <span class="book-tag">必读精读 · 大道之源</span>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="book-item">
+        <div class="book-icon">📘</div>
+        <div class="book-info">
+          <div class="book-title">《管子·内业》等先秦心术文献</div>
+          <div class="book-author">[先秦] 管仲 等</div>
+          <div class="book-desc">
+            三要灵应中的「心为总帅」思想，其哲学根源在先秦心术之学。《内业》论「心」为精气之舍——心静则精气聚、心乱则精气散。此即梅花易数「寂闻澄虑」的哲学根基。
+          </div>
+          <span class="book-tag">延伸参读 · 心术之源</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="info-box">
+      <strong>读书建议：</strong>以上10部书——前4部为<strong>核心必读</strong>（梅花易数+周易+皇极经世+河洛理数），构成梅花易数完整知识体系。中间3部为<strong>深度拓展</strong>（焦氏易林+易隐+奇门），后3部为<strong>道论延伸</strong>（紫微+道德经+管子）。建议以1年为期——每季度精读1部核心书，半年后开始接触拓展书，一年后可涉猎延伸书。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第七部分：「人于心上起经纶」专栏
+       ═══════════════════════════════════════ -->
+  <div class="card" id="quotes">
+    <h2>七、「人于心上起经纶」——古今易学大家心法语录</h2>
+    <p>
+      「<strong>人于心上起经纶</strong>」——出自邵康节之口，道尽了梅花易数乃至整个玄学的终极心法：
+      一切卦象、一切术数、一切吉凶祸福，归根结底<strong>从心的运转中生出</strong>。
+      以下辑录古今数位易学大家的心法语录，供学人日常咀嚼体悟。
+    </p>
+
+    <div class="quote-grid">
+
+      <!-- 邵雍 -->
+      <div class="quote-card">
+        <div class="quote-text">
+          人于心上起经纶，动静之间见鬼神。<br>
+          天地万物皆吾分，不知何处是吾身。
+        </div>
+        <div class="quote-author">邵雍（邵康节）</div>
+        <div class="quote-era">北宋 · 1011-1077 · 梅花易数创始人</div>
+      </div>
+
+      <!-- 邵雍 其二 -->
+      <div class="quote-card">
+        <div class="quote-text">
+          易者，变易也。天地之气，往来消息，无一时之停。<br>
+          占者欲知未来，当先观现在——目之所见、耳之所闻、心之所感，皆是卦也。
+        </div>
+        <div class="quote-author">邵雍</div>
+        <div class="quote-era">《梅花易数·三要灵应篇》</div>
+      </div>
+
+      <!-- 孔子 -->
+      <div class="quote-card">
+        <div class="quote-text">
+          易，无思也，无为也，寂然不动，感而遂通天下之故。<br>
+          非天下之至神，其孰能与于此？
+        </div>
+        <div class="quote-author">孔子</div>
+        <div class="quote-era">春秋 · 《周易·系辞上传》</div>
+      </div>
+
+      <!-- 孔子 其二 -->
+      <div class="quote-card">
+        <div class="quote-text">
+          君子居则观其象而玩其辞，动则观其变而玩其占。<br>
+          是以自天佑之，吉无不利。
+        </div>
+        <div class="quote-author">孔子</div>
+        <div class="quote-era">春秋 · 《周易·系辞上传》</div>
+      </div>
+
+      <!-- 陈抟 -->
+      <div class="quote-card">
+        <div class="quote-text">
+          先天者，心也。后天者，迹也。<br>
+          以心合迹，以迹证心——心迹合一，则万象莫能逃也。
+        </div>
+        <div class="quote-author">陈抟（希夷先生）</div>
+        <div class="quote-era">五代宋初 · 871-989 · 易学大宗师</div>
+      </div>
+
+      <!-- 王阳明 -->
+      <div class="quote-card">
+        <div class="quote-text">
+          心外无物，心外无理。<br>
+          你未看此花时，此花与汝心同归于寂；你来看此花时，则此花颜色一时明白起来。
+        </div>
+        <div class="quote-author">王阳明</div>
+        <div class="quote-era">明代 · 1472-1529 · 心学宗师</div>
+      </div>
+
+      <!-- 庄子 -->
+      <div class="quote-card">
+        <div class="quote-text">
+          天地与我并生，而万物与我为一。<br>
+          既已为一矣，且得有言乎？既已谓之一矣，且得无言乎？
+        </div>
+        <div class="quote-author">庄子</div>
+        <div class="quote-era">战国 · 约前369-前286 · 道家宗师</div>
+      </div>
+
+      <!-- 张载 -->
+      <div class="quote-card">
+        <div class="quote-text">
+          为天地立心，为生民立命，为往圣继绝学，为万世开太平。<br>
+          此心即天地之心——易者，天地之心也。
+        </div>
+        <div class="quote-author">张载（横渠先生）</div>
+        <div class="quote-era">北宋 · 1020-1077 · 理学奠基人</div>
+      </div>
+
+      <!-- 刘伯温 -->
+      <div class="quote-card">
+        <div class="quote-text">
+          观象玩占，不如观心。<br>
+          心正而后象正，心明而后占明。<br>
+          未有心中昏暗而能断天下吉凶者也。
+        </div>
+        <div class="quote-author">刘伯温</div>
+        <div class="quote-era">元末明初 · 1311-1375 · 奇门宗师</div>
+      </div>
+
+      <!-- 鬼谷子 -->
+      <div class="quote-card">
+        <div class="quote-text">
+          以天下之目视，则无不见也；以天下之耳听，则无不闻也；以天下之心虑，则无不知也。<br>
+          此三要之极功也。
+        </div>
+        <div class="quote-author">鬼谷子</div>
+        <div class="quote-era">战国 · 纵横家鼻祖 · 术数大家</div>
+      </div>
+
+      <!-- 周敦颐 -->
+      <div class="quote-card">
+        <div class="quote-text">
+          无极而太极。太极动而生阳，动极而静，静而生阴。<br>
+          静极复动。一动一静，互为其根——此易之所以为易也。
+        </div>
+        <div class="quote-author">周敦颐（濂溪先生）</div>
+        <div class="quote-era">北宋 · 1017-1073 · 理学开山</div>
+      </div>
+
+      <!-- 佚名古诀 -->
+      <div class="quote-card">
+        <div class="quote-text">
+          卦不妄成，象无虚设。<br>
+          一念之起，天地皆知。一卦之成，鬼神已动。<br>
+          慎之哉，慎之哉。
+        </div>
+        <div class="quote-author">《梅花易数》古诀</div>
+        <div class="quote-era">佚名 · 历代传承</div>
+      </div>
+
+    </div>
+
+    <div class="koujue-card tagged" data-tag="心法结语" style="margin-top:1.5rem;">
+      <div class="verse">
+        <span class="line"><span class="hl-gold">人能常清静</span>，<span class="hl-cyan">天地悉皆归</span>。</span>
+        <span class="line"><span class="hl-green">心为万象主</span>，<span class="hl-purple">一念动乾坤</span>。</span>
+        <span class="line" style="font-size:0.82rem; color:var(--muted); margin-top:0.5rem;">
+          ——全篇结语：六层已毕，术尽于此。然道不可尽——真正的学习，从此刻才刚刚开始。
+        </span>
+      </div>
+    </div>
+
+    <div class="highlight-box" style="font-size:0.95rem; line-height:2;">
+      🌸 <strong style="color:var(--accent-glow);">最终赠言：</strong><br>
+      梅花易数，学之者有六层境界。<br>
+      但请记得——<strong>最高的境界，不是学完六层，而是忘记六层</strong>。<br>
+      当你不再需要起卦就能感知天机，当你不再需要口诀就能洞悉万象，<br>
+      当你看一朵花、喝一杯茶、走一步路——都是一次占断——那时候，你才真正「深潜入道」。
+    </div>
+  </div>
+
+  <!-- ═══════════ 底部导航 ═══════════ -->
+  <div class="bottom-nav">
+    <a href="05-应期.html">&larr; 第五层：应期判断</a>
+    <a href="index.html" class="center-link">返回学习地图</a>
+    <span style="color:var(--muted);font-size:0.88rem;padding:0.5rem 1rem;">第六层 · 终 · 以术证道</span>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════
+     JavaScript
+     ═══════════════════════════════════════ -->
+<script>
+  // 五层境界折叠切换
+  function toggleRealm(id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.classList.toggle('expanded');
+    }
+  }
+
+  // 页面加载动画
+  (function() {
+    'use strict';
+
+    // 卡片渐入动画
+    var cards = document.querySelectorAll('.card');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.08 });
+
+    cards.forEach(function(card, i) {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      card.style.transitionDelay = (i * 0.06) + 's';
+      observer.observe(card);
+    });
+
+    // 误区卡片渐入
+    var mistakes = document.querySelectorAll('.mistake-card');
+    var observer2 = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.08 });
+
+    mistakes.forEach(function(card, i) {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(16px)';
+      card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      card.style.transitionDelay = (i * 0.04) + 's';
+      observer2.observe(card);
+    });
+
+    // 心语卡片渐入
+    var quotes = document.querySelectorAll('.quote-card');
+    var observer3 = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.08 });
+
+    quotes.forEach(function(card, i) {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(14px)';
+      card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      card.style.transitionDelay = (i * 0.03) + 's';
+      observer3.observe(card);
+    });
+
+    // 三式对比卡片 hover 效果增强
+    var compItems = document.querySelectorAll('.comparison-item');
+    compItems.forEach(function(item) {
+      item.addEventListener('mouseenter', function() {
+        compItems.forEach(function(other) {
+          if (other !== item) {
+            other.style.opacity = '0.6';
+            other.style.transform = 'scale(0.97)';
+          }
+        });
+        item.style.transform = 'scale(1.02)';
+      });
+      item.addEventListener('mouseleave', function() {
+        compItems.forEach(function(other) {
+          other.style.opacity = '1';
+          other.style.transform = 'scale(1)';
+        });
+      });
+      item.style.transition = 'all 0.35s ease';
+    });
+
+    // 三要卡片 hover 效果
+    var sanyaoItems = document.querySelectorAll('.sanyao-item');
+    sanyaoItems.forEach(function(item) {
+      item.addEventListener('mouseenter', function() {
+        item.style.transform = 'translateY(-4px)';
+        item.style.boxShadow = '0 8px 30px rgba(201,168,76,0.15)';
+      });
+      item.addEventListener('mouseleave', function() {
+        item.style.transform = 'translateY(0)';
+        item.style.boxShadow = '';
+      });
+    });
+
+  })();
+</script>
+
+</body>
+</html>

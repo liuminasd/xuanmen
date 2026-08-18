@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="紫微斗数格局体系 — 命宫强弱五等、十大特殊格局速查、格局判断流程图、格局≠命运定局。">
+<title>紫微斗数 · 格局</title>
+<link rel="stylesheet" href="../共享样式/base.css">
+<link rel="stylesheet" href="../共享样式/components.css">
+<style>
+  :root{--font-ui:"Noto Serif SC","Songti SC","STSong",serif}
+  body{font-family:var(--font-ui);padding-bottom:60px}
+  .breadcrumb{padding:16px 24px;font-size:.78rem}
+  .breadcrumb a{color:var(--text-dim);text-decoration:none}
+  .breadcrumb a:hover{color:var(--gold)}
+  .breadcrumb span{color:var(--text-dim);margin:0 6px}
+
+  .hero{text-align:center;padding:40px 20px 32px;border-bottom:1px solid var(--border);margin-bottom:32px}
+  .hero h1{font-size:2.2em;color:var(--gold-lt);letter-spacing:5px;font-weight:300}
+  .hero p{color:var(--text-dim);font-size:.9rem;letter-spacing:2px;margin-top:6px}
+  .hero .line{width:50px;height:1px;background:var(--gold);margin:12px auto;opacity:.4}
+
+  .container{max-width:960px;margin:0 auto;padding:0 24px}
+
+  .ph-hdr{margin:52px 0 24px;padding:0 0 12px;position:relative}
+  .ph-hdr::after{content:"";position:absolute;bottom:0;left:0;width:60px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+  .ph-hdr h2{font-size:1.35rem;color:var(--gold-lt);letter-spacing:3px;font-weight:300;display:flex;align-items:center;gap:12px}
+  .ph-hdr .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold-glow)}
+  .ph-hdr .sub{color:var(--text-dim);font-size:.76rem;margin-top:4px;letter-spacing:2px;padding-left:20px}
+
+  .sec{margin:30px 0}
+  .sec h3{color:var(--gold);font-size:1.05rem;font-weight:400;letter-spacing:2px;margin:20px 0 10px;padding:0 0 0 14px;border-left:2px solid var(--gold)}
+  .sec h4{color:var(--gold-lt);font-size:.92rem;margin:16px 0 8px;font-weight:400}
+  .sec p{color:var(--text-alt);font-size:.86rem;margin:8px 0;line-height:1.9}
+  .sec p strong,.sec li strong{color:#e8d8b0;font-weight:500}
+  .sec ul,.sec ol{padding-left:22px;margin:8px 0}
+  .sec li{color:var(--text-alt);font-size:.84rem;margin:4px 0;line-height:1.8}
+
+  .em{background:var(--card);border:1px solid rgba(212,176,106,.08);border-radius:var(--radius);padding:15px 18px;margin:12px 0;font-size:.84rem;color:var(--text-alt)}
+  .em strong{color:var(--gold-lt)}
+  .q{background:var(--gold-bg);border-left:2px solid var(--gold);padding:11px 16px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;font-size:.84rem;color:var(--text-alt)}
+  .w{background:rgba(224,85,74,.03);border-left:2px solid var(--red);padding:11px 16px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;font-size:.84rem}
+  .w strong{color:var(--red)}
+  .t{background:rgba(78,168,104,.03);border-left:2px solid var(--green);padding:11px 16px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;font-size:.84rem}
+  .t strong{color:var(--green)}
+  .sum{background:linear-gradient(135deg,var(--gold-bg),rgba(212,176,106,.01));border:1px dashed rgba(212,176,106,.15);border-radius:var(--radius);padding:16px 20px;margin:20px 0;font-size:.84rem}
+  .sum strong{color:var(--gold-lt)}
+
+  table{width:100%;border-collapse:collapse;font-size:.82em;margin:12px 0}
+  th{background:var(--gold-bg);color:var(--gold);padding:9px 12px;text-align:left;border-bottom:1px solid rgba(212,176,106,.15);font-weight:400;letter-spacing:1px}
+  th:first-child{border-radius:var(--radius) 0 0 0}th:last-child{border-radius:0 var(--radius) 0 0}
+  td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  tr:hover td{background:rgba(255,255,255,.01)}
+  td:first-child{color:#e0d8c0;font-weight:500;white-space:nowrap}
+
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:10px 0}
+
+  blockquote{background:var(--card-alt);border-left:2px solid var(--gold);padding:13px 18px;
+    border-radius:0 var(--radius) var(--radius) 0;color:var(--text-alt);font-style:italic;font-size:.84rem;margin:14px 0}
+  blockquote .src{display:block;text-align:right;color:var(--text-dim);font-size:.74rem;margin-top:6px;font-style:normal}
+
+  /* 格局卡片 */
+  .pattern-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius-lg);padding:20px 24px;margin:14px 0;
+    transition:all .3s var(--ease);position:relative;overflow:hidden;
+    border-left:3px solid var(--gold);
+  }
+  .pattern-card:hover{border-color:var(--gold);transform:translateX(3px);box-shadow:0 4px 24px rgba(0,0,0,.3)}
+  .pattern-card .p-name{color:var(--gold);font-size:1.05rem;font-weight:600;letter-spacing:2px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+  .pattern-card .p-badge{display:inline-block;font-size:.62rem;padding:2px 10px;border-radius:10px;font-weight:400;letter-spacing:.08em}
+  .pattern-card .p-badge.top{background:var(--gold-bg);color:var(--gold);border:1px solid rgba(212,176,106,.25)}
+  .pattern-card .p-badge.good{background:var(--green-bg);color:var(--green);border:1px solid rgba(78,168,104,.25)}
+  .pattern-card .p-badge.rare{background:var(--blue-bg);color:var(--blue);border:1px solid rgba(80,152,200,.25)}
+  .pattern-card .p-composition{color:var(--text-alt);font-size:.82rem;margin:6px 0}
+  .pattern-card .p-composition strong{color:var(--gold-lt)}
+  .pattern-card .p-detail{color:var(--text-dim);font-size:.78rem;line-height:1.8;margin-top:6px}
+  .pattern-card .p-detail strong{color:var(--text-alt)}
+
+  /* 命宫等级表 */
+  .level-table td:first-child{font-size:.92rem;font-weight:600;letter-spacing:1px}
+  .level-table .lv-strong{color:var(--green)}
+  .level-table .lv-medium{color:var(--blue)}
+  .level-table .lv-weak{color:var(--red)}
+  .level-table .lv-empty{color:var(--text-dim)}
+  .level-table .lv-special{color:var(--gold)}
+
+  /* 流程图 */
+  .flowchart-container{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius-lg);padding:24px;margin:18px 0;
+    text-align:center;overflow-x:auto;
+  }
+  .flowchart-container svg{max-width:100%;height:auto}
+
+  /* 故事卡 */
+  .story-card{
+    background:linear-gradient(135deg,rgba(155,126,196,.08),rgba(155,126,196,.02));
+    border:1px solid rgba(155,126,196,.2);border-radius:var(--radius-lg);
+    padding:28px 30px;margin:24px 0;position:relative;overflow:hidden;
+  }
+  .story-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+    background:linear-gradient(180deg,var(--purple),#6e5494);border-radius:4px 0 0 4px}
+  .story-card:hover{border-color:var(--purple);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+  .story-card .s-icon{font-size:2rem;margin-bottom:10px}
+  .story-card .s-title{color:#c4b0e0;font-size:1.1rem;font-weight:600;letter-spacing:3px;margin-bottom:12px}
+  .story-card .s-body{color:var(--text-alt);font-size:.86rem;line-height:2.1}
+  .story-card .s-body p{margin:10px 0}
+  .story-card .s-moral{background:rgba(155,126,196,.08);border-radius:var(--radius);padding:14px 18px;margin-top:14px;color:#c4b0e0;font-size:.88rem;font-weight:500;text-align:center;letter-spacing:2px}
+
+  /* 口诀 */
+  .mnemonic{
+    background:linear-gradient(135deg,rgba(212,176,106,.08),rgba(212,176,106,.02));
+    border:1px solid rgba(212,176,106,.2);border-radius:var(--radius-lg);
+    padding:20px 24px;margin:18px 0;position:relative;overflow:hidden;
+    transition:all .3s;
+  }
+  .mnemonic::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+    background:linear-gradient(180deg,var(--gold),var(--gold-dk));border-radius:4px 0 0 4px}
+  .mnemonic:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+  .mnemonic .m-title{color:var(--gold);font-size:.88rem;font-weight:600;letter-spacing:3px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .mnemonic .m-type{display:inline-block;font-size:.62rem;padding:2px 8px;border-radius:8px;
+    background:var(--gold-bg);color:var(--gold);letter-spacing:.1em;font-weight:400}
+  .mnemonic .m-content{color:var(--gold-lt);font-size:.95rem;line-height:2.1;letter-spacing:.05em;
+    text-align:center;font-family:"KaiTi","STKaiti","Noto Serif SC",serif;font-weight:600;
+    text-shadow:0 0 20px rgba(212,176,106,.1)}
+  .mnemonic .m-explain{color:var(--text-dim);font-size:.76rem;margin-top:10px;line-height:1.8}
+  .mnemonic .m-explain strong{color:var(--text-alt)}
+
+  footer{text-align:center;padding:40px 20px;color:var(--text-dim);font-size:.74rem;letter-spacing:2px;border-top:1px solid var(--border);margin-top:48px}
+
+  @media(max-width:720px){.g2,.g3{grid-template-columns:1fr}}
+  @media(max-width:640px){
+    .hero h1{font-size:1.5em}.container{padding:0 12px}
+    .ph-hdr h2{font-size:1.15rem}.pattern-card{padding:14px 16px}
+    table{font-size:.72em}td,th{padding:6px 8px}
+    .story-card{padding:18px 20px}
+  }
+  .with-sidebar{margin-left:0!important}
+  .topnav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(8,7,13,.98),rgba(12,11,21,.95));border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;backdrop-filter:blur(10px)}
+  .topnav-back{color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;padding:5px 12px;border:1px solid var(--gold);border-radius:14px;white-space:nowrap;transition:all .2s;flex-shrink:0}
+  .topnav-back:hover{background:var(--gold);color:#111}
+  .topnav-title{color:var(--text-dim);font-size:.76rem;letter-spacing:.06em;white-space:nowrap}
+  .topnav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .topnav-links a{color:var(--text-alt);text-decoration:none;font-size:.74rem;padding:4px 12px;border:1px solid var(--border);border-radius:12px;transition:all .2s}
+  .topnav-links a:hover,.topnav-links a.active{border-color:var(--gold);color:var(--gold)}
+
+  /* 星级评分 */
+  .stars{color:var(--gold);font-size:.85rem;letter-spacing:1px}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <a href="../index.html" class="topnav-back">← 玄门</a>
+  <span class="topnav-title">紫微斗数 · 格局</span>
+  <div class="topnav-links">
+    <a href="index.html">总览</a>
+    <a href="01-星曜.html">星曜</a>
+    <a href="02-宫位.html">宫位</a>
+    <a href="03-四化.html">四化</a>
+    <a href="04-格局.html">格局</a>
+    <a href="05-断命.html">断命</a>
+    <a href="06-深潜.html">深潜</a>
+    <a href="题库.html">题库</a>
+  </div>
+</header>
+
+<div class="page-progress" id="pageProgress"></div>
+<button id="backTop">↑</button>
+
+<div class="hero">
+  <h1>格 局</h1>
+  <p>星曜组合见格局 · 命宫强弱定高低</p>
+  <div class="line"></div>
+</div>
+
+<div class="container">
+
+<!-- ═══════ 格局总纲 ═══════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>格局总纲</h2><p class="sub">星曜组合的质变——独星为材，合局为器</p></div>
+
+<div class="sec">
+  <blockquote>
+    格局是紫微斗数中<strong>星曜组合产生的质变</strong>。一颗主星代表一种材质，而多星聚合、四化会照则如同将材料锻造成器——<strong>格局即是那把成型的刀剑</strong>。识格局者，观盘如观画；不识格局者，只见星星点点。
+    <span class="src">——《紫微斗数全书》</span>
+  </blockquote>
+</div>
+
+<!-- ═══════ 一、命宫强弱五等 ═══════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>一、命宫强弱五等</h2><p class="sub">先定命宫根基，再论格局层次</p></div>
+
+<div class="sec">
+  <p>论格局之前，必先审视<strong>命宫强弱</strong>。命宫为一生之根基，如同地基决定建筑高度。紫微斗数将命宫分为五等：</p>
+
+  <table class="level-table">
+    <thead>
+      <tr><th style="width:12%">等级</th><th style="width:22%">名称</th><th style="width:36%">核心条件</th><th style="width:30%">人生走向</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="lv-strong">★★★★★</td>
+        <td class="lv-strong">强格</td>
+        <td>主星<strong>庙旺</strong>坐命 + 左辅/右弼/文昌/文曲/天魁/天钺拱照 + 三方四正吉化（化禄/化权/化科会照）</td>
+        <td>先天根基深厚，人生顺遂，遇难有贵人扶持，成就较高，为<strong>上等命格</strong></td>
+      </tr>
+      <tr>
+        <td class="lv-medium">★★★☆☆</td>
+        <td class="lv-medium">平格</td>
+        <td>主星<strong>得地</strong>（非庙旺亦非落陷）+ 一般辅星配置 + 无大煞冲破</td>
+        <td>中等人生，<strong>有起有伏</strong>。需后天努力补先天之不足，吉凶参半</td>
+      </tr>
+      <tr>
+        <td class="lv-weak">★★☆☆☆</td>
+        <td class="lv-weak">弱格</td>
+        <td>主星<strong>落陷</strong>坐命 + 擎羊/陀罗/火星/铃星/地空/地劫会照 + 化忌冲破</td>
+        <td>人生<strong>波折较多</strong>，事倍功半。但若后天修德积善，亦可转祸为福</td>
+      </tr>
+      <tr>
+        <td class="lv-empty">★☆☆☆☆</td>
+        <td class="lv-empty">空宫</td>
+        <td>命宫<strong>无主星</strong>，需借对宫（迁移宫）星曜为用。空宫非凶，但根基不稳</td>
+        <td>随<strong>环境影响极大</strong>——近朱者赤，近墨者黑。借得吉星则吉，借得凶星则凶</td>
+      </tr>
+      <tr>
+        <td class="lv-special">★★★★★</td>
+        <td class="lv-special">特殊格</td>
+        <td>特定星曜组合形成<strong>格局</strong>（如下列十大格局）。无论命宫强弱，格局自成一体</td>
+        <td><strong>格局之力可越命宫等级</strong>——弱宫遇好格局如枯木逢春，强宫遇凶格局似锦上添乱</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="w"><strong>⚠ 重要提醒：</strong>命宫强弱只是先天底色，绝非命运判决书。许多人命宫平平却成就斐然——因为<strong>大限流转可改先天</strong>。弱格行强运，胜过强格行衰运。</div>
+
+  <div class="sum"><strong>记忆要诀：</strong>强平弱空特，五等如阶梯。强格根基厚，空宫随风移。特殊格局出，等级可跃级。</div>
+</div>
+
+<!-- ═══════ 二、十大特殊格局速查 ═══════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>二、十大特殊格局速查</h2><p class="sub">精中选精 · 核心格局一览</p></div>
+
+<div class="sec">
+  <p>以下十大格局为紫微斗数中<strong>最具代表性</strong>的特殊格局，涵盖富贵、才华、权势、财运各维度。每格详列组成、条件、含义及现代解读。</p>
+
+  <!-- 格局1：三奇嘉会 -->
+  <div class="pattern-card">
+    <div class="p-name">格一 · 三奇嘉会 <span class="p-badge top">大吉·才华</span></div>
+    <div class="p-composition"><strong>组成：</strong>化禄 + 化权 + 化科 三者同宫或三方四正会照</div>
+    <div class="p-detail">
+      <strong>条件：</strong>三奇不必同宫，三方（命·财·官）互照亦成立。若三奇+禄存/天马更增贵气。最忌地空/地劫冲破。<br>
+      <strong>含义：</strong>才华横溢，名利兼收。"禄"为财富机遇，"权"为掌控执行力，"科"为名声学识——三者齐聚，人生如虎添翼。<br>
+      <strong>现代解读：</strong>三奇嘉会之人往往能在专业领域崭露头角。若三奇在命宫→自身能力突出；在财帛→经商致富；在官禄→仕途/职场顺遂。<br>
+      <strong>层次区分：</strong>三奇同宫 > 三奇三合会照 > 两奇+一奇在大限补足。<br>
+      <strong>典型人物意象：</strong>跨界多面手——既是技术专家，又能管理团队，还有著作传世。
+    </div>
+  </div>
+
+  <!-- 格局2：紫府同宫 -->
+  <div class="pattern-card">
+    <div class="p-name">格二 · 紫府同宫 <span class="p-badge top">大吉·权贵</span></div>
+    <div class="p-composition"><strong>组成：</strong>紫微 + 天府 同宫坐命（多在寅/申二宫）</div>
+    <div class="p-detail">
+      <strong>条件：</strong>紫微（北斗帝王星）+ 天府（南斗库星）同宫，仅可能在寅、申二宫出现。紫微解厄、天府制煞，二星合力威不可挡。<br>
+      <strong>含义：</strong>尊贵稳重，领袖格局。紫微主"权"，天府主"库"——有权有库，富贵双全。为人厚重有担当，天生领导之材。<br>
+      <strong>现代解读：</strong>紫府同宫之人适合大型机构、政府部门、企业中高层管理。不急不躁、步步为营。<br>
+      <strong>注意：</strong>紫府同宫若逢煞星冲破（擎羊/陀罗），则"权"变"专横"，"库"变"守财奴"，格局大打折扣。<br>
+      <strong>典型人物意象：</strong>大企业的掌门人——手握重权且资源充沛，深谋远虑。
+    </div>
+  </div>
+
+  <!-- 格局3：日照雷门 -->
+  <div class="pattern-card">
+    <div class="p-name">格三 · 日照雷门 <span class="p-badge top">大吉·显达</span></div>
+    <div class="p-composition"><strong>组成：</strong>太阳在卯宫坐命（卯时日出，卯为震卦雷门）</div>
+    <div class="p-detail">
+      <strong>条件：</strong>太阳独坐卯宫命宫，庙旺最吉。太阳在卯如旭日东升——光芒初放、蒸蒸日上。三方得文昌文曲更添文采。<br>
+      <strong>含义：</strong>旭日东升，前程似锦。为人光明磊落、热情慷慨，早年即崭露头角，一生向上走。<br>
+      <strong>现代解读：</strong>日照雷门格之人适合需要"光芒"的行业——媒体、演讲、公关、教育、公益事业。天生的感染力与号召力。<br>
+      <strong>最佳配合：</strong>日月并明（同时"日照雷门"+ "月朗天门"）——夫妇或合作者中各占一格，天下无敌的组合。<br>
+      <strong>典型人物意象：</strong>演说家、媒体人——一站上台就自带光芒，让人不由自主信服。
+    </div>
+  </div>
+
+  <!-- 格局4：月朗天门 -->
+  <div class="pattern-card">
+    <div class="p-name">格四 · 月朗天门 <span class="p-badge top">大吉·贵气</span></div>
+    <div class="p-composition"><strong>组成：</strong>太阴在亥宫坐命（亥为天门，太阴在亥庙旺）</div>
+    <div class="p-detail">
+      <strong>条件：</strong>太阴独坐亥宫命宫，庙旺。亥为西北天门，太阴在此如明月当空——清澈明净、光华内敛。<br>
+      <strong>含义：</strong>清澈明亮，贵气内藏。为人温润如玉、心思细腻，善理财、有艺术气质，一生清贵。<br>
+      <strong>现代解读：</strong>月朗天门格之人适合艺术、金融、咨询、文化行业。不张扬但底蕴深厚，适合以"柔"取胜的领域。<br>
+      <strong>注意：</strong>太阴属阴水，忌火星/铃星（火炎水涸）会照，否则"明月被灼"，格局破坏。<br>
+      <strong>典型人物意象：</strong>优雅的艺术家或金融才女——表面温柔，内里极有主见，如水般以柔克刚。
+    </div>
+  </div>
+
+  <!-- 格局5：雄宿朝元 -->
+  <div class="pattern-card">
+    <div class="p-name">格五 · 雄宿朝元 <span class="p-badge top">大吉·威猛</span></div>
+    <div class="p-composition"><strong>组成：</strong>七杀在寅宫独坐命宫（寅为朝元之地）</div>
+    <div class="p-detail">
+      <strong>条件：</strong>七杀独坐寅宫。七杀为将星，在寅宫得"木"生"金"（寅属木，七杀属金），刚猛之力有滋养之根。<br>
+      <strong>含义：</strong>威猛出群，将帅之才。七杀在寅如猛虎归山——气场强大、敢作敢当、临危不惧。<br>
+      <strong>现代解读：</strong>雄宿朝元格之人适合军警、体育竞技、创业、外科医生等需要"决断力"和"行动力"的领域。<br>
+      <strong>注意：</strong>七杀刚猛，若无吉星调和（如文昌文曲），易孤军奋战、人际关系紧张。<br>
+      <strong>典型人物意象：</strong>特种兵指挥官——独当一面、杀伐决断，是危机中最可靠的人。
+    </div>
+  </div>
+
+  <!-- 格局6：明珠出海 -->
+  <div class="pattern-card">
+    <div class="p-name">格六 · 明珠出海 <span class="p-badge top">大吉·光明</span></div>
+    <div class="p-composition"><strong>组成：</strong>太阳在卯 + 太阴在亥 + 命宫在未（日月夹命）</div>
+    <div class="p-detail">
+      <strong>条件：</strong>太阳在卯宫、太阴在亥宫（日月均庙旺），命宫在未宫。日月从两侧夹照命宫，如双灯照耀。<br>
+      <strong>含义：</strong>光明显达，一生顺遂。日月为天地间最明亮的二星，同时夹命——贵不可言，名利双收。<br>
+      <strong>现代解读：</strong>明珠出海格极为罕见，有此格局者往往在社会上享有盛名，适合公众人物、政治家、文化名人。<br>
+      <strong>精妙之处：</strong>此格同时满足"日照雷门"和"月朗天门"——日月并明，阴阳平衡，是最为理想的格局之一。<br>
+      <strong>典型人物意象：</strong>德高望重的社会名流——白天光明磊落，夜晚宁静致远，全天候受人敬仰。
+    </div>
+  </div>
+
+  <!-- 格局7：火贪格 -->
+  <div class="pattern-card">
+    <div class="p-name">格七 · 火贪格 <span class="p-badge good">横发·暴富</span></div>
+    <div class="p-composition"><strong>组成：</strong>火星 + 贪狼 同宫或会照（命宫或财帛宫为佳）</div>
+    <div class="p-detail">
+      <strong>条件：</strong>火星与贪狼同宫，或三方会照。火星为"突发"，贪狼为"欲望+交际"——火贪相遇，如烈火烹油。<br>
+      <strong>含义：</strong>暴发横财。火贪格是紫微斗数中最著名的<strong>暴富格局</strong>——来财迅猛，但去也匆匆。<br>
+      <strong>现代解读：</strong>火贪格的人容易在投机、创业、新兴行业中获得爆发式财富。但需注意"来得快去得快"，若无禄存/化禄守住，钱财如水过沙。<br>
+      <strong>最佳宫位：</strong>火贪在财帛宫 → 自身赚钱暴发；在命宫 → 个人能力爆发；在田宅宫 → 房产暴富。<br>
+      <strong>典型人物意象：</strong>抓住风口一夜暴富的创业者——靠胆识和时机，一跃而起。
+    </div>
+  </div>
+
+  <!-- 格局8：铃贪格 -->
+  <div class="pattern-card">
+    <div class="p-name">格八 · 铃贪格 <span class="p-badge good">暗发·蓄富</span></div>
+    <div class="p-composition"><strong>组成：</strong>铃星 + 贪狼 同宫或会照</div>
+    <div class="p-detail">
+      <strong>条件：</strong>铃星与贪狼同宫会照。与火贪不同——铃星为"暗火"，慢性积累；贪狼为"欲望"——铃贪发力慢但更持久。<br>
+      <strong>含义：</strong>暗中积蓄，厚积薄发。铃贪不如火贪暴烈，但财富<strong>更为持久稳固</strong>，属于闷声发大财型。<br>
+      <strong>现代解读：</strong>铃贪格之人适合长线投资、实业经营、稳健创业。不如火贪来得快，但守得住。<br>
+      <strong>火贪 vs 铃贪：</strong>火贪如火山爆发——来得猛；铃贪如地热温泉——来得慢但源源不断。<br>
+      <strong>典型人物意象：</strong>低调的实业家——不声不响地积累财富，多年后一鸣惊人。
+    </div>
+  </div>
+
+  <!-- 格局9：禄马交驰 -->
+  <div class="pattern-card">
+    <div class="p-name">格九 · 禄马交驰 <span class="p-badge good">奔波·富足</span></div>
+    <div class="p-composition"><strong>组成：</strong>禄存 + 天马 同宫或三合会照</div>
+    <div class="p-detail">
+      <strong>条件：</strong>禄存与天马同宫或会照。禄存主"财富稳定"，天马主"奔波变动"——禄马交驰 = 动中求财。<br>
+      <strong>含义：</strong>奔走得财，越动越富。此格之人不适合坐守，越往外跑、越奔波，财运越旺。<br>
+      <strong>现代解读：</strong>禄马交驰格最适合贸易、物流、销售、外交、跨国业务等需要"走动"的行业。坐办公室反而压制财运。<br>
+      <strong>精妙之处：</strong>若禄马+太阳庙旺→国际贸易/远洋；禄马+文昌文曲→文化传播/出版。<br>
+      <strong>典型人物意象：</strong>走遍全球的贸易商——足迹所至，财源随之而来。
+    </div>
+  </div>
+
+  <!-- 格局10：府相朝垣 -->
+  <div class="pattern-card">
+    <div class="p-name">格十 · 府相朝垣 <span class="p-badge top">贵格·辅佐</span></div>
+    <div class="p-composition"><strong>组成：</strong>天府 + 天相在三方四正会照命宫</div>
+    <div class="p-detail">
+      <strong>条件：</strong>天府与天相在三方会照命宫。天府为"库"，天相为"印"——一库一印，如宰相辅佐帝王。<br>
+      <strong>含义：</strong>辅佐周全，格局方正。府相朝垣之人稳重可靠、办事周全，是天生的<strong>二把手</strong>或幕后运作高手。<br>
+      <strong>现代解读：</strong>府相朝垣格适合政府机关、大型企业中层管理、幕僚、顾问、总助等角色。虽不居C位，却是真正的实权人物。<br>
+      <strong>最佳归位：</strong>天府在事业宫、天相在命宫 → 以辅佐之才得领导重用；天府在命宫、天相在财帛 → 理财周全。<br>
+      <strong>典型人物意象：</strong>帝王背后的丞相——运筹帷幄之中，决胜千里之外。
+    </div>
+  </div>
+
+</div>
+
+<!-- 格局速查总表 -->
+<div class="ph-hdr"><h2><span class="dot"></span>格局速查总表</h2><p class="sub">一表在手 · 十大格局了然于胸</p></div>
+
+<div class="sec">
+  <table>
+    <thead>
+      <tr><th>格局</th><th>核心星曜</th><th>最佳宫位</th><th>格局类型</th><th>难度</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>三奇嘉会</td><td>化禄+化权+化科</td><td>命·财·官三合</td><td>才华富贵</td><td>★★★★☆</td></tr>
+      <tr><td>紫府同宫</td><td>紫微+天府</td><td>寅/申</td><td>权贵领袖</td><td>★★★★★</td></tr>
+      <tr><td>日照雷门</td><td>太阳</td><td>卯</td><td>光明显达</td><td>★★★☆☆</td></tr>
+      <tr><td>月朗天门</td><td>太阴</td><td>亥</td><td>清贵艺术</td><td>★★★☆☆</td></tr>
+      <tr><td>雄宿朝元</td><td>七杀</td><td>寅</td><td>威猛将才</td><td>★★★☆☆</td></tr>
+      <tr><td>明珠出海</td><td>太阳+太阴</td><td>卯+亥+未</td><td>显赫贵格</td><td>★★★★★</td></tr>
+      <tr><td>火贪格</td><td>火星+贪狼</td><td>命·财帛</td><td>暴发横财</td><td>★★★★☆</td></tr>
+      <tr><td>铃贪格</td><td>铃星+贪狼</td><td>命·财帛</td><td>蓄积富足</td><td>★★★★☆</td></tr>
+      <tr><td>禄马交驰</td><td>禄存+天马</td><td>命·迁移</td><td>动中求财</td><td>★★★☆☆</td></tr>
+      <tr><td>府相朝垣</td><td>天府+天相</td><td>三方会照</td><td>辅佐贵格</td><td>★★★☆☆</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════ 三、格局判断流程图 ═══════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>三、格局判断流程图</h2><p class="sub">三步断格局 · 从命宫到全局</p></div>
+
+<div class="sec">
+  <p>判断一个人是否成格局，需按以下流程逐步排查。格局非"全有或全无"，<strong>半格、类格亦可参考</strong>。</p>
+
+  <div class="flowchart-container">
+    <svg viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg" style="font-family:'Noto Serif SC','Songti SC',serif">
+      <defs>
+        <linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#d4b06a;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#d4b06a;stop-opacity:0.05"/>
+        </linearGradient>
+        <linearGradient id="gGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#4ea868;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#4ea868;stop-opacity:0.05"/>
+        </linearGradient>
+        <linearGradient id="gBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#5098c8;stop-opacity:0.3"/>
+          <stop offset="100%" style="stop-color:#5098c8;stop-opacity:0.05"/>
+        </linearGradient>
+        <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#d4b06a"/>
+        </marker>
+      </defs>
+
+      <!-- 标题 -->
+      <text x="400" y="30" text-anchor="middle" fill="#e8d09f" font-size="18" font-weight="300" letter-spacing="3">格局判断流程图</text>
+
+      <!-- 节点1：开始 -->
+      <rect x="300" y="55" width="200" height="46" rx="23" fill="url(#gGrad)" stroke="#d4b06a" stroke-width="1.5" filter="url(#glow)"/>
+      <text x="400" y="83" text-anchor="middle" fill="#e8d09f" font-size="14">① 排定命盘</text>
+
+      <!-- 箭头 1→2 -->
+      <line x1="400" y1="101" x2="400" y2="125" stroke="#d4b06a" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- 节点2：看命宫主星 -->
+      <rect x="280" y="127" width="240" height="50" rx="8" fill="url(#gGrad)" stroke="#d4b06a" stroke-width="1.2"/>
+      <text x="400" y="148" text-anchor="middle" fill="#d4b06a" font-size="13">② 审视命宫主星</text>
+      <text x="400" y="166" text-anchor="middle" fill="#9b94b8" font-size="11">有无主星？庙旺/落陷？</text>
+
+      <!-- 箭头 2→3 -->
+      <line x1="400" y1="177" x2="400" y2="201" stroke="#d4b06a" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- 节点3：三方四正 -->
+      <rect x="260" y="203" width="280" height="50" rx="8" fill="url(#gBlue)" stroke="#5098c8" stroke-width="1.2"/>
+      <text x="400" y="224" text-anchor="middle" fill="#5098c8" font-size="13">③ 查三方四正</text>
+      <text x="400" y="242" text-anchor="middle" fill="#9b94b8" font-size="11">财帛·官禄·迁移宫有何星曜会照？</text>
+
+      <!-- 箭头 3→4 -->
+      <line x1="400" y1="253" x2="400" y2="277" stroke="#d4b06a" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- 节点4：四化 -->
+      <rect x="280" y="279" width="240" height="50" rx="8" fill="url(#gGrad)" stroke="#d4b06a" stroke-width="1.2"/>
+      <text x="400" y="300" text-anchor="middle" fill="#d4b06a" font-size="13">④ 审四化飞星</text>
+      <text x="400" y="318" text-anchor="middle" fill="#9b94b8" font-size="11">生年四化 + 大限四化 + 宫干飞化</text>
+
+      <!-- 箭头 4→判断 -->
+      <line x1="400" y1="329" x2="400" y2="360" stroke="#d4b06a" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- 菱形判断：成格？ -->
+      <polygon points="400,363 500,410 400,457 300,410" fill="url(#gGrad)" stroke="#d4b06a" stroke-width="1.5" filter="url(#glow)"/>
+      <text x="400" y="414" text-anchor="middle" fill="#e8d09f" font-size="14" font-weight="600">是否构成已知</text>
+      <text x="400" y="432" text-anchor="middle" fill="#e8d09f" font-size="14" font-weight="600">特殊格局？</text>
+
+      <!-- 分支：是 -->
+      <line x1="500" y1="410" x2="620" y2="410" stroke="#4ea868" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="555" y="400" text-anchor="middle" fill="#4ea868" font-size="12">是</text>
+
+      <!-- 节点：成格输出 -->
+      <rect x="618" y="385" width="160" height="50" rx="8" fill="url(#gGreen)" stroke="#4ea868" stroke-width="1.5" filter="url(#glow)"/>
+      <text x="698" y="406" text-anchor="middle" fill="#4ea868" font-size="13">✓ 格局成立</text>
+      <text x="698" y="424" text-anchor="middle" fill="#8cc8a0" font-size="11">记录格局名称与等级</text>
+
+      <!-- 分支：否（向下） -->
+      <line x1="400" y1="457" x2="400" y2="490" stroke="#e0554a" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <text x="415" y="476" fill="#e0554a" font-size="12">否</text>
+
+      <!-- 节点：半格判断 -->
+      <rect x="270" y="493" width="260" height="50" rx="8" fill="url(#gGrad)" stroke="#d4b06a" stroke-width="1.2"/>
+      <text x="400" y="514" text-anchor="middle" fill="#d4b06a" font-size="13">⑤ 判定命宫强弱等级</text>
+      <text x="400" y="532" text-anchor="middle" fill="#9b94b8" font-size="11">强格 / 平格 / 弱格 / 空宫</text>
+
+      <!-- 箭头 5→6 -->
+      <line x1="400" y1="543" x2="400" y2="568" stroke="#d4b06a" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- 节点6：大限 -->
+      <rect x="250" y="571" width="300" height="50" rx="8" fill="url(#gBlue)" stroke="#5098c8" stroke-width="1.2"/>
+      <text x="400" y="592" text-anchor="middle" fill="#5098c8" font-size="13">⑥ 叠合大限流年</text>
+      <text x="400" y="610" text-anchor="middle" fill="#9b94b8" font-size="11">当前大限是上行/下行？流年四化如何？</text>
+
+      <!-- 箭头 6→7 -->
+      <line x1="400" y1="621" x2="400" y2="646" stroke="#d4b06a" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- 节点7：综合 -->
+      <rect x="230" y="649" width="340" height="50" rx="8" fill="url(#gGrad)" stroke="#d4b06a" stroke-width="1.5" filter="url(#glow)"/>
+      <text x="400" y="670" text-anchor="middle" fill="#e8d09f" font-size="13">⑦ 综合论断：命宫等级 × 大限趋势</text>
+      <text x="400" y="688" text-anchor="middle" fill="#9b94b8" font-size="11">弱格+强运 = 可成事 · 强格+弱运 = 需谨慎</text>
+
+      <!-- 箭头 7→结论 -->
+      <line x1="400" y1="699" x2="400" y2="730" stroke="#d4b06a" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+      <!-- 最终结论 -->
+      <rect x="270" y="733" width="260" height="46" rx="23" fill="url(#gGrad)" stroke="#e8d09f" stroke-width="2" filter="url(#glow)"/>
+      <text x="400" y="761" text-anchor="middle" fill="#e8d09f" font-size="15" font-weight="500">🎯 格局总评</text>
+
+      <!-- 右侧标注 -->
+      <rect x="0" y="385" width="185" height="50" rx="8" fill="none" stroke="#4ea868" stroke-width="1" stroke-dasharray="4"/>
+      <text x="92" y="406" text-anchor="middle" fill="#4ea868" font-size="11">十大特殊格局</text>
+      <text x="92" y="422" text-anchor="middle" fill="#6b6590" font-size="10">(本文第二章详列)</text>
+
+      <!-- 底部说明 -->
+      <text x="400" y="810" text-anchor="middle" fill="#6b6590" font-size="10">※ 此流程为通用框架，具体论断需结合全盘分析</text>
+
+      <!-- 左侧时间线标注 -->
+      <line x1="80" y1="55" x2="80" y2="761" stroke="#252240" stroke-width="1"/>
+      <text x="80" y="48" text-anchor="middle" fill="#6b6590" font-size="10">步骤</text>
+      <circle cx="80" cy="78" r="3" fill="#d4b06a"/><text x="70" y="75" fill="#6b6590" font-size="9" text-anchor="end">S1</text>
+      <circle cx="80" cy="152" r="3" fill="#d4b06a"/><text x="70" y="149" fill="#6b6590" font-size="9" text-anchor="end">S2</text>
+      <circle cx="80" cy="228" r="3" fill="#5098c8"/><text x="70" y="225" fill="#6b6590" font-size="9" text-anchor="end">S3</text>
+      <circle cx="80" cy="304" r="3" fill="#d4b06a"/><text x="70" y="301" fill="#6b6590" font-size="9" text-anchor="end">S4</text>
+      <circle cx="80" cy="518" r="3" fill="#d4b06a"/><text x="70" y="515" fill="#6b6590" font-size="9" text-anchor="end">S5</text>
+      <circle cx="80" cy="596" r="3" fill="#5098c8"/><text x="70" y="593" fill="#6b6590" font-size="9" text-anchor="end">S6</text>
+      <circle cx="80" cy="674" r="3" fill="#d4b06a"/><text x="70" y="671" fill="#6b6590" font-size="9" text-anchor="end">S7</text>
+    </svg>
+  </div>
+
+  <div class="em"><strong>流程图使用说明：</strong>①排盘 → ②看命宫主星庙旺落陷 → ③查三方四正会照 → ④审四化飞星 → [Y] 成格局→记录 / [N] 不成格局→⑤判定命宫强弱等级 → ⑥叠合大限流年 → ⑦综合论断。</div>
+</div>
+
+<!-- ═══════ 四、格局口诀 ═══════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>四、格局助记口诀</h2><p class="sub">韵律记忆 · 八字藏格局</p></div>
+
+<div class="sec">
+  <div class="mnemonic">
+    <div class="m-title">📜 十大格局速记歌 <span class="m-type">韵律记忆</span></div>
+    <div class="m-content">
+      三奇嘉会禄权科，紫府同宫寅申坐；<br>
+      日照雷门卯宫亮，月朗天门亥位和。<br>
+      雄宿朝元寅七杀，明珠出海日月合；<br>
+      火贪暴发铃贪蓄，禄马交驰动中活。<br>
+      府相朝垣一库印，十大格局记心窝。
+    </div>
+    <div class="m-explain">
+      <strong>记法：</strong>四句七言诗，每句两格。第一句→三奇嘉会+紫府同宫；第二句→日照雷门+月朗天门；第三句→雄宿朝元+明珠出海；第四句→火贪+铃贪+禄马交驰；第五句收尾→府相朝垣。<br>
+      <strong>关键词联想：</strong>"寅申坐""卯宫亮""亥位和"——将格局与地支位置绑定记忆。
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ 五、故事卡：格局 ≠ 命运定局 ═══════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>五、故事卡</h2><p class="sub">格局 ≠ 命运定局</p></div>
+
+<div class="sec">
+  <div class="story-card">
+    <div class="s-icon">📖</div>
+    <div class="s-title">格 局 不 是 命 运 的 判 决 书</div>
+    <div class="s-body">
+
+      <p>唐朝有一位命理师，名唤<strong>袁守诚</strong>。一日，泾河龙王化为人形前来问卦，袁守诚观其命盘后说："阁下命宫空宫无主星，三方煞星围困——按格局论，乃下等之命。"</p>
+
+      <p>龙王大怒，拂袖而去。《西游记》中这一段，常被后人当作"格局无用论"的佐证——一个空宫之命，何以便判为下等？</p>
+
+      <p>但故事另有下半段：泾河龙王虽是空宫之命，但他<strong>是龙</strong>。龙，天生便有腾云驾雾之能、翻江倒海之力——这些是任何命盘格局都无法涵盖的。<strong>命盘看得见星曜，看不见龙身。</strong></p>
+
+      <p style="color:var(--gold-lt);font-weight:500;">格局管的是星曜的排列，管不了你是谁。</p>
+
+      <hr style="border-color:var(--border);margin:16px 0;">
+
+      <p>再讲一个真实的故事：</p>
+
+      <p>明代有一位书生，命宫主星<strong>天同落陷</strong>，被擎羊、陀罗夹制——按五等分类，属于"弱格"。三十岁之前，他屡试不第，穷困潦倒，似乎应验了弱格之命。</p>
+
+      <p>然而他并未认命。他转而潜心研究水利，遍历山川河流，著成一部<strong>《水经注》</strong>般的水利著作。后被朝廷重用，治理黄河，造福万民，青史留名。</p>
+
+      <p>他的命盘没有变——天同依然落陷，擎羊陀罗依然夹制。但他的<strong>大限走到了强运</strong>，且他<strong>选对了一生的事业方向</strong>。弱格+强运+选对路 = 逆天改命。</p>
+
+      <hr style="border-color:var(--border);margin:16px 0;">
+
+      <p><strong style="color:#c4b0e0;">格局三定律：</strong></p>
+      <p>① 格局是<strong>先天地图</strong>，不是GPS导航——它告诉你地势高低，但不规定你走哪条路。</p>
+      <p>② 格局的<strong>一半在天，一半在人</strong>——同样"火贪暴富格"，有人暴富后挥霍一空，有人暴富后经营成百年基业。</p>
+      <p>③ <strong>大限流转是格局的"开关"</strong>——弱格逢强运 = 逆袭，强格逢弱运 = 蛰伏。人生是一段一段的，不是一句话概括的。</p>
+
+      <div class="s-moral">
+        「 格 局 是 星 图 ，不 是 星 座 —— 它 描 述 你 ，但 不 定 义 你 。」
+      </div>
+
+      <p style="text-align:right;color:var(--text-dim);font-size:.74rem;margin-top:10px;font-style:italic;">
+        —— 紫微斗数古训新解
+      </p>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ 六、格局进阶 — 破格与救格 ═══════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>六、格局进阶</h2><p class="sub">破格与救格 · 格局不是一成不变的</p></div>
+
+<div class="sec">
+  <h3>破格——格局的"毒药"</h3>
+  <p>以下因素可破坏已成立的格局，称为<strong>"破格"</strong>：</p>
+  <table>
+    <thead><tr><th>破格因素</th><th>影响机理</th><th>示例</th></tr></thead>
+    <tbody>
+      <tr><td>地空 / 地劫</td><td>虚空劫难，格局之力被"掏空"</td><td>三奇嘉会+地空 = 才华无法落地</td></tr>
+      <tr><td>化忌冲破</td><td>能量逆转，吉祥变阻滞</td><td>紫府同宫+廉贞化忌 = 权贵变官司</td></tr>
+      <tr><td>擎羊 / 陀罗</td><td>刑伤拖延，格局之力被"切割"</td><td>月朗天门+擎羊 = 贵人变小人</td></tr>
+      <tr><td>火星 / 铃星</td><td>暴烈暗火（贪狼除外），破坏祥和</td><td>明珠出海+火星 = 光芒过于刺眼招祸</td></tr>
+      <tr><td>主星落陷</td><td>格局核心星曜无力，有名无实</td><td>太阳落陷在酉≠日照雷门，反成败局</td></tr>
+    </tbody>
+  </table>
+
+  <h3>救格——格局的"解药"</h3>
+  <p>以下因素可拯救或改善已破损的格局，称为<strong>"救格"</strong>：</p>
+  <table>
+    <thead><tr><th>救格因素</th><th>作用机理</th><th>示例</th></tr></thead>
+    <tbody>
+      <tr><td>左辅 / 右弼</td><td>贵人助力，补格局之不足</td><td>弱格+左右拱照 → 遇贵人扶持逆袭</td></tr>
+      <tr><td>文昌 / 文曲</td><td>学识才华，以智补弱</td><td>空宫+昌曲 = 以学问立身，不受环境左右</td></tr>
+      <tr><td>天魁 / 天钺</td><td>天降贵人，关键时刻得助</td><td>破格+魁钺 = 绝处逢生</td></tr>
+      <tr><td>化禄 (非格局原配)</td><td>额外的财运机缘注入</td><td>弱格+化禄入财帛 = 财运拉高整体格局</td></tr>
+      <tr><td>大限走到强运</td><td>运势补先天，十年翻身</td><td>空宫+大限太阳庙旺 = 十年光明显达</td></tr>
+      <tr><td>宫位自化吉</td><td>自身内在调适机制</td><td>命宫自化科 = 以人格魅力弥补格局不足</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sum">
+    <strong>核心认知：</strong>格局不是"打死"的。<strong>破格未必凶——</strong>火贪格本就是"煞星+主星"的破格变格局，破中有立。<br>
+    <strong>救格也未必万全——</strong>辅星只能"改善"而无法"改变"格局底色。真正的救格，在于<strong>后天修为 + 大限流转 + 正确选择</strong>。
+  </div>
+</div>
+
+<!-- ═══════ 七、格局实战思路 ═══════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>七、格局实战思路</h2><p class="sub">从理论到盘面 · 格局断命的正确姿势</p></div>
+
+<div class="sec">
+  <div class="g2">
+    <div class="q"><strong>Step 1：</strong>打开命盘，先不看格局——只看<strong>命宫主星+三方四正</strong>，建立对命主的第一直觉。</div>
+    <div class="q"><strong>Step 2：</strong>查阅十大格局，逐一比对——<strong>不要求100%符合</strong>，80%近似即可参考。</div>
+    <div class="q"><strong>Step 3：</strong>若有多格局并存——<strong>取最强者为主格</strong>，其余为辅助参考。</div>
+    <div class="q"><strong>Step 4：</strong>审大限——<strong>当前大限主星是否与格局主星呼应？</strong>呼应则格局启动，不呼应则格局休眠。</div>
+    <div class="q"><strong>Step 5：</strong>给命主建议时——<strong>说格局的优势</strong>（方向指引），<strong>说破格的风险</strong>（警示），<strong>不说"你就是这个命"</strong>（宿命论）。</div>
+    <div class="t"><strong>Step 6：</strong>最后一定要加一句——<strong>"格局是地图，路是你自己走的。"</strong></div>
+  </div>
+</div>
+
+</div>
+
+<footer><p>紫微斗数 · 格局 ｜ 格局是星图，不是星座——它描述你，但不定義你</p></footer>
+<script src="../共享样式/app.js"></script>
+</body>
+</html>

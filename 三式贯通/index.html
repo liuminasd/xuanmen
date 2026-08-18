@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>三式贯通 · 玄门集大成</title>
+<link rel="stylesheet" href="../共享样式/base.css">
+<link rel="stylesheet" href="../共享样式/components.css">
+<style>
+:root{--font-ui:"Noto Serif SC","Songti SC","STSong",serif}
+body{font-family:var(--font-ui);padding-bottom:60px}
+.topnav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(8,7,13,.98),rgba(12,11,21,.95));border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;backdrop-filter:blur(10px)}
+.topnav-back{color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;padding:5px 12px;border:1px solid var(--gold);border-radius:14px;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.topnav-back:hover{background:var(--gold);color:#111}
+.topnav-title{color:var(--text-dim);font-size:.76rem;letter-spacing:.06em;white-space:nowrap}
+.topnav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.topnav-links a{color:var(--text-alt);text-decoration:none;font-size:.74rem;padding:4px 12px;border:1px solid var(--border);border-radius:12px;transition:all .2s}
+.topnav-links a:hover{border-color:var(--gold);color:var(--gold)}
+.hero{text-align:center;padding:48px 20px 28px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.hero h1{font-size:2.2em;color:var(--gold-lt);letter-spacing:6px;font-weight:300}
+.hero .sub{color:var(--text-dim);margin-top:6px;letter-spacing:3px;font-size:.95em}
+.hero .line{width:50px;height:1px;background:var(--gold);margin:12px auto;opacity:.4}
+.container{max-width:960px;margin:0 auto;padding:0 24px}
+.sec{margin:36px 0}
+.sec h2{color:var(--gold);font-size:1.15rem;letter-spacing:3px;padding:0 0 8px 14px;border-left:2px solid var(--gold);margin-bottom:16px}
+
+.tri-compare{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:16px 0}
+.tri-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;text-align:center;transition:all .3s}
+.tri-card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.tri-card.qm{border-top:3px solid var(--gold)}
+.tri-card.zw{border-top:3px solid #c9a050}
+.tri-card.mh{border-top:3px solid #d4a060}
+.tri-card .icon{font-size:2.5rem;margin-bottom:8px;display:block}
+.tri-card h3{font-size:1.1rem;color:var(--gold-lt);margin-bottom:4px}
+.tri-card .en{font-size:.68rem;color:var(--text-dim);letter-spacing:.12em;margin-bottom:10px}
+.tri-card p{font-size:.82rem;color:var(--text-alt);line-height:1.7;margin:0 0 10px}
+.tri-card .btn{font-size:.78rem;padding:6px 16px}
+
+.flow-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:20px 0;padding:18px;background:var(--card);border-radius:var(--radius-lg);border:1px solid var(--border)}
+.flow-step{padding:14px 20px;background:linear-gradient(135deg,var(--gold-bg),rgba(212,176,106,.02));border:1px solid rgba(212,176,106,.2);border-radius:var(--radius);font-size:.88rem;color:var(--text);text-align:center;min-width:140px;font-weight:500}
+.flow-arrow{color:var(--gold);font-size:1.3rem;font-weight:700}
+
+@media(max-width:860px){
+  .topnav{padding:8px 10px;gap:8px}.topnav-links{margin-left:0}
+  .hero h1{font-size:1.6em}.hero{padding:36px 16px 24px}
+  .container{padding:0 14px}
+  .tri-compare{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .topnav{padding-left:48px}
+  .hero h1{font-size:1.3em;letter-spacing:3px}
+  .container{padding:0 10px}
+  .flow-step{min-width:110px;padding:10px 14px;font-size:.8rem}
+}
+</style>
+</head>
+<body>
+
+<div class="page-progress" id="pageProgress"></div>
+<button id="backTop">↑</button>
+
+<button class="nav-toggle visible" onclick="toggleMobileNav()">☰</button>
+<div class="nav-overlay" id="navOverlay" onclick="closeMobileNav()"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <div class="mnav-header"><span class="logo">☯ 三式贯通</span></div>
+  <div class="mnav-section">内容导航</div>
+  <a class="mnav-item" href="#sec-compare">📊 三式对比</a>
+  <a class="mnav-item" href="#sec-flow">🔄 三式联动</a>
+  <a class="mnav-item" href="#sec-principle">🧠 深层原理</a>
+  <a class="mnav-item" href="#sec-complement">🤝 体系互补</a>
+  <a class="mnav-item" href="#sec-mind">💎 共同心法</a>
+  <div class="mnav-section">进入学习</div>
+  <a class="mnav-item" href="../根基/">📗 玄门根基</a>
+  <a class="mnav-item" href="../梅花易数/">🌸 梅花易数</a>
+  <a class="mnav-item" href="../奇门遁甲/">🏯 奇门遁甲</a>
+  <a class="mnav-item" href="../紫微斗数/">🔮 紫微斗数</a>
+  <a class="mnav-item" href="../index.html">🏠 返回玄门</a>
+</nav>
+
+<header class="topnav">
+  <a href="../index.html" class="topnav-back">← 玄门</a>
+  <span class="topnav-title">三式贯通 · 集大成指南</span>
+  <div class="topnav-links">
+    <a href="#sec-compare">对比</a><a href="#sec-flow">联动</a>
+    <a href="#sec-principle">原理</a><a href="#sec-mind">心法</a>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>☯ 三式贯通</h1>
+  <p class="sub">—— 奇门·紫微·梅花 · 集大成指南 ——</p>
+  <div class="line"></div>
+</div>
+
+<div class="container">
+
+<div class="lead">
+  当你已经掌握<strong>奇门遁甲、紫微斗数、梅花易数</strong>中至少一门，这里是帮助你看到三式之间深层联系的<strong>贯通指南</strong>。三式虽异，说的却是同一件事：<strong>天地人的和谐统一</strong>。
+</div>
+
+<!-- ═══════════ 三式全景定位 ═══════════ -->
+<div class="sec" id="sec-compare"><h2>三式全景定位</h2>
+<div class="tbl"><table>
+<tr><th>维度</th><th>🏯 奇门遁甲</th><th>🔮 紫微斗数</th><th>🌸 梅花易数</th></tr>
+<tr><td>核心功能</td><td>择时择方·趋吉避凶</td><td>命理推演·人生全局</td><td>即时占卜·一事一断</td></tr>
+<tr><td>时间维度</td><td>时空一体（时辰为盘）</td><td>出生定盘（终身不变）</td><td>起卦当下（即时响应）</td></tr>
+<tr><td>空间维度</td><td>九宫方位（强空间性）</td><td>十二宫（弱空间性）</td><td>后天八卦方位（辅助）</td></tr>
+<tr><td>复杂度</td><td>极高（四层盘面叠加）</td><td>很高（108+星曜体系）</td><td>中等（八卦系统核心）</td></tr>
+<tr><td>学习曲线</td><td>3-12个月</td><td>6-24个月</td><td>1-4周</td></tr>
+<tr><td>最适合</td><td>择日、布局、出行</td><td>看命、运势、性格</td><td>日常决疑、速断</td></tr>
+<tr><td>输出形式</td><td>即时盘局+吉凶判断</td><td>终身命盘+运势推演</td><td>一事一卦+趋势判断</td></tr>
+</table></div>
+</div>
+
+<!-- 三大入口 -->
+<div class="tri-compare">
+  <a href="../奇门遁甲/" class="tri-card qm"><span class="icon">🏯</span><h3>奇门遁甲</h3><div class="en">Qi Men Dun Jia</div><p>帝王之术，融天时地利人和于九宫。已掌握择时、择方、布局能力。</p><span class="btn btn-ghost btn-sm">进入学习 →</span></a>
+  <a href="../紫微斗数/" class="tri-card zw"><span class="icon">🔮</span><h3>紫微斗数</h3><div class="en">Zi Wei Dou Shu</div><p>天下第一神数，星曜布十二宫穷究命理。已掌握看命、运势分析。</p><span class="btn btn-ghost btn-sm">进入学习 →</span></a>
+  <a href="../梅花易数/" class="tri-card mh"><span class="icon">🌸</span><h3>梅花易数</h3><div class="en">Mei Hua Yi Shu</div><p>观物取象以数明理，一花一叶知天地消息。已掌握起卦、断卦。</p><span class="btn btn-ghost btn-sm">进入学习 →</span></a>
+</div>
+
+<!-- ═══════════ 三式联动法 ═══════════ -->
+<div class="sec" id="sec-flow"><h2>三式递进联动法</h2>
+<div class="flow-row">
+  <div class="flow-step">① 梅花起卦<br><small style="color:var(--text-dim)">快速感知吉凶</small></div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">② 奇门择时<br><small style="color:var(--text-dim)">找到最佳时机</small></div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step">③ 紫微看命<br><small style="color:var(--text-dim)">理解深层原因</small></div>
+</div>
+
+<div class="story-card"><div class="story-title">📌 实战案例：何时跳槽为宜？</div>
+<p>① <strong>梅花易数</strong>起卦 → 看这件事的吉凶趋势（5分钟）<br>
+② <strong>奇门遁甲</strong>选时 → 找一个"开门+生门+值符"的时辰去面试<br>
+③ <strong>紫微斗数</strong>看盘 → 看官禄宫大限流年，判断职业运势周期是否支持</p></div>
+
+<div class="tip info"><strong>💡 核心逻辑：</strong>三式互校不是比谁"准"，而是在不同维度为同一问题提供多角度照明。当两个体系给出一致结论时，信心大增！</div>
+</div>
+
+<!-- ═══════════ 主客辩证统一 ═══════════ -->
+<div class="sec" id="sec-principle"><h2>深层原理：三式贯通的"一"</h2>
+
+<div class="card raised"><div class="card-title">⚖️ 主客辩证——三式的共同核心结构</div>
+<div class="tbl"><table>
+<tr><th>体系</th><th>"我"（主）</th><th>"事"（客）</th><th>底层逻辑</th></tr>
+<tr><td>奇门遁甲</td><td>日干</td><td>时干</td><td rowspan="3" style="text-align:center;color:var(--gold);font-weight:700">身要胜物则事易<br>物来胜身则事难</td></tr>
+<tr><td>紫微斗数</td><td>命宫</td><td>各宫位（依所问）</td></tr>
+<tr><td>梅花易数</td><td>体卦</td><td>用卦</td></tr>
+</table></div></div>
+
+<div class="g2">
+  <div class="card raised"><div class="card-title">📐 旺衰修正 · 统一公式</div>
+    <div class="rhyme-card"><div class="rhyme-text">吉凶结论 = 生克关系 × 旺衰系数</div></div>
+    <div class="tbl"><table>
+      <tr><th>体系</th><th>旺衰判定方式</th></tr>
+      <tr><td>奇门</td><td>用神落宫 + 月令旺衰</td></tr>
+      <tr><td>紫微</td><td>星曜庙旺利陷</td></tr>
+      <tr><td>梅花</td><td>五行季节旺相休囚死</td></tr>
+    </table></div></div>
+  <div class="card raised"><div class="card-title">🔮 象数思维 · 统一链条</div>
+    <div class="rhyme-card"><div class="rhyme-text">象 → 数 → 理 → 占</div></div>
+    <p style="font-size:.84rem;color:var(--text-alt)">奇门：时间→局数→符号→吉凶<br>紫微：生辰→干支→星宫→命理<br>梅花：外应→数字→卦象→生克</p>
+  </div>
+</div>
+
+<!-- 六条根本原理 -->
+<div class="g3">
+  <div class="card"><div class="card-title">1. 象数思维</div><p style="font-size:.8rem;color:var(--text-alt)">万物皆可转化为符号推演</p></div>
+  <div class="card"><div class="card-title">2. 触机原则</div><p style="font-size:.8rem;color:var(--text-alt)">心动的刹那即信息入口</p></div>
+  <div class="card"><div class="card-title">3. 主客辩证</div><p style="font-size:.8rem;color:var(--text-alt)">"我"与"事"的判断核心</p></div>
+  <div class="card"><div class="card-title">4. 旺衰修正</div><p style="font-size:.8rem;color:var(--text-alt)">同样生克×不同时空=不同结果</p></div>
+  <div class="card"><div class="card-title">5. 全息对应</div><p style="font-size:.8rem;color:var(--text-alt)">局部反映整体·瞬间包含永恒</p></div>
+  <div class="card"><div class="card-title">6. 圆机应变</div><p style="font-size:.8rem;color:var(--text-alt)">法无定法·不可执泥一端</p></div>
+</div>
+</div>
+
+<!-- ═══════════ 体系互补 ═══════════ -->
+<div class="sec" id="sec-complement"><h2>体系互补速查表</h2>
+<div class="tbl"><table>
+<tr><th>场景</th><th>首选体系</th><th>辅助体系</th><th>说明</th></tr>
+<tr><td>日常决疑</td><td>🌸 梅花</td><td>—</td><td>快速起卦，即时回答</td></tr>
+<tr><td>择日行事</td><td>🏯 奇门</td><td>🌸 梅花</td><td>奇门择时+梅花确认</td></tr>
+<tr><td>人生规划</td><td>🔮 紫微</td><td>🏯 奇门</td><td>紫微看大势+奇门选时机</td></tr>
+<tr><td>空间布局</td><td>🏯 奇门</td><td>—</td><td>九宫方位是独门优势</td></tr>
+<tr><td>性格分析</td><td>🔮 紫微</td><td>—</td><td>星曜宫位最精细的性格模型</td></tr>
+<tr><td>失物寻找</td><td>🌸 梅花</td><td>🏯 奇门</td><td>梅花定方向+奇门定方位</td></tr>
+<tr><td>感情婚姻</td><td>🔮 紫微</td><td>🌸 梅花</td><td>紫微看根本+梅花看当下</td></tr>
+<tr><td>商业决策</td><td>🏯 奇门</td><td>🔮 紫微</td><td>奇门选时+紫微看决策者</td></tr>
+</table></div></div>
+
+<!-- ═══════════ 共同心法 ═══════════ -->
+<div class="sec" id="sec-mind"><h2>三式共同心法</h2>
+
+<div class="rhyme-card"><div class="rhyme-text">
+第一阶段：死记硬背 → 符号对应（加法）<br>
+第二阶段：融会贯通 → 关系是活的（减法）<br>
+第三阶段：得心应手 → 不假思索（心法）<br>
+第四阶段：以术证道 → 术为筏·道为岸（超越）
+</div></div>
+
+<div class="deep-dive"><div class="deep-title">🌟 三式终归一处</div>
+<div class="deep-sub">奇门是"天时地利人和" · 紫微是"星人合一" · 梅花是"心物一元"</div>
+<p>三式到头来说的是同一件事：<strong>天地人的和谐统一。</strong><br>
+"易者，象也。象也者，像也。" ——《周易·系辞》</p>
+</div>
+
+<div class="rhyme-card"><div class="rhyme-text" style="font-size:1rem">
+奇门择时·紫微看命·梅花断事<br>
+三式归一·以术证道·天人合一
+</div></div>
+
+</div>
+
+<!-- ═══════════ 口诀总汇 ═══════════ -->
+<div class="sec"><h2>三式口诀总汇</h2>
+<div class="g2">
+  <div class="card"><div class="card-title">🏯 奇门遁甲</div>
+    <ul style="font-size:.84rem"><li>三吉门：<strong>开休生</strong></li><li>四吉星：<strong>辅禽心任</strong></li><li>排盘：先定局·布地盘·排星门·安八神</li><li>断局：事为主·时为客</li></ul></div>
+  <div class="card"><div class="card-title">🔮 紫微斗数</div>
+    <ul style="font-size:.84rem"><li>安星：紫微逆行安北斗·天府顺行布南斗</li><li>四化：<strong>禄权科忌</strong>·禄随忌走</li><li>核心：天府·天相·七杀<strong>全无四化</strong></li><li>活用灵变·方为灵魂</li></ul></div>
+  <div class="card"><div class="card-title">🌸 梅花易数</div>
+    <ul style="font-size:.84rem"><li>卦数：<strong>乾1兑2离3震4巽5坎6艮7坤8</strong></li><li>起卦：上卦三数除八·下卦四数除八</li><li>体用：静为体·动为用</li><li>断卦：要在圆机·不可执！</li></ul></div>
+  <div class="card"><div class="card-title">📗 通用根基</div>
+    <ul style="font-size:.84rem"><li>相生：<strong>木火土金水</strong></li><li>相克：<strong>木土水火金</strong></li><li>旺衰：当令者旺·我生者相</li><li>天干五行：甲乙木→丙丁火→戊己土→庚辛金→壬癸水</li></ul></div>
+</div></div>
+
+</div>
+
+<script src="../共享样式/app.js"></script>
+</body>
+</html>

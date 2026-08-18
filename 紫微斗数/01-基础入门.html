@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="紫微斗数第一阶段 · 基础入门 — 阴阳五行、天干地支、六十甲子纳音、四柱排法、紫微斗数排盘。">
+<title>紫微斗数 · 基础入门</title>
+<link rel="stylesheet" href="../共享样式/base.css">
+<link rel="stylesheet" href="../共享样式/components.css">
+<style>
+  :root{--font-ui:"Noto Serif SC","Songti SC","STSong",serif}
+  body{font-family:var(--font-ui);padding-bottom:60px}
+  .breadcrumb{padding:16px 24px;font-size:.78rem}
+  .breadcrumb a{color:var(--text-dim);text-decoration:none}
+  .breadcrumb a:hover{color:var(--gold)}
+  .breadcrumb span{color:var(--text-dim);margin:0 6px}
+
+  .hero{text-align:center;padding:40px 20px 32px;border-bottom:1px solid var(--border);margin-bottom:32px}
+  .hero h1{font-size:2.2em;color:var(--gold-lt);letter-spacing:5px;font-weight:300}
+  .hero p{color:var(--text-dim);font-size:.9rem;letter-spacing:2px;margin-top:6px}
+  .hero .line{width:50px;height:1px;background:var(--gold);margin:12px auto;opacity:.4}
+
+  .container{max-width:960px;margin:0 auto;padding:0 24px}
+  .sec{margin:30px 0}
+  .sec h2{color:var(--gold);font-size:1.2rem;font-weight:400;letter-spacing:3px;
+    padding:0 0 8px 14px;border-left:2px solid var(--gold);margin-bottom:16px}
+  .sec h3{color:var(--gold-lt);font-size:.98rem;margin:20px 0 10px;font-weight:400}
+  .sec h4{color:var(--gold-lt);font-size:.9rem;margin:16px 0 8px;font-weight:400}
+  .sec p{color:var(--text-alt);font-size:.86rem;margin:8px 0;line-height:1.9}
+  .sec p strong,.sec li strong{color:#e8d8b0;font-weight:500}
+  .sec ul,.sec ol{padding-left:22px;margin:8px 0}
+  .sec li{color:var(--text-alt);font-size:.84rem;margin:4px 0;line-height:1.8}
+
+  .em{background:var(--card);border:1px solid rgba(212,176,106,.08);border-radius:var(--radius);
+    padding:15px 18px;margin:12px 0;font-size:.84rem;color:var(--text-alt)}
+  .em strong{color:var(--gold-lt)}
+  .em .em-title{color:var(--gold);font-size:.76rem;letter-spacing:3px;margin-bottom:6px;text-transform:uppercase}
+
+  .q{background:var(--gold-bg);border-left:2px solid var(--gold);padding:11px 16px;
+    border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;font-size:.84rem;color:var(--text-alt)}
+  .q strong{color:var(--gold-lt)}
+  .sum{background:linear-gradient(135deg,var(--gold-bg),rgba(212,176,106,.01));
+    border:1px dashed rgba(212,176,106,.15);border-radius:var(--radius);
+    padding:16px 20px;margin:20px 0;font-size:.84rem}
+  .sum strong{color:var(--gold-lt)}
+
+  table{width:100%;border-collapse:collapse;font-size:.82em;margin:12px 0}
+  th{background:var(--gold-bg);color:var(--gold);padding:9px 12px;text-align:left;
+    border-bottom:1px solid rgba(212,176,106,.15);font-weight:400;letter-spacing:1px}
+  th:first-child{border-radius:var(--radius) 0 0 0}
+  th:last-child{border-radius:0 var(--radius) 0 0}
+  td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  tr:hover td{background:rgba(255,255,255,.01)}
+  td:first-child{color:#e0d8c0;font-weight:500;white-space:nowrap}
+
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:10px 0}
+  .kc{display:inline-block;background:var(--gold-bg);color:var(--gold);padding:3px 12px;
+    border-radius:12px;font-size:.78em;margin:2px 3px;border:1px solid rgba(212,176,106,.1)}
+
+  footer{text-align:center;padding:40px 20px;color:var(--text-dim);font-size:.74rem;
+    letter-spacing:2px;border-top:1px solid var(--border);margin-top:48px}
+
+  @media(max-width:720px){.g2,.g3{grid-template-columns:1fr}}
+  @media(max-width:640px){
+    .hero h1{font-size:1.5em}.container{padding:0 12px}
+    .sec h2{font-size:1.05rem}table{font-size:.72em}td,th{padding:6px 8px}
+  }
+  .with-sidebar{margin-left:0!important}
+  .topnav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(8,7,13,.98),rgba(12,11,21,.95));border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;backdrop-filter:blur(10px)}
+  .topnav-back{color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;padding:5px 12px;border:1px solid var(--gold);border-radius:14px;white-space:nowrap;transition:all .2s;flex-shrink:0}
+  .topnav-back:hover{background:var(--gold);color:#111}
+  .topnav-title{color:var(--text-dim);font-size:.76rem;letter-spacing:.06em;white-space:nowrap}
+  .topnav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .topnav-links a{color:var(--text-alt);text-decoration:none;font-size:.74rem;padding:4px 12px;border:1px solid var(--border);border-radius:12px;transition:all .2s}
+  .topnav-links a:hover{border-color:var(--gold);color:var(--gold)}
+  @media(max-width:600px){.topnav{padding:8px 10px;gap:8px}.topnav-links{margin-left:0}}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <a href="../index.html" class="topnav-back">← 玄门</a>
+  <span class="topnav-title">紫微斗数 · 基础入门</span>
+  <div class="topnav-links">
+    <a href="index.html">总览</a>
+    <a href="02-核心知识.html">核心知识</a>
+    <a href="02-宫位.html">宫位篇</a>
+    <a href="03-实战精通.html">实战精通</a>
+    <a href="题库.html">题库</a>
+  </div>
+</header>
+
+<div class="page-progress" id="pageProgress"></div>
+<button id="backTop">↑</button>
+
+<div class="hero">
+  <h1>第一阶段 · 基础入门</h1>
+  <p>搭建知识框架 · 2~4周 · 零基础友好</p>
+  <div class="line"></div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 1.1 阴阳五行 ═══ -->
+<div class="sec">
+<h2>一、阴阳五行 —— 紫微斗数的哲学根基</h2>
+
+<h3>1. 阴阳：宇宙万物的二分法</h3>
+<p>阴阳学说把宇宙万物归为<strong>阴阳两大性质</strong>，一切事物的形成、变化和发展，都是阴阳二气运动与转换的结果。这不是简单的"好坏"二分——阴阳是<strong>相互依存、相互转化</strong>的。</p>
+<div class="em"><div class="em-title">🔑 核心规律（直接影响星曜论断）</div>
+<p><strong>同性相生</strong>（阳生阳、阴生阴）→ 生力大，推动力强<br>
+<strong>异性相生</strong>（阳生阴、阴生阳）→ 生力小，温和滋养<br>
+<strong>同性相克</strong>（阴克阴、阳克阳）→ 克性大，<strong>真克·无情之克</strong><br>
+<strong>异性相克</strong>（阴克阳、阳克阴）→ 克性不大，<strong>有情之克</strong>，只是适度管制</p></div>
+<div class="q"><strong>💡 为什么重要？</strong>论断两颗星的关系时，同性相克=严重冲突，异性相克=温和摩擦。这在看夫妻宫、官禄宫时尤为关键。</div>
+
+<h3>2. 五行：五种基本物质的生克循环</h3>
+<div class="g2">
+<div class="em"><strong>🔄 相生循环：</strong>金→水→木→火→土→金<br><span style="color:var(--text-dim)">金熔成水 · 水浇树木 · 木可燃火 · 火烧成土 · 土中藏金</span></div>
+<div class="em"><strong>⚔ 相克循环：</strong>金→木→土→水→火→金<br><span style="color:var(--text-dim)">金可伐木 · 木可破土 · 土可堵水 · 水可灭火 · 火可熔金</span></div>
+</div>
+<p>在紫微斗数中，<strong>每颗星曜都有五行属性</strong>。两颗星同宫或对宫时，它们之间的生克关系决定了互动的好坏。例如：武曲（金）+ 天机（木）= 金克木，武曲压制天机的灵动性。</p>
+
+<h3>3. 五行旺衰：星曜力量的"季节"</h3>
+<div class="em"><strong>当令者旺，令生者相，生令者休，克令者囚，令克者死。</strong>（令=当季的五行：春木、夏火、秋金、冬水、四季末土）</div>
+<table>
+<thead><tr><th>季节</th><th>旺</th><th>相</th><th>休</th><th>囚</th><th>死</th></tr></thead>
+<tr><td>春（木令）</td><td style="color:var(--green)">木</td><td>火</td><td>水</td><td>金</td><td style="color:var(--red)">土</td></tr>
+<tr><td>夏（火令）</td><td style="color:var(--green)">火</td><td>土</td><td>木</td><td>水</td><td style="color:var(--red)">金</td></tr>
+<tr><td>秋（金令）</td><td style="color:var(--green)">金</td><td>水</td><td>土</td><td>火</td><td style="color:var(--red)">木</td></tr>
+<tr><td>冬（水令）</td><td style="color:var(--green)">水</td><td>木</td><td>金</td><td>土</td><td style="color:var(--red)">火</td></tr>
+</table>
+
+<h3>4. 长生十二神</h3>
+<p><strong>长生→沐浴→冠带→临官→帝旺→衰→病→死→墓→绝→胎→养</strong></p>
+<div class="em">长生/冠带/临官/帝旺 = <strong style="color:var(--green)">旺相 ✓</strong> | 沐浴 = <strong style="color:#d4914c">破败 △</strong> | 衰/病/死/墓/绝 = <strong style="color:var(--red)">衰落 ✗</strong> | 胎/养 = <strong>温养 ○</strong></div>
+
+<div class="sum"><strong>阶段小结：</strong>阴阳→五行→旺衰→长生十二神，四层递进。核心逻辑：<strong>星曜的五行属性 + 所在宫位的季节状态 = 星曜的实际力量</strong>。</div>
+</div>
+
+<!-- ═══ 1.2 天干地支 ═══ -->
+<div class="sec">
+<h2>二、天干地支 —— 时空编码系统</h2>
+
+<h3>1. 十天干</h3>
+<table>
+<thead><tr><th>干</th><th>甲</th><th>乙</th><th>丙</th><th>丁</th><th>戊</th><th>己</th><th>庚</th><th>辛</th><th>壬</th><th>癸</th></tr></thead>
+<tr><td>五行</td><td>木</td><td>木</td><td>火</td><td>火</td><td>土</td><td>土</td><td>金</td><td>金</td><td>水</td><td>水</td></tr>
+<tr><td>阴阳</td><td>阳</td><td>阴</td><td>阳</td><td>阴</td><td>阳</td><td>阴</td><td>阳</td><td>阴</td><td>阳</td><td>阴</td></tr>
+<tr><td>方位</td><td>东</td><td>东</td><td>南</td><td>南</td><td>中</td><td>中</td><td>西</td><td>西</td><td>北</td><td>北</td></tr>
+</table>
+<p><strong>天干相合：</strong><span class="kc">甲己→土</span><span class="kc">乙庚→金</span><span class="kc">丙辛→水</span><span class="kc">丁壬→木</span><span class="kc">戊癸→火</span></p>
+
+<h3>2. 十二地支</h3>
+<table>
+<thead><tr><th>支</th><th>子</th><th>丑</th><th>寅</th><th>卯</th><th>辰</th><th>巳</th><th>午</th><th>未</th><th>申</th><th>酉</th><th>戍</th><th>亥</th></tr></thead>
+<tr><td>五行</td><td>水</td><td>土</td><td>木</td><td>木</td><td>土</td><td>火</td><td>火</td><td>土</td><td>金</td><td>金</td><td>土</td><td>水</td></tr>
+<tr><td>生肖</td><td>鼠</td><td>牛</td><td>虎</td><td>兔</td><td>龙</td><td>蛇</td><td>马</td><td>羊</td><td>猴</td><td>鸡</td><td>狗</td><td>猪</td></tr>
+<tr><td>月份</td><td>11</td><td>12</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+<tr><td>时辰</td><td>23-1</td><td>1-3</td><td>3-5</td><td>5-7</td><td>7-9</td><td>9-11</td><td>11-13</td><td>13-15</td><td>15-17</td><td>17-19</td><td>19-21</td><td>21-23</td></tr>
+</table>
+
+<h3>3. 地支三种空间关系</h3>
+<div class="g3">
+<div class="em"><strong>⚡ 六冲（对角线对立）</strong><br>子午·丑未·寅申<br>卯酉·辰戍·巳亥<br><span style="color:var(--text-dim)">不冲不动，动了才显吉凶</span></div>
+<div class="em"><strong>🤝 六合（相邻配对）</strong><br>子丑→土 寅亥→木<br>卯戍→火 辰酉→金<br>巳申→水 午未→土</div>
+<div class="em"><strong>🔺 三合（等边三角形）</strong><br>申子辰→水<br>亥卯未→木<br>寅午戍→火<br>巳酉丑→金</div>
+</div>
+<div class="q"><strong>💡 三合局=三方四正的"三方"：</strong>命宫在申→三方为申(命)+子(财帛)+辰(官禄)，构成申子辰水局。三合的三个宫位同气连枝、相互呼应。</div>
+</div>
+
+<!-- ═══ 1.3 六十甲子与纳音 ═══ -->
+<div class="sec">
+<h2>三、六十甲子与纳音五行</h2>
+
+<h3>六十甲子</h3>
+<p>天干10个 × 地支12个 = 120种组合 → 但必须<strong>阳干配阳支、阴干配阴支</strong> → 只有60种 = <strong>六十甲子</strong>。用于纪年、纪月、纪日、纪时——即四柱八字的时间坐标系统。</p>
+
+<h3>纳音五行速算法</h3>
+<div class="em"><div class="em-title">🔑 纳音速算法（必背）</div>
+<p><strong>天干配数：</strong>甲乙=1，丙丁=2，庚辛=3，戊己=4，壬癸=5<br>
+<strong>地支配数：</strong>子丑午未=1，寅卯申酉=2，辰巳戍亥=3<br>
+<strong>干支数相加 → 若>5则减5 → 余数：1木 2金 3水 4火 5土</strong></p>
+<p>例：戊戍 → 戊=4 + 戍=3 = 7 > 5 → 7-5=2 → 2=金 → 戊戍纳音为金</p></div>
+<div class="q"><strong>💡 排盘核心链条：</strong>命宫干支 → 纳音五行 → 五行局数（水2/木3/金4/土5/火6）→ 配合农历生日 → 确定紫微星落宫。这是整个排盘最核心的计算链条。</div>
+</div>
+
+<!-- ═══ 1.4 四柱排法 ═══ -->
+<div class="sec">
+<h2>四、四柱排法 —— 时间坐标的建立</h2>
+<div class="g2">
+<div class="em"><strong>年柱：</strong>以农历<strong>正月初一</strong>为界（非立春），查万年历</div>
+<div class="em"><strong>日柱：</strong>以<strong>晚上12:00</strong>为界，查万年历</div>
+<div class="em"><strong>月柱——五虎遁：</strong><br><strong>甲己之年丙作首，乙庚之年戊为头</strong><br>丙辛从庚起，丁壬正月壬寅<br>戊癸正月建甲寅</div>
+<div class="em"><strong>时柱——五鼠遁：</strong><br><strong>甲己还加甲，乙庚丙作初</strong><br>丙辛推戊子，丁壬庚子居<br>戊癸起戊子</div>
+</div>
+</div>
+
+<!-- ═══ 1.5 排盘 ═══ -->
+<div class="sec">
+<h2>五、紫微斗数排盘 —— 从空白到完整命盘</h2>
+<div class="em"><div class="em-title">🔗 排盘核心逻辑链</div>
+<p><strong>出生时间</strong> → 安命宫身宫 → 定十二宫 → 安十二宫天干 → <strong>命宫纳音→五行局 → +生日→紫微星落宫</strong> → 十四主星定位 → 四化星 → 辅星杂曜 → <strong>完整命盘</strong></p></div>
+
+<h3>十二步操作速查</h3>
+<table>
+<thead><tr><th>步</th><th>操作</th><th>核心方法</th></tr></thead>
+<tr><td>①</td><td>安命宫·身宫</td><td>寅起正月顺至生月→起子时逆至生时=命宫；顺至生时=身宫</td></tr>
+<tr><td>②</td><td>定十二宫</td><td>命宫起逆排：命→兄弟→夫妻→子女→财帛→疾厄→迁移→奴仆→官禄→田宅→福德→父母</td></tr>
+<tr><td>③</td><td>安十二宫天干</td><td>五虎遁定寅宫干→顺排</td></tr>
+<tr><td>④</td><td>定五行局</td><td>命宫干支→纳音→水2/木3/金4/土5/火6局</td></tr>
+<tr><td>⑤</td><td>安紫微星</td><td>五行局+农历生日→公式(A+X)÷B=C</td></tr>
+<tr><td>⑥</td><td>安十四主星</td><td>紫微系6颗逆排+天府系8颗顺排</td></tr>
+<tr><td>⑦</td><td>安月系星</td><td>左辅/右弼/天刑/天姚→按生月</td></tr>
+<tr><td>⑧</td><td>安四化星</td><td>生年天干→十天干四化表</td></tr>
+<tr><td>⑨</td><td>安时系星</td><td>文昌/文曲/地空/地劫→按生时</td></tr>
+<tr><td>⑩⑪⑫</td><td>安年支/年干系星+火铃</td><td>天喜红鸾禄存擎羊陀罗等</td></tr>
+</table>
+
+<h3>十天干四化表</h3>
+<table>
+<thead><tr><th>干</th><th>甲</th><th>乙</th><th>丙</th><th>丁</th><th>戊</th><th>己</th><th>庚</th><th>辛</th><th>壬</th><th>癸</th></tr></thead>
+<tr><td>禄</td><td>廉贞</td><td>天机</td><td>天同</td><td>太阴</td><td>贪狼</td><td>武曲</td><td>太阳</td><td>巨门</td><td>天梁</td><td>破军</td></tr>
+<tr><td>权</td><td>破军</td><td>天梁</td><td>天机</td><td>天同</td><td>太阴</td><td>贪狼</td><td>武曲</td><td>太阳</td><td>紫微</td><td>巨门</td></tr>
+<tr><td>科</td><td>武曲</td><td>紫微</td><td>文昌</td><td>天机</td><td>右弼</td><td>天梁</td><td>太阴</td><td>文曲</td><td>左辅</td><td>太阴</td></tr>
+<tr><td>忌</td><td style="color:var(--red)">太阳</td><td style="color:var(--red)">太阴</td><td style="color:var(--red)">廉贞</td><td style="color:var(--red)">巨门</td><td style="color:var(--red)">天机</td><td style="color:var(--red)">文曲</td><td style="color:var(--red)">天同</td><td style="color:var(--red)">文昌</td><td style="color:var(--red)">武曲</td><td style="color:var(--red)">贪狼</td></tr>
+</table>
+<div class="em"><strong>口诀：</strong>甲廉破武阳，乙机梁紫阴，丙同机昌廉，丁阴同机巨，戊贪阴右机，己武贪梁曲，庚阳武阴同，辛巨阳曲昌，壬梁紫左武，癸破巨阴贪。</div>
+
+<div class="sum"><strong>阶段小结：</strong>阴阳五行（万物之理）→ 天干地支（时空编码）→ 六十甲子纳音（组合运算）→ 四柱排法（时间定位）→ 排盘（空间定位）。五步搭建起紫微斗数的整个运算框架。</div>
+</div>
+
+</div>
+
+<footer><p>紫微斗数 · 第一阶段 ｜ 基础扎实，方能高楼起</p></footer>
+<script src="../共享样式/app.js"></script>
+</body>
+</html>

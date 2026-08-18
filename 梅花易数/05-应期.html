@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>梅花易数 · 第五层 · 应期判断与十八类占断</title>
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --card-bg: #1a1a1a;
+    --text: #d4c8a8;
+    --heading: #e8d5a0;
+    --accent: #c9a84c;
+    --accent-glow: #e6c456;
+    --border: #3a3320;
+    --input-bg: #121212;
+    --highlight: #1e1b10;
+    --danger: #c44;
+    --muted: #8a8068;
+    --good: #2ecc71;
+    --warn: #e67e22;
+    --mid: #82b74b;
+    --bad: #e74c3c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Serif SC", "Source Han Serif SC", "宋体", SimSun, serif;
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    padding: 2rem 1rem;
+  }
+
+  .container { max-width: 960px; margin: 0 auto; }
+
+  /* ---- 顶栏 ---- */
+  .topbar {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .breadcrumb {
+    font-size: 0.82rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.6rem;
+  }
+  .breadcrumb a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .topbar h1 {
+    font-size: 2.4rem;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: 0.10em;
+  }
+  .topbar .sub {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---- 卡片 ---- */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem 2.2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.45);
+  }
+  .card h2 {
+    font-size: 1.55rem;
+    color: var(--accent);
+    border-left: 4px solid var(--accent);
+    padding-left: 1rem;
+    margin-bottom: 1.3rem;
+    letter-spacing: 0.08em;
+  }
+  .card h3 {
+    font-size: 1.15rem;
+    color: var(--heading);
+    margin: 1.2rem 0 0.6rem;
+    letter-spacing: 0.06em;
+  }
+  .card h4 {
+    font-size: 1.05rem;
+    color: var(--accent-glow);
+    margin: 1rem 0 0.5rem;
+    letter-spacing: 0.05em;
+  }
+  .card p { margin-bottom: 0.6rem; }
+
+  /* ---- 公式区 ---- */
+  .formula {
+    background: #121006;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2rem 1.6rem;
+    margin: 1rem 0;
+    font-size: 1.05rem;
+    text-align: center;
+    letter-spacing: 0.06em;
+    color: var(--heading);
+    line-height: 2;
+  }
+  .formula em {
+    font-style: normal;
+    color: var(--accent-glow);
+    font-weight: 700;
+  }
+
+  /* ---- 重点标注 ---- */
+  .highlight-box {
+    background: linear-gradient(135deg, #221c0a 0%, #1a1608 100%);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 1rem 1.6rem;
+    margin: 1rem 0;
+    color: var(--accent-glow);
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.05rem;
+  }
+
+  /* ---- 信息提示 ---- */
+  .info-box {
+    background: linear-gradient(135deg, #0a1a1c 0%, #081416 100%);
+    border: 1px solid #2c5a60;
+    border-radius: 8px;
+    padding: 1rem 1.6rem;
+    margin: 1rem 0;
+    color: #7ec8d0;
+    font-size: 0.95rem;
+  }
+
+  /* ---- 警示提示 ---- */
+  .warn-box {
+    background: linear-gradient(135deg, #1c140a 0%, #1a1008 100%);
+    border: 1px solid #8b6914;
+    border-radius: 8px;
+    padding: 1rem 1.6rem;
+    margin: 1rem 0;
+    color: #e6c456;
+    font-size: 0.95rem;
+  }
+
+  /* ---- 表格 ---- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.55rem 0.6rem;
+    text-align: center;
+  }
+  th {
+    background: #1e1b10;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  tr:nth-child(even) td { background: #141414; }
+  tr:hover td { background: #1e1c12; }
+
+  /* ---- 口诀卡片 ---- */
+  .koujue-card {
+    position: relative;
+    background: linear-gradient(135deg, #1a1608 0%, #120e04 50%, #1a1608 100%);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    margin: 1.5rem 0;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(201,168,76,0.12);
+  }
+  .koujue-card::before {
+    content: '口 诀';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #1a1608;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    padding: 2px 20px;
+    border-radius: 10px;
+  }
+  .koujue-card .verse {
+    font-size: 1.25rem;
+    color: var(--heading);
+    line-height: 2.4;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .koujue-card .verse .line { display: block; margin: 0.35rem 0; }
+  .koujue-card .verse .hl-gold   { color: var(--accent-glow); }
+  .koujue-card .verse .hl-green  { color: #2ecc71; }
+  .koujue-card .verse .hl-red    { color: #e74c3c; }
+  .koujue-card .verse .hl-cyan   { color: #7ec8d0; }
+
+  /* ---- 层详解折叠 ---- */
+  .layer-detail {
+    background: #15150e;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0.8rem 0;
+    overflow: hidden;
+  }
+  .layer-detail .layer-header {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .layer-detail .layer-header:hover { background: #1e1b10; }
+  .layer-detail .layer-header .layer-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    background: var(--accent);
+    color: #1a1608;
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .layer-detail .layer-header .layer-title {
+    font-size: 1.05rem;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    flex: 1;
+  }
+  .layer-detail .layer-header .layer-arrow {
+    font-size: 0.9rem;
+    color: var(--muted);
+    transition: transform 0.3s;
+  }
+  .layer-detail.open .layer-header .layer-arrow {
+    transform: rotate(180deg);
+  }
+  .layer-detail .layer-body {
+    display: none;
+    padding: 0 1.5rem 1.2rem;
+    border-top: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.9;
+  }
+  .layer-detail.open .layer-body { display: block; }
+
+  /* ---- 表格颜色标注 ---- */
+  .td-good { background: rgba(46,204,113,0.12) !important; color: var(--good); font-weight: 700; }
+  .td-mid  { background: rgba(130,183,75,0.10) !important; color: var(--mid); font-weight: 700; }
+  .td-warn { background: rgba(230,126,34,0.12) !important; color: var(--warn); font-weight: 700; }
+  .td-bad  { background: rgba(231,76,60,0.12) !important; color: var(--bad); font-weight: 700; }
+
+  /* ---- 速查标签 ---- */
+  .tag {
+    display: inline-block;
+    padding: 2px 12px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .tag-special { background: rgba(201,168,76,0.2); color: var(--accent-glow); }
+  .tag-important { background: rgba(231,76,60,0.15); color: var(--bad); }
+  .tag-note { background: rgba(126,200,208,0.15); color: #7ec8d0; }
+
+  /* ---- 应期速度进度条 ---- */
+  .speed-bar-wrap {
+    margin: 1rem 0;
+  }
+  .speed-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 36px;
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+  }
+  .speed-bar .seg {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #1a1608;
+    letter-spacing: 0.04em;
+    transition: all 0.3s;
+  }
+  .speed-bar .seg:hover { filter: brightness(1.3); }
+
+  /* ---- 十八类网格 ---- */
+  .divination-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 1.2rem;
+    margin: 1rem 0;
+  }
+  .div-card {
+    background: #15150e;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.3rem 1.5rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .div-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(201,168,76,0.08);
+  }
+  .div-card .div-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .div-card .div-icon {
+    font-size: 1.6rem;
+    width: 36px; height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(201,168,76,0.1);
+    border-radius: 8px;
+  }
+  .div-card .div-name {
+    font-size: 1.05rem;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    flex: 1;
+  }
+  .div-card .div-num {
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .div-card .div-key {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+  }
+  .div-card .div-key strong { color: var(--accent-glow); }
+  .div-card .div-shengke {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.8;
+    background: #111108;
+    border-radius: 6px;
+    padding: 0.5rem 0.8rem;
+    margin: 0.5rem 0;
+  }
+  .div-card .div-shengke em { color: var(--accent); font-style: normal; font-weight: 600; }
+  .div-card .div-special {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    border-left: 3px solid var(--accent);
+    padding-left: 0.8rem;
+    margin-top: 0.5rem;
+    color: var(--accent-glow);
+  }
+
+  /* ---- 五行数速查 ---- */
+  .wuxing-num-table td.num-col {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--accent-glow);
+    letter-spacing: 0.08em;
+  }
+
+  /* ---- 底部导航 ---- */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .bottom-nav a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .bottom-nav a:hover {
+    background: var(--accent);
+    color: #1a1608;
+    border-color: var(--accent);
+  }
+  .bottom-nav .center-link {
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  /* ---- 响应式 ---- */
+  @media (max-width: 700px) {
+    .card { padding: 1.2rem 1rem; }
+    .topbar h1 { font-size: 1.5rem; }
+    .divination-grid { grid-template-columns: 1fr; }
+    table { font-size: 0.75rem; }
+    th, td { padding: 0.4rem 0.35rem; }
+    .koujue-card { padding: 1.5rem 1.2rem; }
+    .koujue-card .verse { font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ═══════════ 顶栏 ═══════════ -->
+  <div class="topbar">
+    <div class="breadcrumb">
+      <a href="index.html">梅花易数</a> &raquo; 第五层
+    </div>
+    <h1>应期判断与十八类占断</h1>
+    <div class="sub">知吉凶之期 · 明万事之占 · 穷极数理</div>
+  </div>
+
+  <!-- ═══════════ 总纲口诀 ═══════════ -->
+  <div class="koujue-card">
+    <div class="verse">
+      <span class="line"><span class="hl-gold">小数十日内</span>，<span class="hl-green">中数论月计</span>，</span>
+      <span class="line"><span class="hl-gold">大数年到头</span>，<span class="hl-red">急事取时辰</span>。</span>
+      <span class="line" style="font-size:0.9rem; color:var(--muted); margin-top:0.5rem;">——应期断法总诀：观卦数大小而定时间尺度</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第一部分：五种应期计算方法
+       ═══════════════════════════════════════ -->
+  <div class="card" id="methods">
+    <h2>一、五种应期计算方法</h2>
+    <p>
+      应期——即<strong>事情发生的时间</strong>。梅花易数推断应期，需综合多种方法交叉验证，以下五种为核心计算方法。
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:10%;">方法</th>
+          <th style="width:18%;">别名</th>
+          <th style="width:27%;">计算方式</th>
+          <th style="width:30%;">适用场景</th>
+          <th style="width:15%;">权威度</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:700;color:var(--heading);">卦数法</td>
+          <td>先天数法</td>
+          <td>取卦数直接推算：上卦数+下卦数+动爻数，或上卦数+下卦数+时辰数</td>
+          <td>万事通用，最基础的应期推断法</td>
+          <td class="td-good">★★★★★</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--heading);">动爻法</td>
+          <td>爻位法</td>
+          <td>以动爻所在位置判断应期速度——初爻最快，上爻最慢</td>
+          <td>动爻明确时使用，快速判断远近</td>
+          <td class="td-good">★★★★</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--heading);">生克法</td>
+          <td>体用推期法</td>
+          <td>体用生克关系推时间——生则快、克则慢、比和适中</td>
+          <td>配合体用格局使用，修正卦数法的推算</td>
+          <td class="td-good">★★★★</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--heading);">旺衰法</td>
+          <td>四时法</td>
+          <td>依体卦五行在当下月令的旺衰——旺则近期、衰则远期</td>
+          <td>须结合月令节气，适用于中长期占断</td>
+          <td class="td-mid">★★★☆</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700;color:var(--heading);">五行数法</td>
+          <td>生数成数法</td>
+          <td>五行各有生数与成数——水1.6 / 火2.7 / 木3.8 / 金4.9 / 土5.10</td>
+          <td>精确推算具体数量与时间长度</td>
+          <td class="td-mid">★★★☆</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="formula">
+      综合应期 = <em>卦数法</em>定基数 × <em>生克法</em>调快慢 × <em>旺衰法</em>校远近 × <em>动爻法</em>决迟速
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第二部分：数字→时间单位映射表
+       ═══════════════════════════════════════ -->
+  <div class="card" id="num-map">
+    <h2>二、数字 → 时间单位映射表</h2>
+    <p>
+      卦数法得出的数字，需<strong>根据数字大小与占事性质</strong>，映射到具体的时间单位。此为梅花易数应期推断的关键一步。
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:14%;">数字范围</th>
+          <th style="width:22%;">日常占事</th>
+          <th style="width:22%;">急事占</th>
+          <th style="width:22%;">缓事占</th>
+          <th style="width:20%;">说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:800;color:var(--accent-glow);">1 ~ 3</td>
+          <td>日</td>
+          <td>时辰</td>
+          <td>月</td>
+          <td>小数，事在近期</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--accent-glow);">4 ~ 6</td>
+          <td>日</td>
+          <td>日</td>
+          <td>月</td>
+          <td>中低数，数日内应</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--accent-glow);">7 ~ 9</td>
+          <td>日 / 旬</td>
+          <td>日</td>
+          <td>月</td>
+          <td>中数，旬日内应</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--accent-glow);">10 ~ 12</td>
+          <td>日 / 旬</td>
+          <td>时辰 / 日</td>
+          <td>月</td>
+          <td>数至12，可论月计</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--accent-glow);">13 ~ 20</td>
+          <td>日 / 月</td>
+          <td>日</td>
+          <td>月 / 季</td>
+          <td>中数偏大，日或月</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--accent-glow);">21 ~ 30</td>
+          <td>日 / 月</td>
+          <td>日</td>
+          <td>月 / 季</td>
+          <td>近月计，宜取整</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--accent-glow);">31 ~ 50</td>
+          <td>月</td>
+          <td>日 / 旬</td>
+          <td>季 / 年</td>
+          <td>大数，当以月论</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--accent-glow);">51 ~ 100</td>
+          <td>月 / 季</td>
+          <td>月</td>
+          <td>年</td>
+          <td>甚大数，半年以上</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--accent-glow);">100以上</td>
+          <td>季 / 年</td>
+          <td>月</td>
+          <td>年</td>
+          <td>极大数，以年论之</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>活法要诀：</strong>数字映射不可死执。如占出行——"3"可取3日内，亦可取3时辰后；占婚期——"6"可取6个月后。须结合<em>占事性质</em>与<em>来占者的心理预期</em>灵活调整。另可结合<strong>爻位</strong>与<strong>旺衰</strong>共同决断——小数遇旺则更速，大数遇衰则更缓。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第三部分：动爻位置 → 应期速度
+       ═══════════════════════════════════════ -->
+  <div class="card" id="yao-speed">
+    <h2>三、动爻位置 → 应期速度表</h2>
+    <p>
+      动爻所在的<strong>爻位高低</strong>直接反映事情应验的快慢。爻位从初到上，时间跨度由近及远。
+    </p>
+
+    <!-- 速度渐变条 -->
+    <div class="speed-bar-wrap">
+      <div class="speed-bar">
+        <div class="seg" style="width:24%; background: linear-gradient(90deg, #e74c3c, #e67e22);">初爻 · 即刻~3日</div>
+        <div class="seg" style="width:18%; background: linear-gradient(90deg, #e67e22, #82b74b);">二爻 · 3~10日</div>
+        <div class="seg" style="width:17%; background: linear-gradient(90deg, #82b74b, #2ecc71);">三爻 · 旬~月</div>
+        <div class="seg" style="width:16%; background: linear-gradient(90deg, #2ecc71, #3498db);">四爻 · 月~季</div>
+        <div class="seg" style="width:13%; background: linear-gradient(90deg, #3498db, #7ec8d0);">五爻 · 季~半年</div>
+        <div class="seg" style="width:12%; background: linear-gradient(90deg, #7ec8d0, #8a8068);">上爻 · 半年+</div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:8%;">爻位</th>
+          <th style="width:10%;">爻名</th>
+          <th style="width:16%;">位置含义</th>
+          <th style="width:22%;">应期范围</th>
+          <th style="width:22%;">时间单位(日用)</th>
+          <th style="width:22%;">时间单位(年运)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:800;color:var(--bad);">初爻</td>
+          <td>初九/初六</td>
+          <td>事发之初、萌芽之始</td>
+          <td>即刻 ~ 3日</td>
+          <td>时辰 ~ 日</td>
+          <td>旬 ~ 月</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--warn);">二爻</td>
+          <td>九二/六二</td>
+          <td>事物初显、方露端倪</td>
+          <td>3日 ~ 10日</td>
+          <td>日 ~ 旬</td>
+          <td>月 ~ 季</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--mid);">三爻</td>
+          <td>九三/六三</td>
+          <td>事至中途、反复不定</td>
+          <td>10日 ~ 1月</td>
+          <td>旬 ~ 月</td>
+          <td>季 ~ 半年</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--good);">四爻</td>
+          <td>九四/六四</td>
+          <td>事近高层、决策阶段</td>
+          <td>1月 ~ 3月</td>
+          <td>月 ~ 季</td>
+          <td>半年 ~ 1年</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:#7ec8d0;">五爻</td>
+          <td>九五/六五</td>
+          <td>事至巅峰、核心位置</td>
+          <td>3月 ~ 半年</td>
+          <td>季 ~ 半年</td>
+          <td>1年 ~ 3年</td>
+        </tr>
+        <tr>
+          <td style="font-weight:800;color:var(--muted);">上爻</td>
+          <td>上九/上六</td>
+          <td>事物终结、极则必反</td>
+          <td>半年以上</td>
+          <td>半年 ~ 年</td>
+          <td>3年以上</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      爻位速断口诀：<em>初急二快三中四缓五迟上极远</em>——初爻如火急、上爻如冰缓。
+    </div>
+
+    <div class="warn-box">
+      <strong>特殊情形：</strong>若一卦中有<strong>多个动爻</strong>，则以<strong>最下方的动爻</strong>为主判断应期速度（取初动）。若<strong>六爻皆静</strong>（无动爻），则以<strong>本卦卦数</strong>直接推应期。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第四部分：五行生数成数表
+       ═══════════════════════════════════════ -->
+  <div class="card" id="wuxing-nums">
+    <h2>四、五行生成数（河图数）</h2>
+    <p>
+      五行各有<strong>生数</strong>（1-5）与<strong>成数</strong>（6-10），源自河图。凡体用卦涉及五行，其卦数亦可以河图数佐证应期。
+    </p>
+
+    <table class="wuxing-num-table">
+      <thead>
+        <tr>
+          <th>五行</th>
+          <th>对应八卦</th>
+          <th>生数</th>
+          <th>成数</th>
+          <th>生数含义</th>
+          <th>成数含义</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>水</td>
+          <td>坎☵</td>
+          <td class="num-col">1</td>
+          <td class="num-col">6</td>
+          <td>天一生水</td>
+          <td>地六成之</td>
+        </tr>
+        <tr>
+          <td>火</td>
+          <td>离☲</td>
+          <td class="num-col">2</td>
+          <td class="num-col">7</td>
+          <td>地二生火</td>
+          <td>天七成之</td>
+        </tr>
+        <tr>
+          <td>木</td>
+          <td>震☳ 巽☴</td>
+          <td class="num-col">3</td>
+          <td class="num-col">8</td>
+          <td>天三生木</td>
+          <td>地八成之</td>
+        </tr>
+        <tr>
+          <td>金</td>
+          <td>乾☰ 兑☱</td>
+          <td class="num-col">4</td>
+          <td class="num-col">9</td>
+          <td>地四生金</td>
+          <td>天九成之</td>
+        </tr>
+        <tr>
+          <td>土</td>
+          <td>坤☷ 艮☶</td>
+          <td class="num-col">5</td>
+          <td class="num-col">10</td>
+          <td>天五生土</td>
+          <td>地十成之</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>用法：</strong>生数用于<em>近期</em>、<em>小事</em>的应期推断；成数用于<em>远期</em>、<em>大事</em>的应期推断。例如：体卦为坎水（数1或6），占小事取1日/月，占大事取6日/月或6个月。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第五部分：应期判断综合流程
+       ═══════════════════════════════════════ -->
+  <div class="card" id="flow">
+    <h2>五、应期判断综合流程</h2>
+    <p>
+      将上述五种方法综合运用，按以下流程逐步推断，可得出较为准确的应期结论。
+    </p>
+
+    <div class="formula" style="text-align:left; line-height:2.2; font-size:0.95rem;">
+      <strong>第一步：</strong>取<em>卦数法</em>得基数（上卦数+下卦数+动爻数或时辰数）<br>
+      <strong>第二步：</strong>取<em>数字→时间映射</em>定单位（日/月/年/时辰）<br>
+      <strong>第三步：</strong>取<em>动爻位置</em>校快慢（初爻速、上爻缓）<br>
+      <strong>第四步：</strong>取<em>体用生克</em>调远近（用生体→速，用克体→迟）<br>
+      <strong>第五步：</strong>取<em>旺衰法</em>审时令（旺相→近，休囚→远）<br>
+      <strong>第六步：</strong>取<em>五行数法</em>精确定量（生数/成数）<br>
+      <strong>第七步：</strong>综合以上，结合<em>外应与事理</em>，最终决断
+    </div>
+
+    <div class="highlight-box">
+      以上七步为<em>完整流程</em>。日常占断中，可视情况简化为：<strong>卦数法定基数 + 动爻法校快慢</strong>，已足以快速给出应期。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第六部分：十八类占断要诀（核心）
+       ═══════════════════════════════════════ -->
+  <div class="card" id="18-categories">
+    <h2>六、十八类占断要诀 <span class="tag tag-special" style="margin-left:0.5rem;">核心新增</span></h2>
+    <p>
+      梅花易数体系中，邵康节先生将万事归纳为<strong>十八类占断</strong>。每一类有特定的判断要点、体用生克应用规则及特殊注意事项。以下逐类详述。
+    </p>
+
+    <!-- ═══ 01 天时 ═══ -->
+    <div class="divination-grid" style="grid-template-columns:1fr;">
+      <div class="div-card" id="cat-tianshi" style="border-left: 3px solid var(--accent-glow);">
+        <div class="div-header">
+          <div class="div-icon">🌤</div>
+          <div class="div-name">一、天时占</div>
+          <div class="div-num">01/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>凡占天时，<strong style="color:var(--bad);">不分体用</strong>，全观诸卦，详推五行。先看坎（雨）离（晴）之有无与旺衰，次观互卦、变卦之中有无水火相济或相背之象。坎多主雨，离多主晴，坤艮主阴云，震巽主风雷，乾兑主霜雪冰雹。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em><strong style="color:var(--bad);">天时占不分体用！</strong>不可执体卦为我、用卦为天。天时占的本质是"观天地之气"，本卦用卦皆为天象的一部分。应<strong>全观诸卦</strong>——本卦、互卦、变卦的上下二卦各为何象，五行分布如何。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>天时占是十八类中唯一明确<strong>不分体用</strong>的占类。核心看坎☵（水=雨）和离☲（火=晴）在诸卦中的多寡胜负。坎水旺于冬，离火旺于夏，须结合四时旺衰。如全卦无水火，则看坤艮之阴云或震巽之风。
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 02-18 网格排列 ═══ -->
+    <div class="divination-grid">
+
+      <!-- 02 人事 -->
+      <div class="div-card" id="cat-renshi">
+        <div class="div-header">
+          <div class="div-icon">🧑</div>
+          <div class="div-name">二、人事占</div>
+          <div class="div-num">02/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>人事占以<strong>体用生克为主</strong>，兼看互变。体卦代表自己（占者），用卦代表对方（所问之人或事）。体用比和→人事和谐、诸事顺遂；用生体→得人助益、外力来帮。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>体用比和或生体为吉，用克体则对方压制。变卦体用关系可看人事发展的最终结果。互卦中若见兑☱（口舌）则须防人事纠纷。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>若体卦为离☲（火）而用卦为坎☵（水）→用克体、水火相射，人事关系极为紧张。占交友问合作，以此断之尤验。
+        </div>
+      </div>
+
+      <!-- 03 家宅 -->
+      <div class="div-card" id="cat-jiazhai">
+        <div class="div-header">
+          <div class="div-icon">🏠</div>
+          <div class="div-name">三、家宅占</div>
+          <div class="div-num">03/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>体卦为家宅本身、为居住者。用卦为家宅内外环境。体用比和→家宅安宁；用生体→宅气生旺、家运昌隆；体生用→多有耗散、宜防漏财。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>用克体→家宅不宁，依用卦断具体问题：乾克体恐有官非上门，震克体恐有虚惊风波，离克体恐有火灾隐患，坎克体恐有水患潮湿。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>家宅占须兼看互卦——互卦为宅内隐情。若互卦见艮☶（山），则家中有阻隔不通之处；见兑☱（泽），则家中有口舌争端。变卦看家运走向。
+        </div>
+      </div>
+
+      <!-- 04 屋舍 -->
+      <div class="div-card" id="cat-wushe">
+        <div class="div-header">
+          <div class="div-icon">🏗</div>
+          <div class="div-name">四、屋舍占</div>
+          <div class="div-num">04/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>屋舍占专指<strong>买房、建屋、装修、搬迁</strong>等具体房屋事宜。体卦为屋舍本身（或买家），用卦为房屋所处环境或交易对方。体克用→可以拿下但费劲；用生体→此房利我、宜居。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>体用比和→此房与我有缘，宜买宜居。用克体→此房克我，住之不吉，不可勉强。若体为木、用为金（乾兑克体），则此房有金属煞气，不宜居住。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>屋舍占与家宅占的区别——屋舍占重在"买/建/搬"的<strong>行为决策</strong>，家宅占重在"居住生活的<strong>长期状态</strong>"。另须结合变卦看入住后的运势变化。
+        </div>
+      </div>
+
+      <!-- 05 婚姻 -->
+      <div class="div-card" id="cat-hunyin">
+        <div class="div-header">
+          <div class="div-icon">💑</div>
+          <div class="div-name">五、婚姻占</div>
+          <div class="div-num">05/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>体卦为求占者，用卦为对方（配偶/对象）。婚姻大忌用克体。体用比和为阴阳和谐——上吉。体生用→我对对方付出多、易迁就；用生体→对方爱我、婚姻美满。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>用生体→大吉，对方有情于我。用克体→大凶，对方克我，婚姻不谐。若体为乾☰（男）用为坤☷（女）→天地定位，阴阳得位，吉。若体用皆为乾或皆为坤→同性相斥，须防不和。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>婚姻占须看<strong>变卦</strong>——变卦中若见泽山咸䷞（感应）或雷风恒䷟（恒久）为上吉之象。互卦见离☲（火）则主热情，见坎☵（水）则防第三者暗入。
+        </div>
+      </div>
+
+      <!-- 06 生产 -->
+      <div class="div-card" id="cat-shengchan">
+        <div class="div-header">
+          <div class="div-icon">🤰</div>
+          <div class="div-name">六、生产占</div>
+          <div class="div-num">06/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>体卦为产妇，用卦为胎儿/生产过程。体用比和→生产顺利；用生体→母子平安；用克体→难产之象。另看动爻位置——初爻动则产期将近，上爻动则尚需时日。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>体克用→产妇有力，虽费劲可顺产。用克体→最凶，产厄之兆。若变卦体用转吉，则最终化险为夷。看变卦可断男女——阳卦（乾震坎艮）多为男，阴卦（坤巽离兑）多为女。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>生产占的<strong>应期推断极为重要</strong>——以动爻爻位判断产期远近（见第三表）。产期推断当取「日」为基本单位，不可取年、月。另可看互卦断生产过程是否顺利。
+        </div>
+      </div>
+
+      <!-- 07 饮食 -->
+      <div class="div-card" id="cat-yinshi">
+        <div class="div-header">
+          <div class="div-icon">🍽</div>
+          <div class="div-name">七、饮食占</div>
+          <div class="div-num">07/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>体卦为主人/食客，用卦为饮食/宴席。用生体→饮食丰美、宴饮欢乐；体用比和→宾主尽欢；用克体→饮食不洁、食之伤身或宴席不欢。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>用生体→饮食有益于我。体生用→饮食花销大、本人请客。用克体→食物中毒、酒食伤身之象。若用卦为坤☷（土）则主食粮丰厚，为坎☵（水）则主酒水丰沛。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>饮食占可细辨食物种类——乾☰为圆物（饼、果），坤☷为土产（米面），震☳为长物（蔬菜），巽☴为细长（面条），坎☵为水物（酒汤），离☲为火热（烧烤），艮☶为硬物（坚果），兑☱为碎物（点心）。此为大象，不可拘泥。
+        </div>
+      </div>
+
+      <!-- 08 求谋 -->
+      <div class="div-card" id="cat-qiumou">
+        <div class="div-header">
+          <div class="div-icon">🎯</div>
+          <div class="div-name">八、求谋占</div>
+          <div class="div-num">08/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>求谋——泛指<strong>谋划、请示、托人办事</strong>。体卦为我之谋划，用卦为所求之目标或所托之人。用生体→所求如愿、谋事可成；体克用→需自己多番努力方能成功。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>体用比和→谋划与人合拍、一拍即合。体生用→费心费力，谋划多耗己神。用克体→所求不遂，谋划受阻。互卦见艮☶则中途遇阻，见巽☴则事情多变。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>求谋占<strong>重在互卦和变卦</strong>——本卦仅是谋划之初，互卦见过程顺逆，变卦才是最终结果。若本卦不吉而变卦转吉，则"先难后易、终有所成"。
+        </div>
+      </div>
+
+      <!-- 09 求名 -->
+      <div class="div-card" id="cat-qiuming">
+        <div class="div-header">
+          <div class="div-icon">🏆</div>
+          <div class="div-name">九、求名占</div>
+          <div class="div-num">09/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>求名——<strong>考试、科举、职称、名誉</strong>之占。体卦为己之学养才德，用卦为功名/考官/评审。用生体→功名自来、考官赏识；体用比和→名实相副。最喜见离☲（文明）与乾☰（高位）。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>体克用→学业可成、功名可得，但需竞争。体生用→学养为功名所耗，恐名过其实。用克体→功名反伤身，宜退守自修。若本卦见火地晋䷢（日出地上），功名大有可期。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>求名占的应期推断：动爻在<strong>初爻~三爻</strong>→近期考试/评审；动爻在<strong>四爻~上爻</strong>→远期功名。若卦中见离☲（文星）旺相，则文运昌隆，考试必利。
+        </div>
+      </div>
+
+      <!-- 10 求财 -->
+      <div class="div-card" id="cat-qiucai">
+        <div class="div-header">
+          <div class="div-icon">💰</div>
+          <div class="div-name">十、求财占</div>
+          <div class="div-num">10/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>体卦为我，用卦为财。用生体→财自来寻我，不劳而获；体克用→可以得财但需主动争取；体用比和→财运平稳。忌体生用→耗财之象；大忌用克体→破财损身。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>财之多少看<strong>用卦五行旺衰</strong>——用卦旺相则财大，休囚则财薄。用卦为乾☰兑☱（金）→金融、金属之财；用卦为坤☷艮☶（土）→地产、农业之财。巽☴（木）为近利市三倍，主商业暴利。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>求财占须看<strong>互卦</strong>——互卦中见坎☵（水）则财路流畅，见艮☶（山）则财路阻塞。另须观<strong>应期</strong>——用生体则财来得快，用克体则不仅无财反有损失。
+        </div>
+      </div>
+
+      <!-- 11 交易 -->
+      <div class="div-card" id="cat-jiaoyi">
+        <div class="div-header">
+          <div class="div-icon">🤝</div>
+          <div class="div-name">十一、交易占</div>
+          <div class="div-num">11/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>交易——<strong>买卖、签约、合作</strong>之占。体卦为我方/买方，用卦为对方/卖方/合同。体用比和→交易公平、双方满意。用生体→对方迁就于我、交易对我有利。体生用→我亏本让步。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>体克用→交易可成但我方占优势。用克体→交易不利、对方欺我，宜放弃。若变卦体用皆吉，则签约后双方得益；若变卦转凶，则合同有隐患。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>交易占须注意<strong>互卦</strong>——互卦见兑☱（口舌）则合同条款有争议；见离☲（火）则过程火热推进快；见坎☵（水）则防暗中有诈。交易金额可参用卦五行数（五行生成数）估算。
+        </div>
+      </div>
+
+      <!-- 12 出行 -->
+      <div class="div-card" id="cat-chuxing">
+        <div class="div-header">
+          <div class="div-icon">✈</div>
+          <div class="div-name">十二、出行占</div>
+          <div class="div-num">12/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>体卦为出行者，用卦为旅途/目的地。体用比和→旅途顺利平安；用生体→出行有利、旅途愉快；用克体→旅途凶险，宜取消或延期。若是被迫出行（如公差），用克体也得出行但须多加小心。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>体克用→可出行但较辛苦。体生用→出行耗费精力财力。用克体→旅途有风险——用卦为坎☵防水厄，为艮☶防山险阻塞，为震☳防车祸惊险，为离☲防火灾。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>出行占的<strong>方向判断</strong>——用卦的方位即出行方向吉凶。乾西北、坤西南、震东、巽东南、坎北、离南、艮东北、兑西。若用卦方位克体卦五行，则此方向不利出行。
+        </div>
+      </div>
+
+      <!-- 13 行人 -->
+      <div class="div-card" id="cat-xingren">
+        <div class="div-header">
+          <div class="div-icon">🚶</div>
+          <div class="div-name">十三、行人占</div>
+          <div class="div-num">13/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>行人——<strong>寻人、问归期、查下落</strong>。体卦为寻人者/在家等候者，用卦为所寻之人。用生体→人将归或可寻得；体用比和→人在途中、即将归来；用克体→人难寻、归期遥遥。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>用生体→行人思归，必回。体克用→行人可回但拖延。用克体→行人受阻在外，短期难回。用卦休囚无气→行人困于某处，须结合动爻断其所在远近。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>行人占的<strong>应期推断</strong>最为关键——用卦生体，动爻在下则归速；用卦克体，动爻在上则归期遥远。若卦中见艮☶（山为止）则行人中途滞留；见震☳（雷为动）则行人已在归途。
+        </div>
+      </div>
+
+      <!-- 14 谒见 -->
+      <div class="div-card" id="cat-yejian">
+        <div class="div-header">
+          <div class="div-icon">🙏</div>
+          <div class="div-name">十四、谒见占</div>
+          <div class="div-num">14/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>谒见——<strong>求见贵人、拜访师长、面试</strong>等。体卦为我，用卦为所要谒见之人。用生体→贵人愿见我、见面有利；体用比和→相见欢洽；用克体→贵人拒见或见面不利。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>体克用→可见但需多次请求。体生用→我谦恭求见，耗费心力。用克体→见之无益反受其辱。体为离☲（文）见用为乾☰（君）→向上级呈文，易获赏识。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>谒见占须关注<strong>互卦</strong>——互卦见兑☱（口舌）→见面可能有口角；见离☲（火）→见面气氛热烈。另看变卦：变卦体用吉→见面有后续；变卦体用凶→一见面终。
+        </div>
+      </div>
+
+      <!-- 15 失物 -->
+      <div class="div-card" id="cat-shiwu">
+        <div class="div-header">
+          <div class="div-icon">🔍</div>
+          <div class="div-name">十五、失物占</div>
+          <div class="div-num">15/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>体卦为失主，用卦为所失之物。体用比和→物未远失、就近可寻；用生体→物可得、有人送还；体生用→物已散失、难寻；用克体→物被盗或已毁，不可复得。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>用卦可断<strong>失物所在方位</strong>——乾西北、坤西南、震东、巽东南、坎北、离南、艮东北、兑西。用卦可断<strong>失物所在环境</strong>——乾在高处，坤在地面，离在火旁/光亮处，坎在水边/暗处。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>失物占须速占，<strong>迟则不准</strong>。若用卦生体，物必在附近——以动爻爻位断远近（初爻最近、上爻已远）。若互卦见兑☱（毁折），则物已损坏；见坎☵（盗），则已被人偷走。
+        </div>
+      </div>
+
+      <!-- 16 疾病 -->
+      <div class="div-card" id="cat-jibing">
+        <div class="div-header">
+          <div class="div-icon">💊</div>
+          <div class="div-name">十六、疾病占</div>
+          <div class="div-num">16/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>体卦为病人，用卦为病源/病症。用克体→病重难愈、病来克人；用生体→病将退、医药见效；体克用→病人有力、可以战胜疾病；体用比和→病将愈但不速。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>用克体是大凶——用卦五行可定<strong>病症部位</strong>：乾金克体→头、肺、筋骨之疾；坤土克体→脾胃、腹疾；震巽木克体→肝胆、风疾；坎水克体→肾、血病；离火克体→心、眼、热病；艮土克体→脾胃、肿块；兑金克体→口喉、肺。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>疾病占的<strong>生死判断</strong>——体卦旺相有气则生，体卦休囚无气则危。变卦尤为重要——若变卦体用关系转吉，则病有好转；若变卦体用关系转凶，则病情恶化。互卦见艮☶（山为止）则病有停滞，见震☳（雷为动）则病有转变。
+        </div>
+      </div>
+
+      <!-- 17 官讼 -->
+      <div class="div-card" id="cat-guansong">
+        <div class="div-header">
+          <div class="div-icon">⚖</div>
+          <div class="div-name">十七、官讼占</div>
+          <div class="div-num">17/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>官讼——<strong>官司、诉讼、是非纠纷</strong>。体卦为我方，用卦为对方/官府。体用比和→官司可和解、双方各退一步；用生体→官司对我有利、可胜诉；用克体→官讼不利、恐有牢狱官灾。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>体克用→可胜诉但费时费力。用克体→败诉之象，宜求和。体为离☲（文）见用为乾☰（官）→文书诉讼，证据充分则利。体为坎☵（险）见用为艮☶（止）→恐有牢狱。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>官讼占的<strong>和解时机</strong>——看互卦：互卦见兑☱（口舌）则官司以口舌之争为主，有调解余地；互卦见坤☷（顺）则对方有退让之意，宜主动和解。变卦看最终判决结果。
+        </div>
+      </div>
+
+      <!-- 18 坟墓 -->
+      <div class="div-card" id="cat-fenmu">
+        <div class="div-header">
+          <div class="div-icon">🪦</div>
+          <div class="div-name">十八、坟墓占</div>
+          <div class="div-num">18/18</div>
+        </div>
+        <div class="div-key">
+          <strong>核心判断要点：</strong>坟墓——<strong>阴宅风水、墓地选择、先人安葬</strong>。体卦为后人/生者，用卦为坟地/先人。用生体→阴宅护佑后人、风水上吉；体用比和→阴阳和谐、家宅平安；用克体→阴宅不吉，反克生人，宜迁葬。
+        </div>
+        <div class="div-shengke">
+          <em>体用生克应用：</em>用生体→大吉，祖先荫庇子孙。体生用→后人供奉先人，为孝道之正，但须防耗财。用克体→阴宅风水大凶，家运日衰之兆。互卦看阴宅周边环境——艮☶主山，坎☵主水，离☲主明堂开阔。
+        </div>
+        <div class="div-special">
+          <strong>特殊注意：</strong>坟墓占须<strong>极其慎重</strong>，不可轻断。看变卦可知葬后家运变化——变卦吉则葬后家运昌隆，变卦凶则宜另择吉地。另：坟墓占与家宅占有"阴阳宅互通"之理——阳宅占断可参阴宅，阴宅占断可参阳宅。
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 天时占特别提示 -->
+    <div class="highlight-box" style="margin-top:1.5rem; font-size:1.1rem; text-align:left; padding:1.5rem 2rem;">
+      ⭐ <strong style="color:var(--bad);">重点提示：天时占——不分体用！</strong><br>
+      <span style="font-size:0.95rem; font-weight:400; color:var(--text); display:block; margin-top:0.5rem;">
+        十八类占断中，<strong style="color:var(--accent-glow);">唯天时占不分体用</strong>。其他十七类皆以体用生克为纲，唯独天时占须<strong>全观诸卦、详推五行</strong>。原因在于：人事有主客之分，天时无体用之别。天地之气浑然一体，坎离水火、乾坤阴阳，皆为天象之一端——不可机械分割为"天之体"与"天之用"。
+      </span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第七部分：十八类速查总表
+       ═══════════════════════════════════════ -->
+  <div class="card" id="quick-summary">
+    <h2>七、十八类占断速查总表</h2>
+    <p>下表为十八类占断的<strong>极简速查</strong>，一眼看明各类的核心体用吉凶格局。</p>
+
+    <table style="font-size:0.82rem;">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>类别</th>
+          <th>体用比和</th>
+          <th>用生体</th>
+          <th>体生用</th>
+          <th>体克用</th>
+          <th>用克体</th>
+          <th>关键备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td><td>天时</td>
+          <td colspan="5" style="color:var(--bad);font-weight:700;">不分体用！全观诸卦详推五行</td>
+          <td>唯一不分体用的占类</td>
+        </tr>
+        <tr>
+          <td>2</td><td>人事</td><td class="td-good">吉</td><td class="td-good">大吉</td><td class="td-warn">耗</td><td class="td-mid">可成</td><td class="td-bad">凶</td><td>体用为纲</td>
+        </tr>
+        <tr>
+          <td>3</td><td>家宅</td><td class="td-good">安</td><td class="td-good">昌</td><td class="td-warn">耗</td><td class="td-mid">可安</td><td class="td-bad">凶</td><td>兼看互卦隐情</td>
+        </tr>
+        <tr>
+          <td>4</td><td>屋舍</td><td class="td-good">宜居</td><td class="td-good">利我</td><td class="td-warn">费财</td><td class="td-mid">可居</td><td class="td-bad">克我</td><td>重在决策判断</td>
+        </tr>
+        <tr>
+          <td>5</td><td>婚姻</td><td class="td-good">和谐</td><td class="td-good">美满</td><td class="td-warn">付出多</td><td class="td-mid">可成</td><td class="td-bad">不和</td><td>忌用克体</td>
+        </tr>
+        <tr>
+          <td>6</td><td>生产</td><td class="td-good">顺</td><td class="td-good">平安</td><td class="td-warn">费力</td><td class="td-mid">可顺</td><td class="td-bad">难产</td><td>应期极为重要</td>
+        </tr>
+        <tr>
+          <td>7</td><td>饮食</td><td class="td-good">欢</td><td class="td-good">丰美</td><td class="td-warn">破费</td><td class="td-mid">可享</td><td class="td-bad">伤身</td><td>用卦断食物种类</td>
+        </tr>
+        <tr>
+          <td>8</td><td>求谋</td><td class="td-good">顺</td><td class="td-good">成</td><td class="td-warn">劳心</td><td class="td-mid">费力成</td><td class="td-bad">败</td><td>互变卦定结果</td>
+        </tr>
+        <tr>
+          <td>9</td><td>求名</td><td class="td-good">名实符</td><td class="td-good">名自至</td><td class="td-warn">耗学养</td><td class="td-mid">可成</td><td class="td-bad">败</td><td>喜见离☲文明</td>
+        </tr>
+        <tr>
+          <td>10</td><td>求财</td><td class="td-good">平稳</td><td class="td-good">自来财</td><td class="td-bad">耗财</td><td class="td-mid">可求</td><td class="td-bad">破财</td><td>旺衰定财多少</td>
+        </tr>
+        <tr>
+          <td>11</td><td>交易</td><td class="td-good">公平</td><td class="td-good">利我</td><td class="td-warn">亏让</td><td class="td-mid">占优</td><td class="td-bad">不利</td><td>互卦防条款争议</td>
+        </tr>
+        <tr>
+          <td>12</td><td>出行</td><td class="td-good">平安</td><td class="td-good">利行</td><td class="td-warn">耗资</td><td class="td-mid">辛苦</td><td class="td-bad">凶险</td><td>方向用卦定吉凶</td>
+        </tr>
+        <tr>
+          <td>13</td><td>行人</td><td class="td-good">将归</td><td class="td-good">必回</td><td class="td-warn">难寻</td><td class="td-mid">拖延回</td><td class="td-bad">不回</td><td>动爻断归期远近</td>
+        </tr>
+        <tr>
+          <td>14</td><td>谒见</td><td class="td-good">欢洽</td><td class="td-good">愿见</td><td class="td-warn">费力</td><td class="td-mid">可求见</td><td class="td-bad">拒见</td><td>互卦看见面气氛</td>
+        </tr>
+        <tr>
+          <td>15</td><td>失物</td><td class="td-good">近可寻</td><td class="td-good">可得</td><td class="td-bad">散失</td><td class="td-mid">费力寻</td><td class="td-bad">盗毁</td><td>须速占不可迟</td>
+        </tr>
+        <tr>
+          <td>16</td><td>疾病</td><td class="td-good">将愈</td><td class="td-good">医药效</td><td class="td-warn">体虚</td><td class="td-mid">可胜病</td><td class="td-bad">病重</td><td>体卦旺衰断生死</td>
+        </tr>
+        <tr>
+          <td>17</td><td>官讼</td><td class="td-good">可和解</td><td class="td-good">可胜诉</td><td class="td-warn">耗心力</td><td class="td-mid">可胜</td><td class="td-bad">败诉</td><td>互卦看调解时机</td>
+        </tr>
+        <tr>
+          <td>18</td><td>坟墓</td><td class="td-good">阴阳和</td><td class="td-good">荫庇</td><td class="td-warn">耗财</td><td class="td-mid">可安</td><td class="td-bad">克主</td><td>极慎重不可轻断</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第八部分：综合心法
+       ═══════════════════════════════════════ -->
+  <div class="card" id="xinfa">
+    <h2>八、应期断法综合心法</h2>
+
+    <div class="koujue-card">
+      <div class="verse">
+        <span class="line"><span class="hl-gold">小数十日内</span>，<span class="hl-green">中数论月计</span>，</span>
+        <span class="line"><span class="hl-gold">大数年到头</span>，<span class="hl-red">急事取时辰</span>。</span>
+        <span class="line" style="font-size:0.85rem; color:var(--muted); margin-top:0.3rem;">——应期断法四句总诀</span>
+      </div>
+    </div>
+
+    <div class="formula" style="text-align:left; line-height:2.2;">
+      <strong>总诀详解：</strong><br>
+      <em>「小数」</em>——卦数1~12，占日常之事，以<strong>日</strong>为基本单位，10日内应验。<br>
+      <em>「中数」</em>——卦数13~50，占中期之事，以<strong>月</strong>为基本单位。<br>
+      <em>「大数」</em>——卦数51以上，占长远之事，以<strong>年</strong>为基本单位。<br>
+      <em>「急事」</em>——凡占紧急之事（疾病急救、行人走失、灾祸等），不论卦数大小，皆以<strong>时辰</strong>为基本单位。
+    </div>
+
+    <div class="info-box">
+      <strong>圆机心法：</strong>以上四种时间尺度可灵活交叉使用。例如卦数35——论月则35个月（近3年），若事情紧迫，论日则35日——这便是「圆机」的体现。关键看<strong>来占者的实际情况</strong>与<strong>事情本身的轻重缓急</strong>。
+    </div>
+
+    <div class="highlight-box" style="margin-top:1.5rem;">
+      知吉凶不难，<em>知何时吉凶</em>方为真功夫。应期断法是梅花易数从「占事」到「占时」的关键一跃，须反复实践方能精熟。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第九部分：应期心法要义
+       ═══════════════════════════════════════ -->
+  <div class="card" id="essence">
+    <h2>九、应期心法要义</h2>
+
+    <div class="formula" style="text-align:left; line-height:2.4; font-size:0.95rem;">
+      <strong>一、数不可执：</strong>卦数给出的数字是「天地之数」，莫死执。如得数3——可为3日、3旬、3月，须结合事情实际情况判断。<br><br>
+      <strong>二、爻位为纲：</strong>动爻位置是判断应期快慢的<strong>第一优先</strong>指标。初爻至上爻的速度差异可达百倍。<br><br>
+      <strong>三、旺衰加权：</strong>体卦在当下月令的旺衰——旺则时间取<strong>下限</strong>（快），衰则取<strong>上限</strong>（慢）。<br><br>
+      <strong>四、生克调准：</strong>用生体→应期<strong>提前</strong>；用克体→应期<strong>延后</strong>（甚至不成）。<br><br>
+      <strong>五、外应入断：</strong>断应期时突有外应——如钟响、鸟鸣、人来——取其数直接入断，常有奇验。<br><br>
+      <strong>六、心静为基：</strong>越是急于知时，越要静心。心浮气躁者，数字莫辨、爻位失察，断期必误。
+    </div>
+
+    <div class="koujue-card" style="margin-top:1.5rem;">
+      <div class="verse">
+        <span class="line"><span class="hl-gold">数从卦中出</span>，<span class="hl-cyan">时由爻位推</span>。</span>
+        <span class="line"><span class="hl-green">旺衰调远近</span>，<span class="hl-red">生克决迟速</span>。</span>
+        <span class="line" style="font-size:0.85rem; color:var(--muted); margin-top:0.3rem;">——应期四要心法</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       底部导航
+       ═══════════════════════════════════════ -->
+  <div class="bottom-nav">
+    <a href="04-断卦.html">&larr; 第四层：断卦体系</a>
+    <a href="index.html" class="center-link">返回学习地图</a>
+    <span style="color:var(--muted);font-size:0.88rem;padding:0.5rem 1rem;">第五层 · 终</span>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════
+     JavaScript：折叠交互
+     ═══════════════════════════════════════ -->
+<script>
+  // 折叠切换
+  function toggleLayer(id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.classList.toggle('open');
+    }
+  }
+</script>
+
+</body>
+</html>

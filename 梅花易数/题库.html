@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="梅花易数互动题库 — 四阶递进：基础知识·应用理解·案例分析·深度分析，40题全面检验学习成果。">
+<title>梅花易数 · 题库</title>
+<link rel="stylesheet" href="../共享样式/base.css">
+<link rel="stylesheet" href="../共享样式/components.css">
+<style>
+:root{--font-ui:"Noto Serif SC","Songti SC","STSong",serif}
+body{font-family:var(--font-ui);padding-bottom:80px;background:var(--bg)}
+
+.breadcrumb{padding:16px 24px;font-size:.78rem}
+.breadcrumb a{color:var(--text-dim);text-decoration:none}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:var(--text-dim);margin:0 6px}
+
+.hero{text-align:center;padding:32px 20px 24px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.hero h1{font-size:2em;color:var(--gold-lt);letter-spacing:5px;font-weight:300;margin-bottom:8px}
+.hero p{color:var(--text-dim);font-size:.85rem;letter-spacing:2px}
+
+.container{max-width:800px;margin:0 auto;padding:0 20px}
+
+/* 分数栏 */
+.score-bar{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:0 0 28px;
+  padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+.score-item{text-align:center;min-width:70px}
+.score-item .val{font-size:2rem;color:var(--gold);font-weight:300}
+.score-item .lbl{font-size:.7rem;color:var(--text-dim);letter-spacing:.06em}
+
+/* 选项卡 */
+.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+.tab{padding:10px 20px;border:1px solid var(--border);border-radius:20px;background:var(--card);
+  color:var(--text-alt);cursor:pointer;font-size:.82rem;transition:all .2s;font-family:inherit;letter-spacing:.04em;white-space:nowrap}
+.tab:hover{border-color:var(--gold);color:var(--gold)}
+.tab.active{background:var(--gold-bg);border-color:var(--gold);color:var(--gold);font-weight:600}
+
+/* 题目卡片 */
+.question{display:none;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:14px;transition:all .3s}
+.question.active{display:block;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.question .q-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:18px}
+.question .q-num{font-size:.8rem;color:var(--gold);font-weight:600;white-space:nowrap;padding-top:2px}
+.question .q-badge{font-size:.62rem;padding:2px 8px;border-radius:8px;letter-spacing:.06em;white-space:nowrap}
+.q-badge.basic{background:rgba(80,152,200,.1);color:var(--blue);border:1px solid rgba(80,152,200,.2)}
+.q-badge.core{background:rgba(212,176,106,.1);color:var(--gold);border:1px solid rgba(212,176,106,.2)}
+.q-badge.case{background:rgba(78,168,104,.1);color:var(--green);border:1px solid rgba(78,168,104,.2)}
+.q-badge.deep{background:rgba(155,126,196,.1);color:var(--purple);border:1px solid rgba(155,126,196,.2)}
+.question .q-text{color:var(--text);font-size:.92rem;line-height:1.8}
+
+.options{margin:8px 0 18px}
+.opt{display:block;width:100%;text-align:left;padding:13px 16px;margin:8px 0;
+  background:rgba(255,255,255,.015);border:1px solid var(--border);border-radius:var(--radius-sm);
+  color:var(--text-alt);cursor:pointer;font-size:.84rem;transition:all .2s;font-family:inherit;line-height:1.6}
+.opt:hover{border-color:var(--gold);background:var(--gold-bg);color:var(--text)}
+.opt.correct{border-color:var(--green)!important;background:rgba(78,168,104,.1)!important;color:var(--green)!important}
+.opt.wrong{border-color:var(--red)!important;background:rgba(224,85,74,.08)!important;color:var(--red)!important}
+.opt.show-correct{border-color:var(--green)!important;background:rgba(78,168,104,.05)!important}
+.opt:disabled{cursor:default}
+
+.explanation{display:none;background:rgba(212,176,106,.04);border-left:2px solid var(--gold);
+  padding:12px 16px;border-radius:0 var(--radius) var(--radius) 0;margin-top:10px;font-size:.82rem;color:var(--text-alt);line-height:1.8}
+.explanation.show{display:block}
+.explanation strong{color:var(--gold-lt)}
+
+/* 按钮 */
+.btn-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px 0}
+.btn{padding:10px 28px;border:1px solid var(--gold);border-radius:20px;
+  background:var(--gold-bg);color:var(--gold);cursor:pointer;font-size:.84rem;
+  letter-spacing:.05em;transition:all .2s;font-family:inherit}
+.btn:hover{background:var(--gold);color:#111}
+.btn.reset{border-color:var(--border);background:var(--card);color:var(--text-dim)}
+.btn.reset:hover{border-color:var(--red);color:var(--red);background:rgba(224,85,74,.05)}
+.btn.wrong-book{border-color:var(--red);background:rgba(224,85,74,.06);color:var(--red)}
+.btn.wrong-book:hover{background:rgba(224,85,74,.15);color:var(--red);border-color:var(--red)}
+.btn.wrong-book:disabled{opacity:.4;cursor:default;pointer-events:none}
+
+/* 错题本弹窗 */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.7);align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--card);border:1px solid var(--border-lt);border-radius:var(--radius-lg);max-width:700px;width:95%;max-height:80vh;overflow-y:auto;padding:24px 28px;position:relative}
+.modal h3{color:var(--gold-lt);font-size:1.1rem;margin-bottom:4px}
+.modal .modal-sub{color:var(--text-dim);font-size:.76rem;margin-bottom:18px}
+.modal .modal-close{position:absolute;top:14px;right:18px;background:none;border:none;color:var(--text-dim);font-size:1.4rem;cursor:pointer;transition:color .2s}
+.modal .modal-close:hover{color:var(--gold)}
+.modal .empty-msg{text-align:center;color:var(--text-dim);padding:40px 20px;font-size:.88rem}
+.modal .wrong-item{background:rgba(224,85,74,.04);border:1px solid rgba(224,85,74,.15);border-radius:var(--radius-sm);padding:16px;margin-bottom:12px}
+.modal .wrong-item .q-text{color:var(--text);font-size:.84rem;line-height:1.7;margin-bottom:10px}
+.modal .wrong-item .wrong-meta{font-size:.74rem;color:var(--text-dim);display:flex;gap:16px;flex-wrap:wrap}
+.modal .wrong-item .your-ans{color:var(--red)}
+.modal .wrong-item .right-ans{color:var(--green)}
+.modal .wrong-item .w-exp{font-size:.78rem;color:var(--text-alt);line-height:1.7;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.04)}
+.modal .wrong-item .w-exp strong{color:var(--gold-lt)}
+
+footer{text-align:center;padding:32px;color:var(--text-dim);font-size:.74rem;letter-spacing:2px;margin-top:40px}
+
+/* 进度条 - 全局正确率 */
+.progress-mini{height:4px;background:var(--border);border-radius:2px;margin:0 0 28px;overflow:hidden}
+.progress-mini-fill{height:100%;background:linear-gradient(90deg,var(--gold-dk),var(--gold-lt));border-radius:2px;transition:width .5s var(--ease)}
+
+@media(max-width:600px){
+  .hero h1{font-size:1.4em}.container{padding:0 10px}
+  .question{padding:18px 14px}.question .q-text{font-size:.85rem}
+  .tab{padding:8px 12px;font-size:.72rem}
+  .score-item .val{font-size:1.5rem}
+  .modal{padding:16px 14px;width:98%}
+}
+
+.with-sidebar{margin-left:0!important}
+.topnav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(8,7,13,.98),rgba(12,11,21,.95));border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;backdrop-filter:blur(10px)}
+.topnav-back{color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;padding:5px 12px;border:1px solid var(--gold);border-radius:14px;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.topnav-back:hover{background:var(--gold);color:#111}
+.topnav-title{color:var(--text-dim);font-size:.76rem;letter-spacing:.06em;white-space:nowrap}
+.topnav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.topnav-links a{color:var(--text-alt);text-decoration:none;font-size:.74rem;padding:4px 12px;border:1px solid var(--border);border-radius:12px;transition:all .2s}
+.topnav-links a:hover{border-color:var(--gold);color:var(--gold)}
+@media(max-width:600px){.topnav{padding:8px 10px;gap:8px}.topnav-links{margin-left:0}}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <a href="../index.html" class="topnav-back">← 玄门</a>
+  <span class="topnav-title">梅花易数 · 题库</span>
+  <div class="topnav-links">
+    <a href="index.html">总览</a>
+    <a href="01-八卦.html">八卦基础</a>
+    <a href="02-起卦.html">起卦方法</a>
+    <a href="03-体用.html">体用生克</a>
+    <a href="04-断卦.html">断卦体系</a>
+    <a href="05-应期.html">应期占断</a>
+    <a href="06-深潜.html">深潜入道</a>
+  </div>
+</header>
+
+<div class="page-progress" id="pageProgress"></div>
+<button id="backTop">↑</button>
+
+<div class="hero">
+  <h1>梅花易数 · 题库</h1>
+  <p>四阶递进：基础知识 → 应用理解 → 案例分析 → 深度分析</p>
+</div>
+
+<div class="container">
+
+<div class="score-bar">
+  <div class="score-item"><div class="val" id="totalScore">0</div><div class="lbl">总分</div></div>
+  <div class="score-item"><div class="val" id="answered">0</div><div class="lbl">已答</div></div>
+  <div class="score-item"><div class="val" id="correct">0</div><div class="lbl">正确</div></div>
+</div>
+<div class="progress-mini"><div class="progress-mini-fill" id="miniProgress" style="width:0%"></div></div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('basic')">☯ 基础知识</button>
+  <button class="tab" onclick="switchTab('core')">⚖️ 应用理解</button>
+  <button class="tab" onclick="switchTab('case')">📋 案例分析</button>
+  <button class="tab" onclick="switchTab('deep')">🔮 深度分析</button>
+</div>
+
+<div id="quizContainer"></div>
+
+<div class="btn-row">
+  <button class="btn wrong-book" id="btnWrongBook" onclick="openWrongBook()" disabled>📕 错题本 (<span id="wrongCount">0</span>)</button>
+  <button class="btn reset" onclick="resetAll()">🔄 重新开始</button>
+</div>
+
+</div>
+
+<!-- 错题本弹窗 -->
+<div class="modal-overlay" id="wrongBookOverlay" onclick="if(event.target===this)closeWrongBook()">
+  <div class="modal" id="wrongBookModal">
+    <button class="modal-close" onclick="closeWrongBook()">✕</button>
+    <h3>📕 错题本</h3>
+    <p class="modal-sub">答错的题目都在这里，逐题回顾，查漏补缺</p>
+    <div id="wrongBookContent"></div>
+  </div>
+</div>
+
+<footer><p>梅花易数 · 题库 ｜ 观物取象 以数明理 ｜ 学了要考，考了才会</p></footer>
+<script src="../共享样式/app.js"></script>
+<script>
+// ═══════════════════ 四阶题库 (共40题) ═══════════════════
+var QUIZ_DATA = {
+  // ── 第一阶：基础知识 (10题) ──
+  basic: [
+    {q:'八卦取象歌中"乾三连"对应的卦符是什么？',
+     opts:['☰（三连横）','☷（六断）','☵（中满）','☲（中虚）'],
+     ans:0,
+     e:'<strong>乾三连☰、坤六断☷、震仰盂☳、艮覆碗☶、离中虚☲、坎中满☵、兑上缺☱、巽下断☴</strong>。取象歌是记忆八卦符号的入门口诀，必须熟练背诵。'},
+
+    {q:'先天八卦数中，乾卦对应的数字是？',
+     opts:['8（坤）','1（乾）','6（坎）','3（离）'],
+     ans:1,
+     e:'<strong>先天八卦数：乾1、兑2、离3、震4、巽5、坎6、艮7、坤8</strong>。歌诀："乾一兑二离三震四，巽五坎六艮七坤八"。起卦时年月日时数除以8取余，用的就是先天数。'},
+
+    {q:'后天八卦方位中，震卦位于哪个方向？',
+     opts:['正南','正北','正东','正西'],
+     ans:2,
+     e:'<strong>后天八卦方位：震东、兑西、离南、坎北、乾西北、坤西南、艮东北、巽东南</strong>。"帝出乎震"——震为东方，万物之始。断卦时判断方位多参后天八卦。'},
+
+    {q:'五行相生的正确顺序是什么？',
+     opts:['金→水→木→火→土','木→火→土→金→水','水→火→木→金→土','土→金→火→水→木'],
+     ans:1,
+     e:'<strong>木生火、火生土、土生金、金生水、水生木</strong>。相生循环如环无端。体用断卦中，用生体为最吉，体生用为泄气。'},
+
+    {q:'八卦中属于"阳卦"的是哪一组？',
+     opts:['坤、巽、离、兑','乾、震、坎、艮','乾、兑、离、震','坤、艮、坎、巽'],
+     ans:1,
+     e:'<strong>阳卦：乾(父)、震(长男)、坎(中男)、艮(少男)</strong>。阴卦：坤(母)、巽(长女)、离(中女)、兑(少女)。阳卦的特征是多阴爻——震坎艮皆一阳二阴，所谓"阳卦多阴"。'},
+
+    {q:'坎卦的五行属性是什么？',
+     opts:['木','火','水','金'],
+     ans:2,
+     e:'<strong>坎为水、离为火、震巽为木、乾兑为金、坤艮为土</strong>。八卦配五行是体用生克判断的基础——五行关系决定了体用生克的吉凶。'},
+
+    {q:'先天八卦与后天八卦最核心的区别是什么？',
+     opts:['只是方位不同，没有本质区别','先天为体(天地定位)，后天为用(流行运转)','先天为用，后天为体','两者完全相同'],
+     ans:1,
+     e:'<strong>先天八卦讲"对待"——天地定位、山泽通气，是静态的本体</strong>。后天八卦讲"流行"——帝出乎震，是动态的运用。梅花易数<strong>起卦用先天数，断卦参后天方位</strong>，两者各司其职。'},
+
+    {q:'离卦的取象歌是？',
+     opts:['乾三连','坤六断','离中虚','坎中满'],
+     ans:2,
+     e:'<strong>离中虚☲</strong>——上下两阳爻中间一阴爻，外明内暗，象征火焰。"离"通"丽"，代表光明、美丽、文明。八卦之中，离为中女。'},
+
+    {q:'五行相克中，火克什么？',
+     opts:['水','木','金','土'],
+     ans:2,
+     e:'<strong>火克金、金克木、木克土、土克水、水克火</strong>。相克关系在体用中体现为：体克用=小吉（事情可控），用克体=凶（外部不利）。'},
+
+    {q:'兑卦在自然界中代表什么物象？',
+     opts:['山','泽','风','雷'],
+     ans:1,
+     e:'<strong>乾天、坤地、震雷、巽风、坎水、离火、艮山、兑泽</strong>。兑为泽，代表湖泊、沼泽。引申为<strong>喜悦(兑=悦)、口舌、言语、少女</strong>，万物类象中兑卦信息极丰富。'}
+  ],
+
+  // ── 第二阶：应用理解 (10题) ──
+  core: [
+    {q:'用年月日时法起卦：年月日三个数之和为45，除以8余5。上卦应该是什么卦？',
+     opts:['乾(1)','巽(5)','坎(6)','坤(8)'],
+     ans:1,
+     e:'<strong>上卦=(年+月+日)÷8的余数，对应先天数</strong>。余数5对应巽卦(☴)。口诀：1乾2兑3离4震<strong>5巽</strong>6坎7艮8坤。余0则为坤(8)。'},
+
+    {q:'年月日时起卦法中，动爻的确定公式是什么？',
+     opts:['(年+月+日)÷6取余','(年+月+日+时)÷6取余','(月+日+时)÷8取余','(年+时)÷6取余'],
+     ans:1,
+     e:'<strong>动爻=(年+月+日+时)÷6，看余数</strong>。余1=初爻动，余2=二爻动...余0=六爻动。动爻位置决定了体用之分：动爻在下卦→下为用上为体，在上卦→上为用下为体。'},
+
+    {q:'起卦得本卦天风姤(䷫)，上乾下巽。动爻在初爻（下卦最下）。体卦和用卦分别是谁？',
+     opts:['体乾、用巽','体巽、用乾','体乾、用乾','无法确定'],
+     ans:0,
+     e:'<strong>动爻在初爻=下卦动→下卦为用、上卦为体</strong>。天风姤上乾下巽，初爻在下卦→体乾(上卦)、用巽(下卦)。体金用木→体克用，小吉。'},
+
+    {q:'体卦为离(火)，用卦为巽(木)。体用之间的生克关系及吉凶是？',
+     opts:['体生用(泄气·小凶)','用生体(大吉)','体克用(小吉)','用克体(凶)'],
+     ans:1,
+     e:'<strong>巽木(用)→离火(体)=用生体，大吉！</strong>用生体=外部环境生助求测人，事情会主动向有利于求测人的方向发展。五大格局中，用生体为最吉。'},
+
+    {q:'体卦为坎(水)，用卦为坤(土)。这个格局是什么？吉凶如何？',
+     opts:['用生体·大吉','体克用·小吉','用克体·凶','比和·吉'],
+     ans:2,
+     e:'<strong>坤土(用)克坎水(体)=用克体，大凶</strong>。外部环境克制求测人，事情不顺利，困难来自外界。当用克体时，应建议求测人暂避锋芒，等待时机。'},
+
+    {q:'梅花易数中，体卦和用卦分别代表什么？',
+     opts:['体卦=外部环境，用卦=求测人','体卦=求测人自身，用卦=所问之事/外部','体卦=未来，用卦=过去','两者无区别'],
+     ans:1,
+     e:'<strong>体卦=求测人(事主自身)，用卦=所问之事(外部环境)</strong>。体不生不灭、不动不变；用随动而变。体用之间五行生克反映人与事的互动关系，是断卦最核心的维度。'},
+
+    {q:'起卦得火风鼎(䷱)，上离下巽。动爻在第四爻（上卦初爻）。体用如何分？吉凶如何？',
+     opts:['体离用巽·体克用','体巽用离·用生体(大吉)','体离用巽·用生体','体巽用离·体生用'],
+     ans:1,
+     e:'<strong>动爻在第四爻=上卦动→上为用下为体</strong>。体巽(木)用离(火)→用生体(木生火)，大吉！鼎卦本身代表"革新、成就"，用生体+卦名吉=双重利好。'},
+
+    {q:'体卦为震(木)，用卦为乾(金)。若问事业求职，应如何判断？',
+     opts:['顺利大吉','用克体，求职有阻碍需谨慎','体用无关，随便断','先难后易'],
+     ans:1,
+     e:'<strong>乾金(用)克震木(体)=用克体，凶</strong>。求职中外部压力大，竞争对手强，自身处于弱势。金克木还暗示可能遇到强势领导或苛刻条件。建议多做准备，等待良机。'},
+
+    {q:'互卦在梅花易数断卦中的作用是什么？',
+     opts:['代替本卦','反映事物发展的中间过程','确定动爻位置','无关紧要'],
+     ans:1,
+     e:'<strong>互卦反映事物发展的中间过程</strong>。由本卦二三四爻(下互)和三四五爻(上互)组成。本卦=起点、互卦=过程、变卦=结局——三卦串联才能完整呈现事物发展的全貌。'},
+
+    {q:'变卦（之卦）在断卦中代表什么？',
+     opts:['事情的起点','事情发展中间过程','事情的最终结果/结局','与事情完全无关'],
+     ans:2,
+     e:'<strong>变卦(之卦)代表事情的最终走向和结局</strong>。由本卦动爻阴阳互变而来——阳爻动变阴、阴爻动变阳。变卦与体卦的关系（变生体/变克体等）反映结局对求测人的影响。'}
+  ],
+
+  // ── 第三阶：案例分析 (10题) ──
+  case: [
+    {q:'【案例】测出行，得水山蹇(䷦)，上坎下艮。动爻第三爻(下卦)→体坎用艮。体水用土→用克体。卦名"蹇"意为艰难。此人出行应如何建议？',
+     opts:['大胆出行，一切顺利','出行不顺，用克体+卦名艰=双凶，建议暂缓','先走再说','换一个方向走'],
+     ans:1,
+     e:'<strong>用克体(土克水)+卦名蹇(艰难)=双重凶兆</strong>。出行最怕用克体——代表路途中的外部环境对求测人不利。蹇卦本义"跋前踬后"，处处掣肘。建议暂缓出行，另择时日。'},
+
+    {q:'【案例】测求职，得火雷噬嗑(䷔)，上离下震。初爻动(下卦)→体离用震。体火用木→用生体(大吉)。变卦火地晋(䷢)。此求职应如何断？',
+     opts:['求职无望','用生体大吉+变卦晋(前进)=求职成功，且发展前景好','需要换行业','结果不确定'],
+     ans:1,
+     e:'<strong>用生体(吉)+变晋卦(前进升高)=求职大概率成功</strong>。噬嗑="咬合"，代表双方磨合。变卦火地晋=旭日东升之象。从磨合到升晋，整个过程向好。'},
+
+    {q:'【案例】测婚姻，得泽山咸(䷞)，上兑下艮。第五爻动(上卦)→体艮用兑。体土用金→体生用(泄气)。但咸卦本身是"感应"之卦。应如何综合判断？',
+     opts:['婚姻美满无问题','卦名吉(感应)+体生用(略有消耗)，两人有感情基础但求测人需多付出','必分手','无法判断'],
+     ans:1,
+     e:'<strong>咸=感应(卦名吉)，体生用=求测人付出较多</strong>。两人互相吸引的基础存在，但求测人在关系中处于付出方。建议调整心态，注意感情平衡，避免单方面消耗过多。这就是"卦名+体用"联断的经典应用。'},
+
+    {q:'【案例】测疾病，得天雷无妄(䷘)，上乾下震。初爻动(下卦)→体乾用震。体金用木→体克用。病人吉凶如何？',
+     opts:['病情严重，凶多吉少','体克用=病人能控制病情，但无妄有突发之意需防范','立即痊愈','不需要治疗'],
+     ans:1,
+     e:'<strong>体克用(金克木)=病情可控，求测人有主动权</strong>。但无妄卦有"意外、突发"的含义，提醒不可大意——病情可能突然变化。体克用在本卦中代表疾病被压制，但仍需持续治疗观察。'},
+
+    {q:'【案例】测财运，得地天泰(䷊)，上坤下乾。第四爻动(上卦)→体乾用坤。体金用土→用生体(大吉)。变卦雷天大壮(䷡)。综合判断财运如何？',
+     opts:['财运平平','财运亨通！泰(天地交泰)+用生体+大壮(强盛)=三重吉兆','财运不佳','需要谨慎投资'],
+     ans:1,
+     e:'<strong>泰(天地交泰·大吉)+用生体(外部助我)+大壮(强盛发展)=三重叠加</strong>。三个维度全部指向利好——这是极为难得的全吉格局。此财运不仅当前好，且变卦大壮说明后续发展势头强劲。'},
+
+    {q:'【案例】测官司纠纷，得天水讼(䷅)，上乾下坎。二爻动(下卦)→体乾用坎。体金用水→体生用。卦名"讼"即争讼。如何建议当事人？',
+     opts:['必然胜诉，全力打到底','虽有纷争但体生用=消耗自身，卦名讼提示最好和解','败诉不可避免','无所谓'],
+     ans:1,
+     e:'<strong>讼=争讼纠纷，体生用=求测人消耗自身去"喂养"官司</strong>。卦名+体用都暗示：打官司对求测人不利，会消耗大量精力财力。建议优先考虑和解，除非万不得已——讼卦的智慧就是"以和为贵"。'},
+
+    {q:'【案例】测失物，得雷水解(䷧)，上震下坎。初爻动(下卦)→体震用坎。体木用水→用生体(大吉)。解卦意为"解脱、解决"。失物能找到吗？',
+     opts:['找不到了','失物可找回！解卦+用生体双重吉兆，建议往震(东)、坎(北)方向找','已被盗','已损坏'],
+     ans:1,
+     e:'<strong>解=困难解除/失而复得，用生体=外部有利</strong>。两个信号都指向可找回。这里还体现了"卦象取方位"的技巧：震=东、坎=北，建议往东北方向寻找。万物类象在断卦中至关重要。'},
+
+    {q:'【案例】测天气，得天泽履(䷉)，上乾下兑。互卦见离(火)。变卦天雷无妄(䷘)。断卦者说"先雨后晴"。这个判断的取象依据是什么？',
+     opts:['随便猜的','兑为泽=雨+互离=太阳+变震=雷动→天象演变=先雨后晴','只看卦名','只看动爻'],
+     ans:1,
+     e:'<strong>兑(泽/雨)→互离(太阳)→变震(雷动)</strong>。三个卦象串联起来的自然逻辑：下雨→日出→雷动天变。这就是"取象链条"断卦法——把各卦代表的物象串联成事件的时间线，是断天气的经典手法。'},
+
+    {q:'【案例】测子女学业，得山水蒙(䷃)，上艮下坎。二爻动(下卦)→体艮用坎。体土用水→体克用。蒙卦为"启蒙"之意。如何解读？',
+     opts:['学业无望','蒙=启蒙正当时+体克用=孩子能主导学习，但艮山=需坚持','天赋异禀不学就会','应换学校'],
+     ans:1,
+     e:'<strong>蒙=启蒙教育正当时，体克用=孩子能掌握学习主动</strong>。艮为山——学习如登山，需持之以恒。体克用在此是好事：求测方(孩子/家长)能控制学习进程。但山上山下，过程必不轻松。'},
+
+    {q:'【案例】综合断卦：本卦火地晋(䷢)→互卦水山蹇(䷦)→变卦火雷噬嗑(䷔)。动爻在上卦。体坤用离→用生体(吉)。但互卦蹇(艰难)和变卦噬嗑(决断)给这个"吉"增加了什么条件？',
+     opts:['没有任何条件，就是顺利','虽有吉的基础但中间会遇阻，最终需要果断决策才能破解','一路恶化','无法解读'],
+     ans:1,
+     e:'<strong>晋(前进)→蹇(艰难)→噬嗑(咬合决断)</strong>。用生体定下吉的基调，但互卦蹇提示中途必定受阻。变卦噬嗑=必须"咬碎"阻碍，需要果断的决策力和执行力。本→互→变三卦联动分析，是完整断卦的标准流程。'}
+  ],
+
+  // ── 第四阶：深度分析 (10题) ──
+  deep: [
+    {q:'【深度】体用比和(如体乾用乾)看似大吉。但起卦时外应听到破碎声、看到争吵场景。此时应如何断卦？',
+     opts:['只按体用比和断大吉','外应凶兆不可忽视——三要灵应优先级高于体用生克，应断"虽有基础但当下不利"','忽略外应，它无关','重新起卦'],
+     ans:1,
+     e:'<strong>三要(耳闻/目见/心感)是梅花易数的心法，优先级高于体用生克</strong>。体用比和是"理"，外应破败是"象"——象先于理、理从于象。邵雍曰："观物取象，当下即是。"若外应明确指向凶象，不可强行用体用去粉饰。'},
+
+    {q:'【深度】起卦得天风姤(䷫)，一阴遇五阳。体用为用克体(金克木)的凶格。但若问婚姻，"一阴遇五阳"这一特殊结构应如何理解？',
+     opts:['就是凶，不用多想','一阴遇五阳=女壮勿取——女方过强婚姻不宜，但需看互变是否有坤(包容)、咸(感应)等转机','一定大吉','必须重新起卦'],
+     ans:1,
+     e:'<strong>姤卦的特殊结构不能只看体用</strong>。卦辞"女壮，勿用取女"直言一女子面对五男子——力量悬殊。但断卦不可孤立看本卦：若互卦有坤(包容厚德)、变卦有咸(感应和谐)，则提示有转圜余地。这就是"不拘体用"——某些卦的结构特征本身就包含关键信息。'},
+
+    {q:'【深度】测怀孕，本卦震为雷(䷲)，体用皆震(比和·吉)。互卦水山蹇(䷦)。变卦雷水解(䷧)。起卦时窗外忽有鸟鸣入室(外应)。应如何综合分析？',
+     opts:['只看体用比和','体用比和=母体安泰；互蹇=孕期有波折但可克服；变解=顺利分娩；外应鸟鸣=生机来临。综合：虽有波折终平安','只说结果好','外应无关'],
+     ans:1,
+     e:'<strong>四层信息叠加是最完整的断卦：体用定基调(吉)、互卦看过程(有小阻)、变卦看结局(解=顺利)、外应参天机(鸟鸣=生机)</strong>。每层各有职能，互不矛盾。孕期波折不等于结果不好——正如互蹇只是"路上堵车"，变解说明最终顺利"到达"。'},
+
+    {q:'【深度】"互中取互"(在互卦中再取互卦)这种深度技法，在什么场景下最为适用？',
+     opts:['所有场景都应该使用','当事物极其复杂、多方利益交织时——如商业纠纷、家族矛盾、多层博弈','简单小事','从不使用'],
+     ans:1,
+     e:'<strong>互中取互是对中间过程的二次细化</strong>。一般事物一层互卦已足够。但涉及多重因果的复杂场景(连环合同、多方博弈、跨代恩怨)，一层互卦粒度不够，需要深入取象。这是从"技"入"艺"的分水岭——知道什么时候需要用，比知道怎么用更重要。'},
+
+    {q:'【深度】本卦水火既济(䷾)，体离用坎→体克用(小吉)。变卦火水未济(䷿)。从"既济"变为"未济"，这种卦名反转的哲学含义是什么？',
+     opts:['纯粹巧合，没有意义','既济(完美完成)→未济(尚未完成)，揭示"物极必反、盛极而衰"的易理——完美之后便是不完美的开始','两个都是吉卦，不用多想','卦名无关紧要'],
+     ans:1,
+     e:'<strong>既济是六十四卦中唯一六爻皆正位的完美之卦，但卦辞却说"初吉终乱"</strong>。完美到了极致便是衰败的起点。变卦恰为未济(六爻皆不正位)——这就是《周易》最核心的智慧：<strong>物极必反，盈不可久</strong>。既济变未济，提醒求测人成功后万不可松懈。'},
+
+    {q:'【深度】测投资，本卦火风鼎(䷱)，体巽用离→用生体(大吉)。但起卦时值秋季(金旺)。五行旺衰如何修正此卦判断？',
+     opts:['旺衰不影响用生体的大吉','秋金旺→金克体巽木+金泄土(财运)→用生体虽吉但被削弱，秋季投资此卦吉中带减','秋季意味着更吉','旺衰只影响很小'],
+     ans:1,
+     e:'<strong>秋季金旺→金克体巽木(体受伤)+金泄土气(财运被削弱)</strong>。用生体虽是大吉格局，但体卦自身在秋令气衰——好比一个人虽然有贵人相助(用生体)，但自己身体虚弱(体被秋金所克)，福力减半。旺衰与生克并重，缺一不可。'},
+
+    {q:'【深度】本卦中互卦上互克下互(内部矛盾)，但体用方向是"用生体"(外部有利)。这种"内层互克、外层体生"的矛盾如何处理？',
+     opts:['只看体用，忽略互卦','体用定大方向(吉)，互卦揭示过程中有内部掣肘——二者是层次关系，不矛盾','只看互卦','矛盾无法调和'],
+     ans:1,
+     e:'<strong>体用=宏观结果，互卦=微观过程，不同层次各司其职</strong>。体用向吉说明最终结果好，互卦被克说明过程中有内部矛盾——好比一趟旅行，目的地是好的(体用吉)，但路上堵车(互卦克)。不能说堵车就不去了，但也不能假装路不堵。层次分明，全面呈现。'},
+
+    {q:'【深度】当"三要"(耳闻、目见、心感)与体用生克截然相反，且提问者神情急切、语气焦躁。应如何决定优先级？',
+     opts:['以体用生克为准','三要优先——梅花易数的核心是"当下之机"，体用是公式，三要才是灵魂','忽略所有外应','各取一半折中'],
+     ans:1,
+     e:'<strong>三要十应是梅花易数的"心法"，体用生克是"技法"。心法高于技法</strong>。提问者的神情语气属于"心感"——是天机最直接的流露。邵雍创此术的精髓即在于"即物取象、当机立断"，而不是僵化套公式。这恰是从"术"入"道"的关键分水岭。'},
+
+    {q:'【深度】一个卦象出现连环生克链：体木→用火→互土→变金。体木被层层转化，最终被变金回头克。这个链条说明了什么？',
+     opts:['太复杂，无法解读','体生用(消耗)→用生互(传递)→互生变(延续)→变金回头克体。看似主动实则被反噬——"聪明反被聪明误"','一切皆吉','只看第一步即可'],
+     ans:1,
+     e:'<strong>连环追踪是梅花易数的高阶技法</strong>。本例：体木→生用火(泄气)→火生互土(转化)→土生变金(积蓄)→金回头克体木。体(木)先付出、层层传递，最终养大了一个回头伤害自己的力量——堪称"作茧自缚"的经典格局。断卦不可只看体用一步，尤其是牵涉多方关系的复杂场景，必须追踪整条生克链。'},
+
+    {q:'【深度】"不拘体用"被认为是梅花易数的高阶境界。在什么情况下应跳出体用框架，直接以卦象取义断卦？',
+     opts:['永远不能跳出体用框架','卦名含义极其明确时(如讼/师/归妹)、外应信号极强时、问题简单到只取一象即可时','任何时候都可以跳出','只有大师才能跳出'],
+     ans:1,
+     e:'<strong>"不拘体用"不是否定体用，而是突破教条</strong>。如问天气得坎卦——直接取"水/雨"之义即可，何必硬套体用？问出行得师卦——"师"为军队出征，凶多吉少，一眼便知。问婚姻得归妹——"归妹"就是嫁娶，取义即明。高级阶段的境界是"看山还是山"——穿透所有技法，回归最本质的取象直觉。<strong>学到最后，忘了体用才是真正会用体用。</strong>'}
+  ]
+};
+
+// ═══════════ 状态 ═══════════
+var state = {
+  totalScore: 0,
+  answered: 0,
+  correct: 0,
+  answeredSet: {},   // { key: userAnsIndex }
+  wrongList: [],     // [{ key, q, opts, ans, userAns, e }]
+  currentTab: 'basic'
+};
+
+function init() {
+  state.answeredSet = {};
+  state.wrongList = [];
+  state.totalScore = 0;
+  state.answered = 0;
+  state.correct = 0;
+  updateScore();
+  renderQuestions('basic');
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  var firstTab = document.querySelector('.tab');
+  if (firstTab) firstTab.classList.add('active');
+  updateWrongBookBtn();
+}
+
+function updateScore() {
+  document.getElementById('totalScore').textContent = state.totalScore;
+  document.getElementById('answered').textContent = state.answered;
+  document.getElementById('correct').textContent = state.correct;
+  // 进度条
+  var totalQ = 40;
+  var pct = totalQ > 0 ? Math.round(state.answered / totalQ * 100) : 0;
+  document.getElementById('miniProgress').style.width = pct + '%';
+}
+
+function updateWrongBookBtn() {
+  var btn = document.getElementById('btnWrongBook');
+  document.getElementById('wrongCount').textContent = state.wrongList.length;
+  if (state.wrongList.length === 0) {
+    btn.disabled = true;
+  } else {
+    btn.disabled = false;
+  }
+}
+
+function switchTab(tab) {
+  state.currentTab = tab;
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.tab').forEach(function(t){
+    var txt = t.textContent;
+    if ((tab==='basic' && txt.includes('基础')) ||
+        (tab==='core' && txt.includes('应用')) ||
+        (tab==='case' && txt.includes('案例')) ||
+        (tab==='deep' && txt.includes('深度'))) {
+      t.classList.add('active');
+    }
+  });
+  renderQuestions(tab);
+}
+
+function renderQuestions(tab) {
+  var container = document.getElementById('quizContainer');
+  var questions = QUIZ_DATA[tab];
+  var badgeMap = { basic: '基础知识', core: '应用理解', case: '案例分析', deep: '深度分析' };
+  var clsMap = { basic: 'basic', core: 'core', case: 'case', deep: 'deep' };
+  var html = '';
+  questions.forEach(function(q, i) {
+    var key = tab + '-' + i;
+    var answered = state.answeredSet[key] !== undefined;
+    var userAns = state.answeredSet[key];
+    html += '<div class="question active" id="q-' + key + '">';
+    html += '<div class="q-header"><span class="q-num">#' + (i+1) + '</span>';
+    html += '<span class="q-badge ' + clsMap[tab] + '">' + badgeMap[tab] + '</span>';
+    html += '</div>';
+    html += '<div class="q-text">' + q.q + '</div>';
+    html += '<div class="options">';
+    var labels = ['A', 'B', 'C', 'D'];
+    q.opts.forEach(function(opt, j) {
+      var cls = 'opt';
+      if (answered) {
+        if (j === q.ans) cls += ' show-correct';
+        if (j === userAns && j !== q.ans) cls += ' wrong';
+        if (j === userAns && j === q.ans) cls += ' correct';
+      }
+      html += '<button class="' + cls + '" ' + (answered ? 'disabled' : '') + ' onclick="answer(\'' + key + '\',' + j + ',' + q.ans + ')">' + labels[j] + '. ' + opt + '</button>';
+    });
+    html += '</div>';
+    html += '<div class="explanation' + (answered ? ' show' : '') + '" id="exp-' + key + '">' + q.e + '</div>';
+    html += '</div>';
+  });
+  container.innerHTML = html;
+}
+
+function answer(key, userAns, correctAns) {
+  if (state.answeredSet[key] !== undefined) return;
+  var isCorrect = userAns === correctAns;
+  state.answeredSet[key] = userAns;
+  state.answered++;
+
+  if (isCorrect) {
+    state.correct++;
+    state.totalScore += 10;
+  } else {
+    // 加入错题本
+    var parts = key.split('-');
+    var tab = parts[0];
+    var idx = parseInt(parts[1], 10);
+    var q = QUIZ_DATA[tab][idx];
+    state.wrongList.push({
+      key: key,
+      q: q.q,
+      opts: q.opts,
+      ans: q.ans,
+      userAns: userAns,
+      e: q.e
+    });
+  }
+
+  updateScore();
+  updateWrongBookBtn();
+  renderQuestions(state.currentTab);
+  // 滚动到当前题
+  var el = document.getElementById('q-' + key);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function resetAll() {
+  if (confirm('确定要重新开始吗？所有答题记录和错题本将被清除。')) {
+    init();
+  }
+}
+
+// ═══════════ 错题本 ═══════════
+function openWrongBook() {
+  if (state.wrongList.length === 0) return;
+  var content = document.getElementById('wrongBookContent');
+  var labels = ['A', 'B', 'C', 'D'];
+  var html = '';
+  state.wrongList.forEach(function(item, i) {
+    html += '<div class="wrong-item">';
+    html += '<div class="q-text"><strong>#' + (i+1) + '</strong> ' + item.q + '</div>';
+    html += '<div class="wrong-meta">';
+    html += '<span class="your-ans">你的答案：' + labels[item.userAns] + '. ' + item.opts[item.userAns] + '</span>';
+    html += '<span class="right-ans">正确答案：' + labels[item.ans] + '. ' + item.opts[item.ans] + '</span>';
+    html += '</div>';
+    html += '<div class="w-exp">' + item.e + '</div>';
+    html += '</div>';
+  });
+  content.innerHTML = html;
+  document.getElementById('wrongBookOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeWrongBook() {
+  document.getElementById('wrongBookOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// 键盘 ESC 关闭错题本
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeWrongBook();
+});
+
+init();
+</script>
+</body>
+</html>

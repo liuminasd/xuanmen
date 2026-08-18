@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>紫微斗数 · 四化飞星</title>
+<style>
+  :root {
+    --bg: #0f0f16;
+    --card-bg: #1a1a28;
+    --text: #d4d4e8;
+    --gold: #c9a44b;
+    --lu: #e8c547;    /* 禄 - 金黄 */
+    --quan: #e05555;  /* 权 - 赤红 */
+    --ke: #55aadd;    /* 科 - 青蓝 */
+    --ji: #3a3a5a;    /* 忌 - 暗紫 */
+    --border: #2a2a3a;
+    --accent: #7b68ee;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  /* ===== 顶部导航 ===== */
+  .top-nav {
+    background: #111122dd;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .top-nav .brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+  .top-nav .breadcrumb a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+  .top-nav .breadcrumb a:hover { opacity: 1; color: var(--gold); }
+  .top-nav .breadcrumb span { margin: 0 6px; opacity: 0.5; }
+
+  /* ===== 主容器 ===== */
+  .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  /* ===== 页面标题 ===== */
+  .page-hero {
+    text-align: center;
+    padding: 3rem 0 2rem;
+  }
+  .page-hero h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 6px;
+    margin-bottom: 0.5rem;
+  }
+  .page-hero .subtitle {
+    font-size: 1.1rem;
+    color: var(--text);
+    opacity: 0.65;
+    letter-spacing: 3px;
+  }
+  .page-hero .four-pills {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .pill {
+    padding: 6px 22px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+  }
+  .pill-lu  { background: var(--lu);  color: #1a1a00; }
+  .pill-quan{ background: var(--quan);color: #fff; }
+  .pill-ke  { background: var(--ke);  color: #fff; }
+  .pill-ji  { background: var(--ji);  color: #ccc; border: 1px solid #555; }
+
+  /* ===== 区块标题 ===== */
+  .section { margin-bottom: 2.5rem; }
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    border-left: 4px solid var(--gold);
+    padding-left: 1rem;
+    margin-bottom: 1.2rem;
+    letter-spacing: 2px;
+  }
+  .section-subtitle {
+    font-size: 1rem;
+    color: var(--text);
+    opacity: 0.6;
+    margin-bottom: 1rem;
+    margin-top: -0.5rem;
+    padding-left: 1.5rem;
+  }
+
+  /* ===== 通用卡片 ===== */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.6rem;
+    margin-bottom: 1.2rem;
+  }
+
+  /* ===== 表格样式 ===== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  th, td {
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+  th {
+    background: #1e1e35;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  td {
+    background: #141420;
+  }
+  tr:hover td { background: #1a1a30; }
+  td.lu-cell  { color: var(--lu); font-weight: 700; }
+  td.quan-cell{ color: var(--quan); font-weight: 700; }
+  td.ke-cell  { color: var(--ke); font-weight: 700; }
+  td.ji-cell  { color: #9999cc; font-weight: 700; }
+
+  /* ===== 四化概念表（四列大卡片） ===== */
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  @media (max-width: 800px) {
+    .concept-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .concept-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+  .concept-card .ctype {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 0.6rem;
+  }
+  .concept-card.lu  { border-top: 3px solid var(--lu);  }
+  .concept-card.quan{ border-top: 3px solid var(--quan); }
+  .concept-card.ke  { border-top: 3px solid var(--ke);  }
+  .concept-card.ji  { border-top: 3px solid #6666aa;   }
+  .concept-card.lu  .ctype { color: var(--lu);  }
+  .concept-card.quan .ctype { color: var(--quan); }
+  .concept-card.ke  .ctype { color: var(--ke);  }
+  .concept-card.ji  .ctype { color: #9999cc;   }
+  .concept-card .info-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    padding: 4px 0;
+    border-bottom: 1px dotted #222;
+  }
+  .concept-card .info-label { opacity: 0.55; }
+  .concept-card .info-value { font-weight: 600; }
+  .concept-card .desc {
+    margin-top: 0.7rem;
+    font-size: 0.82rem;
+    opacity: 0.7;
+    line-height: 1.55;
+  }
+
+  /* ===== 十天干表 ===== */
+  .tg-table td:first-child {
+    font-weight: 800;
+    color: var(--gold);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    background: #1a1a2e;
+  }
+
+  /* ===== 深层奥义卡片 ===== */
+  .wisdom-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  @media (max-width: 700px) {
+    .wisdom-grid { grid-template-columns: 1fr; }
+  }
+  .wisdom-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.4rem;
+  }
+  .wisdom-card .w-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    letter-spacing: 1px;
+  }
+  .wisdom-card .w-body {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    line-height: 1.7;
+  }
+  .wisdom-card .w-highlight {
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .wisdom-card.lu-w  { border-left: 3px solid var(--lu);  }
+  .wisdom-card.quan-w{ border-left: 3px solid var(--quan); }
+  .wisdom-card.ke-w  { border-left: 3px solid var(--ke);  }
+  .wisdom-card.ji-w  { border-left: 3px solid #6666aa;   }
+  .wisdom-card.lu-w  .w-title { color: var(--lu);  }
+  .wisdom-card.quan-w .w-title { color: var(--quan); }
+  .wisdom-card.ke-w  .w-title { color: var(--ke);  }
+  .wisdom-card.ji-w  .w-title { color: #9999cc;   }
+
+  /* ===== 碰撞法则表 ===== */
+  .clash-table td:first-child {
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: 1rem;
+  }
+  .clash-table td {
+    vertical-align: middle;
+  }
+
+  /* ===== 四化层次 ===== */
+  .hierarchy-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem 0;
+  }
+  .h-level {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    min-width: 120px;
+  }
+  .h-level .hl-main {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .h-level .hl-sub {
+    font-size: 0.8rem;
+    opacity: 0.55;
+    margin-top: 2px;
+  }
+  .h-arrow {
+    font-size: 1.5rem;
+    color: var(--gold);
+    opacity: 0.5;
+    margin: 0 4px;
+  }
+
+  /* ===== 闪卡 ===== */
+  .flashcard-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  @media (max-width: 800px) {
+    .flashcard-container { grid-template-columns: repeat(2, 1fr); }
+  }
+  .flashcard {
+    perspective: 1000px;
+    height: 260px;
+    cursor: pointer;
+  }
+  .flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  .flashcard.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+  }
+  .flashcard-front, .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem;
+    border: 1px solid var(--border);
+  }
+  .flashcard-front {
+    background: var(--card-bg);
+  }
+  .flashcard-back {
+    background: #1e1e35;
+    transform: rotateY(180deg);
+    border: 1px solid var(--gold);
+  }
+  .flashcard-front .fc-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .flashcard-front .fc-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .flashcard-front .fc-hint {
+    font-size: 0.78rem;
+    opacity: 0.5;
+    margin-top: 0.5rem;
+  }
+  .flashcard-back .fc-answer {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    text-align: center;
+  }
+  .flashcard-back .fc-answer strong {
+    color: var(--gold);
+  }
+  .fc-lu  .fc-title { color: var(--lu);  }
+  .fc-quan .fc-title { color: var(--quan); }
+  .fc-ke  .fc-title { color: var(--ke);  }
+  .fc-ji  .fc-title { color: #9999cc;   }
+
+  /* ===== 提示块 ===== */
+  .note-box {
+    background: #1a1a2e;
+    border: 1px solid #2a2a4a;
+    border-radius: 10px;
+    padding: 1rem 1.3rem;
+    font-size: 0.88rem;
+    opacity: 0.75;
+    margin-top: 1rem;
+  }
+  .note-box::before {
+    content: "📌 口诀 ";
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* ===== 页脚 ===== */
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    opacity: 0.4;
+    letter-spacing: 2px;
+  }
+
+  /* ===== 响应式微调 ===== */
+  @media (max-width: 600px) {
+    .container { padding: 1rem; }
+    .page-hero h1 { font-size: 2rem; letter-spacing: 3px; }
+    .concept-grid { grid-template-columns: 1fr 1fr; }
+    .wisdom-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== 顶部导航 ==================== -->
+<nav class="top-nav">
+  <div class="brand">玄门 · 紫微斗数</div>
+  <div class="breadcrumb">
+    <a href="index.html">首页</a><span>/</span>
+    <strong style="color:#c9a44b;">03 · 四化飞星</strong>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ==================== 页面标题 ==================== -->
+<div class="page-hero">
+  <h1>四 化 飞 星</h1>
+  <p class="subtitle">禄 权 科 忌 —— 命盘流转之枢机</p>
+  <div class="four-pills">
+    <span class="pill pill-lu">化禄</span>
+    <span class="pill pill-quan">化权</span>
+    <span class="pill pill-ke">化科</span>
+    <span class="pill pill-ji">化忌</span>
+  </div>
+</div>
+
+<!-- ==================== 一、四化概念表 ==================== -->
+<div class="section">
+  <h2 class="section-title">一、四化概念总表</h2>
+  <p class="section-subtitle">禄权科忌的本质属性与天地人对应</p>
+
+  <div class="concept-grid">
+
+    <!-- 化禄 -->
+    <div class="concept-card lu">
+      <div class="ctype">化 禄</div>
+      <div class="info-row"><span class="info-label">季节</span><span class="info-value">春</span></div>
+      <div class="info-row"><span class="info-label">五行</span><span class="info-value">木</span></div>
+      <div class="info-row"><span class="info-label">先天数</span><span class="info-value">三 (3)</span></div>
+      <div class="info-row"><span class="info-label">八卦</span><span class="info-value">震 ☳</span></div>
+      <div class="info-row"><span class="info-label">天干</span><span class="info-value">甲乙</span></div>
+      <div class="info-row"><span class="info-label">卦气</span><span class="info-value">生发之气</span></div>
+      <div class="desc">
+        <strong>含义：</strong>福禄、钱财、享受、增广、缘起、喜悦。<br/>
+        禄为「施」为「生」，代表得到、拥有、顺畅。
+      </div>
+    </div>
+
+    <!-- 化权 -->
+    <div class="concept-card quan">
+      <div class="ctype">化 权</div>
+      <div class="info-row"><span class="info-label">季节</span><span class="info-value">夏</span></div>
+      <div class="info-row"><span class="info-label">五行</span><span class="info-value">火</span></div>
+      <div class="info-row"><span class="info-label">先天数</span><span class="info-value">二 (2)</span></div>
+      <div class="info-row"><span class="info-label">八卦</span><span class="info-value">离 ☲</span></div>
+      <div class="info-row"><span class="info-label">天干</span><span class="info-value">丙丁</span></div>
+      <div class="info-row"><span class="info-label">卦气</span><span class="info-value">炎上之气</span></div>
+      <div class="desc">
+        <strong>含义：</strong>权力、权威、掌控、固执、力争、执行。<br/>
+        权为「争」为「克」，代表主导、管理、强势。
+      </div>
+    </div>
+
+    <!-- 化科 -->
+    <div class="concept-card ke">
+      <div class="ctype">化 科</div>
+      <div class="info-row"><span class="info-label">季节</span><span class="info-value">秋</span></div>
+      <div class="info-row"><span class="info-label">五行</span><span class="info-value">金</span></div>
+      <div class="info-row"><span class="info-label">先天数</span><span class="info-value">四 (4)</span></div>
+      <div class="info-row"><span class="info-label">八卦</span><span class="info-value">兑 ☱</span></div>
+      <div class="info-row"><span class="info-label">天干</span><span class="info-value">庚辛</span></div>
+      <div class="info-row"><span class="info-label">卦气</span><span class="info-value">收敛之气</span></div>
+      <div class="desc">
+        <strong>含义：</strong>名声、科甲、文采、贵人、舒缓、化解。<br/>
+        科为「化」为「解」，代表文雅、学识、声名。
+      </div>
+    </div>
+
+    <!-- 化忌 -->
+    <div class="concept-card ji">
+      <div class="ctype">化 忌</div>
+      <div class="info-row"><span class="info-label">季节</span><span class="info-value">冬</span></div>
+      <div class="info-row"><span class="info-label">五行</span><span class="info-value">水</span></div>
+      <div class="info-row"><span class="info-label">先天数</span><span class="info-value">一 (1)</span></div>
+      <div class="info-row"><span class="info-label">八卦</span><span class="info-value">坎 ☵</span></div>
+      <div class="info-row"><span class="info-label">天干</span><span class="info-value">壬癸</span></div>
+      <div class="info-row"><span class="info-label">卦气</span><span class="info-value">润下之气</span></div>
+      <div class="desc">
+        <strong>含义：</strong>波折、困扰、收敛、执着、业力、是非。<br/>
+        忌为「收」为「归」，代表不顺、缺失、挂碍。
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== 二、十天干四化表 ==================== -->
+<div class="section">
+  <h2 class="section-title">二、十天干四化表</h2>
+  <p class="section-subtitle">甲至癸，十天干各自引发的星曜四化</p>
+
+  <div class="card" style="overflow-x:auto;">
+    <table class="tg-table">
+      <thead>
+        <tr>
+          <th>天干</th>
+          <th style="color:var(--lu)">化禄</th>
+          <th style="color:var(--quan)">化权</th>
+          <th style="color:var(--ke)">化科</th>
+          <th style="color:#9999cc">化忌</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>甲</td>
+          <td class="lu-cell">廉贞化禄</td>
+          <td class="quan-cell">破军化权</td>
+          <td class="ke-cell">武曲化科</td>
+          <td class="ji-cell">太阳化忌</td>
+        </tr>
+        <tr>
+          <td>乙</td>
+          <td class="lu-cell">天机化禄</td>
+          <td class="quan-cell">天梁化权</td>
+          <td class="ke-cell">紫微化科</td>
+          <td class="ji-cell">太阴化忌</td>
+        </tr>
+        <tr>
+          <td>丙</td>
+          <td class="lu-cell">天同化禄</td>
+          <td class="quan-cell">天机化权</td>
+          <td class="ke-cell">文昌化科</td>
+          <td class="ji-cell">廉贞化忌</td>
+        </tr>
+        <tr>
+          <td>丁</td>
+          <td class="lu-cell">太阴化禄</td>
+          <td class="quan-cell">天同化权</td>
+          <td class="ke-cell">天机化科</td>
+          <td class="ji-cell">巨门化忌</td>
+        </tr>
+        <tr>
+          <td>戊</td>
+          <td class="lu-cell">贪狼化禄</td>
+          <td class="quan-cell">太阴化权</td>
+          <td class="ke-cell">右弼化科</td>
+          <td class="ji-cell">天机化忌</td>
+        </tr>
+        <tr>
+          <td>己</td>
+          <td class="lu-cell">武曲化禄</td>
+          <td class="quan-cell">贪狼化权</td>
+          <td class="ke-cell">天梁化科</td>
+          <td class="ji-cell">文曲化忌</td>
+        </tr>
+        <tr>
+          <td>庚</td>
+          <td class="lu-cell">太阳化禄</td>
+          <td class="quan-cell">武曲化权</td>
+          <td class="ke-cell">太阴化科</td>
+          <td class="ji-cell">天同化忌</td>
+        </tr>
+        <tr>
+          <td>辛</td>
+          <td class="lu-cell">巨门化禄</td>
+          <td class="quan-cell">太阳化权</td>
+          <td class="ke-cell">文曲化科</td>
+          <td class="ji-cell">文昌化忌</td>
+        </tr>
+        <tr>
+          <td>壬</td>
+          <td class="lu-cell">天梁化禄</td>
+          <td class="quan-cell">紫微化权</td>
+          <td class="ke-cell">左辅化科</td>
+          <td class="ji-cell">武曲化忌</td>
+        </tr>
+        <tr>
+          <td>癸</td>
+          <td class="lu-cell">破军化禄</td>
+          <td class="quan-cell">巨门化权</td>
+          <td class="ke-cell">太阴化科</td>
+          <td class="ji-cell">贪狼化忌</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note-box">
+    十天干四化口诀：甲廉破武阳，乙机梁紫阴，丙同机昌廉，丁阴同机巨，戊贪阴右机，己武贪梁曲，庚阳武阴同，辛巨阳曲昌，壬梁紫左武，癸破巨阴贪。
+  </div>
+</div>
+
+<!-- ==================== 三、四化深层奥义 ==================== -->
+<div class="section">
+  <h2 class="section-title">三、⭐ 四化深层奥义</h2>
+  <p class="section-subtitle">超越表面含义，直抵四化本质的玄门心法</p>
+
+  <div class="wisdom-grid">
+
+    <!-- 化禄 -->
+    <div class="wisdom-card lu-w">
+      <div class="w-title">化禄 — 「禄随忌走」</div>
+      <div class="w-body">
+        <p>禄为福气、财禄、好运。但<span class="w-highlight">禄不独行，必随忌走</span>。</p>
+        <p style="margin-top:0.5rem;">化禄在何处得利，则化忌在何处失损——两者一体两面，不可分割。若只看禄不看忌，则只见其利不见其害。</p>
+        <p style="margin-top:0.5rem;"><strong>心法：</strong>禄是「得」，忌是「付出」；禄之所至，忌必相随。譬如发财（禄）必伴随辛苦（忌），升官（禄）必伴随责任压力（忌）。禄忌同参，方知得失全貌。</p>
+      </div>
+    </div>
+
+    <!-- 化权 -->
+    <div class="wisdom-card quan-w">
+      <div class="w-title">化权 — 「权为小忌」</div>
+      <div class="w-body">
+        <p>化权表面是权力、掌控，但<span class="w-highlight">权的本质是「小忌」</span>。</p>
+        <p style="margin-top:0.5rem;">权带火性，刚猛急躁，过度则伤。化权所在必起争端、竞争、压力——权是「争来的」，过程必有摩擦。</p>
+        <p style="margin-top:0.5rem;"><strong>心法：</strong>权 = 忌的温和形态。化权太重则近于忌，争而不得反生怨。权忌同宫或对照，力量叠加，往往事倍功半、劳心费力。见权当思：权力背后，代价几何？</p>
+      </div>
+    </div>
+
+    <!-- 化科 -->
+    <div class="wisdom-card ke-w">
+      <div class="w-title">化科 — 「一科化二忌」</div>
+      <div class="w-body">
+        <p>化科是贵人、名声、化解之力。<span class="w-highlight">一科之力可化解二忌之厄</span>，此为四化中最珍贵的「解厄」功能。</p>
+        <p style="margin-top:0.5rem;">科属金，金能生水（忌属水），故科能化忌。但科力有限——一科仅能化二忌，若忌过重（三忌以上），科亦无能为力。</p>
+        <p style="margin-top:0.5rem;"><strong>心法：</strong>科是命盘中的「贵人星」与「解厄星」。见科在命、迁、福，遇事有缓；科在疾厄，病有良医。但科最怕空劫冲破，科被冲破则贵人无力。</p>
+      </div>
+    </div>
+
+    <!-- 化忌 -->
+    <div class="wisdom-card ji-w">
+      <div class="w-title">化忌 — 「忌入四墓反为库」</div>
+      <div class="w-body">
+        <p>化忌并非纯凶。<span class="w-highlight">忌入辰、戌、丑、未四墓库之地，反为「忌入库」</span>，主聚财、收藏、积累。</p>
+        <p style="margin-top:0.5rem;">辰戌丑未为四大墓库——辰为水库，戌为火库，丑为金库，未为木库。忌入墓库，如同水流归海，虽不再流动但汇集为渊，反成大器。</p>
+        <p style="margin-top:0.5rem;"><strong>心法：</strong>忌入辰戌丑未 → 忌入库 → 收敛为财。尤其化忌在田宅宫坐四墓库，主房产积蓄；在财帛宫坐四墓库，主财富沉淀。此乃「凶中藏吉」的玄机。</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== 四、四化碰撞法则表 ==================== -->
+<div class="section">
+  <h2 class="section-title">四、⭐ 四化碰撞法则表</h2>
+  <p class="section-subtitle">当两个或多个四化同宫或对照时，产生的化学反应</p>
+
+  <div class="card" style="overflow-x:auto;">
+    <table class="clash-table">
+      <thead>
+        <tr>
+          <th>组合</th>
+          <th>法则</th>
+          <th>详解</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span style="color:var(--lu)">禄</span> + <span style="color:var(--quan)">权</span></td>
+          <td style="color:var(--gold);font-weight:700;">横发</td>
+          <td>禄权双至，财权俱得。好运加权力，容易突然暴发、快速成功。但来得快去得也快，需根基稳固方能持久。</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--lu)">禄</span> + <span style="color:var(--ke)">科</span></td>
+          <td style="color:var(--ke);font-weight:700;">因名得利</td>
+          <td>禄科交会，名声带来财富。靠学识、名望、才艺获利，走「名利双收」路线。最利文人、艺人、学者。</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--lu)">禄</span> + <span style="color:#9999cc">忌</span></td>
+          <td style="color:var(--quan);font-weight:700;">起伏</td>
+          <td>禄忌同宫，得失交替。赚钱快花钱也快，得而复失、失而复得。大起大落之象，需有强韧心理素质。</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--quan)">权</span> + <span style="color:var(--ke)">科</span></td>
+          <td style="color:var(--ke);font-weight:700;">技能</td>
+          <td>权科相会，专业技术精湛。权力配合学识，以技服人。利工程师、医生、律师等专业技术人才。</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--quan)">权</span> + <span style="color:#9999cc">忌</span></td>
+          <td style="color:var(--quan);font-weight:700;">仓促</td>
+          <td>权忌相遇，急中出错。强势但受阻，越想控制越失控。做事匆忙草率，决策容易失误。需放慢节奏。</td>
+        </tr>
+        <tr>
+          <td><span style="color:var(--ke)">科</span> + <span style="color:#9999cc">忌</span></td>
+          <td style="color:#9999cc;font-weight:700;">拖拉</td>
+          <td>科忌相会，犹豫拖沓。想做好（科）又怕出错（忌），思虑过重导致行动迟滞。事虽可成但进度缓慢。</td>
+        </tr>
+        <tr>
+          <td>双禄 / 双权 / 双科 / 双忌</td>
+          <td style="color:var(--gold);font-weight:700;">加重</td>
+          <td>同类双化叠加，力量翻倍。双禄 → 大富之兆；双权 → 权势滔天；双科 → 名满天下；双忌 → 祸不单行，需格外谨慎。</td>
+        </tr>
+        <tr>
+          <td>禄权科忌全见</td>
+          <td style="color:var(--gold);font-weight:700;">大器晚成</td>
+          <td>四化齐聚，人生完整丰富。早年起伏波折（忌），中年拼搏（权），中年后收成（禄科）。历经沧桑方成大器。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==================== 五、四化层次 ==================== -->
+<div class="section">
+  <h2 class="section-title">五、四化层次体系</h2>
+  <p class="section-subtitle">四化的力量来源有层次之分，由体及用、由内而外</p>
+
+  <div class="card">
+    <div class="hierarchy-flow">
+      <div class="h-level">
+        <div class="hl-main">生年四化</div>
+        <div class="hl-sub">先天 · 体</div>
+        <div style="font-size:0.78rem;opacity:0.6;margin-top:4px;">与生俱来<br/>终生不变</div>
+      </div>
+      <div class="h-arrow">→</div>
+      <div class="h-level">
+        <div class="hl-main">大限四化</div>
+        <div class="hl-sub">十年 · 运</div>
+        <div style="font-size:0.78rem;opacity:0.6;margin-top:4px;">十年一变<br/>阶段运势</div>
+      </div>
+      <div class="h-arrow">→</div>
+      <div class="h-level">
+        <div class="hl-main">流年四化</div>
+        <div class="hl-sub">当年 · 用</div>
+        <div style="font-size:0.78rem;opacity:0.6;margin-top:4px;">一年一变<br/>当年应事</div>
+      </div>
+      <div class="h-arrow">→</div>
+      <div class="h-level" style="border:1px solid var(--gold);">
+        <div class="hl-main">宫位自化</div>
+        <div class="hl-sub">本宫 · 变</div>
+        <div style="font-size:0.78rem;opacity:0.6;margin-top:4px;">宫干引发<br/>即时变化</div>
+      </div>
+    </div>
+
+    <div style="margin-top:1rem; padding:0 1rem;">
+      <div style="display:flex;align-items:flex-start;gap:1.5rem;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <p style="font-weight:700;color:var(--gold);margin-bottom:0.3rem;">体用关系</p>
+          <p style="font-size:0.88rem;opacity:0.75;">生年四化为「体」，是根本、是天命所赋；大限四化为「运」，是十年大环境的流转；流年四化为「用」，是当年具体事件的触发。体决定上限，运决定时机，用决定应事。</p>
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <p style="font-weight:700;color:var(--gold);margin-bottom:0.3rem;">宫位自化</p>
+          <p style="font-size:0.88rem;opacity:0.75;">各宫天干引发本宫星曜四化，称为「自化」。自化代表该宫位的「自我变化」——禄出、权出、科出、忌出皆有其特定含义。自化是判断宫位吉凶变化的关键。</p>
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <p style="font-weight:700;color:var(--gold);margin-bottom:0.3rem;">叠加效应</p>
+          <p style="font-size:0.88rem;opacity:0.75;">生年四化 + 大限四化 + 流年四化 + 宫位自化，四层叠加于同一星曜时，力量最大。譬如生年化禄 + 大限化禄 + 流年化禄汇聚一星，称为「三禄汇聚」，大吉之兆。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 六、闪卡 ==================== -->
+<div class="section">
+  <h2 class="section-title">六、四化记忆闪卡</h2>
+  <p class="section-subtitle">点击卡片翻转，加深记忆（共4张）</p>
+
+  <div class="flashcard-container">
+
+    <!-- 闪卡1：禄随忌走 -->
+    <div class="flashcard fc-lu" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">
+          <div class="fc-icon">🪵</div>
+          <div class="fc-title">化禄 · 核心心法</div>
+          <div class="fc-hint">点击翻转查看答案</div>
+        </div>
+        <div class="flashcard-back">
+          <div class="fc-answer">
+            <strong>「禄随忌走」</strong><br/><br/>
+            禄为得，忌为失。<br/>
+            禄之所至，忌必相随。<br/>
+            看禄先看忌，方知得从何来、失往何去。<br/><br/>
+            <em style="opacity:0.6;">福祸相依，得失一体。</em>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 闪卡2：权为小忌 -->
+    <div class="flashcard fc-quan" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">
+          <div class="fc-icon">🔥</div>
+          <div class="fc-title">化权 · 核心心法</div>
+          <div class="fc-hint">点击翻转查看答案</div>
+        </div>
+        <div class="flashcard-back">
+          <div class="fc-answer">
+            <strong>「权为小忌」</strong><br/><br/>
+            权的本质是忌的温和形态。<br/>
+            权太刚猛即近于忌，<br/>
+            争而不得反生怨。<br/><br/>
+            <em style="opacity:0.6;">权力背后，必有代价。</em>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 闪卡3：一科化二忌 -->
+    <div class="flashcard fc-ke" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">
+          <div class="fc-icon">⚜️</div>
+          <div class="fc-title">化科 · 核心心法</div>
+          <div class="fc-hint">点击翻转查看答案</div>
+        </div>
+        <div class="flashcard-back">
+          <div class="fc-answer">
+            <strong>「一科化二忌」</strong><br/><br/>
+            科金生忌水，故能化解。<br/>
+            一科之力可消二忌之厄。<br/>
+            但忌过重(三忌以上)则科亦难救。<br/><br/>
+            <em style="opacity:0.6;">科为命中最珍贵的解厄之星。</em>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 闪卡4：忌入四墓为库 -->
+    <div class="flashcard fc-ji" onclick="this.classList.toggle('flipped')">
+      <div class="flashcard-inner">
+        <div class="flashcard-front">
+          <div class="fc-icon">💧</div>
+          <div class="fc-title">化忌 · 核心心法</div>
+          <div class="fc-hint">点击翻转查看答案</div>
+        </div>
+        <div class="flashcard-back">
+          <div class="fc-answer">
+            <strong>「忌入辰戌丑未反为库」</strong><br/><br/>
+            四大墓库：辰戌丑未<br/>
+            忌入四墓 → 忌入库 → 聚财<br/>
+            水流归海，不流则积。<br/><br/>
+            <em style="opacity:0.6;">凶中藏吉，收敛反成大器。</em>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="text-align:center;margin-top:1rem;font-size:0.82rem;opacity:0.5;">提示：点击卡片翻转查看答案，再次点击翻回。</p>
+</div>
+
+<!-- ==================== 页脚 ==================== -->
+<div class="footer">
+  玄门学习平台 · 紫微斗数 · 03 四化飞星<br/>
+  禄权科忌 — 天地之数 — 命理之机
+</div>
+
+</div><!-- /container -->
+
+</body>
+</html>

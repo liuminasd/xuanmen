@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>梅花易数 · 第二层 · 起卦方法大全</title>
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --card-bg: #1a1a1a;
+    --text: #d4c8a8;
+    --heading: #e8d5a0;
+    --accent: #c9a84c;
+    --accent-glow: #e6c456;
+    --border: #3a3320;
+    --input-bg: #121212;
+    --highlight: #1e1b10;
+    --danger: #c44;
+    --muted: #8a8068;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Serif SC", "Source Han Serif SC", "宋体", SimSun, serif;
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  /* ---- 顶栏 ---- */
+  .topbar {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .breadcrumb {
+    font-size: 0.82rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.6rem;
+  }
+  .breadcrumb a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .topbar h1 {
+    font-size: 2.4rem;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: 0.10em;
+  }
+  .topbar .sub {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---- 卡片 ---- */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem 2.2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.45);
+  }
+  .card h2 {
+    font-size: 1.55rem;
+    color: var(--accent);
+    border-left: 4px solid var(--accent);
+    padding-left: 1rem;
+    margin-bottom: 1.3rem;
+    letter-spacing: 0.08em;
+  }
+  .card h3 {
+    font-size: 1.15rem;
+    color: var(--heading);
+    margin: 1.2rem 0 0.6rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---- 公式区 ---- */
+  .formula {
+    background: #121006;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2rem 1.6rem;
+    margin: 1rem 0;
+    font-size: 1.1rem;
+    text-align: center;
+    letter-spacing: 0.06em;
+    color: var(--heading);
+  }
+  .formula em {
+    font-style: normal;
+    color: var(--accent-glow);
+    font-weight: 700;
+  }
+
+  /* ---- 重点标注 ---- */
+  .highlight-box {
+    background: linear-gradient(135deg, #221c0a 0%, #1a1608 100%);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 1rem 1.6rem;
+    margin: 1rem 0;
+    color: var(--accent-glow);
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.05rem;
+  }
+
+  /* ---- 表格 ---- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.55rem 0.7rem;
+    text-align: center;
+  }
+  th {
+    background: #1e1b10;
+    color: var(--heading);
+    font-weight: 700;
+  }
+  tr:nth-child(even) td {
+    background: #141414;
+  }
+  tr:hover td {
+    background: #1e1c12;
+  }
+
+  /* ---- 八卦对照表 ---- */
+  .bagua-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .bagua-item {
+    background: #15150e;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .bagua-symbol {
+    font-size: 2rem;
+    color: var(--accent-glow);
+    min-width: 2.2rem;
+    text-align: center;
+  }
+  .bagua-info .name {
+    font-weight: 700;
+    color: var(--heading);
+  }
+  .bagua-info .objects {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  /* ---- 计算器 ---- */
+  .calculator {
+    background: linear-gradient(180deg, #1a1608 0%, #121006 100%);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 1.2rem;
+  }
+  .calc-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .calc-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .calc-field label {
+    font-size: 0.85rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .calc-field input {
+    width: 80px;
+    padding: 0.5rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--input-bg);
+    color: var(--heading);
+    font-size: 1.1rem;
+    text-align: center;
+    font-family: inherit;
+    transition: border-color 0.2s;
+  }
+  .calc-field input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+  }
+  .calc-field input::placeholder {
+    color: #4a4030;
+    font-size: 0.85rem;
+  }
+  .btn-guaci {
+    padding: 0.6rem 2.2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: inherit;
+    letter-spacing: 0.08em;
+    color: #1a1608;
+    background: linear-gradient(180deg, #e6c456 0%, #c9a84c 100%);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 0 14px rgba(201,168,76,0.35);
+  }
+  .btn-guaci:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 22px rgba(201,168,76,0.55);
+  }
+  .btn-guaci:active {
+    transform: translateY(0);
+  }
+  .btn-reset {
+    padding: 0.6rem 1.6rem;
+    font-size: 1rem;
+    font-family: inherit;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .btn-reset:hover {
+    border-color: var(--accent);
+  }
+
+  /* ---- 结果区 ---- */
+  .result {
+    margin-top: 1.6rem;
+    padding: 1.5rem;
+    background: #0e0d06;
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    text-align: center;
+    display: none;
+  }
+  .result.show { display: block; }
+  .result .gua-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .result .gua-block {
+    text-align: center;
+  }
+  .result .gua-symbol {
+    font-size: 3.5rem;
+    color: var(--accent-glow);
+    text-shadow: 0 0 18px rgba(201,168,76,0.4);
+    line-height: 1.2;
+  }
+  .result .gua-name {
+    font-size: 1.2rem;
+    color: var(--heading);
+    margin-top: 0.3rem;
+    font-weight: 700;
+  }
+  .result .gua-number {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .result .arrow {
+    font-size: 1.8rem;
+    color: var(--accent);
+  }
+  .result .final-name {
+    font-size: 1.6rem;
+    color: var(--accent-glow);
+    font-weight: 700;
+    margin-top: 1rem;
+    letter-spacing: 0.1em;
+  }
+  .result .moving-yao {
+    font-size: 1rem;
+    color: #e6c456;
+    margin-top: 0.4rem;
+    letter-spacing: 0.06em;
+  }
+  .result .calc-detail {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.8rem;
+    line-height: 2;
+  }
+
+  /* ---- 错误提示 ---- */
+  .error-msg {
+    color: var(--danger);
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 0.6rem;
+    display: none;
+  }
+  .error-msg.show { display: block; }
+
+  /* ---- 响应式 ---- */
+  @media (max-width: 600px) {
+    .card { padding: 1.2rem 1rem; }
+    .topbar h1 { font-size: 1.7rem; }
+    .calc-row { gap: 0.6rem; }
+    .calc-field input { width: 60px; font-size: 0.95rem; }
+    .result .gua-symbol { font-size: 2.5rem; }
+    .result .arrow { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ========== 顶栏 ========== -->
+  <div class="topbar">
+    <div class="breadcrumb">
+      <a href="#">玄门学习平台</a> &gt; <a href="#">梅花易数</a> &gt; 第二层
+    </div>
+    <h1>起卦方法大全</h1>
+    <p class="sub">观物取象 · 以数明理 · 一花一叶知天地消息</p>
+  </div>
+
+  <!-- ========== 一、年月日时起卦法 ========== -->
+  <div class="card" id="section1">
+    <h2>一、年月日时起卦法（最经典）</h2>
+    <p>此法为梅花易数中最核心、最常用的起卦方式，以农历年、月、日、时四个时间要素换算成数，通过取余运算得出上下卦与动爻。</p>
+
+    <h3>1.1 核心公式</h3>
+    <div class="formula">
+      上卦数 = (<em>年支数</em> + <em>农历月</em> + <em>农历日</em>) ÷ 8 …… <em>取余数</em><br>
+      下卦数 = (<em>年支数</em> + <em>农历月</em> + <em>农历日</em> + <em>时支数</em>) ÷ 8 …… <em>取余数</em><br>
+      动爻数 = (<em>年支数</em> + <em>农历月</em> + <em>农历日</em> + <em>时支数</em>) ÷ 6 …… <em>取余数</em>
+    </div>
+
+    <div class="highlight-box">
+      ⚠ 重点：上卦只加年、月、日——<u>不加时支</u>；下卦和动爻才加时支！
+    </div>
+
+    <h3>1.2 地支数字对照表</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>地支</th><td>子</td><td>丑</td><td>寅</td><td>卯</td><td>辰</td><td>巳</td><td>午</td><td>未</td><td>申</td><td>酉</td><td>戌</td><td>亥</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>数字</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td>
+        </tr>
+        <tr>
+          <th>时辰</th><td>23-1</td><td>1-3</td><td>3-5</td><td>5-7</td><td>7-9</td><td>9-11</td><td>11-13</td><td>13-15</td><td>15-17</td><td>17-19</td><td>19-21</td><td>21-23</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>1.3 余数对应八卦</h3>
+    <table>
+      <thead>
+        <tr><th>余数</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>0（即8）</td></tr>
+      </thead>
+      <tbody>
+        <tr><th>八卦</th><td>乾 ☰</td><td>兑 ☱</td><td>离 ☲</td><td>震 ☳</td><td>巽 ☴</td><td>坎 ☵</td><td>艮 ☶</td><td>坤 ☷</td></tr>
+        <tr><th>五行</th><td>金</td><td>金</td><td>火</td><td>木</td><td>木</td><td>水</td><td>土</td><td>土</td></tr>
+      </tbody>
+    </table>
+
+    <h3>1.4 完整计算示例</h3>
+    <p><strong>例：</strong>丁卯年农历三月十五日申时</p>
+    <div class="formula" style="text-align:left; font-size:1rem;">
+      ① 年支「卯」→ 数字 <strong>4</strong><br>
+      ② 农历三月 → <strong>3</strong>，十五日 → <strong>15</strong>，申时 → <strong>9</strong><br>
+      ③ 上卦：(4 + 3 + 15) = 22，22 ÷ 8 = 2 余 <strong>6</strong> → <em>坎卦 ☵</em><br>
+      ④ 下卦：(4 + 3 + 15 + 9) = 31，31 ÷ 8 = 3 余 <strong>7</strong> → <em>艮卦 ☶</em><br>
+      ⑤ 动爻：(4 + 3 + 15 + 9) = 31，31 ÷ 6 = 5 余 <strong>1</strong> → <em>初爻动（第1爻）</em><br>
+      ⑥ 得卦：<strong>䷦ 水山蹇</strong>，初爻动
+    </div>
+    <p style="color:var(--muted); font-size:0.9rem;">上坎下艮，卦名「水山蹇」，六十四卦之第39卦。初爻动，变卦为上坎下离（水火既济 ䷾）。</p>
+  </div>
+
+  <!-- ========== 二、数字起卦法 ========== -->
+  <div class="card" id="section2">
+    <h2>二、数字起卦法</h2>
+    <p>任意三个数字即可起卦，方便快捷，是梅花易数最灵活的起卦方式。</p>
+
+    <h3>2.1 三数起卦规则</h3>
+    <table>
+      <thead>
+        <tr><th>数字位置</th><th>含义</th><th>取卦方法</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>第1个数</td><td>上卦</td><td>数 ÷ 8 → 取余数 → 对应八卦</td></tr>
+        <tr><td>第2个数</td><td>下卦</td><td>数 ÷ 8 → 取余数 → 对应八卦</td></tr>
+        <tr><td>第3个数</td><td>动爻</td><td>数 ÷ 6 → 取余数 → 动爻位置（余0为6爻动）</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2.2 数字来源举例</h3>
+    <ul style="list-style:disc; padding-left:1.5rem; color:var(--muted);">
+      <li><strong>随口报数：</strong>让对方随口报3个数</li>
+      <li><strong>手机号末三位：</strong>末三位数字分别对应</li>
+      <li><strong>车牌号：</strong>取末三位数字</li>
+      <li><strong>页码/行号：</strong>随手翻书取3个数</li>
+      <li><strong>时间戳：</strong>秒、分、时各取一位</li>
+    </ul>
+
+    <h3>2.3 示例</h3>
+    <p>报数：<strong>5、12、7</strong></p>
+    <div class="formula">
+      上卦：5 ÷ 8 = 余 <em>5</em> → 巽 ☴<br>
+      下卦：12 ÷ 8 = 1 余 <em>4</em> → 震 ☳<br>
+      动爻：7 ÷ 6 = 1 余 <em>1</em> → 初爻动<br>
+      得卦：<strong>䷟ 风雷益</strong>
+    </div>
+  </div>
+
+  <!-- ========== 三、物象起卦法 ========== -->
+  <div class="card" id="section3">
+    <h2>三、物象起卦法</h2>
+    <p>万物皆可归于八卦，所见之物即其卦象。此法最考验易者的取象能力，也是梅花易数「观物取象」的精髓所在。</p>
+
+    <h3>3.1 八卦所见之物对照表</h3>
+    <div class="bagua-grid">
+
+      <div class="bagua-item">
+        <div class="bagua-symbol">☰</div>
+        <div class="bagua-info">
+          <div class="name">乾 — 天</div>
+          <div class="objects">天、父、君、首、马、金玉、冰、圆形、西北方、高亢之物</div>
+        </div>
+      </div>
+
+      <div class="bagua-item">
+        <div class="bagua-symbol">☱</div>
+        <div class="bagua-info">
+          <div class="name">兑 — 泽</div>
+          <div class="objects">泽、少女、口舌、羊、缺损之物、金属乐器、西方、喜悦</div>
+        </div>
+      </div>
+
+      <div class="bagua-item">
+        <div class="bagua-symbol">☲</div>
+        <div class="bagua-info">
+          <div class="name">离 — 火</div>
+          <div class="objects">火、日、中女、目、雉、文书、光明、南方、红色、干燥</div>
+        </div>
+      </div>
+
+      <div class="bagua-item">
+        <div class="bagua-symbol">☳</div>
+        <div class="bagua-info">
+          <div class="name">震 — 雷</div>
+          <div class="objects">雷、长男、足、龙、青色、震动、东方、草木、大路、声响</div>
+        </div>
+      </div>
+
+      <div class="bagua-item">
+        <div class="bagua-symbol">☴</div>
+        <div class="bagua-info">
+          <div class="name">巽 — 风</div>
+          <div class="objects">风、长女、股、鸡、木、绳直、入、东南方、流动、香臭</div>
+        </div>
+      </div>
+
+      <div class="bagua-item">
+        <div class="bagua-symbol">☵</div>
+        <div class="bagua-info">
+          <div class="name">坎 — 水</div>
+          <div class="objects">水、中男、耳、豕、陷、隐伏、北方、黑色、沟渎、弓轮</div>
+        </div>
+      </div>
+
+      <div class="bagua-item">
+        <div class="bagua-symbol">☶</div>
+        <div class="bagua-info">
+          <div class="name">艮 — 山</div>
+          <div class="objects">山、少男、手、狗、止、石、东北方、门阙、果实、静物</div>
+        </div>
+      </div>
+
+      <div class="bagua-item">
+        <div class="bagua-symbol">☷</div>
+        <div class="bagua-info">
+          <div class="name">坤 — 地</div>
+          <div class="objects">地、母、腹、牛、布、釜、柔顺、西南方、方物、众人</div>
+        </div>
+      </div>
+
+    </div>
+
+    <h3>3.2 取象要诀</h3>
+    <ul style="list-style:decimal; padding-left:1.8rem; color:var(--muted);">
+      <li>所见之物取其上卦，所动之态取其下卦，动静相合以定动爻</li>
+      <li>若只见一物，以物之八卦归属为上卦，以所见方位八卦为下卦</li>
+      <li>两物相见：先见者为上卦，后见者为下卦，两物数目之和取动爻</li>
+      <li>颜色亦可入象：红→离，黑→坎，青绿→震巽，白→乾兑，黄→坤艮</li>
+    </ul>
+  </div>
+
+  <!-- ========== 四、其他起卦法简述 ========== -->
+  <div class="card" id="section4">
+    <h2>四、其他起卦法简述</h2>
+
+    <h3>4.1 声音起卦法</h3>
+    <p>以听到的声音次数起卦。一声乾、二声兑、三声离……若听到连续数声，取声数次第：第一声为上卦，第二声为下卦，总声数取动爻。例：闻鸟鸣三声，又闻五声 → 离上巽下（䷱ 火风鼎）。</p>
+
+    <h3>4.2 字划起卦法</h3>
+    <p>以汉字的笔画数起卦：</p>
+    <ul style="list-style:disc; padding-left:1.5rem; color:var(--muted);">
+      <li><strong>一字：</strong>拆分左右/上下结构，左（上）边笔画为上卦，右（下）边笔画为下卦，总笔画取动爻</li>
+      <li><strong>二字：</strong>第一字笔画为上卦，第二字笔画为下卦，两字总笔画取动爻</li>
+      <li><strong>三字及以上：</strong>第一字上卦、第二字下卦、第三字动爻</li>
+    </ul>
+    <p style="color:var(--muted); font-size:0.85rem;">注：笔画数以繁体康熙笔画为准，现行简体亦可参照使用。数字超过8则取除以8的余数。</p>
+
+    <h3>4.3 方位起卦法</h3>
+    <p>以占者所在方位或事物出现方位起卦。如老人从<strong>东方（震）</strong>来，面带<strong>忧色（坎为忧）</strong>——则震为上卦，坎为下卦，得雷水解（䷧）。</p>
+
+    <h3>4.4 颜色起卦法</h3>
+    <p>以所见主色起卦：红衣（离）、黑衣（坎）、青衣（震/巽）、白衣（乾/兑）、黄衣（坤/艮）。上下卦取两色，动爻可依出现先后次序之数。</p>
+
+    <h3>4.5 日期起卦法</h3>
+    <p>公历日期亦可：年取末两位，月、日各取其数，三数分别对应上卦、下卦、动爻。如 2026年7月30日 → 26、7、30 → 各除以8/6取余。</p>
+  </div>
+
+  <!-- ========== 五、⭐ 交互起卦计算器 ========== -->
+  <div class="card" id="section5">
+    <h2>五、⭐ 交互起卦计算器</h2>
+    <p style="color:var(--muted);">输入农历年月日时信息，系统自动计算上下卦与动爻，即时得卦。支持键盘输入与一键清空。</p>
+
+    <div class="calculator">
+      <div class="calc-row">
+        <div class="calc-field">
+          <label for="nianZhi">年支数 (1-12)</label>
+          <input type="number" id="nianZhi" min="1" max="12" placeholder="子=1">
+        </div>
+        <div class="calc-field">
+          <label for="nongYue">农历月</label>
+          <input type="number" id="nongYue" min="1" max="12" placeholder="1-12">
+        </div>
+        <div class="calc-field">
+          <label for="nongRi">农历日</label>
+          <input type="number" id="nongRi" min="1" max="30" placeholder="1-30">
+        </div>
+        <div class="calc-field">
+          <label for="shiZhi">时支数 (1-12)</label>
+          <input type="number" id="shiZhi" min="1" max="12" placeholder="子=1">
+        </div>
+      </div>
+
+      <div class="calc-row">
+        <button class="btn-guaci" onclick="qiGua()">✦ 起 卦 ✦</button>
+        <button class="btn-reset" onclick="resetCalc()">清 空</button>
+      </div>
+
+      <div class="error-msg" id="errorMsg"></div>
+
+      <!-- 结果区 -->
+      <div class="result" id="resultArea">
+        <div class="gua-row">
+          <div class="gua-block">
+            <div class="gua-symbol" id="shangGuaSymbol"></div>
+            <div class="gua-name" id="shangGuaName"></div>
+            <div class="gua-number">上卦</div>
+          </div>
+          <div class="arrow">+</div>
+          <div class="gua-block">
+            <div class="gua-symbol" id="xiaGuaSymbol"></div>
+            <div class="gua-name" id="xiaGuaName"></div>
+            <div class="gua-number">下卦</div>
+          </div>
+        </div>
+        <div class="final-name" id="finalName"></div>
+        <div class="moving-yao" id="movingYao"></div>
+        <div class="calc-detail" id="calcDetail"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 页脚 ========== -->
+  <div style="text-align:center; color:var(--muted); font-size:0.8rem; margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+    玄门学习平台 · 梅花易数 第二层 · 起卦方法大全
+  </div>
+
+</div>
+
+<script>
+// ==================== 八卦数据 ====================
+const BAGUA_MAP = {
+  1: { name: '乾',  symbol: '☰', wuxing: '金', fangwei: '西北' },
+  2: { name: '兑',  symbol: '☱', wuxing: '金', fangwei: '西'   },
+  3: { name: '离',  symbol: '☲', wuxing: '火', fangwei: '南'   },
+  4: { name: '震',  symbol: '☳', wuxing: '木', fangwei: '东'   },
+  5: { name: '巽',  symbol: '☴', wuxing: '木', fangwei: '东南' },
+  6: { name: '坎',  symbol: '☵', wuxing: '水', fangwei: '北'   },
+  7: { name: '艮',  symbol: '☶', wuxing: '土', fangwei: '东北' },
+  8: { name: '坤',  symbol: '☷', wuxing: '土', fangwei: '西南' },
+};
+
+// 六十四卦名称表 (key: "上_下", 如 "乾_坤" -> "天地否")
+const LIUSHISIGUA = {
+  '乾_乾':'䷀ 乾为天',  '乾_兑':'䷪ 泽天夬',  '乾_离':'䷍ 火天大有', '乾_震':'䷡ 雷天大壮',
+  '乾_巽':'䷈ 风天小畜', '乾_坎':'䷄ 水天需',  '乾_艮':'䷙ 山天大畜', '乾_坤':'䷊ 地天泰',
+  '兑_乾':'䷉ 天泽履',  '兑_兑':'䷹ 兑为泽',  '兑_离':'䷥ 火泽睽',  '兑_震':'䷵ 雷泽归妹',
+  '兑_巽':'䷼ 风泽中孚', '兑_坎':'䷮ 水泽节',  '兑_艮':'䷨ 山泽损',  '兑_坤':'䷒ 地泽临',
+  '离_乾':'䷌ 天火同人', '离_兑':'䷰ 泽火革',  '离_离':'䷝ 离为火',  '离_震':'䷶ 雷火丰',
+  '离_巽':'䷤ 风火家人', '离_坎':'䷾ 水火既济', '离_艮':'䷕ 山火贲',  '离_坤':'䷣ 地火明夷',
+  '震_乾':'䷘ 天雷无妄', '震_兑':'䷐ 泽雷随',  '震_离':'䷔ 火雷噬嗑', '震_震':'䷲ 震为雷',
+  '震_巽':'䷟ 风雷益',  '震_坎':'䷂ 水雷屯',  '震_艮':'䷚ 山雷颐',  '震_坤':'䷗ 地雷复',
+  '巽_乾':'䷫ 天风姤',  '巽_兑':'䷛ 泽风大过', '巽_离':'䷱ 火风鼎',  '巽_震':'䷭ 雷风恒',
+  '巽_巽':'䷸ 巽为风',  '巽_坎':'䷯ 水风井',  '巽_艮':'䷑ 山风蛊',  '巽_坤':'䷭ 地风升',
+  '坎_乾':'䷅ 天水讼',  '坎_兑':'䷮ 泽水困',  '坎_离':'䷿ 火水未济', '坎_震':'䷧ 雷水解',
+  '坎_巽':'䷺ 风水涣',  '坎_坎':'䷜ 坎为水',  '坎_艮':'䷦ 水山蹇',  '坎_坤':'䷇ 地水师',
+  '艮_乾':'䷠ 天山遁',  '艮_兑':'䷞ 泽山咸',  '艮_离':'䷷ 火山旅',  '艮_震':'䷽ 雷山小过',
+  '艮_巽':'䷴ 风山渐',  '艮_坎':'䷦ 山水蹇',  '艮_艮':'䷳ 艮为山',  '艮_坤':'䷖ 山地剥',
+  '坤_乾':'䷋ 天地否',  '坤_兑':'䷬ 泽地萃',  '坤_离':'䷢ 火地晋',  '坤_震':'䷏ 雷地豫',
+  '坤_巽':'䷓ 风地观',  '坤_坎':'䷇ 水地比',  '坤_艮':'䷖ 山地剥',  '坤_坤':'䷁ 坤为地',
+};
+
+// 数字转地支名
+const DIZHI = ['','子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+
+/**
+ * 数字转八卦 (除数取余，余0则为8)
+ */
+function numToGua(n) {
+  let r = n % 8;
+  if (r === 0) r = 8;
+  return BAGUA_MAP[r];
+}
+
+/**
+ * 数字转动爻 (除数取余，余0则为6)
+ */
+function numToDongYao(n) {
+  let r = n % 6;
+  if (r === 0) r = 6;
+  return r;
+}
+
+// ==================== 核心：起卦 ====================
+function qiGua() {
+  const nianZhi = parseInt(document.getElementById('nianZhi').value);
+  const nongYue = parseInt(document.getElementById('nongYue').value);
+  const nongRi  = parseInt(document.getElementById('nongRi').value);
+  const shiZhi  = parseInt(document.getElementById('shiZhi').value);
+  const errorEl = document.getElementById('errorMsg');
+  const resultEl = document.getElementById('resultArea');
+
+  // 校验
+  errorEl.classList.remove('show');
+  resultEl.classList.remove('show');
+
+  if (isNaN(nianZhi) || nianZhi < 1 || nianZhi > 12) {
+    errorEl.textContent = '请输入正确的年支数（1-12）';
+    errorEl.classList.add('show');
+    return;
+  }
+  if (isNaN(nongYue) || nongYue < 1 || nongYue > 12) {
+    errorEl.textContent = '请输入正确的农历月（1-12）';
+    errorEl.classList.add('show');
+    return;
+  }
+  if (isNaN(nongRi) || nongRi < 1 || nongRi > 30) {
+    errorEl.textContent = '请输入正确的农历日（1-30）';
+    errorEl.classList.add('show');
+    return;
+  }
+  if (isNaN(shiZhi) || shiZhi < 1 || shiZhi > 12) {
+    errorEl.textContent = '请输入正确的时支数（1-12）';
+    errorEl.classList.add('show');
+    return;
+  }
+
+  // 计算
+  const shangHe = nianZhi + nongYue + nongRi;           // 上卦：不加时支
+  const xiaHe   = nianZhi + nongYue + nongRi + shiZhi;  // 下卦+动爻：加时支
+
+  const shangGua = numToGua(shangHe);
+  const xiaGua   = numToGua(xiaHe);
+  const dongYao  = numToDongYao(xiaHe);
+
+  const guaKey = shangGua.name + '_' + xiaGua.name;
+  const fullName = LIUSHISIGUA[guaKey] || (shangGua.name + xiaGua.name);
+
+  // 渲染结果
+  document.getElementById('shangGuaSymbol').textContent = shangGua.symbol;
+  document.getElementById('shangGuaName').textContent = shangGua.name + '卦（' + shangGua.wuxing + '）';
+  document.getElementById('xiaGuaSymbol').textContent = xiaGua.symbol;
+  document.getElementById('xiaGuaName').textContent = xiaGua.name + '卦（' + xiaGua.wuxing + '）';
+  document.getElementById('finalName').textContent = '得卦：' + fullName;
+  document.getElementById('movingYao').textContent = '动爻：第 ' + dongYao + ' 爻动' + (dongYao === 1 ? '（初爻）' : dongYao === 6 ? '（上爻）' : '');
+
+  const nianName = DIZHI[nianZhi] || nianZhi;
+  const shiName  = DIZHI[shiZhi]  || shiZhi;
+  document.getElementById('calcDetail').innerHTML =
+    '计算过程：<br>' +
+    '上卦 = (' + nianName + '年' + nianZhi + ' + ' + nongYue + '月 + ' + nongRi + '日) = <em>' + shangHe + '</em>，' +
+    shangHe + ' ÷ 8 = ' + Math.floor(shangHe / 8) + ' 余 <em>' + (shangHe % 8 === 0 ? 8 : shangHe % 8) + '</em> → ' + shangGua.name + '卦<br>' +
+    '下卦 = (' + nianName + '年' + nianZhi + ' + ' + nongYue + '月 + ' + nongRi + '日 + ' + shiName + '时' + shiZhi + ') = <em>' + xiaHe + '</em>，' +
+    xiaHe + ' ÷ 8 = ' + Math.floor(xiaHe / 8) + ' 余 <em>' + (xiaHe % 8 === 0 ? 8 : xiaHe % 8) + '</em> → ' + xiaGua.name + '卦<br>' +
+    '动爻 = ' + xiaHe + ' ÷ 6 = ' + Math.floor(xiaHe / 6) + ' 余 <em>' + (xiaHe % 6 === 0 ? 6 : xiaHe % 6) + '</em> → 第' + dongYao + '爻动';
+
+  // 金色高亮显示
+  resultEl.classList.add('show');
+  resultEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// ==================== 清空 ====================
+function resetCalc() {
+  document.getElementById('nianZhi').value = '';
+  document.getElementById('nongYue').value = '';
+  document.getElementById('nongRi').value  = '';
+  document.getElementById('shiZhi').value  = '';
+  document.getElementById('errorMsg').classList.remove('show');
+  document.getElementById('resultArea').classList.remove('show');
+  document.getElementById('nianZhi').focus();
+}
+
+// ==================== 键盘事件 ====================
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    qiGua();
+  }
+});
+
+// ==================== 演示示例预填 ====================
+(function demo() {
+  if (document.getElementById('nianZhi').value === '') {
+    // 默认预填示例值：卯年=4, 三月=3, 十五日=15, 申时=9
+    document.getElementById('nianZhi').value = '4';
+    document.getElementById('nongYue').value = '3';
+    document.getElementById('nongRi').value  = '15';
+    document.getElementById('shiZhi').value  = '9';
+  }
+})();
+</script>
+
+</body>
+</html>

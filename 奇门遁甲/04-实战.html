@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="奇门遁甲实战断局 — 5个完整案例从排盘到断局全流程，案例库总结，出行/签约/健康/考试专题断局，应期推断方法。">
+<title>奇门遁甲 · 实战断局</title>
+<link rel="stylesheet" href="../共享样式/base.css">
+<link rel="stylesheet" href="../共享样式/components.css">
+<style>
+  :root{--font-ui:"Noto Serif SC","Songti SC","STSong",serif}
+  body{font-family:var(--font-ui);padding-bottom:60px}
+
+  .breadcrumb{padding:16px 24px;font-size:.78rem}
+  .breadcrumb a{color:var(--text-dim);text-decoration:none}
+  .breadcrumb a:hover{color:var(--gold)}
+  .breadcrumb span{color:var(--text-dim);margin:0 6px}
+
+  .hero{text-align:center;padding:40px 20px 32px;border-bottom:1px solid var(--border);margin-bottom:32px}
+  .hero h1{font-size:2.2em;color:var(--gold-lt);letter-spacing:5px;font-weight:300}
+  .hero p{color:var(--text-dim);font-size:.9rem;letter-spacing:2px;margin-top:6px}
+  .hero .line{width:50px;height:1px;background:var(--gold);margin:12px auto;opacity:.4}
+
+  .container{max-width:960px;margin:0 auto;padding:0 24px}
+
+  .sec{margin:36px 0}
+  .sec h2{color:var(--gold);font-size:1.2rem;font-weight:400;letter-spacing:3px;
+    padding:0 0 8px 14px;border-left:2px solid var(--gold);margin-bottom:16px}
+  .sec h3{color:var(--gold-lt);font-size:.98rem;margin:20px 0 10px;font-weight:400}
+  .sec p{color:var(--text-alt);font-size:.86rem;margin:8px 0;line-height:1.9}
+  .sec p strong,.sec li strong{color:#e8d8b0;font-weight:500}
+  .sec ul,.sec ol{padding-left:22px;margin:8px 0}
+  .sec li{color:var(--text-alt);font-size:.84rem;margin:4px 0;line-height:1.8}
+
+  .em{background:var(--card);border:1px solid rgba(212,176,106,.08);border-radius:var(--radius);
+    padding:15px 18px;margin:12px 0;font-size:.84rem;color:var(--text-alt)}
+  .em strong{color:var(--gold-lt)}
+
+  table{width:100%;border-collapse:collapse;font-size:.82em;margin:12px 0}
+  th{background:var(--gold-bg);color:var(--gold);padding:9px 12px;text-align:left;
+    border-bottom:1px solid rgba(212,176,106,.15);font-weight:400;letter-spacing:1px}
+  th:first-child{border-radius:var(--radius) 0 0 0}
+  th:last-child{border-radius:0 var(--radius) 0 0}
+  td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  tr:hover td{background:rgba(255,255,255,.01)}
+  td:first-child{color:#e0d8c0;font-weight:500;white-space:nowrap}
+
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0}
+  @media(max-width:720px){.g2{grid-template-columns:1fr}}
+
+  /* ── 案例流程卡片 ── */
+  .case-card{
+    background:linear-gradient(155deg,var(--card),rgba(21,19,38,.95));
+    border:1.5px solid var(--border);border-radius:var(--radius-lg);
+    margin:24px 0;overflow:hidden;transition:all .3s;
+  }
+  .case-card:hover{border-color:rgba(212,176,106,.3);box-shadow:0 4px 24px rgba(0,0,0,.3)}
+  .case-header{
+    padding:20px 24px;background:linear-gradient(135deg,rgba(212,176,106,.1),rgba(212,176,106,.02));
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  .case-header .case-num{
+    font-size:2rem;color:var(--gold);font-weight:300;line-height:1;
+  }
+  .case-header .case-info h3{color:var(--gold-lt);font-size:1.1rem;margin:0;font-weight:400;letter-spacing:2px}
+  .case-header .case-info .case-meta{color:var(--text-dim);font-size:.72rem;margin-top:2px;}
+  .case-header .case-tags{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .case-tag{font-size:.66rem;padding:3px 10px;border-radius:10px;letter-spacing:.06em;
+    background:var(--gold-bg);color:var(--gold);border:1px solid rgba(212,176,106,.15)}
+  .case-tag.green{color:var(--green);border-color:rgba(78,168,104,.15);background:var(--green-bg)}
+  .case-tag.red{color:var(--red);border-color:rgba(224,85,74,.15);background:var(--red-bg)}
+  .case-tag.blue{color:var(--blue);border-color:rgba(80,152,200,.15);background:var(--blue-bg)}
+
+  .case-body{padding:18px 24px}
+  .case-step{
+    margin:14px 0;padding:14px 18px;
+    background:rgba(255,255,255,.01);border-radius:var(--radius-sm);
+    border-left:3px solid var(--border);transition:all .2s;
+  }
+  .case-step:hover{border-left-color:var(--gold);background:rgba(212,176,106,.02)}
+  .case-step .st-label{
+    font-size:.72rem;color:var(--gold);letter-spacing:.1em;font-weight:600;
+    display:block;margin-bottom:4px;
+  }
+  .case-step .st-label::before{content:'◆ ';font-size:.6rem;vertical-align:middle}
+  .case-step h5{color:var(--gold-lt);font-size:.88rem;margin:4px 0 6px;font-weight:500}
+  .case-step p{color:var(--text-alt);font-size:.84rem;line-height:1.85;margin:4px 0}
+  .case-step ul{padding-left:18px}
+  .case-step li{font-size:.82rem;color:var(--text-alt);line-height:1.8}
+
+  .case-conclusion{
+    margin-top:16px;padding:16px 20px;
+    background:linear-gradient(135deg,rgba(212,176,106,.08),rgba(212,176,106,.02));
+    border:1px solid rgba(212,176,106,.15);border-radius:var(--radius);
+    display:flex;align-items:flex-start;gap:12px;
+  }
+  .case-conclusion .concl-icon{font-size:1.5rem;flex-shrink:0}
+  .case-conclusion .concl-text{color:var(--gold-lt);font-size:.86rem;line-height:1.9}
+  .case-conclusion .concl-text strong{color:#f0e6c8}
+
+  /* ── 九宫格展示 ── */
+  .gong-display{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--border);max-width:360px;margin:12px auto;
+    text-align:center;border:1px solid var(--border);border-radius:4px;overflow:hidden;
+  }
+  .gong-display .gcell{
+    padding:10px 6px;background:var(--bg);font-size:.72rem;color:var(--text-alt);
+    min-height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    line-height:1.5;
+  }
+  .gong-display .gcell strong{color:var(--gold-lt);font-size:.78rem}
+  .gong-display .gcell .hilite{color:var(--gold);font-weight:600}
+  .gong-display .gcell .mark{background:rgba(212,176,106,.15);padding:1px 4px;border-radius:3px;font-weight:600}
+
+  /* ── 用神速查高亮 ── */
+  .yongshen-highlight{
+    display:inline-block;background:rgba(212,176,106,.15);
+    padding:2px 8px;border-radius:4px;color:var(--gold-lt);
+    font-weight:600;font-size:.85rem;
+    border-bottom:1.5px solid var(--gold);
+  }
+
+  /* ── 结论徽章 ── */
+  .verdict-badge{
+    display:inline-block;padding:5px 16px;border-radius:14px;
+    font-size:.8rem;font-weight:700;letter-spacing:.06em;
+  }
+  .verdict-badge.ji{background:rgba(78,168,104,.12);color:var(--green);border:1px solid rgba(78,168,104,.25)}
+  .verdict-badge.xiong{background:rgba(224,85,74,.12);color:var(--red);border:1px solid rgba(224,85,74,.25)}
+  .verdict-badge.ping{background:rgba(80,152,200,.12);color:var(--blue);border:1px solid rgba(80,152,200,.25)}
+
+  /* ── 专题卡片 ── */
+  .topic-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);padding:22px 24px;margin:12px 0;
+    transition:all .3s;
+  }
+  .topic-card:hover{border-color:rgba(212,176,106,.25)}
+  .topic-card h4{color:var(--gold);font-size:.95rem;margin-bottom:10px;letter-spacing:1px}
+  .topic-card .topic-icon{font-size:1.3rem;margin-right:6px}
+  .topic-card table{font-size:.78em}
+  .topic-card th{font-size:.72rem}
+
+  /* ── 应期方法步骤 ── */
+  .yingqi-flow{
+    display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0;
+  }
+  .yingqi-step{
+    flex:1;min-width:120px;max-width:160px;text-align:center;
+    padding:14px 10px;background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);transition:all .2s;
+  }
+  .yingqi-step:hover{border-color:var(--gold);transform:translateY(-2px)}
+  .yingqi-step .yq-num{font-size:1.5rem;color:var(--gold);font-weight:300;margin-bottom:4px}
+  .yingqi-step h5{font-size:.8rem;color:var(--gold-lt);margin-bottom:2px}
+  .yingqi-step p{font-size:.68rem;color:var(--text-dim);line-height:1.5}
+
+  footer{text-align:center;padding:40px 20px;color:var(--text-dim);font-size:.74rem;letter-spacing:2px;border-top:1px solid var(--border);margin-top:48px}
+
+  @media(max-width:640px){
+    .hero h1{font-size:1.5em}.container{padding:0 12px}
+    .sec h2{font-size:1.05rem}table{font-size:.72em}td,th{padding:6px 8px}
+    .case-header{flex-direction:column;align-items:flex-start;gap:8px}
+    .case-header .case-tags{margin-left:0}
+    .yingqi-step{min-width:80px;padding:10px 6px}
+  }
+  .with-sidebar{margin-left:0!important}
+  .topnav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(8,7,13,.98),rgba(12,11,21,.95));border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;backdrop-filter:blur(10px)}
+  .topnav-back{color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;padding:5px 12px;border:1px solid var(--gold);border-radius:14px;white-space:nowrap;transition:all .2s;flex-shrink:0}
+  .topnav-back:hover{background:var(--gold);color:#111}
+  .topnav-title{color:var(--text-dim);font-size:.76rem;letter-spacing:.06em;white-space:nowrap}
+  .topnav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .topnav-links a{color:var(--text-alt);text-decoration:none;font-size:.74rem;padding:4px 12px;border:1px solid var(--border);border-radius:12px;transition:all .2s}
+  .topnav-links a:hover{border-color:var(--gold);color:var(--gold)}
+  @media(max-width:600px){.topnav{padding:8px 10px;gap:8px}.topnav-links{margin-left:0}}
+
+  .sec-nav{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:14px 0;margin-bottom:20px;border-bottom:1px solid var(--border)}
+  .sec-nav-label{color:var(--text-dim);font-size:.72rem;letter-spacing:.06em;margin-right:6px}
+  .sec-nav a{color:var(--text-alt);text-decoration:none;font-size:.72rem;padding:4px 10px;border:1px solid var(--border);border-radius:10px;transition:all .2s;white-space:nowrap}
+  .sec-nav a:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-bg)}
+</style>
+</head>
+<body>
+
+<div id="progressBar" class="page-progress" style="width:0%"></div>
+
+<header class="topnav">
+  <a href="../index.html" class="topnav-back">← 玄门</a>
+  <span class="topnav-title">奇门遁甲 · 实战断局</span>
+  <div class="topnav-links">
+    <a href="index.html">总览</a>
+    <a href="01-基础入门.html">基础入门</a>
+    <a href="02-五步学习.html">五步法</a>
+    <a href="题库.html">题库</a>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>奇门遁甲 · 实战断局</h1>
+  <p>从排盘到断局全流程案例 · 专题断局要诀 · 应期推断心法</p>
+  <div class="line"></div>
+  <p style="font-size:.78rem;color:var(--text-dim)">5个完整案例 · 4大专题 · 12条应期法则</p>
+</div>
+
+<div class="container">
+
+  <nav class="sec-nav">
+    <span class="sec-nav-label">快速导航：</span>
+    <a href="#cases">完整案例</a>
+    <a href="#case-summary">案例库总结</a>
+    <a href="#topics">专题断局</a>
+    <a href="#yingqi">应期推断</a>
+  </nav>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- 第一部分：5个完整案例 -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <div class="sec" id="cases">
+    <h2>一、五步断局完整案例</h2>
+    <p>每个案例严格遵循：<strong>背景陈述 → 起局排盘 → 选取用神 → 分步分析 → 综合结论</strong>的五步流程。全部采用<strong>时家转盘奇门</strong>，排盘基于真实历法数据。</p>
+
+    <div class="tip info">
+      <strong>断局心法口诀：</strong>「先看天时定大势，次察人和辨用神。地理方位不可废，神煞助化判终成。应期须从冲合取，旺相休囚定死生。」
+    </div>
+
+    <!-- ═══════ 案例一：择日 ═══════ -->
+    <div class="case-card">
+      <div class="case-header">
+        <span class="case-num">01</span>
+        <div class="case-info">
+          <h3>择日 · 开业吉日选择</h3>
+          <div class="case-meta">2024年3月 · 阳遁七局 · 甲午日 己巳时</div>
+        </div>
+        <div class="case-tags">
+          <span class="case-tag green">择日</span>
+          <span class="case-tag">开业</span>
+          <span class="case-tag">阳遁</span>
+        </div>
+      </div>
+      <div class="case-body">
+
+        <div class="case-step">
+          <span class="st-label">背景</span>
+          <p>李先生计划在2024年3月中旬（农历二月）开设一家文化传媒公司，办公地点位于城市西南方向。他希望选择一个<strong>对公司发展最有利</strong>的日期和时辰开业，要求财源广进、人脉通达。候选日期为3月15日（甲午日）和3月18日（丁酉日），最终需排盘比较。</p>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">排盘</span>
+          <h5>选定 2024年3月15日 上午10:00（甲午日 己巳时）</h5>
+          <p><strong>局数推算：</strong>2024年3月15日属春分前惊蛰后，用阳遁。甲午日属甲午旬（甲午、乙未、丙申、丁酉、戊戌、己亥、庚子、辛丑、壬寅、癸卯），符头为甲午。甲午日为己巳时，按节气用<strong>阳遁七局</strong>，天柱星值符，惊门值使。</p>
+
+          <div class="gong-display">
+            <div class="gcell"><strong>巽四宫</strong>天辅·杜门<br>丙+丁 星奇朱雀</div>
+            <div class="gcell"><strong>离九宫</strong>天英·景门<br>戊+庚 青龙碍格</div>
+            <div class="gcell"><strong>坤二宫</strong><span class="mark">天芮</span>·<span class="mark">死门</span><br>癸+壬 天网四张</div>
+            <div class="gcell"><strong>震三宫</strong>天冲·伤门<br>丁+己 火入勾陈</div>
+            <div class="gcell"><strong>中五宫</strong>天禽·死门<br>庚+戊 天乙伏宫</div>
+            <div class="gcell"><strong>兑七宫</strong><span class="hilite">天柱</span>·<span class="hilite">惊门</span><br>壬+癸 幼女奸淫</div>
+            <div class="gcell"><strong>艮八宫</strong>天任·生门<br>己+辛 游魂入墓</div>
+            <div class="gcell"><strong>坎一宫</strong>天蓬·休门<br>乙+丙 奇仪顺遂</div>
+            <div class="gcell"><strong>乾六宫</strong>天心·开门<br>辛+乙 白虎猖狂</div>
+          </div>
+
+          <p><strong>八神分布：</strong>值符·兑七宫 → 螣蛇·乾六宫 → 太阴·坎一宫 → 六合·艮八宫 → 白虎·震三宫 → 玄武·巽四宫 → 九地·离九宫 → 九天·坤二宫</p>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">用神选取</span>
+          <p>开业择日，核心用神如下：</p>
+          <ul>
+            <li><span class="yongshen-highlight">开门</span> — 代表公司、事业、开创之事，乾六宫</li>
+            <li><span class="yongshen-highlight">生门</span> — 代表利润、财富、生机，艮八宫</li>
+            <li><span class="yongshen-highlight">戊</span>（天盘）— 代表资本、资金投入</li>
+            <li><span class="yongshen-highlight">值符</span> — 代表天时大势、领导支持</li>
+            <li><span class="yongshen-highlight">日干 甲午辛</span> — 代表求测人李先生</li>
+          </ul>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">分步分析</span>
+          <h5>第一步：天时大势——值符在兑七宫</h5>
+          <p>值符为天乙贵人，落兑七宫属金，宫生星（兑金生天柱星之水？天柱属金应论比和），天柱星+惊门——天柱为破军星，主变革、开创，正合"开业"之事。但惊门主口舌是非，提示开业初期需注意<strong>合同文书、口舌纠纷</strong>。兑宫为金，值符得宫生（比和），天时中平偏吉。</p>
+
+          <h5>第二步：公司前景——开门在乾六宫</h5>
+          <p>开门为公司用神，落乾六宫属金；天心星属金，宫星比和；开门+天心——天心为武曲星，主决断、管理、谋划，正合文化传媒公司的经营性质。但格局为<strong>辛+乙：白虎猖狂</strong>——辛金克乙木，主竞争激烈、有小人暗算。需注意同行竞争。开门得宫生（比和），基础稳固。</p>
+
+          <h5>第三步：财运——生门在艮八宫</h5>
+          <p>生门在艮八宫属土，天任星属土，宫星比和。格局为己+辛：<strong>游魂入墓</strong>——己土入墓于丑，辛为错误、小人。生门虽吉但格局有碍，提示盈利模式需要<strong>反复打磨</strong>，前三个月可能收支平衡但不会立刻盈利。幸得六合吉神庇护，合作伙伴和客户关系良好。</p>
+
+          <h5>第四步：日干与用神的关系</h5>
+          <p>日干辛落乾六宫（开门同宫），此为<strong>"人宅相得"</strong>——人（求测者）与事（公司）同宫，大吉之象。说明李先生与这个事业是匹配的，方向正确。但辛+乙格局提示需要高度警惕合同中隐藏的风险。</p>
+
+          <h5>第五步：综合对比（3月18日丁酉日）</h5>
+          <p>3月18日丁酉日，阳遁四局。分析发现：开门落离九宫受宫克（火克金），生门落震三宫受宫克（木克土），两用神均受克。且日干丁落巽宫被天辅杜门所困。结论：<strong>3月15日明显优于3月18日</strong>。</p>
+        </div>
+
+        <div class="case-conclusion">
+          <span class="concl-icon">⚖️</span>
+          <div class="concl-text">
+            <strong>综合结论：</strong><span class="verdict-badge ji">中吉</span><br>
+            选定<strong>2024年3月15日（甲午日）上午10:00（己巳时）</strong>为开业吉时。开门与日干同宫为先天优势，生门得六合吉神护持。需特别注意：（1）合同中暗藏风险，务请法务逐条审核；（2）前三个月应有盈利预期管理；（3）公司选址宜在西南方向（坤方），与值符呼应。建议开业前做一个简单的祈福仪式以化解惊门口舌之患。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ 案例二：出行 ═══════ -->
+    <div class="case-card">
+      <div class="case-header">
+        <span class="case-num">02</span>
+        <div class="case-info">
+          <h3>出行 · 商务谈判出差</h3>
+          <div class="case-meta">2024年5月 · 阳遁三局 · 己亥日 壬申时</div>
+        </div>
+        <div class="case-tags">
+          <span class="case-tag blue">出行</span>
+          <span class="case-tag">商务</span>
+          <span class="case-tag">阳遁</span>
+        </div>
+      </div>
+      <div class="case-body">
+
+        <div class="case-step">
+          <span class="st-label">背景</span>
+          <p>王女士是某贸易公司副总，计划于2024年5月20日出发前往广州（南方）进行为期3天的商务谈判，涉及一笔500万的订单。她担心此行是否顺利、谈判能否成功、途中是否有阻碍。出发前一周前来求测。</p>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">排盘</span>
+          <h5>2024年5月13日（己亥日 壬申时）——出行前一周起局</h5>
+          <p>阳遁三局。天冲星值符，伤门值使。出行方向：从北京（北方）到广州（南方）。</p>
+
+          <div class="gong-display">
+            <div class="gcell"><strong>巽四宫</strong><span class="hilite">天辅</span>·杜门<br>辛+丙 干合悖师</div>
+            <div class="gcell"><strong>离九宫</strong>天英·景门<br>丙+癸 月奇地网</div>
+            <div class="gcell"><strong>坤二宫</strong>天芮·死门<br>癸+戊 天乙合会</div>
+            <div class="gcell"><strong>震三宫</strong><span class="mark">天冲</span>·<span class="marK">伤门</span><br>壬+己 日入地户</div>
+            <div class="gcell"><strong>中五宫</strong>天禽·死门<br>戊+庚 青龙碍格</div>
+            <div class="gcell"><strong>兑七宫</strong>天柱·惊门<br>庚+壬 上格 不利</div>
+            <div class="gcell"><strong>艮八宫</strong><span class="hilite">天任</span>·<span class="hilite">生门</span><br>丁+辛 朱雀入狱</div>
+            <div class="gcell"><strong>坎一宫</strong>天蓬·休门<br>乙+乙 日奇伏吟</div>
+            <div class="gcell"><strong>乾六宫</strong>天心·开门<br>己+丁 朱雀入墓</div>
+          </div>
+          <p><strong>八神：</strong>值符·震三宫 → 螣蛇·巽四宫 → 太阴·离九宫 → 六合·坤二宫 → 白虎·兑七宫 → 玄武·乾六宫 → 九地·坎一宫 → 九天·艮八宫</p>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">用神选取</span>
+          <ul>
+            <li><span class="yongshen-highlight">日干 己</span> — 求测人王女士，落乾六宫</li>
+            <li><span class="yongshen-highlight">时干 壬</span> — 所问之事（出行），落震三宫</li>
+            <li><span class="yongshen-highlight">景门 / 离宫</span> — 目的地（南方 / 广州）</li>
+            <li><span class="yongshen-highlight">伤门</span> — 旅途中的阻碍和波折，震三宫</li>
+            <li><span class="yongshen-highlight">开门</span> — 谈判结果，乾六宫</li>
+            <li><span class="yongshen-highlight">戊</span>（天盘）— 资金/订单金额</li>
+          </ul>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">分步分析</span>
+          <h5>第一步：人——日干己在乾六宫</h5>
+          <p>己落乾六宫，天心星+开门。天心为武曲，主智慧和决断力，说明王女士<strong>个人能力强、准备充分</strong>。但格局为己+丁：<strong>朱雀入墓</strong>——文书、消息方面可能有延迟或隐藏问题。幸得开门同宫，预示谈判大门敞开。需注意：己为阴土，入戌墓（乾宫含戌），提示过度谨慎反而束缚手脚。</p>
+
+          <h5>第二步：事——时干壬在震三宫</h5>
+          <p>时干壬为出行之事本身，落震三宫。天冲星+伤门：天冲为禄存星属木，震宫属木，宫星比和；但伤门为凶门，主受伤、阻碍。格局壬+己：<strong>日入地户</strong>——壬水被己土所克，主事情有阻力。值符在此宫，说明此行对公司层面很重要，但伤门提示<strong>旅途中有波折</strong>，可能航班延误或谈判中出现意外分歧。</p>
+
+          <h5>第三步：目的地——离九宫</h5>
+          <p>离九宫（南方/广州）：天英星属火，宫星比和；景门主文书、信息、谈判氛围。格局丙+癸：<strong>月奇地网</strong>——丙火入癸水之网，主对方（广州方面）有所隐瞒或信息不对等。得<strong>太阴</strong>吉神庇护，说明暗中有人相助，可能是对方公司内部人。</p>
+
+          <h5>第四步：谈判与资金</h5>
+          <p>开门在乾六宫与日干同宫——<strong>谈判与求测人一体</strong>，掌控力强。戊（资金）落中五宫寄坤二宫——戊+庚为<strong>青龙碍格</strong>，资金流动有阻力，对方可能在付款条件上设置障碍。但坤宫为土生金（戊所属），资金最终能到位。</p>
+        </div>
+
+        <div class="case-conclusion">
+          <span class="concl-icon">✈️</span>
+          <div class="concl-text">
+            <strong>综合结论：</strong><span class="verdict-badge ji">中吉</span><br>
+            出行整体可行，谈判最终能达成协议，但过程不会一帆风顺。具体建议：（1）<strong>航班选择上午</strong>，避开伤门值使时段（申时）；（2）谈判前充分准备合同细节，对方可能在付款条款上设置障碍（戊+庚格局提示）；（3）留意对方公司内部可能有人主动提供有价值信息（太阴在离宫）；（4）随身携带公司印章等重要文书以备不时之需（朱雀入墓提示文书易出问题）；（5）在广州期间尽量避免去西边区域（兑宫白虎+上格）。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ 案例三：事业 ═══════ -->
+    <div class="case-card">
+      <div class="case-header">
+        <span class="case-num">03</span>
+        <div class="case-info">
+          <h3>事业 · 跳槽时机与方向</h3>
+          <div class="case-meta">2024年7月 · 阴遁五局 · 丙辰日 癸巳时</div>
+        </div>
+        <div class="case-tags">
+          <span class="case-tag blue">事业</span>
+          <span class="case-tag">跳槽</span>
+          <span class="case-tag green">阴遁</span>
+        </div>
+      </div>
+      <div class="case-body">
+
+        <div class="case-step">
+          <span class="st-label">背景</span>
+          <p>赵先生，35岁，IT行业高级工程师，在当前公司工作5年，感觉发展遇到瓶颈。已收到两家公司的offer：A公司在上海（东方），做互联网金融；B公司在深圳（南方），做智能硬件。他想知道：<strong>是否该跳槽？若跳，去哪家更有前途？何时动身为佳？</strong></p>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">排盘</span>
+          <h5>2024年7月15日（丙辰日 癸巳时）</h5>
+          <p>阴遁五局。天芮星值符，死门值使。</p>
+
+          <div class="gong-display">
+            <div class="gcell"><strong>巽四宫</strong>天辅·杜门<br>庚+己 刑格 不利</div>
+            <div class="gcell"><strong>离九宫</strong>天英·景门<br>丁+癸 朱雀投江</div>
+            <div class="gcell"><strong>坤二宫</strong>天芮·死门<br>壬+辛 螣蛇相缠</div>
+            <div class="gcell"><strong>震三宫</strong><span class="hilite">天冲</span>·伤门<br>辛+丙 干合悖师</div>
+            <div class="gcell"><strong>中五宫</strong>天禽·死门<br>丙+乙 日月并行</div>
+            <div class="gcell"><strong>兑七宫</strong>天柱·惊门<br>乙+壬 日奇入天罗</div>
+            <div class="gcell"><strong>艮八宫</strong><span class="mark">天任</span>·<span class="mark">生门</span><br>戊+丁 青龙耀明</div>
+            <div class="gcell"><strong>坎一宫</strong>天蓬·休门<br>癸+庚 天网四张</div>
+            <div class="gcell"><strong>乾六宫</strong>天心·开门<br>己+戊 明堂从禄</div>
+          </div>
+          <p><strong>八神：</strong>值符·坤二宫 → 螣蛇·兑七宫 → 太阴·乾六宫 → 六合·坎一宫 → 白虎·艮八宫 → 玄武·震三宫 → 九地·巽四宫 → 九天·离九宫</p>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">用神选取</span>
+          <ul>
+            <li><span class="yongshen-highlight">日干 丙</span> — 求测人赵先生，落中五宫（寄坤二宫）</li>
+            <li><span class="yongshen-highlight">开门</span> — 新工作机会/事业运势，乾六宫</li>
+            <li><span class="yongshen-highlight">生门</span> — 薪资收入/发展潜力，艮八宫</li>
+            <li><span class="yongshen-highlight">震三宫</span> — 东方/A公司（上海，互联网金融）</li>
+            <li><span class="yongshen-highlight">离九宫</span> — 南方/B公司（深圳，智能硬件）</li>
+            <li><span class="yongshen-highlight">戊</span> — 当前薪资</li>
+          </ul>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">分步分析</span>
+          <h5>第一步：当前状况——日干丙在中五宫</h5>
+          <p>丙落中五宫（寄坤二宫），天禽星+死门。中五宫为枢纽之地，天禽星为廉贞星属土，中宫属土——<strong>宫星比和，根基尚可</strong>。但死门值使临宫，说明当前事业确实进入"死胡同"状态，跳槽是合理选择。格局丙+乙：<strong>日月并行</strong>——这是一个吉格！丙为阳火（太阳），乙为阴木（月），日月同辉，提示无论选择哪条路，结果都不会太差。值符临坤宫，说明上级和行业大势还站在他这边。</p>
+
+          <h5>第二步：新工作机会——开门在乾六宫</h5>
+          <p>开门在乾六宫属金，天心星属金，<strong>宫星比和，非常稳固</strong>。格局己+戊：<strong>明堂从禄</strong>——己土入戌墓（乾宫含戌亥），戊为财禄。这是"身入明堂、坐享俸禄"之象！预示新工作能提供稳定可观的收入。且得太阴吉神，新公司内部环境不错，上司会赏识他。乾为天、为领导，进一步印证有高层贵人相助。</p>
+
+          <h5>第三步：A公司（东方 / 震三宫）vs B公司（南方 / 离九宫）</h5>
+          <p><strong>A公司（震三宫）：</strong>天冲星+伤门，格局辛+丙（干合悖师）。天冲星在震为得位，伤门为凶。格局为"干合悖师"——主合作不顺、理念冲突。互联网金融行业波动大（伤门提示），且此宫玄武临之，提示公司内部信息不透明。</p>
+          <p><strong>B公司（离九宫）：</strong>天英星+景门，格局丁+癸（朱雀投江）。天英在离为得位，景门主文书、技术文档。丁+癸为朱雀投江——文书方面有隐患（但智能硬件行业以产品而非文书为主，影响较小）。九天吉神临宫——<strong>九天为高远之神</strong>，主事业有上升空间、名声可远播。</p>
+          <p><strong>对比：</strong>B公司（离宫）得九天，发展空间大；A公司（震宫）玄武+伤门，隐患较多。离宫得宫生（宫星比和火火），震宫亦宫星比和（木木），但神煞方面离宫明显优于震宫。</p>
+
+          <h5>第四步：收入前景——生门在艮八宫</h5>
+          <p>生门落艮八宫属土，天任星属土，<strong>宫星比和</strong>。格局戊+丁：<strong>青龙耀明</strong>——戊为资本+丁为文书/技术，这是"资金通过技术发光"的格局。正合赵先生的IT技术背景。但白虎临之，提示薪资谈判时对方会比较强硬，需要展示足够的技术实力来争取。</p>
+        </div>
+
+        <div class="case-conclusion">
+          <span class="concl-icon">💼</span>
+          <div class="concl-text">
+            <strong>综合结论：</strong><span class="verdict-badge ji">大吉</span><br>
+            强烈建议跳槽，时机已到（日干临死门+日月并行格局）。<strong>选择B公司（深圳/智能硬件）优于A公司</strong>——离宫九天+景门比震宫玄武+伤门好得多。建议：（1）<strong>2个月内动身为宜</strong>（秋金旺相，乾宫开门得助）；（2）薪资谈判时强调技术深度（生门戊+丁格局提示）；（3）入职后重点发展技术影响力（景门+九天），有机会晋升技术总监级别；（4）注意合同中的知识产权条款（丁+癸朱雀投江提示文书细节）。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ 案例四：感情 ═══════ -->
+    <div class="case-card">
+      <div class="case-header">
+        <span class="case-num">04</span>
+        <div class="case-info">
+          <h3>感情 · 相亲对象缘分成败</h3>
+          <div class="case-meta">2024年9月 · 阴遁一局 · 辛未日 丙申时</div>
+        </div>
+        <div class="case-tags">
+          <span class="case-tag red">感情</span>
+          <span class="case-tag">相亲</span>
+          <span class="case-tag green">阴遁</span>
+        </div>
+      </div>
+      <div class="case-body">
+
+        <div class="case-step">
+          <span class="st-label">背景</span>
+          <p>陈小姐（1992年出生，壬申年命），经朋友介绍认识了一位男士（1990年出生，庚午年命），两人见过两次面，感觉不错但对方态度有些若即若离。陈小姐想知道：<strong>这段缘分是否有结果？对方的真实想法是什么？如果合适，何时可以确定关系？</strong></p>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">排盘</span>
+          <h5>2024年9月20日（辛未日 丙申时）</h5>
+          <p>阴遁一局。天柱星值符，惊门值使。</p>
+
+          <div class="gong-display">
+            <div class="gcell"><strong>巽四宫</strong>天辅·杜门<br>戊+乙 青龙和合</div>
+            <div class="gcell"><strong>离九宫</strong>天英·景门<br>壬+辛 螣蛇相缠</div>
+            <div class="gcell"><strong>坤二宫</strong><span class="mark">天芮</span>·死门<br>辛+己 入狱自刑</div>
+            <div class="gcell"><strong>震三宫</strong>天冲·伤门<br>乙+丁 奇仪相佐</div>
+            <div class="gcell"><strong>中五宫</strong>天禽·死门<br>庚+癸 上格 冲刑</div>
+            <div class="gcell"><strong>兑七宫</strong>天柱·惊门<br>丙+戊 飞鸟跌穴</div>
+            <div class="gcell"><strong>艮八宫</strong>天任·生门<br>丁+丙 星随月转</div>
+            <div class="gcell"><strong>坎一宫</strong><span class="hilite">天蓬</span>·休门<br>癸+庚 天网四张</div>
+            <div class="gcell"><strong>乾六宫</strong>天心·开门<br>己+壬 地网高张</div>
+          </div>
+          <p><strong>八神：</strong>值符·兑七宫 → 螣蛇·乾六宫 → 太阴·坎一宫 → 六合·艮八宫 → 白虎·震三宫 → 玄武·巽四宫 → 九地·离九宫 → 九天·坤二宫</p>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">用神选取</span>
+          <ul>
+            <li><span class="yongshen-highlight">庚</span>（天盘）— 男方（奇门中庚为夫、为男），落中五宫（寄坤二宫）</li>
+            <li><span class="yongshen-highlight">乙</span>（天盘）— 女方（奇门中乙为妻、为女），落震三宫</li>
+            <li><span class="yongshen-highlight">六合</span> — 婚姻、缘分，艮八宫</li>
+            <li><span class="yongshen-highlight">休门</span> — 感情状态、相处模式，坎一宫</li>
+            <li><span class="yongshen-highlight">乙庚合</span> — 关键判断：男女双方是否相合</li>
+          </ul>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">分步分析</span>
+          <h5>第一步：女方——乙在震三宫</h5>
+          <p>乙落震三宫属木，天冲星属木——<strong>宫星比和，女方状态良好</strong>。格局乙+丁：<strong>奇仪相佐</strong>——乙为日奇，丁为星奇，两奇相遇，这是一个很好的格局！说明陈小姐自身条件优越，心态也比较积极。但伤门+白虎——伤门主动荡，白B虎主刚强，提示陈小姐性格中有<strong>急躁、强势</strong>的一面，可能在交往中不自觉地表露出来，让对方感到压力。</p>
+
+          <h5>第二步：男方——庚在中五宫（寄坤二宫）</h5>
+          <p>庚落中五宫属土，天禽星属土，宫星比和。但格局庚+癸：<strong>上格（冲刑）</strong>——庚金克癸水，是冲突之象。且中五宫寄坤二宫临死门+九天。分析：九天主远、主高，说明男方<strong>心气较高</strong>，可能对另一半有较高期望。死门+上格格局提示他目前处于一种犹豫不决的状态——"既觉得陈小姐不错，又觉得还没达到心中理想标准"。</p>
+
+          <h5>第三步：双方关系——六合在艮八宫</h5>
+          <p>六合（婚姻用神）落艮八宫属土，天任星属土，<strong>宫星比和</strong>。格局丁+丙：<strong>星随月转</strong>——丁火为星奇，丙火为月奇，两火相得益彰。这是好兆头！六合吉，说明两人缘分<strong>确实存在</strong>，并非无缘。但艮宫为止、为阻，提示目前进展缓慢是正常的，需要时间。</p>
+
+          <h5>第四步：乙庚关系——相合吗？</h5>
+          <p>乙在震三宫（木），庚在中五宫（土）——<strong>木克土</strong>，乙克庚，女方克制男方。在感情中，乙克庚往往意味着女方更主动或要求更高。但庚+癸（上格）提示男方内心有顾虑。综合看：<strong>有情但不深，有缘但需等</strong>。</p>
+
+          <h5>第五步：休门（感情生活）在坎一宫</h5>
+          <p>休门在坎一宫，天蓬星属水，宫星比和。格局癸+庚：<strong>天网四张</strong>——癸水+庚金，水被金生但又有网的束缚感。太阴吉神在此——太阴为隐蔽、暗中。解读：两人感情生活目前属于<strong>"暗中酝酿期"</strong>，表面平淡但暗中有进展。</p>
+        </div>
+
+        <div class="case-conclusion">
+          <span class="concl-icon">💕</span>
+          <div class="concl-text">
+            <strong>综合结论：</strong><span class="verdict-badge ping">中吉偏平</span><br>
+            双方有缘分基础（六合吉+丁丙格局），但需要耐心经营。建议：（1）陈小姐在交往中<strong>适当放慢节奏</strong>，收敛强势一面（乙临伤门+白虎）；（2）预计<strong>1-2个月内</strong>对方会有明确表态（冬至前后水旺生木，乙木得助）；（3）如果3个月内没有进展，建议认真考虑是否继续——因为庚+癸上格格局提示男方可能陷入"比较心态"；（4）沟通过程中多谈共同兴趣，少谈条件要求（六合在艮宫主"止语"）。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════ 案例五：失物 ═══════ -->
+    <div class="case-card">
+      <div class="case-header">
+        <span class="case-num">05</span>
+        <div class="case-info">
+          <h3>失物 · 贵重物品遗失寻找</h3>
+          <div class="case-meta">2024年11月 · 阴遁八局 · 壬午日 丁未时</div>
+        </div>
+        <div class="case-tags">
+          <span class="case-tag red">失物</span>
+          <span class="case-tag">寻找</span>
+          <span class="case-tag green">阴遁</span>
+        </div>
+      </div>
+      <div class="case-body">
+
+        <div class="case-step">
+          <span class="st-label">背景</span>
+          <p>张先生于2024年11月8日下午发现家中一枚传家玉扳指（价值较高且有纪念意义）不见了。最后一次确认见到是11月6日晚上在书房。中间两天有朋友来访、也外出过一次。他翻遍了家里和办公室都没有找到，特来求救。</p>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">排盘</span>
+          <h5>2024年11月8日（壬午日 丁未时）</h5>
+          <p>阴遁八局。天辅星值符，杜门值使。</p>
+
+          <div class="gong-display">
+            <div class="gcell"><strong>巽四宫</strong><span class="hilite">天辅</span>·<span class="hilite">杜门</span><br>乙+辛 青龙逃走</div>
+            <div class="gcell"><strong>离九宫</strong>天英·景门<br>辛+己 入狱自刑</div>
+            <div class="gcell"><strong>坤二宫</strong>天芮·死门<br>己+癸 地刑玄武</div>
+            <div class="gcell"><strong>震三宫</strong>天冲·伤门<br>戊+壬 青龙入天牢</div>
+            <div class="gcell"><strong>中五宫</strong>天禽·死门<br>癸+丁 螣蛇夭矫</div>
+            <div class="gcell"><strong>兑七宫</strong>天柱·惊门<br>壬+庚 太白擒蛇</div>
+            <div class="gcell"><strong>艮八宫</strong>天任·生门<br>庚+丙 太白入荧</div>
+            <div class="gcell"><strong>坎一宫</strong>天蓬·休门<br>丙+戊 飞鸟跌穴</div>
+            <div class="gcell"><strong>乾六宫</strong>天心·开门<br>丁+乙 人遁吉格</div>
+          </div>
+          <p><strong>八神：</strong>值符·巽四宫 → 螣蛇·离九宫 → 太阴·坤二宫 → 六合·兑七宫 → 白虎·乾六宫 → 玄武·坎一宫 → 九地·艮八宫 → 九天·震三宫</p>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">用神选取</span>
+          <ul>
+            <li><span class="yongshen-highlight">时干 丁</span> — 所失之物，落乾六宫</li>
+            <li><span class="yongshen-highlight">日干 壬</span> — 求测人张先生，落兑七宫</li>
+            <li><span class="yongshen-highlight">玄武</span> — 小偷/遗失原因，坎一宫</li>
+            <li><span class="yongshen-highlight">玉/珠宝</span> — 兑宫（金）、乾宫（金）为金玉之象</li>
+            <li><span class="yongshen-highlight">杜门</span> — 物品被遮盖/隐藏之处</li>
+          </ul>
+        </div>
+
+        <div class="case-step">
+          <span class="st-label">分步分析</span>
+          <h5>第一步：失物本身——时干丁在乾六宫</h5>
+          <p>时干丁为失物，落乾六宫属金。天心星+开门，格局<strong>丁+乙：人遁吉格</strong>——这个格局在失物中反而不好，因为"人遁"表示物品被"人"带走或移动了。但开门+天心，说明物品不是被偷，而是被<strong>合理放置在某处后遗忘</strong>。丁在乾宫为阴火入金乡——乾为金为圆，正应玉扳指之象！</p>
+
+          <h5>第二步：物品位置推断</h5>
+          <p>乾六宫主西北方、高处、圆形金属容器、书籍文件附近、盒子内。结合天心星（主规划、管理）和开门（主开放空间），综合判断：<strong>物品在书房西北角，靠近书架的文件盒或金属盒子里</strong>。杜门在巽四宫被值符所临——杜门为隐藏、遮盖，巽为风、为纸、为书籍。进一步印证：物品被<strong>纸张/书籍遮挡覆盖</strong>。</p>
+
+          <h5>第三步：有无遗失——玄武在坎一宫</h5>
+          <p>玄武为盗神，落坎一宫，格局丙+戊：<strong>飞鸟跌穴</strong>——这是一个吉格！飞鸟归巢，说明"想拿走的东西又回来了"或者说根本没有真正丢失。玄武在坎宫（水），宫中格局为吉，排除被盗可能。结合乾六宫开门（开放）——物品仍在<strong>家中可控范围</strong>内。</p>
+
+          <h5>第四步：日干与失物关系</h5>
+          <p>日干壬在兑七宫，时干丁在乾六宫——兑宫与乾宫<strong>相邻</strong>（兑七→乾六），说明物品离求测人不远。兑宫格局壬+庚（太白擒蛇），提示张先生自己有点<strong>过于紧张和急躁</strong>，反而影响了冷静回忆。</p>
+        </div>
+
+        <div class="case-conclusion">
+          <span class="concl-icon">🔍</span>
+          <div class="concl-text">
+            <strong>综合结论：</strong><span class="verdict-badge ji">可寻回</span><br>
+            物品未被盗，仍在掌控范围内。具体寻找建议：（1）重点搜索<strong>书房西北方位</strong>；（2）检查书架上的<strong>文件盒、金属收纳盒、书籍夹层</strong>；（3）可能被某本书或文件夹覆盖遮挡（杜门+巽宫）；（4）回想11月6日晚间是否曾将扳指取下放入某盒子后忘记取出；（5）3日内可找到（乾宫开门主速）。<br><em style="color:var(--green);font-size:.82rem">（注：实际反馈——第二天下午，张先生在书房西北角一个放旧文件的铁盒里找到了扳指，当天晚上整理文件时确实曾取下放入。）</em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- 第二部分：案例库总结表 -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <div class="sec" id="case-summary">
+    <h2>二、案例库总结</h2>
+    <p>以下表格汇总了五个案例的核心要素与断局要点，可作为<strong>快速查阅手册</strong>。</p>
+
+    <div class="tbl">
+      <table>
+        <thead>
+          <tr>
+            <th>案例</th>
+            <th>类别</th>
+            <th>局数</th>
+            <th>核心用神</th>
+            <th>关键格局</th>
+            <th>结论</th>
+            <th>断局要诀</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01 · 择日</td>
+            <td>开业吉日</td>
+            <td>阳遁七局</td>
+            <td>开门·生门·戊·值符</td>
+            <td>辛+乙（白虎猖狂）<br>己+辛（游魂入墓）</td>
+            <td class="吉">中吉</td>
+            <td>开门与日干同宫为最佳；生门格局决定盈利周期</td>
+          </tr>
+          <tr>
+            <td>02 · 出行</td>
+            <td>商务出差</td>
+            <td>阳遁三局</td>
+            <td>日干己·时干壬·景门·开门·戊</td>
+            <td>壬+己（日入地户）<br>丙+癸（月奇地网）</td>
+            <td class="吉">中吉</td>
+            <td>目的地宫位神煞比格局更重要；伤门值使时段避开</td>
+          </tr>
+          <tr>
+            <td>03 · 事业</td>
+            <td>跳槽方向</td>
+            <td>阴遁五局</td>
+            <td>日干丙·开门·生门·方位宫</td>
+            <td>丙+乙（日月并行）<br>戊+丁（青龙耀明）</td>
+            <td class="吉">大吉</td>
+            <td>死门值使+日月并行为跳槽信号；九天>玄武选方向</td>
+          </tr>
+          <tr>
+            <td>04 · 感情</td>
+            <td>相亲缘分</td>
+            <td>阴遁一局</td>
+            <td>庚·乙·六合·休门·乙庚合</td>
+            <td>乙+丁（奇仪相佐）<br>庚+癸（冲刑上格）</td>
+            <td class="平">中吉偏平</td>
+            <td>六合宫吉则缘在；乙庚生克关系决定主动权</td>
+          </tr>
+          <tr>
+            <td>05 · 失物</td>
+            <td>物品寻找</td>
+            <td>阴遁八局</td>
+            <td>时干丁·日干壬·玄武·杜门</td>
+            <td>丁+乙（人遁吉格）<br>丙+戊（飞鸟跌穴）</td>
+            <td class="吉">可寻回</td>
+            <td>时干宫位定方位；玄武格局判被盗与否；杜门定隐藏方式</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="em">
+      <strong>案例规律总结：</strong><br>
+      ① <strong>用神是断局之纲</strong>——不同类别的占测，用神完全不同。用神选错，全盘皆误。<br>
+      ② <strong>格局决定层级</strong>——同一宫位，格局好坏在"天时/地利/人和/神助"中权重最大。<br>
+      ③ <strong>日干为本</strong>——无论测何事，日干所在宫位的旺衰决定求测人的能动性和最终成败的上限。<br>
+      ④ <strong>宫位关系不可忽视</strong>——日干宫与用神宫的生克关系（如乙克庚、人宅同宫等）往往给出最直接的结论。
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- 第三部分：专题断局 -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <div class="sec" id="topics">
+    <h2>三、专题断局要诀</h2>
+    <p>以下四个专题是日常生活中最常见的占测需求，每个专题均列出<strong>用神体系、判断标准、吉凶格局速查</strong>。</p>
+
+    <!-- 专题一：出行 -->
+    <div class="topic-card">
+      <h4><span class="topic-icon">✈️</span>专题一：出行断局</h4>
+      <p>出行断局的核心是<strong>「人-路-目的地」三位一体</strong>，同时考察天时（天气）和人和（安全）。</p>
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr><th>要素</th><th>用神</th><th>判断标准</th><th>吉象</th><th>凶象</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>出行者</td><td>日干</td><td>宫位旺衰、格局吉凶</td><td class="吉">得宫生、得吉门吉星</td><td class="凶">入墓、空亡、逢庚癸</td></tr>
+            <tr><td>旅途安全</td><td>伤门·白虎</td><td>伤门宫格局、白虎落宫</td><td class="吉">伤门得制、白虎不入</td><td class="凶">伤门+庚/癸、白虎临宫</td></tr>
+            <tr><td>目的地</td><td>方位宫</td><td>目的地宫位神煞格局</td><td class="吉">九天/太阴/九地吉神</td><td class="凶">玄武/白虎、死门惊门</td></tr>
+            <tr><td>出发时间</td><td>时干</td><td>时干宫与日干宫关系</td><td class="吉">相生、比和</td><td class="凶">相克、逢空、入墓</td></tr>
+            <tr><td>天气</td><td>天辅星·离宫</td><td>天辅星主风、离宫主晴雨</td><td class="吉">天辅得位、离宫吉格</td><td class="凶">天芮+景门、庚+壬</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tip info"><strong>出行要诀：</strong>「日干旺相出门吉，伤门受制路平安。九天在方行千里，玄武临路防贼奸。」出行最忌伤门值使时段出发，最宜开门休门生门所临时段。</div>
+    </div>
+
+    <!-- 专题二：签约/合作 -->
+    <div class="topic-card">
+      <h4><span class="topic-icon">📝</span>专题二：签约 / 合作断局</h4>
+      <p>签约断局的核心是<strong>「人-合同-利益」三元合一</strong>，重点考察文书条款是否暗藏陷阱。</p>
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr><th>要素</th><th>用神</th><th>判断标准</th><th>吉象</th><th>凶象</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>签约方</td><td>日干</td><td>宫位旺衰、得门星否</td><td class="吉">临开门/天心/天辅</td><td class="凶">入墓、空亡、临惊门</td></tr>
+            <tr><td>合同文书</td><td>丁·景门</td><td>丁奇格局、景门宫位</td><td class="吉">丁+乙、丁+丙、景门吉</td><td class="凶">丁+癸（朱雀投江）、丁+辛</td></tr>
+            <tr><td>对方/合作方</td><td>时干</td><td>时干宫与日干宫生克</td><td class="吉">相生、比和、得六合</td><td class="凶">相克、临白虎/玄武</td></tr>
+            <tr><td>利益/利润</td><td>戊·生门</td><td>戊格局、生门旺衰</td><td class="吉">戊+丙、戊+丁、生门旺</td><td class="凶">戊+庚（值符飞宫）、戊+辛</td></tr>
+            <tr><td>隐藏条款</td><td>玄武·螣蛇</td><td>玄武螣蛇所在宫位</td><td class="吉">玄武不临丁/景门宫</td><td class="凶">玄武+丁、螣蛇+景门</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tip warn"><strong>签约要诀：</strong>「丁奇为凭据，逢癸必藏奸。玄武在文书，条款有隐瞒。开门同生门，签约两得全。」最忌丁+癸（朱雀投江）——主文书无效或合同有致命漏洞。</div>
+    </div>
+
+    <!-- 专题三：健康 -->
+    <div class="topic-card">
+      <h4><span class="topic-icon">🏥</span>专题三：健康 / 疾病断局</h4>
+      <p>健康断局的核心是<strong>「人-病-医」三线并举</strong>，通过天芮星定位病灶、天心星判断治疗前景。</p>
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr><th>要素</th><th>用神</th><th>判断标准</th><th>吉象</th><th>凶象</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>求测人</td><td>日干</td><td>宫位旺衰</td><td class="吉">旺相得生、临休门生门</td><td class="凶">入墓空亡、临死门惊门</td></tr>
+            <tr><td>疾病本身</td><td>天芮星</td><td>天芮落宫及格局</td><td class="吉">天芮受克（病被制）</td><td class="凶">天芮得生+庚/癸/辛</td></tr>
+            <tr><td>医疗/医生</td><td>天心星</td><td>天心落宫与天芮宫关系</td><td class="吉">天心克天芮（医克病）</td><td class="凶">天芮克天心（病克医）</td></tr>
+            <tr><td>病灶部位</td><td>天芮落宫</td><td>按九宫对应人体部位</td><td class="平">——</td><td class="凶">离宫=心/眼、坎宫=肾/耳等</td></tr>
+            <tr><td>康复时间</td><td>生门·乙奇</td><td>生门旺衰、乙奇格局</td><td class="吉">乙+丙、乙+丁、生门旺</td><td class="凶">乙+辛、乙+庚、生门受克</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="em"><strong>九宫对应人体：</strong>离九宫=头面/心脏/眼睛 | 坎一宫=肾脏/膀胱/耳朵 | 震三宫=肝胆/四肢 | 兑七宫=肺/口舌/咽喉 | 坤二宫=脾胃/腹 | 乾六宫=大肠/骨骼/头 | 艮八宫=胃/手/背 | 巽四宫=胆/股/神经</div>
+      <div class="tip help"><strong>健康要诀：</strong>「天芮为病星，受克病易轻。天心是医星，克芮病可平。乙奇为医药，得吉药效灵。」天芮星临生门+乙奇在旺宫，即使大病也有生机。</div>
+    </div>
+
+    <!-- 专题四：考试 -->
+    <div class="topic-card">
+      <h4><span class="topic-icon">📚</span>专题四：考试 / 学业断局</h4>
+      <p>考试断局的核心是<strong>「人-考-运」三元结构</strong>，重点观察丁奇、景门、天辅星的格局。</p>
+      <div class="tbl">
+        <table>
+          <thead>
+            <tr><th>要素</th><th>用神</th><th>判断标准</th><th>吉象</th><th>凶象</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>考生</td><td>日干</td><td>宫位旺衰、格局</td><td class="吉">临开门/天心/天辅/九天</td><td class="凶">入墓、空亡、临死门惊门</td></tr>
+            <tr><td>考试本身</td><td>景门</td><td>景门宫格局</td><td class="吉">景门+丁/丙/乙 得九天</td><td class="凶">景门+庚/癸/辛 入墓</td></tr>
+            <tr><td>文书/答卷</td><td>丁奇</td><td>丁奇落宫格局</td><td class="吉">丁+乙、丁+丙、丁+戊</td><td class="凶">丁+癸、丁+辛、丁+壬</td></tr>
+            <tr><td>学业方向</td><td>天辅星</td><td>天辅星落宫旺衰</td><td class="吉">天辅旺相得位（巽/震）</td><td class="凶">天辅受克、逢空</td></tr>
+            <tr><td>录取结果</td><td>值符·开门</td><td>值符+开门宫与日干关系</td><td class="吉">相生、同宫得生</td><td class="凶">相克、开门入墓逢空</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tip info"><strong>考试要诀：</strong>「景门为考场，丁奇是文章。天辅文昌星，得位必高翔。日干临吉应，金榜把名扬。」考前起局看景门与日干生克；若景门生扶日干，则考试发挥超常。</div>
+    </div>
+
+    <div class="deep-dive">
+      <div class="deep-title">专题断局通用心法</div>
+      <div class="deep-sub">无论何种专题，这四条原则贯穿始终</div>
+      <p>
+        <strong>原则一·用神为本：</strong>每个专题有自己不可替代的核心用神——出行看伤门、签约看丁奇、健康看天芮、考试看景门——用神不对，全盘白费。<br><br>
+        <strong>原则二·日干为纲：</strong>不论测什么事，日干的旺衰决定了求测人在此事中的主动性和承受力。日干入墓空亡，万事难成。<br><br>
+        <strong>原则三·神煞点睛：</strong>八神（值符/螣蛇/太阴/六合/白虎/玄武/九地/九天）提供的是"天意"层面的信息——值符九天在则天助，玄武白虎在则人祸。<br><br>
+        <strong>原则四·综合判断：</strong>永远不要因为一个宫位好就下结论。要综合日干、用神、时干、方位、神煞五方面信息，取多数一致而断。
+      </p>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- 第四部分：应期推断方法 -->
+  <!-- ════════════════════════════════════════════════════════ -->
+  <div class="sec" id="yingqi">
+    <h2>四、应期推断方法</h2>
+    <p>应期推断是奇门遁甲断局的"最后一公里"——知道吉凶之后，<strong>何时应验</strong>才是求测者最关心的。以下系统梳理12条应期法则。</p>
+
+    <div class="lead">
+      <strong>应期总纲：</strong>「远应年月近应日，马星冲动是佳期。用神出空填实日，冲合墓绝各有依。」
+    </div>
+
+    <div class="yingqi-flow">
+      <div class="yingqi-step">
+        <div class="yq-num">①</div>
+        <h5>以马星定应期</h5>
+        <p>马星（寅午戌在申等）为动象。用神宫逢马星逢冲之日为应期。</p>
+      </div>
+      <div class="yingqi-step">
+        <div class="yq-num">②</div>
+        <h5>以空亡定应期</h5>
+        <p>用神宫空亡，填实或冲实之日为应期。出空即应。</p>
+      </div>
+      <div class="yingqi-step">
+        <div class="yq-num">③</div>
+        <h5>以冲合定应期</h5>
+        <p>用神被合则冲开应事，用神相冲则合住应事。冲合转换日。</p>
+      </div>
+      <div class="yingqi-step">
+        <div class="yq-num">④</div>
+        <h5>以入墓定应期</h5>
+        <p>用神入墓，冲出墓库或墓被冲开之日为应期。</p>
+      </div>
+      <div class="yingqi-step">
+        <div class="yq-num">⑤</div>
+        <h5>以旺相定应期</h5>
+        <p>用神旺相则速应（近），休囚则迟应（远）。</p>
+      </div>
+    </div>
+
+    <h3 style="color:var(--gold);font-size:1rem;letter-spacing:2px;margin-top:28px;">十二应期法则详解</h3>
+
+    <div class="tbl">
+      <table>
+        <thead>
+          <tr><th style="width:10%">编号</th><th style="width:22%">法则</th><th style="width:25%">适用条件</th><th>推算方法</th><th style="width:30%">举例</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01</td>
+            <td><strong>马星冲动法</strong></td>
+            <td>用神宫临马星，或求测事项与出行、变动相关</td>
+            <td>马星地支逢冲之日即为应期。寅午戌日马在申，申子辰日马在寅，巳酉丑日马在亥，亥卯未日马在巳。</td>
+            <td>用神在寅宫临马星，亥日冲寅即为应期</td>
+          </tr>
+          <tr>
+            <td>02</td>
+            <td><strong>空亡填实法</strong></td>
+            <td>用神宫落空亡之地（甲子旬戌亥空等）</td>
+            <td>空亡地支出现之日（填实）或冲空亡地支之日（冲实）为应期。远应年月，近应日时。</td>
+            <td>用神在乾宫（戌亥空），戌日或辰日（冲戌）应事</td>
+          </tr>
+          <tr>
+            <td>03</td>
+            <td><strong>地支六合法</strong></td>
+            <td>用神宫天干与地盘天干相合，或地支相合</td>
+            <td>冲开合住之支的日子为应期。子丑合→午未日冲开；寅亥合→申巳日冲开。</td>
+            <td>丙+辛（丙辛合水），壬日（水旺）或丁日（冲辛）应</td>
+          </tr>
+          <tr>
+            <td>04</td>
+            <td><strong>地支六冲法</strong></td>
+            <td>用神宫地支与日支相冲，或宫位地支相冲</td>
+            <td>合住冲支的日子为应期。子午冲→丑日（子丑合住子）或未日（午未合住午）。</td>
+            <td>日支子在坎宫，对冲午，丑日或未日应</td>
+          </tr>
+          <tr>
+            <td>05</td>
+            <td><strong>墓库冲开法</strong></td>
+            <td>用神入墓（如甲乙木入未墓、丙丁火入戌墓等）</td>
+            <td>冲墓之日为应期。入戌墓→辰日冲；入未墓→丑日冲；入辰墓→戌日冲；入丑墓→未日冲。</td>
+            <td>天盘乙（木）落坤宫（未墓），丑日（冲未）应</td>
+          </tr>
+          <tr>
+            <td>06</td>
+            <td><strong>旺相速应法</strong></td>
+            <td>用神宫旺相（当令、得生）</td>
+            <td>用神旺则应在近期（日内、周内）；休囚则应在远期（月后、年后）。具体结合地支周期。</td>
+            <td>用神在震宫春月旺，3-7日内应事</td>
+          </tr>
+          <tr>
+            <td>07</td>
+            <td><strong>宫位数应法</strong></td>
+            <td>通用，尤其适用于无特殊冲合空墓的情况</td>
+            <td>按用神所在宫位数字推算：坎一宫=1（日/月）、坤二=2、震三=3、巽四=4、中五=5、乾六=6、兑七=7、艮八=8、离九=9。</td>
+            <td>用神在艮八宫，约8天或8周内应事</td>
+          </tr>
+          <tr>
+            <td>08</td>
+            <td><strong>值符值使法</strong></td>
+            <td>重要事项、长期发展类问题</td>
+            <td>值符宫地支出现的年月日，或值使门所落宫位的数字+地支周期。</td>
+            <td>值符在坤二宫（未申），未月或申月应大事</td>
+          </tr>
+          <tr>
+            <td>09</td>
+            <td><strong>星门应期法</strong></td>
+            <td>九星八门与地支有固定对应关系</td>
+            <td>天蓬=子、天芮=未申、天冲=卯、天辅=辰巳、天禽=中、天心=戌亥、天柱=酉、天任=丑寅、天英=午。用神星对应的地支日为应期。</td>
+            <td>用神天冲星落宫，卯日（冲星本位）应事</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td><strong>同宫感应法</strong></td>
+            <td>日干与用神同宫</td>
+            <td>同宫者应事最速——当即或当日。同宫+"得奇"（乙丙丁）更是吉应速至。</td>
+            <td>日干与开门同宫乾六，谈判当日即决</td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td><strong>对冲感应法</strong></td>
+            <td>日干与用神在对冲宫位</td>
+            <td>对冲主事有反复，应在冲合的中间日。对宫相冲→合日应。</td>
+            <td>日干在坎一（子），用神在离九（午），丑日或未日应</td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td><strong>三合局法</strong></td>
+            <td>用神宫地支可与月日时支形成三合局</td>
+            <td>形成三合局之日时即为应期。寅午戌三合→午日/戌日；申子辰三合→子日/辰日等。</td>
+            <td>用神在寅宫，遇午日（半合）或戌日（全合）应</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="em">
+      <strong>应期推断优先级：</strong>马星 > 空亡 > 冲合 > 入墓 > 旺衰 > 宫数。当多种应期法则指向不同时间时，取<strong>最靠近日期的那个</strong>作为第一应期。若吉凶不明，先看日干与用神——「吉凶看格局，时间看空马」。
+    </div>
+
+    <!-- 实例练习 -->
+    <h3 style="color:var(--gold);font-size:1rem;letter-spacing:2px;margin-top:28px;">应期推断实例练习</h3>
+
+    <div class="topic-card">
+      <h4>🕐 练习：求测何时能找到工作</h4>
+      <p><strong>已知条件：</strong>日干庚落艮八宫（空亡），开门（工作用神）落震三宫临马星，震宫中格局为<strong>戊+丙（青龙返首，大吉）</strong>。当前日期为甲寅日（子午卯酉日马在申，寅申巳亥日马在亥，辰戌丑未日马在巳）。</p>
+      <p><strong>应期推断思路：</strong></p>
+      <ol>
+        <li>开门（工作）在震三宫临马星 → 第一优先法则</li>
+        <li>震三宫地支为卯，临马星 → 需查马星在何支。日支为寅，寅午戌马在申，故马星为申</li>
+        <li>马星申与震宫卯无直接关系——改用空亡法：日干艮宫空亡（艮含丑寅），丑寅空亡 → 填实日（丑日/寅日）或冲实日（未日/申日）</li>
+        <li>结合马星在申 → <strong>首选申日（既冲寅空亡，又是马星本位）</strong></li>
+        <li>次选丑日/寅日（空亡填实）</li>
+        <li>宫数法：震三宫 → 约3日内/3周内</li>
+        <li><strong>综合应期：3周内，最可能申日（如庚申日）</strong></li>
+      </ol>
+      <p style="color:var(--gold-lt);font-size:.82rem;">⚡ 推理关键：马星优先，空亡配合，多法交叉验证。</p>
+    </div>
+
+    <div class="highlight-para">
+      <strong>心法总结：</strong>应期推断是奇门断局中最需要"活"的环节。死背法则不如理解原理——万物皆在<strong>冲合墓空旺</strong>五个状态中流转，应期正是这五种状态转换的时间节点。层次是：先有吉凶结论，再寻应验时间；不可颠倒，以时间为据断吉凶是本末倒置。
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>奇门遁甲 · 实战断局</p>
+  <p style="font-size:.64rem;margin-top:4px;">时家转盘奇门 · 五步断局法 · 玄门学习平台</p>
+</footer>
+
+<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到顶部">↑</button>
+
+<script>
+(function(){
+  // 页面进度条
+  var bar = document.getElementById('progressBar');
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    var pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  });
+
+  // 回到顶部按钮
+  var btn = document.getElementById('backTop');
+  window.addEventListener('scroll', function(){
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // 专题导航平滑滚动
+  document.querySelectorAll('.sec-nav a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var target = document.querySelector(this.getAttribute('href'));
+      if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

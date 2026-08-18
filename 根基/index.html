@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>玄门根基 · 三式共同入门</title>
+<link rel="stylesheet" href="../共享样式/base.css">
+<link rel="stylesheet" href="../共享样式/components.css">
+<style>
+:root{--font-ui:"Noto Serif SC","Songti SC","STSong",serif}
+body{font-family:var(--font-ui);padding-bottom:60px}
+
+/* 顶部导航 */
+.topnav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(8,7,13,.98),rgba(12,11,21,.95));border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;backdrop-filter:blur(10px)}
+.topnav-back{color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;padding:5px 12px;border:1px solid var(--gold);border-radius:14px;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.topnav-back:hover{background:var(--gold);color:#111}
+.topnav-title{color:var(--text-dim);font-size:.76rem;letter-spacing:.06em;white-space:nowrap}
+.topnav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.topnav-links a{color:var(--text-alt);text-decoration:none;font-size:.74rem;padding:4px 12px;border:1px solid var(--border);border-radius:12px;transition:all .2s}
+.topnav-links a:hover{border-color:var(--gold);color:var(--gold)}
+
+.hero{text-align:center;padding:48px 20px 28px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.hero h1{font-size:2.2em;color:var(--gold-lt);letter-spacing:6px;font-weight:300}
+.hero .sub{color:var(--text-dim);margin-top:6px;letter-spacing:3px;font-size:.95em}
+.hero .line{width:50px;height:1px;background:var(--gold);margin:12px auto;opacity:.4}
+
+.container{max-width:960px;margin:0 auto;padding:0 24px}
+
+/* 五行图 */
+.wx-diagram{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:10px;margin:20px 0;font-size:.9rem}
+.wx-node{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;border:2px solid}
+.wx-node.mu{background:rgba(76,175,80,.1);border-color:#4caf50;color:#4caf50}
+.wx-node.huo{background:rgba(244,67,54,.1);border-color:#f44336;color:#f44336}
+.wx-node.tu{background:rgba(121,85,72,.15);border-color:#795548;color:#c9a050}
+.wx-node.jin{background:rgba(249,168,37,.1);border-color:#f9a825;color:#f9a825}
+.wx-node.shui{background:rgba(33,150,243,.1);border-color:#2196f3;color:#2196f3}
+.wx-arrow{font-size:1.3rem;color:var(--text-dim)}
+
+/* 八卦展示 */
+.bg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:16px 0}
+.bg-item{text-align:center;padding:18px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);transition:all .2s;cursor:default}
+.bg-item:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.35)}
+.bg-item .sym{font-size:2.2rem;display:block;margin-bottom:6px}
+.bg-item .name{font-size:1rem;font-weight:700;color:var(--gold);margin-bottom:2px}
+.bg-item .info{font-size:.74rem;color:var(--text-dim);line-height:1.5}
+
+@media(max-width:860px){
+  .topnav{padding:8px 10px;gap:8px}.topnav-links{margin-left:0}
+  .hero h1{font-size:1.6em}.hero{padding:36px 16px 24px}
+  .container{padding:0 14px}
+  .bg-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:480px){
+  .topnav{padding-left:48px}
+  .hero h1{font-size:1.3em;letter-spacing:3px}
+  .container{padding:0 10px}
+  .bg-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .bg-item{padding:12px 8px}
+  .bg-item .sym{font-size:1.6rem}
+}
+</style>
+</head>
+<body>
+
+<div class="page-progress" id="pageProgress"></div>
+<button id="backTop">↑</button>
+
+<!-- 移动端导航按钮 -->
+<button class="nav-toggle visible" onclick="toggleMobileNav()">☰</button>
+<div class="nav-overlay" id="navOverlay" onclick="closeMobileNav()"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <div class="mnav-header"><span class="logo">☯ 玄门根基</span></div>
+  <div class="mnav-section">内容导航</div>
+  <a class="mnav-item" href="#sec-yinyang">☯ 阴阳</a>
+  <a class="mnav-item" href="#sec-wuxing">🔥 五行</a>
+  <a class="mnav-item" href="#sec-gansheng">📅 天干地支</a>
+  <a class="mnav-item" href="#sec-bagua">☰ 八卦</a>
+  <div class="mnav-section">学习体系</div>
+  <a class="mnav-item" href="../梅花易数/">🌸 梅花易数</a>
+  <a class="mnav-item" href="../奇门遁甲/">🏯 奇门遁甲</a>
+  <a class="mnav-item" href="../紫微斗数/">🔮 紫微斗数</a>
+  <a class="mnav-item" href="../index.html">🏠 返回玄门</a>
+</nav>
+
+<header class="topnav">
+  <a href="../index.html" class="topnav-back">← 玄门</a>
+  <span class="topnav-title">玄门根基 · 三式共同入门</span>
+  <div class="topnav-links">
+    <a href="#sec-yinyang">阴阳</a><a href="#sec-wuxing">五行</a>
+    <a href="#sec-gansheng">干支</a><a href="#sec-bagua">八卦</a>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>☯ 玄门根基</h1>
+  <p class="sub">—— 奇门·紫微·梅花 · 三式共同语言 ——</p>
+  <div class="line"></div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════ 学习指引 ═══════════ -->
+<div class="lead">
+  这是<strong>奇门遁甲、紫微斗数、梅花易数</strong>三大玄学体系的<strong>共同根基</strong>。
+  无论你从哪个体系开始学习，都必须先掌握阴阳、五行、天干地支、八卦这四块基石。
+  建议学习时间：<strong>1~2周</strong>，每天1小时。
+</div>
+
+<!-- ═══════════ 一、阴阳 ═══════════ -->
+<div class="sec-title" id="sec-yinyang">一、阴阳 —— 三式的总开关</div>
+
+<div class="story-card">
+  <div class="story-title">📌 故事记忆法：日出而作，日落而息</div>
+  <p>想象一座山——<strong>山的南面</strong>阳光普照，温暖明亮，万物活跃，这是<strong>阳</strong>；
+  <strong>山的北面</strong>背阴幽暗，清凉宁静，万物收藏，这是<strong>阴</strong>。
+  阴阳不是对立，而是<strong>同一座山的两个面</strong>——没有南坡就没有北坡，没有白昼就没有黑夜。</p>
+</div>
+
+<div class="compare-grid">
+  <div class="compare-card good"><h4>☀ 阳</h4>
+    <ul><li>天、日、男、动、刚、热</li><li>奇数、明亮、上升、发散</li><li>天干：甲丙戊庚壬</li><li>地支：子寅辰午申戌</li></ul></div>
+  <div class="compare-card bad"><h4>🌙 阴</h4>
+    <ul><li>地、月、女、静、柔、冷</li><li>偶数、暗昧、下降、收敛</li><li>天干：乙丁己辛癸</li><li>地支：丑卯巳未酉亥</li></ul></div>
+</div>
+
+<div class="tip info"><strong>💡 在三式中的应用：</strong>奇门遁甲的阳遁阴遁是排盘总开关；紫微斗数十二宫分阴阳内外；梅花易数八卦分阴阳。记住阴阳 = 记住三式的第一语言。</div>
+
+<!-- ═══════════ 二、五行 ═══════════ -->
+<div class="sec-title" id="sec-wuxing">二、五行 —— 三式的能量语言</div>
+
+<div class="story-card">
+  <div class="story-title">📌 故事记忆法：一棵树的一生</div>
+  <p>想象一棵<strong>树（木）</strong>——它被<strong>斧头（金）</strong>砍倒，树干腐烂归入<strong>泥土（土）</strong>，
+  泥土筑成<strong>堤坝（土）</strong>挡住<strong>洪水（水）</strong>，水能<strong>浇灭（水）</strong>森林<strong>大火（火）</strong>，
+  火烧尽木头化为<strong>灰烬（火→土）</strong>，灰烬中又长出新树……这就是五行的<strong>相生相克循环</strong>。</p>
+</div>
+
+<div class="rhyme-card">
+  <div class="rhyme-text">木生火 → 火生土 → 土生金 → 金生水 → 水生木（相生·顺次）<br>
+  木克土 → 土克水 → 水克火 → 火克金 → 金克木（相克·隔一）</div>
+  <div class="rhyme-note"><strong>💡 巧记：</strong>画一个五角星★，顺时针走 = 相生，走直线 = 相克！</div>
+</div>
+
+<div class="g2">
+  <div class="card raised">
+    <div class="card-title">🔥 五行属性速查</div>
+    <div class="tbl"><table>
+      <tr><th>五行</th><th>色</th><th>季</th><th>方位</th><th>五脏</th><th>味</th><th>八卦</th></tr>
+      <tr><td style="color:#4caf50;font-weight:700">木</td><td>青</td><td>春</td><td>东</td><td>肝</td><td>酸</td><td>震☳巽☴</td></tr>
+      <tr><td style="color:#f44336;font-weight:700">火</td><td>赤</td><td>夏</td><td>南</td><td>心</td><td>苦</td><td>离☲</td></tr>
+      <tr><td style="color:#c9a050;font-weight:700">土</td><td>黄</td><td>长夏</td><td>中</td><td>脾</td><td>甘</td><td>艮☶坤☷</td></tr>
+      <tr><td style="color:#f9a825;font-weight:700">金</td><td>白</td><td>秋</td><td>西</td><td>肺</td><td>辛</td><td>乾☰兑☱</td></tr>
+      <tr><td style="color:#2196f3;font-weight:700">水</td><td>黑</td><td>冬</td><td>北</td><td>肾</td><td>咸</td><td>坎☵</td></tr>
+    </table></div>
+  </div>
+  <div class="card raised">
+    <div class="card-title">📊 旺相休囚死（力量的四季变化）</div>
+    <div class="tbl"><table>
+      <tr><th>季节</th><th>旺</th><th>相</th><th>休</th><th>囚</th><th>死</th></tr>
+      <tr><td>春</td><td style="color:#4caf50;font-weight:700">木</td><td>火</td><td>水</td><td>金</td><td>土</td></tr>
+      <tr><td>夏</td><td style="color:#f44336;font-weight:700">火</td><td>土</td><td>木</td><td>水</td><td>金</td></tr>
+      <tr><td>秋</td><td style="color:#f9a825;font-weight:700">金</td><td>水</td><td>土</td><td>火</td><td>木</td></tr>
+      <tr><td>冬</td><td style="color:#2196f3;font-weight:700">水</td><td>木</td><td>金</td><td>土</td><td>火</td></tr>
+      <tr><td>四季末</td><td style="color:#c9a050;font-weight:700">土</td><td>金</td><td>火</td><td>木</td><td>水</td></tr>
+    </table></div>
+    <div class="rhyme-card" style="margin-top:12px;padding:12px 16px">
+      <div class="rhyme-text" style="font-size:.9rem">当令者旺 · 我生者相 · 生我者休 · 克我者囚 · 我克者死</div>
+    </div>
+  </div>
+</div>
+
+<div class="tip warn"><strong>🔥 实战意义：</strong>五行旺衰是三大体系判断<strong>吉凶力度</strong>的修正系数。同样的"生"或"克"，在旺地和死地结果截然不同——旺衰可以改变吉凶的程度甚至方向！</div>
+
+<!-- ═══════════ 三、天干地支 ═══════════ -->
+<div class="sec-title" id="sec-gansheng">三、天干地支 —— 三式的时空坐标</div>
+
+<div class="story-card">
+  <div class="story-title">📌 故事记忆法：树干与树枝</div>
+  <p><strong>天干</strong>就像一棵树的<strong>树干</strong>——竖直向上，与天相接，共十根（十天干）。
+  <strong>地支</strong>就像树的<strong>树枝</strong>——横向展开，接地而生，共十二枝（十二地支）。
+  天干地支组合起来，就是<strong>一棵完整的时间之树</strong>，标记年月日时。</p>
+</div>
+
+<div class="card raised">
+  <div class="card-title">🔤 十天干（五行分组记忆）</div>
+  <div class="rhyme-card" style="margin-bottom:14px">
+    <div class="rhyme-text">甲乙木 → 丙丁火 → 戊己土 → 庚辛金 → 壬癸水<br>
+    <small style="font-weight:400">每组第一个为阳，第二个为阴</small></div>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>序号</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr>
+    <tr><td>天干</td><td>甲</td><td>乙</td><td>丙</td><td>丁</td><td>戊</td><td>己</td><td>庚</td><td>辛</td><td>壬</td><td>癸</td></tr>
+    <tr><td>五行</td><td>木</td><td>木</td><td>火</td><td>火</td><td>土</td><td>土</td><td>金</td><td>金</td><td>水</td><td>水</td></tr>
+    <tr><td>阴阳</td><td>阳</td><td>阴</td><td>阳</td><td>阴</td><td>阳</td><td>阴</td><td>阳</td><td>阴</td><td>阳</td><td>阴</td></tr>
+  </table></div>
+</div>
+
+<div class="card raised">
+  <div class="card-title">🌙 十二地支（生肖 + 时辰 + 数字）</div>
+  <div class="tbl"><table>
+    <tr><th>序号</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr>
+    <tr><td>地支</td><td>子</td><td>丑</td><td>寅</td><td>卯</td><td>辰</td><td>巳</td><td>午</td><td>未</td><td>申</td><td>酉</td><td>戌</td><td>亥</td></tr>
+    <tr><td>生肖</td><td>鼠</td><td>牛</td><td>虎</td><td>兔</td><td>龙</td><td>蛇</td><td>马</td><td>羊</td><td>猴</td><td>鸡</td><td>狗</td><td>猪</td></tr>
+    <tr><td>五行</td><td>水</td><td>土</td><td>木</td><td>木</td><td>土</td><td>火</td><td>火</td><td>土</td><td>金</td><td>金</td><td>土</td><td>水</td></tr>
+    <tr><td>时辰</td><td>23-1</td><td>1-3</td><td>3-5</td><td>5-7</td><td>7-9</td><td>9-11</td><td>11-13</td><td>13-15</td><td>15-17</td><td>17-19</td><td>19-21</td><td>21-23</td></tr>
+  </table></div>
+</div>
+
+<div class="compare-grid">
+  <div class="compare-card info"><h4>🤝 六合（和谐）</h4>
+    <p style="font-size:.84rem">子丑合 · 寅亥合 · 卯戌合<br>辰酉合 · 巳申合 · 午未合</p></div>
+  <div class="compare-card bad"><h4>⚡ 六冲（冲突）</h4>
+    <p style="font-size:.84rem">子午冲 · 丑未冲 · 寅申冲<br>卯酉冲 · 辰戌冲 · 巳亥冲</p></div>
+</div>
+
+<div class="tip help"><strong>📘 在三式中的不同用途：</strong>奇门用天干排盘、用地支定局；紫微用天干化四化、用地支安命宫；梅花用天干地支数字起卦。同一套符号，三套用法。</div>
+
+<!-- ═══════════ 四、八卦 ═══════════ -->
+<div class="sec-title" id="sec-bagua">四、八卦 —— 三式的空间密码</div>
+
+<div class="story-card">
+  <div class="story-title">📌 故事记忆法：一家八口</div>
+  <p>把八卦想象成一个<strong>八口之家</strong>——<strong>乾（父）</strong>是天，刚健威严；<strong>坤（母）</strong>是地，温柔包容。
+  他们生了三男三女：<strong>震（长男）</strong>像雷一样有冲劲，<strong>坎（中男）</strong>像水一样深沉，
+  <strong>艮（少男）</strong>像山一样稳重；<strong>巽（长女）</strong>像风一样灵活，<strong>离（中女）</strong>像火一样热情，
+  <strong>兑（少女）</strong>像湖泽一样欢乐。一家八口，各有性格，各居其位。</p>
+</div>
+
+<div class="rhyme-card">
+  <div class="rhyme-text"><strong>乾三连 ☰</strong> · <strong>坤六断 ☷</strong> · <strong>震仰盂 ☳</strong> · <strong>艮覆碗 ☶</strong><br>
+  <strong>离中虚 ☲</strong> · <strong>坎中满 ☵</strong> · <strong>兑上缺 ☱</strong> · <strong>巽下断 ☴</strong></div>
+  <div class="rhyme-note">取象歌——把每个卦想象成日常物品。每天背一遍，一周烂熟于心。</div>
+</div>
+
+<!-- 八卦闪卡 -->
+<div class="flash-grid" id="bagua-flash">
+</div>
+
+<div class="card raised">
+  <div class="card-title">☰ 八卦属性全表</div>
+  <div class="tbl"><table>
+    <tr><th>卦名</th><th>符号</th><th>先天数</th><th>五行</th><th>自然</th><th>家庭</th><th>身体</th><th>后天方位</th><th>性情</th></tr>
+    <tr><td>乾</td><td>☰</td><td>1</td><td>金</td><td>天</td><td>父</td><td>头</td><td>西北</td><td>刚健</td></tr>
+    <tr><td>兑</td><td>☱</td><td>2</td><td>金</td><td>泽</td><td>少女</td><td>口</td><td>西</td><td>悦</td></tr>
+    <tr><td>离</td><td>☲</td><td>3</td><td>火</td><td>火</td><td>中女</td><td>目</td><td>南</td><td>丽</td></tr>
+    <tr><td>震</td><td>☳</td><td>4</td><td>木</td><td>雷</td><td>长男</td><td>足</td><td>东</td><td>动</td></tr>
+    <tr><td>巽</td><td>☴</td><td>5</td><td>木</td><td>风</td><td>长女</td><td>股</td><td>东南</td><td>入</td></tr>
+    <tr><td>坎</td><td>☵</td><td>6</td><td>水</td><td>水</td><td>中男</td><td>耳</td><td>北</td><td>陷</td></tr>
+    <tr><td>艮</td><td>☶</td><td>7</td><td>土</td><td>山</td><td>少男</td><td>手</td><td>东北</td><td>止</td></tr>
+    <tr><td>坤</td><td>☷</td><td>8</td><td>土</td><td>地</td><td>母</td><td>腹</td><td>西南</td><td>顺</td></tr>
+  </table></div>
+</div>
+
+<div class="tip warn"><strong>⚠️ 关键区分：</strong>梅花易数起卦用<strong>先天八卦数</strong>（乾1兑2离3……坤8），断卦方位参考<strong>后天八卦方位</strong>（离南坎北）。两者不可混淆！</div>
+
+<div class="rhyme-card">
+  <div class="rhyme-text">任何数 ÷ 8 取余数 → 得卦<br>
+  余1=乾☰ · 余2=兑☱ · 余3=离☲ · 余4=震☳<br>
+  余5=巽☴ · 余6=坎☵ · 余7=艮☶ · 余0=坤☷</div>
+  <div class="rhyme-note">这是梅花易数起卦的核心运算，必须练到条件反射！每天随机取10个两位数练习。</div>
+</div>
+
+<!-- ═══════════ 下一步 ═══════════ -->
+<div class="deep-dive" style="margin-top:40px">
+  <div class="deep-title">🚀 根基已立，选择你的第一门玄学</div>
+  <div class="deep-sub">三式各有侧重，建议按「梅花→奇门→紫微」的由简入繁顺序学习</div>
+  <div class="btn-group" style="justify-content:center">
+    <a href="../梅花易数/" class="btn btn-primary">🌸 梅花易数 — 最易入门（1~4周）</a>
+    <a href="../奇门遁甲/" class="btn btn-ghost">🏯 奇门遁甲 — 中层进阶（12周）</a>
+    <a href="../紫微斗数/" class="btn btn-ghost">🔮 紫微斗数 — 终极深入（16~30周）</a>
+  </div>
+</div>
+
+</div>
+
+<script src="../共享样式/app.js"></script>
+<script>
+// 生成八卦闪卡
+(function(){
+  var bagua = [
+    {symbol:'☰',name:'乾',num:1,el:'金',nat:'天',fam:'父'},
+    {symbol:'☱',name:'兑',num:2,el:'金',nat:'泽',fam:'少女'},
+    {symbol:'☲',name:'离',num:3,el:'火',nat:'火',fam:'中女'},
+    {symbol:'☳',name:'震',num:4,el:'木',nat:'雷',fam:'长男'},
+    {symbol:'☴',name:'巽',num:5,el:'木',nat:'风',fam:'长女'},
+    {symbol:'☵',name:'坎',num:6,el:'水',nat:'水',fam:'中男'},
+    {symbol:'☶',name:'艮',num:7,el:'土',nat:'山',fam:'少男'},
+    {symbol:'☷',name:'坤',num:8,el:'土',nat:'地',fam:'母'}
+  ];
+  var container = document.getElementById('bagua-flash');
+  if(!container) return;
+  bagua.forEach(function(b){
+    var div = document.createElement('div');
+    div.className = 'flash-card';
+    div.innerHTML = '<div class="flash-inner">'
+      + '<div class="flash-front">' + b.symbol + ' ' + b.name + '<br><small style="font-weight:400;color:var(--text-dim)">先天数：' + b.num + '</small></div>'
+      + '<div class="flash-back">五行：<b style="color:var(--gold)">' + b.el + '</b><br>'
+      + '自然：' + b.nat + ' · 家庭：' + b.fam + '<br>'
+      + '<small style="color:var(--text-dim);margin-top:4px">点击翻转</small></div>'
+      + '</div>';
+    container.appendChild(div);
+  });
+})();
+</script>
+</body>
+</html>

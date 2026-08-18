@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>紫微斗数 · 四阶题库</title>
+<style>
+  :root {
+    --bg: #0b0a10;
+    --card: #15141f;
+    --border: #262437;
+    --text: #ddd8c8;
+    --muted: #7a7888;
+    --gold: #c9a14e;
+    --gold-dim: #8a6a30;
+    --purple: #8b6fc0;
+    --purple-dim: #4a3870;
+    --jade: #4a9e7a;
+    --jade-dim: #2a6e4a;
+    --red: #c05050;
+    --red-dim: #802a2a;
+    --blue: #5078b8;
+    --blue-dim: #284878;
+    --correct: #3a8a5a;
+    --wrong: #9a3a3a;
+    --radius: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Serif SC", "STSong", "SimSun", "KaiTi", serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 780px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .hd {
+    text-align: center;
+    padding: 20px 16px 4px;
+  }
+  .hd h1 {
+    font-size: 1.85rem;
+    letter-spacing: 5px;
+    color: var(--gold);
+    text-shadow: 0 0 14px rgba(201,161,78,.2);
+  }
+  .hd .sub {
+    font-size: .8rem;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 3px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 3px;
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 4px;
+    border: 1px solid var(--border);
+  }
+  .tab {
+    flex: 1;
+    padding: 11px 4px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: .88rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all .25s;
+    color: var(--muted);
+    background: transparent;
+    border: none;
+    font-family: inherit;
+  }
+  .tab:hover { color: var(--text); background: rgba(255,255,255,.03); }
+  .tab.on { color: #fff; box-shadow: 0 2px 6px rgba(0,0,0,.3); }
+  .tab .badge {
+    display: block;
+    font-size: .65rem;
+    opacity: .55;
+    margin-top: 2px;
+    letter-spacing: 0;
+  }
+  .tab.t0.on { background: var(--purple-dim); }
+  .tab.t1.on { background: var(--blue-dim); }
+  .tab.t2.on { background: var(--jade-dim); }
+  .tab.t3.on { background: var(--red-dim); }
+
+  .sbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 18px;
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .sbar .grp { display: flex; gap: 18px; align-items: center; }
+  .sbar span { font-size: .85rem; color: var(--gold); font-weight: 600; }
+  .sbar span em { font-style: normal; color: var(--text); font-size: 1.05rem; }
+
+  .btn {
+    padding: 7px 16px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: .82rem;
+    letter-spacing: 1px;
+    transition: all .2s;
+  }
+  .btn:hover { border-color: var(--gold); color: var(--gold); }
+  .btn.dng:hover { border-color: var(--red); color: var(--red); }
+
+  .quiz {
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 28px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .qhead { display: flex; justify-content: space-between; align-items: center; }
+  .qnum { font-size: .78rem; color: var(--muted); letter-spacing: 1px; }
+  .qnum em { color: var(--gold); font-style: normal; }
+  .tag {
+    font-size: .68rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .tg0 { background: var(--purple-dim); color: #d0c0f0; }
+  .tg1 { background: var(--blue-dim); color: #b0d0f0; }
+  .tg2 { background: var(--jade-dim); color: #b0e0d0; }
+  .tg3 { background: var(--red-dim); color: #f0c0b0; }
+
+  .qtxt {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    letter-spacing: .5px;
+    padding: 4px 0;
+  }
+
+  .opts { display: flex; flex-direction: column; gap: 8px; }
+  .opt {
+    padding: 13px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: .94rem;
+    letter-spacing: .4px;
+    transition: all .2s;
+    background: rgba(255,255,255,.012);
+    line-height: 1.5;
+    font-family: inherit;
+    text-align: left;
+    width: 100%;
+    color: var(--text);
+  }
+  .opt:hover:not(.done) {
+    border-color: var(--gold-dim);
+    background: rgba(201,161,78,.05);
+  }
+  .opt.done { cursor: default; }
+  .opt.correct {
+    border-color: var(--correct) !important;
+    background: rgba(58,138,90,.14) !important;
+    color: #8ae0a0 !important;
+  }
+  .opt.wrong {
+    border-color: var(--wrong) !important;
+    background: rgba(154,58,58,.14) !important;
+    color: #f09090 !important;
+  }
+  .opt.show-correct {
+    border-color: var(--correct) !important;
+    background: rgba(58,138,90,.06) !important;
+  }
+
+  .expl {
+    margin-top: 4px;
+    padding: 13px 16px;
+    background: rgba(201,161,78,.05);
+    border-left: 3px solid var(--gold-dim);
+    border-radius: 0 6px 6px 0;
+    font-size: .85rem;
+    line-height: 1.7;
+    color: #c0b070;
+    letter-spacing: .4px;
+  }
+
+  .wbook {
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .wbook h3 {
+    font-size: .95rem;
+    letter-spacing: 2px;
+    color: var(--red);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .wi {
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: rgba(255,255,255,.01);
+    cursor: pointer;
+    transition: all .2s;
+    font-size: .84rem;
+    line-height: 1.55;
+  }
+  .wi:hover { border-color: var(--gold-dim); }
+  .wi .wq { color: var(--text); }
+  .wi .wa { color: var(--gold); font-size: .76rem; margin-top: 3px; }
+  .wempty { color: var(--muted); text-align: center; padding: 18px; font-size: .85rem; }
+
+  .navbtns { display: flex; gap: 10px; justify-content: center; margin-top: 6px; }
+  .navbtns .btn:disabled { opacity: .3; cursor: default; }
+
+  @media (max-width: 600px) {
+    .wrap { gap: 12px; }
+    .hd h1 { font-size: 1.35rem; }
+    .tabs { flex-wrap: wrap; }
+    .tab { flex: 1 1 40%; padding: 9px 3px; font-size: .78rem; }
+    .sbar { flex-direction: column; align-items: stretch; text-align: center; }
+    .quiz { padding: 18px 14px; }
+    .qtxt { font-size: .98rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+
+  <div class="hd">
+    <h1>紫 微 斗 数</h1>
+    <div class="sub">四 阶 题 库</div>
+  </div>
+
+  <div class="tabs" id="tabsEl"></div>
+
+  <div class="sbar">
+    <div class="grp">
+      <span>进度 <em id="prog">0/40</em></span>
+      <span>正确率 <em id="acc">0%</em></span>
+    </div>
+    <div class="grp">
+      <button class="btn" id="btnWb" onclick="toggleWb()">错题本 (<em id="wc">0</em>)</button>
+      <button class="btn dng" onclick="resetAll()">重置全部</button>
+    </div>
+  </div>
+
+  <div class="quiz" id="quizEl"></div>
+
+  <div class="wbook" id="wbEl" style="display:none;">
+    <h3>错题本 <button class="btn" style="font-size:.72rem" onclick="clearWb()">清空</button></h3>
+    <div id="wbList"></div>
+  </div>
+
+</div>
+
+<script>
+var Q = [
+  // ==================== 基础 (0~9) ====================
+  {q:"紫微星在十四主星中被称为什么？",opts:["帝王之星","财富之星","桃花之星","武曲之星"],ans:0,e:"紫微为北斗主星，化气为「尊」，乃众星之首，象征帝王、权力与尊贵。命宫坐紫微者，气度不凡，有领导才能，需辅星拱照方能成格。"},
+  {q:"以下哪一组是紫微斗数「六吉星」？",opts:["左辅、右弼、文昌、文曲、天魁、天钺","擎羊、陀罗、火星、铃星、地空、地劫","禄存、天马、咸池、大耗、天刑、天姚","太阳、太阴、天府、天相、天梁、天同"],ans:0,e:"六吉星：左辅、右弼、文昌、文曲、天魁、天钺。左辅右弼为「助星」，文昌文曲为「文星」，天魁天钺为「贵星」，各具助力。"},
+  {q:"十二宫位中，哪一宫代表内心世界、精神寄托与晚年运？",opts:["命宫","福德宫","迁移宫","田宅宫"],ans:1,e:"福德宫主精神享受、内心世界、福报深浅与晚年运势。命宫看外在表现，福德宫看内在修为。两宫互为表里，不可偏废。"},
+  {q:"十四主星中，哪两颗星永远成对出现（同宫或对照）？",opts:["天府与天相","太阳与太阴","廉贞与贪狼","天机与天梁"],ans:1,e:"太阳与太阴为「阴阳」星对，在命盘上永远对照出现——太阳在寅则太阴必在申。日月为天地之纲纪，互为表里。"},
+  {q:"「擎羊、陀罗、火星、铃星」合称为什么？",opts:["四化星","六煞星","四煞星","三方星"],ans:2,e:"擎羊、陀罗、火星、铃星合称「四煞星」。六煞星则再加地空、地劫。擎羊主突发伤害，陀罗主纠缠拖延，火星主爆发，铃星主暗中积累。"},
+  {q:"破军星在北斗星序中排第几位？",opts:["第一","第三","第五","第七"],ans:3,e:"破军为北斗第七星，化气为「耗」，主破旧立新、冲锋陷阵。北斗七星序：贪狼一、巨门二、禄存三、文曲四、廉贞五、武曲六、破军七。"},
+  {q:"命盘中「兄弟宫」位于命宫的哪个方向？",opts:["命宫顺数第二宫","命宫逆数第二宫","命宫顺数第三宫","命宫顺数第四宫"],ans:0,e:"十二宫逆时针排列：命宫→兄弟→夫妻→子女→财帛→疾厄→迁移→交友→官禄→田宅→福德→父母。兄弟宫为命宫后第一宫（顺数第二宫）。"},
+  {q:"天同星的核心特质是什么？",opts:["刚强好胜","温和懒散","多变狡黠","孤高清冷"],ans:1,e:"天同属水，南斗第四星，化气为「福」。天性温和善良、不喜争斗、向往安逸。若无煞星刺激，易安于现状缺乏进取，但福气深厚。"},
+  {q:"以下哪颗星属于辅星中的「桃花星」？",opts:["天贵","红鸾","天巫","三台"],ans:1,e:"红鸾、天喜为最具婚庆意象的桃花星。红鸾主正式婚姻、正桃花；天喜主喜庆之事。流年入夫妻宫或命宫，往往有婚恋之喜。"},
+  {q:"命盘中「身宫」的主要作用是什么？",opts:["决定出生时辰","影响中年以后运势","决定兄弟姐妹数量","只看健康状态"],ans:1,e:"身宫是后天努力的方向标，约30岁后影响力渐强。身宫所在宫位代表此人一生最在意、最投入的领域。身命合一者目标明确，身命分离者后天转向。"},
+
+  // ==================== 理解 (10~19) ====================
+  {q:"四化中「化禄」的核心含义是什么？",opts:["阻碍与考验","收获与缘起","变动与转移","收敛与沉淀"],ans:1,e:"化禄为四化之首，代表福禄、缘分、得到、开始。化禄所在宫位，往往是命主最容易获得好处、最顺遂的领域。但禄多则贪，需有忌来收敛方为平衡。"},
+  {q:"「三方四正」中「三方」指的是什么关系？",opts:["本宫与对宫","本宫与左右邻宫","本宫与其三合宫","本宫与上下两宫"],ans:2,e:"「三方」指地支三合：申子辰、巳酉丑、寅午戌、亥卯未。命宫三方为命宫、财帛宫、官禄宫。四正则在此基础上加对宫，是论断的核心架构。"},
+  {q:"「化忌」入夫妻宫，通常暗示什么？",opts:["婚姻美满幸福","感情中有执着、缺失或亏欠感","配偶事业有成","桃花运旺盛"],ans:1,e:"化忌为四化之收敛，入夫妻宫主感情上的执着、放不下、亏欠或缺失。可能是爱得深也痛得深，也可能是付出多回报少。需结合主星及煞星综合判断。"},
+  {q:"以下哪种组合构成「府相朝垣格」？",opts:["紫微在午、天相在戌","天府在命、天相在夫妻（三合照会）","天机在命、天梁在迁移","七杀在命、破军在迁移"],ans:1,e:"府相朝垣格：命宫三方四正有天府、天相来照会。天府为财库，天相为印星，二星拱照命宫，主稳重、有格局、善理财、处事圆融。"},
+  {q:"巨门化忌入命宫，最可能表现为什么？",opts:["口才出众、表达力强","口舌是非、内心敏感、容易得罪人","财运亨通","身体健康精力充沛"],ans:1,e:"巨门本就主「暗」，化忌后暗上加暗——口舌是非、说话得罪人而不自知、内心敏感多疑。但也可能成为深入研究者，将「暗」转化为探究真相的力量。"},
+  {q:"「杀破狼」格局由哪三颗星构成？",opts:["紫微、天府、天相","七杀、破军、贪狼","廉贞、天相、武曲","天机、天梁、巨门"],ans:1,e:"杀破狼：七杀、破军、贪狼永远在三方会合，代表「变动」。命坐其一，其余二星必在三方，主一生必有一次重大人生转折，大起大落，利创业不利守成。"},
+  {q:"四化中「化权」最适合加强哪个宫位的能力？",opts:["疾厄宫","官禄宫","田宅宫","父母宫"],ans:1,e:"化权属火，主掌控、权力、竞争、专业能力。入官禄宫，主事业上有魄力、能掌握实权，适合管理、技术骨干、创业者。在命宫则个性强势有主见。"},
+  {q:"命宫为空宫（无主星）时，应如何论断？",opts:["此命无意义不须看","借对宫迁移宫的主星来论断","只看辅星即可","以福德宫代替命宫"],ans:1,e:"命宫无主星时需「借对宫」——将迁移宫主星借作命宫论断依据。借来的星力量减半，需结合命宫内辅星、煞星、四化综合判断。空宫者适应力强，但自我认同感可能较弱。"},
+  {q:"下列哪种情形最能体现四化中「科」的作用？",opts:["权力的掌控","财富的积累","名声、化解纠纷、贵人提携","快速变动与改革"],ans:2,e:"化科属水，主名声、文采、贵人、化解之力。科能「解」忌的负面影响——命宫化忌但有科来照，则凶中有救。科也代表因才学名声获得机会。"},
+  {q:"「机月同梁格」需要哪四颗星在三方四正？",opts:["天机、太阴、天同、天梁","天机、太阳、天同、天梁","天机、太阴、天相、天梁","天机、天府、天同、天梁"],ans:0,e:"机月同梁格：天机、太阴、天同、天梁四星在命宫三方四正会齐。此格主「机巧、阴柔、温和、荫庇」，古代多为吏人（师爷），现代适合公务员、策划、咨询等协调型工作。"},
+
+  // ==================== 应用 (20~29) ====================
+  {q:"命宫武曲+天府，财帛宫有禄存，此人最适合的事业方向是？",opts:["艺术创作","金融、财务、管理","自由职业","餐饮服务"],ans:1,e:"武曲为财星主「行动赚钱」，天府为库星主「守财理财」，禄存入财帛——三重财星汇聚，理财能力极强。适合金融、会计、银行、资产管理等，能积累可观财富。"},
+  {q:"夫妻宫廉贞+七杀，对宫破军对照，最可能暗示什么婚姻状况？",opts:["平淡稳定到老","感情激烈、多变、可能晚婚或二婚","一生独身","配偶是同事"],ans:1,e:"廉贞七杀+破军对照，杀破狼气势强烈。感情上轰轰烈烈、一见钟情，但也易因性格冲突而分手。建议晚婚（30岁后），或找性格互补的伴侣，以吉星调和方能长久。"},
+  {q:"财帛宫天同+太阴化禄，此人的财运特点是什么？",opts:["靠体力劳动赚钱","靠投机暴富","靠人际关系、女性相关行业得财","靠遗产继承"],ans:2,e:"天同为福星，太阴为阴柔之美，化禄入财帛——财源来自与人打交道、服务业、女性相关行业（美容、服饰、艺术）。赚钱方式温和，人缘是最大的财源。"},
+  {q:"官禄宫太阳在酉（陷地），可能意味着什么事业状态？",opts:["官运亨通、事业巅峰","有才干但难施展、中年后方好转","完全不适合工作","创业必定成功"],ans:1,e:"太阳在酉为「日落西山」，光辉不足。官禄宫坐陷地太阳，主怀才不遇、贵人运弱。但若遇吉星调候（文昌、天魁），中年后运势可回升。或暗示在海外远方才更有利。"},
+  {q:"疾厄宫贪狼+火星同宫，健康上应注意什么？",opts:["心脏疾病","肝火旺盛、生殖系统、意外伤害","骨折","皮肤过敏"],ans:1,e:"贪狼属木主肝，火星属火，木火相生过旺则肝火盛、脾气暴躁。贪狼亦与生殖泌尿系统相关，火星主突然——须防急性炎症、意外伤害。宜修身养性、少饮酒、多运动。"},
+  {q:"天府在田宅宫，无煞星冲破，最可能代表什么？",opts:["无固定居所","家宅不宁","家底丰厚、有不动产运","租房子一辈子"],ans:2,e:"天府为财库之星入田宅宫（库位），库入其位，是上佳格局。代表家宅安宁、有祖产或能购置房产。无煞星冲破，一生不动产运佳，晚年安居乐业。"},
+  {q:"迁移宫天马+禄存同在，此组合对命主的影响是？",opts:["不宜外出宅中有利","外出求财顺利、适合异地发展","出国会有危险","与外地人无缘"],ans:1,e:"天马主动，禄存为财，二星同在迁移宫——古称「禄马交驰」格。极为利外出发展、经商贸易、物流运输、跨国业务，是致富的经典组合。"},
+  {q:"兄弟宫空宫，交友宫巨门化权，此人的人际关系模式是？",opts:["兄弟姐妹众多","手足缘薄，但朋友中有权威人物可借力","完全没有朋友","朋友都是普通人"],ans:1,e:"兄弟宫空宫（借对宫），手足缘分较薄或联系少；交友宫巨门化权，主朋友中有口才好、有实权的「大佬」型人物。适合通过朋友关系发展事业。"},
+  {q:"子女宫天梁+天巫同宫，关于子女方面最可能的情况是？",opts:["子女成群","子女有宗教缘或学术天赋、子息较迟","子女不孝","没有子女"],ans:1,e:"天梁为「荫星」入子女宫，主子女孝顺有福气；天巫为「灵性星」，暗示子女可能对宗教、玄学、医学、学术有特殊天赋。天梁亦有「孤」的含义，子女可能来得迟但质量高。"},
+  {q:"命宫天机+太阴，福德宫天同，此人的整体命格特征是什么？",opts:["粗心大意","心思细腻、好静、智力型人才","武力超群","财大气粗"],ans:1,e:"天机（智谋）+太阴（细腻）在命，福德宫又有天同（享福）——典型「机月」组合。聪明缜密，善于策划运筹。古代多为军师谋士，现代适合策划、IT、咨询、心理学等智力型行业。"},
+
+  // ==================== 分析 (30~39) ====================
+  {q:"大限行至「紫微天府」在寅宫，三方有天相、武曲、天魁。此大限的整体基调是？",opts:["动荡不安、事业受挫","稳中求进、事业上升、有贵人相助","健康出大问题","财运破败"],ans:1,e:"紫微天府同宫（寅申位）为「紫府同宫格」，属帝王格局。配武曲（财）、天相（印）、天魁（贵），大限十年事业有突破，贵人扶持，财运上升。宜稳扎稳打。"},
+  {q:"流年夫妻宫廉贞化忌+擎羊同宫，当年最应警惕什么？",opts:["可能获得意外之财","感情危机、口舌争执甚至法律纠纷","学业进步","健康状况好转"],ans:1,e:"廉贞化忌本身有「囚」之象，加擎羊为「刑」——「刑囚」组合在流年夫妻宫，是感情危机的重要信号。可能表现为激烈争吵、第三者介入、甚至法律层面的婚姻问题。"},
+  {q:"命盘官禄宫七杀+破军对照+贪狼在三方，大限又行至官禄宫。此人适合什么职业路径？",opts:["公务员安稳度日","创业、军警、外科、工程等需要魄力的行业","出家修行","普通文员"],ans:1,e:"杀破狼在事业线，是强烈的「变革者」信号。不适合按部就班，适合创业、军警、外科医生、工程师等需要胆识、快速决策的领域。大限行至官禄宫，创业时机成熟。"},
+  {q:"流年田宅宫太阴化权+文昌，可能发生什么？",opts:["搬家或房产交易有损失","购置房产、装修、搬家入更好环境","房子被盗窃","房屋倒塌"],ans:1,e:"太阴与田宅相关（太阴属田宅主），化权主「主动掌控」，加文昌为文书契约。流年此组合入田宅宫，极可能买房、签合约、装修、乔迁之喜。"},
+  {q:"本命财帛宫廉贞贪狼+火星，大限财帛又逢禄存。综合分析财运走势？",opts:["一生贫穷","早年求财冒险波折，中年后渐入佳境有积累","财富从天而降","只适合打工"],ans:1,e:"廉贞贪狼+火星为「火贪格」体现——早年求财心切，易走偏门或高风险投资，波折大。大限财帛得禄存，中年后财运趋稳，经验转化为智慧，财富逐步积累。先苦后甜的财运曲线。"},
+  {q:"迁移宫天同化禄+天梁，大限福德宫太阳陷地。此人的晚年运趋势是？",opts:["晚年凄凉孤独","晚年精神生活丰富但需注意健康、异地养老宜","晚年后大富大贵","晚年重病缠身"],ans:1,e:"天同化禄（福气）+天梁（荫庇）在迁移，主晚年适合去环境好、气候宜人的地方养老。但大限福德宫太阳陷地，需注意心理状态，应主动社交、培养兴趣。总体是「有福但需自求」。"},
+  {q:"某命盘「三合火贪格」成立（贪狼+火星在命宫三合方），最显著的特征是？",opts:["一生平凡无奇","突发性暴富机会、但也易大起大落","永远贫穷","天生体弱"],ans:1,e:"火贪格是紫微斗数最著名的「暴发格」之一。火星引爆贪狼的欲望和行动力，主突然爆发的财富增长。但火星来得快去得也快，若无禄存/化禄稳固，财富可能来去匆匆。"},
+  {q:"流年命宫天机化忌，对宫巨门对照。当年应采取什么策略？",opts:["大举投资","少说多做、避免计划过多行动不足、谨慎签约","辞职旅行","什么都不要管"],ans:1,e:"天机化忌——思虑过度、计划赶不上变化、容易神经衰弱。对宫巨门加重口舌。最佳策略：不要想太多、不乱说话、不签重要合同、不过度承诺。天机化忌的年份，「不动」就是最好的「动」。"},
+  {q:"本命福德宫紫微+化权，大限命宫行至夫妻宫贪狼+咸池。十年内的主要课题是？",opts:["事业发展","婚姻感情的考验与内心精神成长","身体健康危机","学业问题"],ans:1,e:"大限命宫在夫妻宫，这十年婚姻感情是核心舞台。贪狼+咸池——桃花极旺，但咸池为「偏桃花」，诱惑多。福德宫紫微化权则内心强势有主见，可能面临「坚守」与「诱惑」的拉扯。"},
+  {q:"综合分析：命宫天府，迁移宫七杀破军对照，财帛宫武曲，官禄宫天相，福德宫紫微。此命盘最接近哪种人生模式？",opts:["平平淡淡的普通人","外稳内霸的幕后掌权者——表面温和内心有雷霆手段","完全的失败者","无欲无求的隐士"],ans:1,e:"天府坐命——外表温和稳重；迁移宫杀破——在外有魄力敢打敢拼；武曲在财帛——财富来自实干；天相在官禄——事业靠辅佐上位；福德宫紫微——内心以帝星自居。外表忠厚辅臣，骨子里帝王心术——「外柔内刚、以退为进」的成大事者格局。"}
+];
+
+var LEVELS = ["基础","理解","应用","分析"];
+var TAGS   = ["tg0","tg1","tg2","tg3"];
+
+var lv    = 0;
+var qi    = 0;
+var done  = new Array(40).fill(false);
+var right = new Array(40).fill(false);
+var pick  = new Array(40).fill(-1);
+var wrong = new Set();
+var showWb = false;
+
+function rTabs(){
+  var h = "";
+  for(var i = 0; i < 4; i++){
+    var s = i * 10;
+    var cnt = done.slice(s, s + 10).filter(function(x){return x;}).length;
+    h += '<button class="tab t'+i+' '+(i===lv?"on":"")+'" onclick="goLv('+i+')">'+LEVELS[i]+'阶<span class="badge">'+cnt+'/10</span></button>';
+  }
+  document.getElementById("tabsEl").innerHTML = h;
+}
+
+function rScore(){
+  var td = done.filter(function(x){return x;}).length;
+  var tc = right.filter(function(x){return x;}).length;
+  document.getElementById("prog").textContent = td + "/40";
+  document.getElementById("acc").textContent = td === 0 ? "0%" : Math.round(tc/td*100) + "%";
+  document.getElementById("wc").textContent = wrong.size;
+}
+
+function rQuiz(){
+  var idx = lv * 10 + qi;
+  var qq  = Q[idx];
+  var isDone = done[idx];
+  var isRight = right[idx];
+  var chosen  = pick[idx];
+  var el = document.getElementById("quizEl");
+
+  var h = '<div class="qhead">';
+  h += '<span class="qnum">第 <em>'+(lv*10+qi+1)+'</em> / 40 题 &nbsp;|&nbsp; '+LEVELS[lv]+'阶 · 第 '+(qi+1)+' 题</span>';
+  h += '<span class="tag '+TAGS[lv]+'">'+LEVELS[lv]+'</span>';
+  h += '</div>';
+  h += '<div class="qtxt">'+qq.q+'</div>';
+  h += '<div class="opts">';
+
+  for(var i = 0; i < qq.opts.length; i++){
+    var cls = "opt";
+    if(isDone) cls += " done";
+    if(isDone && i === qq.ans && chosen === qq.ans) cls += " correct";
+    if(isDone && i === chosen && chosen !== qq.ans) cls += " wrong";
+    if(isDone && i === qq.ans && chosen !== qq.ans) cls += " show-correct";
+    h += '<button class="'+cls+'" onclick="answer('+idx+','+i+')" '+(isDone?"disabled":"")+'>'+"ABCD"[i]+'. '+qq.opts[i]+'</button>';
+  }
+
+  h += '</div>';
+
+  if(isDone){
+    h += '<div class="expl">'+qq.e+'</div>';
+  }
+
+  h += '<div class="navbtns">';
+  h += '<button class="btn" onclick="prevQ()" '+(qi===0?"disabled":"")+'>上一题</button>';
+  h += '<button class="btn" onclick="nextQ()" '+(qi>=9?"disabled":"")+'>下一题</button>';
+  h += '</div>';
+
+  el.innerHTML = h;
+}
+
+function answer(idx, choice){
+  if(done[idx]) return;
+  done[idx]  = true;
+  pick[idx]  = choice;
+  if(choice === Q[idx].ans){
+    right[idx] = true;
+  } else {
+    wrong.add(idx);
+  }
+  refresh();
+}
+
+function goLv(n){ lv = n; qi = 0; refresh(); }
+function prevQ(){ if(qi > 0){ qi--; refresh(); } }
+function nextQ(){ if(qi < 9){ qi++; refresh(); } }
+
+function toggleWb(){
+  showWb = !showWb;
+  document.getElementById("wbEl").style.display = showWb ? "" : "none";
+  if(showWb) rWb();
+}
+
+function rWb(){
+  var el = document.getElementById("wbList");
+  if(wrong.size === 0){
+    el.innerHTML = '<div class="wempty">暂无错题，继续加油！</div>';
+    return;
+  }
+  var arr = Array.from(wrong).sort(function(a,b){return a-b;});
+  var h = "";
+  for(var k = 0; k < arr.length; k++){
+    var idx = arr[k];
+    var qq  = Q[idx];
+    var lvi = Math.floor(idx / 10);
+    h += '<div class="wi" onclick="goQ('+idx+')">';
+    h += '<div class="wq">['+LEVELS[lvi]+'阶·'+(idx+1)+'] '+qq.q+'</div>';
+    h += '<div class="wa">正确答案：'+"ABCD"[qq.ans]+'. '+qq.opts[qq.ans]+'</div>';
+    h += '<div class="wa" style="color:#888;font-size:.7rem">'+qq.e+'</div>';
+    h += '</div>';
+  }
+  el.innerHTML = h;
+}
+
+function goQ(idx){
+  lv = Math.floor(idx / 10);
+  qi = idx % 10;
+  showWb = false;
+  document.getElementById("wbEl").style.display = "none";
+  refresh();
+}
+
+function clearWb(){
+  wrong.forEach(function(idx){
+    done[idx]  = false;
+    right[idx] = false;
+    pick[idx]  = -1;
+  });
+  wrong.clear();
+  refresh();
+}
+
+function resetAll(){
+  if(!confirm("确定要重置全部答题进度吗？此操作不可撤销。")) return;
+  done  = new Array(40).fill(false);
+  right = new Array(40).fill(false);
+  pick  = new Array(40).fill(-1);
+  wrong = new Set();
+  lv    = 0;
+  qi    = 0;
+  showWb = false;
+  document.getElementById("wbEl").style.display = "none";
+  refresh();
+}
+
+function refresh(){
+  rTabs();
+  rScore();
+  rQuiz();
+  if(showWb) rWb();
+}
+
+refresh();
+</script>
+</body>
+</html>

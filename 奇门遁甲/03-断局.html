@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="奇门遁甲断局实战指南 — 6步断局法、四维分析框架、用神心法、特格局速查表、用神速查，从排盘到断局一气呵成。">
+<title>奇门遁甲 · 断局实战</title>
+<link rel="stylesheet" href="../共享样式/base.css">
+<link rel="stylesheet" href="../共享样式/components.css">
+<style>
+:root{--font-ui:"Noto Serif SC","Songti SC","STSong",serif}
+body{font-family:var(--font-ui);padding-bottom:60px}
+
+/* ── 顶部导航 ── */
+.topnav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(8,7,13,.98),rgba(12,11,21,.95));border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;backdrop-filter:blur(10px)}
+.topnav-back{color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;padding:5px 12px;border:1px solid var(--gold);border-radius:14px;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.topnav-back:hover{background:var(--gold);color:#111}
+.topnav-title{color:var(--text-dim);font-size:.76rem;letter-spacing:.06em;white-space:nowrap}
+.topnav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.topnav-links a{color:var(--text-alt);text-decoration:none;font-size:.74rem;padding:4px 12px;border:1px solid var(--border);border-radius:12px;transition:all .2s}
+.topnav-links a:hover{border-color:var(--gold);color:var(--gold)}
+@media(max-width:600px){.topnav{padding:8px 10px;gap:8px}.topnav-links{margin-left:0}}
+
+.hero{text-align:center;padding:40px 20px 32px;border-bottom:1px solid var(--border);margin-bottom:32px}
+.hero h1{font-size:2.2em;color:var(--gold-lt);letter-spacing:5px;font-weight:300}
+.hero p{color:var(--text-dim);font-size:.9rem;letter-spacing:2px;margin-top:6px}
+.hero .line{width:50px;height:1px;background:var(--gold);margin:12px auto;opacity:.4}
+
+.container{max-width:960px;margin:0 auto;padding:0 24px}
+
+/* ── 步骤标题 ── */
+.step-hdr{margin:52px 0 24px;padding:0 0 12px;position:relative}
+.step-hdr::after{content:"";position:absolute;bottom:0;left:0;width:60px;height:1px;
+  background:linear-gradient(90deg,var(--gold),transparent)}
+.step-hdr h2{font-size:1.35rem;color:var(--gold-lt);letter-spacing:3px;font-weight:300;
+  display:flex;align-items:center;gap:12px}
+.step-hdr .num{display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:50%;background:var(--gold-bg);
+  border:1px solid var(--gold);color:var(--gold);font-size:1rem;font-weight:600}
+.step-hdr .sub{color:var(--text-dim);font-size:.76rem;margin-top:4px;letter-spacing:2px;padding-left:48px}
+
+.sec{margin:20px 0}
+.sec h3{color:var(--gold);font-size:1.05rem;font-weight:400;letter-spacing:2px;
+  margin:20px 0 10px;padding:0 0 0 14px;border-left:2px solid var(--gold)}
+.sec h4{color:var(--gold-lt);font-size:.92rem;margin:16px 0 8px;font-weight:400}
+.sec p{color:var(--text-alt);font-size:.86rem;margin:8px 0;line-height:1.9}
+.sec p strong,.sec li strong{color:#e8d8b0;font-weight:500}
+.sec ul,.sec ol{padding-left:22px;margin:8px 0}
+.sec li{color:var(--text-alt);font-size:.84rem;margin:4px 0;line-height:1.8}
+
+/* ── 强调引用 ── */
+.em{background:var(--card);border:1px solid rgba(212,176,106,.08);border-radius:var(--radius);
+  padding:15px 18px;margin:12px 0;font-size:.84rem;color:var(--text-alt)}
+.em strong{color:var(--gold-lt)}
+
+table{width:100%;border-collapse:collapse;font-size:.82em;margin:12px 0}
+th{background:var(--gold-bg);color:var(--gold);padding:9px 12px;text-align:left;
+  border-bottom:1px solid rgba(212,176,106,.15);font-weight:400;letter-spacing:1px}
+th:first-child{border-radius:var(--radius) 0 0 0}
+th:last-child{border-radius:0 var(--radius) 0 0}
+td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:hover td{background:rgba(255,255,255,.01)}
+td:first-child{color:#e0d8c0;font-weight:500;white-space:nowrap}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0}
+@media(max-width:720px){.g2{grid-template-columns:1fr}}
+
+blockquote{background:var(--card-alt);border-left:2px solid var(--gold);padding:13px 18px;
+  border-radius:0 var(--radius) var(--radius) 0;color:var(--text-alt);font-style:italic;
+  font-size:.84rem;margin:14px 0}
+blockquote strong{color:var(--gold-lt);font-style:normal}
+
+/* ── 精髓原则卡片 ── */
+.core-principle{
+  background:linear-gradient(135deg,rgba(212,176,106,.12),rgba(212,176,106,.04));
+  border:2px solid rgba(212,176,106,.3);border-radius:var(--radius-lg);
+  padding:24px 28px;margin:20px 0;text-align:center;position:relative;
+}
+.core-principle::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  border-radius:3px 3px 0 0;
+}
+.core-principle .cp-title{
+  font-size:.85rem;color:var(--gold);letter-spacing:4px;margin-bottom:8px;
+}
+.core-principle .cp-main{
+  font-family:var(--font-cn);font-size:1.6rem;font-weight:700;
+  color:var(--gold-lt);letter-spacing:.08em;line-height:1.6;
+}
+.core-principle .cp-sub{
+  color:var(--text-dim);font-size:.82rem;margin-top:8px;line-height:1.8;
+}
+
+/* ── 四维框架卡片 ── */
+.dim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:16px 0}
+.dim-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:18px 16px;transition:all .25s;position:relative;overflow:hidden;
+}
+.dim-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.dim-card .dim-icon{font-size:1.8rem;display:block;margin-bottom:8px}
+.dim-card .dim-label{font-size:.9rem;color:var(--gold-lt);font-weight:600;margin-bottom:4px;letter-spacing:.04em}
+.dim-card .dim-detail{font-size:.74rem;color:var(--text-dim);line-height:1.6}
+.dim-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.3}
+
+/* ── 用神速查卡 ── */
+.ys-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.ys-card{
+  background:linear-gradient(155deg,var(--card),rgba(21,19,38,.95));
+  border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;
+  cursor:pointer;transition:all .25s;text-align:center;
+}
+.ys-card:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,.3);transform:translateY(-2px)}
+.ys-card .ys-ask{font-size:.74rem;color:var(--text-dim);margin-bottom:6px;letter-spacing:.04em}
+.ys-card .ys-key{font-size:.95rem;color:var(--gold-lt);font-weight:600;margin-bottom:4px}
+.ys-card .ys-detail{font-size:.7rem;color:var(--text-dim);line-height:1.5}
+
+/* ── 格局速查表 ── */
+.gj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:16px 0}
+.gj-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:18px 20px;transition:all .25s;position:relative;
+}
+.gj-card:hover{border-color:var(--gold);background:var(--card-alt)}
+.gj-card .gj-badge{
+  display:inline-block;padding:2px 10px;border-radius:8px;font-size:.64rem;
+  font-weight:700;letter-spacing:.06em;margin-bottom:8px;
+}
+.gj-card .gj-badge.danger{background:var(--red-bg);color:var(--red);border:1px solid rgba(224,85,74,.2)}
+.gj-card .gj-badge.warn{background:rgba(212,176,106,.08);color:var(--gold-dk);border:1px solid rgba(212,176,106,.2)}
+.gj-card .gj-name{font-size:.95rem;color:var(--gold-lt);font-weight:600;margin-bottom:6px}
+.gj-card .gj-desc{font-size:.8rem;color:var(--text-alt);line-height:1.7;margin-bottom:6px}
+.gj-card .gj-act{font-size:.74rem;color:var(--text-dim);line-height:1.6;border-top:1px solid var(--border);padding-top:8px;margin-top:4px}
+.gj-card .gj-act strong{color:var(--gold)}
+
+/* ── 断局流程图 ── */
+.flow-wrap{display:flex;gap:8px;overflow-x:auto;padding:8px 0 16px;margin:16px 0;scroll-snap-type:x mandatory}
+.flow-wrap::-webkit-scrollbar{height:4px}
+.flow-step-box{flex:0 0 auto;min-width:140px;max-width:160px;scroll-snap-align:start;
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px 12px;text-align:center;position:relative;transition:all .2s}
+.flow-step-box:hover{border-color:var(--gold);transform:translateY(-3px)}
+.flow-step-box .f-num{font-size:1.2rem;color:var(--gold);font-weight:700;margin-bottom:6px}
+.flow-step-box .f-title{font-size:.82rem;color:var(--gold-lt);font-weight:600;margin-bottom:3px}
+.flow-step-box .f-desc{font-size:.68rem;color:var(--text-dim);line-height:1.5}
+.flow-arrow{display:flex;align-items:center;color:var(--gold);font-size:1.4rem;flex-shrink:0;padding:0 2px}
+
+/* ── 心法卡片 ── */
+.xf-card{
+  background:linear-gradient(135deg,rgba(155,126,196,.08),rgba(155,126,196,.02));
+  border:1.5px solid rgba(155,126,196,.2);border-radius:var(--radius);
+  padding:18px 22px;margin:14px 0;
+}
+.xf-card h4{color:var(--purple);font-size:.9rem;font-weight:600;margin-bottom:8px;letter-spacing:.04em}
+.xf-card p{color:var(--text-alt);font-size:.84rem;line-height:1.85;margin:4px 0}
+.xf-card .xf-formula{display:block;text-align:center;font-size:1rem;color:var(--gold-lt);
+  font-weight:700;padding:8px;margin:6px 0}
+
+footer{text-align:center;padding:40px 20px;color:var(--text-dim);font-size:.74rem;
+  letter-spacing:2px;border-top:1px solid var(--border);margin-top:48px}
+
+@media(max-width:640px){
+  .hero h1{font-size:1.5em}.container{padding:0 12px}
+  .step-hdr h2{font-size:1.15rem}
+  table{font-size:.72em}td,th{padding:6px 8px}
+  .core-principle .cp-main{font-size:1.2rem}
+  .flow-step-box{min-width:110px;max-width:130px;padding:12px 8px}
+}
+.with-sidebar{margin-left:0!important}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <a href="../index.html" class="topnav-back">← 玄门</a>
+  <span class="topnav-title">奇门遁甲 · 断局实战</span>
+  <div class="topnav-links">
+    <a href="index.html">总览</a>
+    <a href="01-基础入门.html">基础入门</a>
+    <a href="02-五步学习.html">五步学习</a>
+    <a href="题库.html">题库</a>
+  </div>
+</header>
+
+<div class="page-progress" id="pageProgress"></div>
+<button id="backTop">↑</button>
+
+<div class="hero">
+  <h1>断局实战</h1>
+  <p>6步断局 · 四维分析 · 格局速查 · 用神心法</p>
+  <div class="line"></div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 精髓原则：事为主，时为客 -->
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="step-hdr">
+  <h2><span class="num">道</span> 断局精髓原则</h2>
+  <p class="sub">心法第一 · 法是渡河筏，道是彼岸土</p>
+</div>
+
+<div class="sec">
+  <div class="core-principle">
+    <div class="cp-title">◆ 断 局 根 本 原 则 ◆</div>
+    <div class="cp-main">事 为 主 ， 时 为 客</div>
+    <div class="cp-sub">
+      所问之事决定哪个符号影响力最大。<br>
+      事是断局的"锚"，一切分析围绕"事"展开，而非机械套用公式。<br>
+      日干为求测人，时干为所问之事，<strong>事为主、人为辅</strong>。
+    </div>
+  </div>
+
+  <p>奇门遁甲断局如同中医辨证——先定病位（用神），再看病性（吉凶），后断病势（应期）。一盘在手，<strong>务求心中有"事"</strong>，盘中的每一个符号都是围绕这个"事"展开的对话。</p>
+
+  <blockquote>
+    <strong>心法口诀：</strong>一心一盘一事。人与盘、盘与事本为一体。初学者愈单纯，断事愈准；学得愈杂，反而错漏增多。保持初心单纯，接近"一"便接近"道"。
+  </blockquote>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 实战断局6步法 -->
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="step-hdr">
+  <h2><span class="num">术</span> 实战断局六步法</h2>
+  <p class="sub">第零步定用神 → 五步层层递进分析</p>
+</div>
+
+<div class="sec">
+
+  <!-- 流程图 -->
+  <div class="flow-wrap">
+    <div class="flow-step-box">
+      <div class="f-num">⓪</div>
+      <div class="f-title">定用神</div>
+      <div class="f-desc">锁定核心符号<br>问财→生门+戊<br>问病→天芮</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step-box">
+      <div class="f-num">①</div>
+      <div class="f-title">看八门</div>
+      <div class="f-desc">近期吉凶<br>门生宫则易成<br>门克宫则难成</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step-box">
+      <div class="f-num">②</div>
+      <div class="f-title">看天干格局</div>
+      <div class="f-desc">核心矛盾<br>盘局的"戏眼"<br>症结所在</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step-box">
+      <div class="f-num">③</div>
+      <div class="f-title">看九星</div>
+      <div class="f-desc">长期基础<br>大环境底色<br>天时能量</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step-box">
+      <div class="f-num">④</div>
+      <div class="f-title">看八神</div>
+      <div class="f-desc">神秘力量<br>无形影响<br>加减分项</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step-box">
+      <div class="f-num">⑤</div>
+      <div class="f-title">综合串联</div>
+      <div class="f-desc">通盘融汇<br>逻辑通顺<br>落结论</div>
+    </div>
+  </div>
+
+  <!-- 第零步 -->
+  <h3>第零步 · 定核心用神</h3>
+  <p><strong>断局之前的第一件事：</strong>明确"测什么"。用神选错，全盘皆错。这一步看似简单，却是整个断局的地基。用神确定之后，观察用神落哪一宫，该宫的<strong>八门、九星、八神、天干格局</strong>，就是判断的核心依据。</p>
+
+  <div class="tip info">不同的问题，用神完全不同。同一盘面，问财和问病的结论可以截然相反——因为看的符号不同、关注的角度不同。这就是"事为主"的真义。</div>
+
+  <!-- 第一步 -->
+  <h3>第一步 · 看八门 — 断近期吉凶</h3>
+  <p>八门代表<strong>人事层面的短期趋势</strong>，是能量的流动出口。用神所在之宫的门，决定了事情的"门路"是否通畅。</p>
+  <table>
+  <thead><tr><th>门</th><th>五行</th><th>吉凶</th><th>断局要点</th></tr></thead>
+  <tr><td><strong>开门</strong></td><td>金</td><td style="color:var(--green)">大吉</td><td>事业开创、远行公开之事易成；落宫受克则开局不顺</td></tr>
+  <tr><td><strong>休门</strong></td><td>水</td><td style="color:var(--green)">吉</td><td>谈判和解、休整养生之事易成；落宫受克则进退两难</td></tr>
+  <tr><td><strong>生门</strong></td><td>土</td><td style="color:var(--green)">大吉</td><td>求财创业、生机之事易成；受克则利润微薄、难产</td></tr>
+  <tr><td><strong>伤门</strong></td><td>木</td><td style="color:var(--red)">凶</td><td>竞争博弈可用；婚嫁出行则凶；落宫得生则险中求胜</td></tr>
+  <tr><td><strong>杜门</strong></td><td>木</td><td style="color:var(--blue)">平</td><td>保密藏匿可倚；公开交际则阻；技术研发之事得杜门为专精</td></tr>
+  <tr><td><strong>景门</strong></td><td>火</td><td style="color:var(--blue)">平</td><td>文书考试有利；婚嫁则不宜；得吉星吉神则名利双收</td></tr>
+  <tr><td><strong>死门</strong></td><td>土</td><td style="color:var(--red)">大凶</td><td>送葬守成可用；其他诸事皆忌；落宫得吉星可减凶</td></tr>
+  <tr><td><strong>惊门</strong></td><td>金</td><td style="color:var(--red)">凶</td><td>辩论诉讼可借势；婚嫁出行则忌；口舌是非多从此来</td></tr>
+  </table>
+
+  <div class="tip help"><strong>门宫关系是判断成败的关键：</strong>门生宫 = 事情主动向有利方向发展 · 宫生门 = 环境支持事情 · 门克宫 = 事情本身有问题阻碍 · 宫克门 = 环境压制事情发展</div>
+
+  <!-- 第二步 -->
+  <h3>第二步 · 看天干格局 — 断核心矛盾</h3>
+  <p>天干是盘局的<strong>"戏眼"</strong>——揭示事情的核心症结所在。用神落宫的天盘天干与地盘天干的组合，以及与其他关键宫位的天干关系，构成了断局中最有信息量的部分。</p>
+
+  <table>
+  <thead><tr><th>天干</th><th>断局中的特殊含义</th><th>常见格局信号</th></tr></thead>
+  <tr><td><strong>戊</strong></td><td>资金、钱财、资本</td><td>戊+庚 = 资金转移/财产变动</td></tr>
+  <tr><td><strong>己</strong></td><td>欲望、私心、陷阱</td><td>己+辛 = 因私欲犯错</td></tr>
+  <tr><td><strong>庚</strong></td><td>阻碍、白虎、强硬力量</td><td>庚+癸 = 阻力来自暗处</td></tr>
+  <tr><td><strong>辛</strong></td><td>错误、罪过、瑕疵</td><td>辛+壬 = 错误被放大扩散</td></tr>
+  <tr><td><strong>壬</strong></td><td>流动、变化、不稳定</td><td>壬+戊 = 资金流动大起大落</td></tr>
+  <tr><td><strong>癸</strong></td><td>暗昧、隐情、暧昧</td><td>癸+丁 = 暗中有文书麻烦</td></tr>
+  <tr><td><strong>乙</strong></td><td>希望、柔韧、女性</td><td>乙+庚 = 柔中带阻、事情有转机</td></tr>
+  <tr><td><strong>丙</strong></td><td>权威、光明、乱子</td><td>丙+庚 = 权威受阻、光明中有暗影</td></tr>
+  <tr><td><strong>丁</strong></td><td>消息、文书、希望</td><td>丁+癸 = 文书暗昧、消息不实</td></tr>
+  </table>
+
+  <blockquote><strong>断格局心诀：</strong>天干组合如同两股力量在较量——天盘为"客"（主动方），地盘为"主"（受动方）。谁的力量强（旺衰），谁就主导格局走向。</blockquote>
+
+  <!-- 第三步 -->
+  <h3>第三步 · 看九星 — 断长期基础</h3>
+  <p>九星决定事情的<strong>长期基础和天时底色</strong>。如果说八门看"一个月内"的走势，九星则看"三个月到一年"的大环境。</p>
+
+  <table>
+  <thead><tr><th>九星</th><th>五行</th><th>吉凶</th><th>断局要点</th></tr></thead>
+  <tr><td><strong>天辅</strong></td><td>木</td><td style="color:var(--green)">吉</td><td>文昌教育有利；文化辅助之象；得之则有人帮、有资源</td></tr>
+  <tr><td><strong>天禽</strong></td><td>土</td><td style="color:var(--green)">吉</td><td>中正稳定，核心位置；适合守成、巩固</td></tr>
+  <tr><td><strong>天心</strong></td><td>金</td><td style="color:var(--green)">吉</td><td>谋划智慧，适合策划、医疗；聪明人得之则事半功倍</td></tr>
+  <tr><td><strong>天任</strong></td><td>土</td><td style="color:var(--green)">吉</td><td>踏实担当，适合农业、基建；稳扎稳打之象</td></tr>
+  <tr><td><strong>天冲</strong></td><td>木</td><td style="color:var(--blue)">平</td><td>冲动行动，适合武职军警；不宜久等之事</td></tr>
+  <tr><td><strong>天英</strong></td><td>火</td><td style="color:var(--blue)">平</td><td>华丽文书，适合媒体公关；但易有虚火、火患</td></tr>
+  <tr><td><strong>天蓬</strong></td><td>水</td><td style="color:var(--red)">凶</td><td>冒险贪欲，需防破财受骗；水患之象</td></tr>
+  <tr><td><strong>天芮</strong></td><td>土</td><td style="color:var(--red)">凶</td><td>疾病问题，学习之象；问病则天芮为第一用神</td></tr>
+  <tr><td><strong>天柱</strong></td><td>金</td><td style="color:var(--red)">凶</td><td>破坏口舌，不适合合作；独行反而有利</td></tr>
+  </table>
+
+  <!-- 第四步 -->
+  <h3>第四步 · 看八神 — 断无形力量</h3>
+  <p>八神代表<strong>神秘力量和无形影响</strong>，是断局中"加减分"的项目。它不决定成败的根本方向，但会大幅影响事情的顺利程度和最终体验。</p>
+
+  <table>
+  <thead><tr><th>八神</th><th>吉凶</th><th>核心影响</th><th>断局信号</th></tr></thead>
+  <tr><td><strong>值符</strong></td><td style="color:var(--green)">大吉</td><td>首领、贵人、主导力量</td><td>有贵人相助、当前环境最强能量加持</td></tr>
+  <tr><td><strong>螣蛇</strong></td><td style="color:var(--red)">凶</td><td>虚惊怪异、纠缠、假象</td><td>事情有假象、信息不实、精神焦虑</td></tr>
+  <tr><td><strong>太阴</strong></td><td style="color:var(--green)">吉</td><td>暗中相助、密谋、庇护</td><td>背后有贵人、适合暗中推进</td></tr>
+  <tr><td><strong>六合</strong></td><td style="color:var(--green)">吉</td><td>合作、婚姻、中介撮合</td><td>婚事可成、合作顺利、中间人得力</td></tr>
+  <tr><td><strong>白虎</strong></td><td style="color:var(--red)">凶</td><td>血光、威猛、军警、压力</td><td>压力巨大、意外伤害风险、但也代表执行力强</td></tr>
+  <tr><td><strong>玄武</strong></td><td style="color:var(--red)">凶</td><td>盗贼、暗昧、暧昧、欺骗</td><td>需防被骗、隐私泄露、信息不对称</td></tr>
+  <tr><td><strong>九地</strong></td><td style="color:var(--green)">吉(缓)</td><td>稳固、迟缓、长久</td><td>事成但慢、宜守不宜攻</td></tr>
+  <tr><td><strong>九天</strong></td><td style="color:var(--green)">吉(快)</td><td>高远、主动、扬名、快速</td><td>事成且快、名声远播、适合进取</td></tr>
+  </table>
+
+  <!-- 第五步 -->
+  <h3>第五步 · 综合串联 — 落结论</h3>
+  <p>将前五步的信息<strong>串联成一条完整的逻辑链</strong>，输出清晰可执行的断局结论。这一步考验的是通盘融汇的能力，而非简单叠加。</p>
+
+  <div class="em">
+    <strong>串联示例：</strong>某人问工作变动 → 用神=开门，落离9宫 → 开门(金)克离宫(火)=门克宫，事情受阻 → 天盘庚+地盘癸=阻力来自暗处 → 天辅星=长期有贵人 → 九天=快速变化 → <strong>结论：</strong>短期内变法困难（门克宫+庚癸暗阻），但长远有贵人相助（天辅），约3个月后（离宫数9÷3）九天主动出击可得良机。
+  </div>
+
+  <table>
+  <thead><tr><th>串联维度</th><th>要回答的问题</th><th>信息来源</th></tr></thead>
+  <tr><td><strong>能不能成？</strong></td><td>事情的结果走向是吉是凶？</td><td>八门吉凶 + 门宫生克</td></tr>
+  <tr><td><strong>卡在哪里？</strong></td><td>核心阻力/症结是什么？</td><td>天干格局 + 特格局</td></tr>
+  <tr><td><strong>什么底色？</strong></td><td>大环境支持还是不利？</td><td>九星吉凶 + 月令旺衰</td></tr>
+  <tr><td><strong>有什么助力/阻力？</strong></td><td>无形力量加减分如何？</td><td>八神吉凶</td></tr>
+  <tr><td><strong>什么时候应？</strong></td><td>事情何时发生/何时了结？</td><td>宫数 + 空亡填实 + 马星应期</td></tr>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 四维分析框架 -->
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="step-hdr">
+  <h2><span class="num">维</span> 四维分析框架</h2>
+  <p class="sub">竖看四盘 · 横看生克 · 时空定位 · 能量评估</p>
+</div>
+
+<div class="sec">
+
+  <div class="dim-grid">
+    <div class="dim-card">
+      <span class="dim-icon">📐</span>
+      <div class="dim-label">一维 · 竖看四盘</div>
+      <div class="dim-detail">
+        天时(九星) + 地利(地盘天干)<br>
+        + 人和(八门) + 神助(八神)<br>
+        一宫之内四层叠看<br>
+        <strong>纵向深挖一宫的全息信息</strong>
+      </div>
+    </div>
+    <div class="dim-card">
+      <span class="dim-icon">⚖</span>
+      <div class="dim-label">二维 · 横看生克</div>
+      <div class="dim-detail">
+        日干(求测人) 与 时干(所问事)<br>
+        的生克关系<br>
+        各用神落宫之间的五行生克<br>
+        <strong>横向对比人与事的互动关系</strong>
+      </div>
+    </div>
+    <div class="dim-card">
+      <span class="dim-icon">🗺</span>
+      <div class="dim-label">三维 · 时空定位</div>
+      <div class="dim-detail">
+        内盘(1-4宫) = 近、快、本地<br>
+        外盘(6-9宫) = 远、慢、外地<br>
+        宫位数 = 应期参考<br>
+        <strong>判断事情的时间和空间属性</strong>
+      </div>
+    </div>
+    <div class="dim-card">
+      <span class="dim-icon">🔋</span>
+      <div class="dim-label">四维 · 能量评估</div>
+      <div class="dim-detail">
+        月令旺衰定吉凶力度<br>
+        用神落宫得令则事大<br>
+        失令则事小或无<br>
+        <strong>空亡填实、马星动应为应期关键</strong>
+      </div>
+    </div>
+  </div>
+
+  <h3>一维：竖看四盘 — 一宫之内的全息解读</h3>
+  <p>选定用神落宫后，<strong>垂直深入</strong>该宫的四个层次：天盘的九星（天时环境）、人盘的八门（人事状态）、神盘的八神（神秘力量）、地盘的天干（地理基础）。四层信息叠加，构成该宫完整的"能量画像"。</p>
+
+  <div class="em">
+    <strong>示例：</strong>用神落震3宫 → 天盘天辅星(文化/贵人) + 人盘开门(事业/公开) + 神盘值符(主导/权威) + 地盘坐戊(资金基础) → <strong>四层皆吉</strong>，该宫能量非常正面，事业有贵人引路、资金基础扎实。
+  </div>
+
+  <h3>二维：横看生克 — 人与事的互动</h3>
+  <p><strong>日干为"我"，时干为"事"。</strong>横看生克即：日干落宫 与 时干落宫 之间的五行生克关系。这是判断"事是否利我"的核心维度。</p>
+
+  <table>
+  <thead><tr><th>关系</th><th>含义</th><th>判断要点</th></tr></thead>
+  <tr><td><strong>日干生时干</strong></td><td>我去生事 — 付出多，收获少</td><td>主动投入，但事情未必回报自己 —— "身去生物"</td></tr>
+  <tr><td><strong>时干生日干</strong></td><td>事来生我 — 事有利，自然而成</td><td>事情对本人有益，顺势而为即可 —— "物来生身"</td></tr>
+  <tr><td><strong>日干克时干</strong></td><td>我去克事 — 能掌控，但费力</td><td>有能力把控，但需要付出努力 —— "身能胜物"</td></tr>
+  <tr><td><strong>时干克日干</strong></td><td>事来克我 — 事情不利，难以驾驭</td><td>事情超出能力范围，建议暂缓或放弃 —— "物来胜身"</td></tr>
+  <tr><td><strong>日干=时干(比和)</strong></td><td>人与事同气 — 顺势自然</td><td>事情与本人契合度高，顺势推进即可</td></tr>
+  </table>
+
+  <blockquote><strong>心诀：</strong>身要胜物则事易，物来胜身则事难。日干与时干的生克关系，是横看生克的灵魂。</blockquote>
+
+  <h3>三维：时空定位 — 内外盘与应期</h3>
+  <p><strong>内盘（1-4宫）</strong>主近、主快、主本地、主内部；<strong>外盘（6-9宫）</strong>主远、主慢、主外地、主外部。用神落在内盘还是外盘，直接决定了事情的时间属性。</p>
+
+  <div class="g2">
+    <div class="em">
+      <strong>内盘（1·8·3·4宫）</strong><br>
+      事情来得快、离得近<br>
+      应在近期（天/周）<br>
+      地点以本地为主<br>
+      人事关系偏内部
+    </div>
+    <div class="em">
+      <strong>外盘（9·2·7·6宫）</strong><br>
+      事情来得慢、离得远<br>
+      应在远期（月/年）<br>
+      地点以外地为主<br>
+      人事关系偏外部
+    </div>
+  </div>
+
+  <h3>四维：能量评估 — 旺衰与应期</h3>
+  <p>同一个吉门，<strong>旺则吉力大，衰则吉力小</strong>；同一个凶门，旺则凶力大，衰则凶力小。月令决定五行的旺衰强弱，是衡量吉凶"力度"的标尺。</p>
+
+  <table>
+  <thead><tr><th>季节</th><th>旺</th><th>相</th><th>休</th><th>囚</th><th>死</th></tr></thead>
+  <tr><td><strong>春（寅卯辰月）</strong></td><td style="color:var(--green)">木</td><td>火</td><td>水</td><td>金</td><td>土</td></tr>
+  <tr><td><strong>夏（巳午未月）</strong></td><td style="color:var(--red)">火</td><td>土</td><td>木</td><td>水</td><td>金</td></tr>
+  <tr><td><strong>秋（申酉戌月）</strong></td><td style="color:var(--gold)">金</td><td>水</td><td>土</td><td>火</td><td>木</td></tr>
+  <tr><td><strong>冬（亥子丑月）</strong></td><td style="color:var(--blue)">水</td><td>木</td><td>金</td><td>土</td><td>火</td></tr>
+  <tr><td><strong>四季末（辰未戌丑月）</strong></td><td style="color:var(--gold-dk)">土</td><td>金</td><td>火</td><td>木</td><td>水</td></tr>
+  </table>
+
+  <div class="tip help">
+    <strong>应期判断三要素：</strong><br>
+    ① <strong>宫数应期：</strong>用神落宫数 = 天数/周数/月数（如离9宫 → 9天/9周/9个月）<br>
+    ② <strong>空亡填实：</strong>旬空之宫，待地支填实（如甲子旬空戌亥 → 逢戌日/亥日应）<br>
+    ③ <strong>马星动应：</strong>马星所在之宫，逢冲日/合日发动
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 用神心法 -->
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="step-hdr">
+  <h2><span class="num">心</span> 用神心法</h2>
+  <p class="sub">日干=我 · 时干=事 · 值符=环境 · 值使=通道</p>
+</div>
+
+<div class="sec">
+
+  <div class="xf-card">
+    <h4>用神四大定位</h4>
+    <span class="xf-formula">日干 = 求测人（"我"）</span>
+    <span class="xf-formula">时干 = 所问之事</span>
+    <span class="xf-formula">值符 = 大环境 / 主导力量</span>
+    <span class="xf-formula">值使 = 事体的关键 / 执行通道</span>
+    <p>日干落宫代表求测人自身的状态、能力、位置；时干落宫代表事情本身的状态、走向、难易。值符是整盘的"天心"——大环境对事情的加持或压制；值使是"通道"——事情能否顺利执行的关卡。</p>
+  </div>
+
+  <h3>用神选用的三层逻辑</h3>
+  <table>
+  <thead><tr><th>层级</th><th>用神</th><th>回答什么问题</th><th>示例</th></tr></thead>
+  <tr><td><strong>第一层：人事定位</strong></td><td>日干 + 时干</td><td>"我"和"事"各自的状态如何？</td><td>日干落坎1宫临休门→我目前在休整期</td></tr>
+  <tr><td><strong>第二层：专项用神</strong></td><td>按问题选专项符号</td><td>这件事的专项指标如何？</td><td>问财看生门+戊落何宫、吉凶如何</td></tr>
+  <tr><td><strong>第三层：环境通道</strong></td><td>值符 + 值使</td><td>大环境和执行通道是否通畅？</td><td>值符临九天→大环境有利快速行动</td></tr>
+  </table>
+
+  <h3>年命为根，月令为干，时干为梢</h3>
+  <p>若求测人提供了<strong>出生年份（年命）</strong>，则年命落宫代表此人的"命根子"——根本运势底色。年命宫 > 日干宫 > 时干宫，三者形成从根到梢的完整链条。年干为根（先天禀赋）、月干为干（大势所趋）、时干为梢（具体事件）。</p>
+
+  <blockquote><strong>心诀：</strong>身要胜物则事易，物来胜身则事难。日干强于时干则事在掌控之中，反之则力不从心。用神心法的本质，是找到盘中最能代表"人"和"事"的那一对符号，然后看它们之间是"相亲"还是"相斗"。</blockquote>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 用神速查 -->
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="step-hdr">
+  <h2><span class="num">速</span> 用神速查表</h2>
+  <p class="sub">一问一答 · 按问题类型快速定位用神</p>
+</div>
+
+<div class="sec">
+  <p>以下是最常见的问题类型与对应的用神符号。记住：<strong>问什么就看什么</strong>——问财看生门+戊，问病看天芮，问工作看开门，问婚看六合+乙庚。</p>
+
+  <div class="ys-grid">
+    <div class="ys-card">
+      <div class="ys-ask">问财运 / 投资</div>
+      <div class="ys-key">生门 + 戊</div>
+      <div class="ys-detail">生门=生机利润 · 戊=资金<br>两者同宫则财源滚滚<br>再看得不得奇、门吉不吉</div>
+    </div>
+    <div class="ys-card">
+      <div class="ys-ask">问疾病 / 健康</div>
+      <div class="ys-key">天芮星</div>
+      <div class="ys-detail">天芮=疾病问题<br>看其落宫及所临之门<br>天心星+开门为医救之神</div>
+    </div>
+    <div class="ys-card">
+      <div class="ys-ask">问工作 / 事业</div>
+      <div class="ys-key">开门</div>
+      <div class="ys-detail">开门=开创·事业·公开<br>落宫吉则工作顺遂<br>再配合日干落宫看人岗匹配</div>
+    </div>
+    <div class="ys-card">
+      <div class="ys-ask">问婚姻 / 感情</div>
+      <div class="ys-key">六合 + 乙庚</div>
+      <div class="ys-detail">六合=婚姻中介<br>乙(女方)·庚(男方)<br>看两干落宫生克关系</div>
+    </div>
+    <div class="ys-card">
+      <div class="ys-ask">问考试 / 文书</div>
+      <div class="ys-key">景门 + 丁</div>
+      <div class="ys-detail">景门=文书考试<br>丁=消息·文书<br>天辅星加持则文昌大旺</div>
+    </div>
+    <div class="ys-card">
+      <div class="ys-ask">问出行 / 远行</div>
+      <div class="ys-key">开门 + 九天</div>
+      <div class="ys-detail">开门=出行·远行<br>九天=高远·快速<br>两者得吉则出行顺利</div>
+    </div>
+    <div class="ys-card">
+      <div class="ys-ask">问合作 / 合伙</div>
+      <div class="ys-key">六合</div>
+      <div class="ys-detail">六合=合作撮合<br>落宫吉则合作顺利<br>落宫凶则需防合作陷阱</div>
+    </div>
+    <div class="ys-card">
+      <div class="ys-ask">问官司 / 诉讼</div>
+      <div class="ys-key">惊门 + 白虎</div>
+      <div class="ys-detail">惊门=口舌官司<br>白虎=威猛压力<br>看日干和对方落宫强弱</div>
+    </div>
+    <div class="ys-card">
+      <div class="ys-ask">问失物 / 寻人</div>
+      <div class="ys-key">玄武</div>
+      <div class="ys-detail">玄武=盗贼·遗失<br>落内盘则物失不远<br>落外盘则已流向外地</div>
+    </div>
+    <div class="ys-card">
+      <div class="ys-ask">问择日 / 开业</div>
+      <div class="ys-key">生门 + 开门</div>
+      <div class="ys-detail">生门=生机·大吉<br>开门=开创·公开<br>两门得吉宫则日课大吉</div>
+    </div>
+  </div>
+
+  <h3>用神选用总表</h3>
+  <table>
+  <thead><tr><th>问题类型</th><th>主要用神</th><th>辅助用神</th><th>关键判断</th></tr></thead>
+  <tr><td>财运投资</td><td><strong>生门 + 戊</strong></td><td>甲子戊（本金）</td><td>生门是否得奇得吉、戊是否入墓</td></tr>
+  <tr><td>疾病健康</td><td><strong>天芮星</strong></td><td>天心星（医）+ 乙（药）</td><td>天芮落宫吉凶、天心是否能克天芮</td></tr>
+  <tr><td>工作事业</td><td><strong>开门</strong></td><td>日干（自身）+ 值符（领导）</td><td>开门与日干落宫的生克关系</td></tr>
+  <tr><td>婚姻感情</td><td><strong>六合 + 乙庚</strong></td><td>休门（家庭）</td><td>乙庚落宫生克、六合宫吉凶</td></tr>
+  <tr><td>考试升学</td><td><strong>景门 + 丁</strong></td><td>天辅星（文昌）</td><td>景门丁奇是否得吉星吉神</td></tr>
+  <tr><td>出行远行</td><td><strong>开门 + 九天</strong></td><td>日干落宫</td><td>开门是否得吉格、有无门迫</td></tr>
+  <tr><td>合作合伙</td><td><strong>六合</strong></td><td>双方日干落宫</td><td>六合宫吉凶、双方宫位生克</td></tr>
+  <tr><td>官司诉讼</td><td><strong>惊门 + 白虎</strong></td><td>日干（己）+ 对方干支</td><td>两方宫位强弱对比</td></tr>
+  <tr><td>失物寻人</td><td><strong>玄武</strong></td><td>时干（失物）</td><td>玄武落宫方位、内外盘定远近</td></tr>
+  <tr><td>择日开业</td><td><strong>生门 + 开门</strong></td><td>值符（环境）</td><td>两门不得迫制、宫位得令得旺</td></tr>
+  </table>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 特格局速查表 -->
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="step-hdr">
+  <h2><span class="num">格</span> 特格局速查表</h2>
+  <p class="sub">七大格局完整解析 · 断局时必须排查的关键信号</p>
+</div>
+
+<div class="sec">
+
+  <p>以下七个特殊格局是断局中<strong>必须逐项排查</strong>的关键信号。任何一个特殊格局的出现，都会显著影响最终的判断结论。排查顺序：<strong>先看伏吟反吟 → 再查空亡入墓 → 后看击刑门迫 → 最后确认是否五不遇时</strong>。</p>
+
+  <div class="gj-grid">
+
+    <!-- 1. 伏吟 -->
+    <div class="gj-card">
+      <span class="gj-badge warn">格局一</span>
+      <div class="gj-name">伏吟</div>
+      <div class="gj-desc">
+        九星伏吟：天盘星与地盘星相同（星不动）<br>
+        八门伏吟：人盘门与地盘门相同（门不动）<br>
+        <strong>星门皆不动，整个盘面"静止"了</strong>
+      </div>
+      <div class="gj-act">
+        <strong>核心含义：</strong>事情迟缓、停滞、维持原状。天地人都"不动"，意味着事情难以推进。<br>
+        <strong>何时出现：</strong>时干为甲时（天盘为甲申庚除外）容易出现伏吟。<br>
+        <strong>断局要点：</strong>伏吟主"不宜动"——凡事宜守不宜攻、宜静不宜动、宜等不宜急。但并非全凶：如果问"守成、维持、稳定"之事，伏吟反而是吉兆。<br>
+        <strong>应期：</strong>待冲则动——逢相冲之日（如子午冲）或相冲之月，伏吟方解。
+      </div>
+    </div>
+
+    <!-- 2. 反吟 -->
+    <div class="gj-card">
+      <span class="gj-badge danger">格局二</span>
+      <div class="gj-name">反吟</div>
+      <div class="gj-desc">
+        星门对冲：天盘星或人盘门与地盘对冲<br>
+        如天盘星在坎1宫、地盘星在离9宫<br>
+        <strong>天地人颠倒对冲，整个盘面"动荡"了</strong>
+      </div>
+      <div class="gj-act">
+        <strong>核心含义：</strong>事情反复、变动、不稳定、折腾。事情容易出现反复、一波三折、表面上看到的和实际情况相反。<br>
+        <strong>何时出现：</strong>星门落对冲之宫（坎1离9对冲、震3兑7对冲、坤2艮8对冲、巽4乾6对冲）。<br>
+        <strong>断局要点：</strong>反吟主"多变"——计划易变、承诺易反悔、信息易失真。问"稳定"之事忌反吟；问"变动"之事（如跳槽、搬家）反吟反而可用。<br>
+        <strong>应期：</strong>逢合则止——逢六合之日（如子丑合），反吟之气暂缓。
+      </div>
+    </div>
+
+    <!-- 3. 空亡 -->
+    <div class="gj-card">
+      <span class="gj-badge danger">格局三</span>
+      <div class="gj-name">空亡</div>
+      <div class="gj-desc">
+        旬空之宫：每一旬中，天干配地支必有二支轮空<br>
+        如甲子旬中戌亥为空亡<br>
+        <strong>该宫能量"虚、空、假"，名存实亡</strong>
+      </div>
+      <div class="gj-act">
+        <strong>核心含义：</strong>虚空、虚假、有名无实、等待填充。用神落空亡之宫，事情处于"悬而未决"的状态。<br>
+        <strong>如何查找：</strong>按时柱所在之旬确定空亡二支 → 找到对应地支所在之宫 → 该宫即为空亡宫。<br>
+        <strong>断局要点：</strong>空亡之宫能量"打折"——吉事减吉、凶事减凶。用神落空亡，事情暂时"没有着落"。但也可能是"虚惊一场"（坏事落空亡 = 坏事不实）。<br>
+        <strong>应期：</strong>填实则发——逢空亡地支之日/月（如空戌亥 → 逢戌日/亥日），事情方显真身。
+      </div>
+    </div>
+
+    <!-- 4. 入墓 -->
+    <div class="gj-card">
+      <span class="gj-badge danger">格局四</span>
+      <div class="gj-name">入墓</div>
+      <div class="gj-desc">
+        用神天干落入其"墓"之宫<br>
+        如戊入墓于乾6宫（戌为火库?不，戊为土，墓在辰/戌）<br>
+        <strong>能量被"关押"了，出不来</strong>
+      </div>
+      <div class="gj-act">
+        <strong>核心含义：</strong>能量被压制、束缚、受困、不能发挥。如同人被关在房间里出不来。<br>
+        <strong>五行入墓速查：</strong>甲乙木墓在未(坤2) · 丙丁火墓在戌(乾6) · 戊己土墓在辰(巽4) · 庚辛金墓在丑(艮8) · 壬癸水墓在辰(巽4)。<br>
+        <strong>断局要点：</strong>用神入墓 = 能量出不来，事情难成。需待"冲墓"（对冲之支）方能解开。吉神入墓则不吉，凶神入墓则减凶。<br>
+        <strong>应期：</strong>冲墓则出——如戊入墓于辰(巽4)，逢戌日(戌冲辰)则出墓。
+      </div>
+    </div>
+
+    <!-- 5. 击刑 -->
+    <div class="gj-card">
+      <span class="gj-badge danger">格局五</span>
+      <div class="gj-name">击刑</div>
+      <div class="gj-desc">
+        地支相刑：用神落宫的地支与天干所带地支相刑<br>
+        <strong>盘中的"法律纠纷"和"痛苦折磨"</strong>
+      </div>
+      <div class="gj-act">
+        <strong>核心含义：</strong>波折、纠纷、痛苦、刑伤。击刑是盘中最明显的"痛苦"信号——事情一定有波折、摩擦或法律层面的麻烦。<br>
+        <strong>常见击刑组合：</strong>子卯刑(无礼之刑) · 寅巳申刑(无恩之刑) · 丑未戌刑(恃势之刑) · 辰午酉亥自刑。<br>
+        <strong>断局要点：</strong>击刑之宫必有"痛"——问事业则有人际摩擦，问合作则有契约纠纷，问婚姻则有情感折磨。自刑（辰午酉亥）往往是自己给自己找麻烦。<br>
+        <strong>化解：</strong>逢合可解——如子卯刑，逢丑(子丑合)或戌(卯戌合)可缓。
+      </div>
+    </div>
+
+    <!-- 6. 门迫 -->
+    <div class="gj-card">
+      <span class="gj-badge warn">格局六</span>
+      <div class="gj-name">门迫</div>
+      <div class="gj-desc">
+        门克宫：八门五行克制其所在之宫的五行<br>
+        如开门(金)落震3宫(木) → 金克木 = 门迫<br>
+        <strong>事情被"门"本身堵住了</strong>
+      </div>
+      <div class="gj-act">
+        <strong>核心含义：</strong>事情受阻、门路不通、事情本身的属性与所在环境冲突，导致难以推进。<br>
+        <strong>八大迫制速查：</strong>开门/惊门(金)迫震3巽4(木) · 休门(水)迫离9(火) · 生门/死门(土)迫坎1(水) · 伤门/杜门(木)迫坤2艮8(土) · 景门(火)迫兑7乾6(金)。<br>
+        <strong>断局要点：</strong>门迫比门克宫更严重——门克宫是"门欺负宫"，但门迫是"门堵了自己"。吉门遇迫则吉力大减，凶门遇迫则凶上加凶。<br>
+        <strong>化解：</strong>用神来制——如开门金迫震木，逢火日(火克金)可减轻门迫之力。
+      </div>
+    </div>
+
+    <!-- 7. 五不遇时 -->
+    <div class="gj-card">
+      <span class="gj-badge danger">格局七</span>
+      <div class="gj-name">五不遇时</div>
+      <div class="gj-desc">
+        时干克日干：时柱天干克日柱天干<br>
+        且为同性相克（阳克阳/阴克阴）<br>
+        <strong>天时对人不利，诸事不宜</strong>
+      </div>
+      <div class="gj-act">
+        <strong>核心含义：</strong>天时与人心相悖，做什么都不顺。五不遇时是奇门中最凶的"时效格局"——一天中只有2个时辰是五不遇时，但这个时辰内诸事不宜。<br>
+        <strong>如何判断：</strong>以日干查时干，看是否同性相克。<br>
+        甲日 → 庚午时 / 乙日 → 辛巳时 / 丙日 → 壬辰时 / 丁日 → 癸卯时 / 戊日 → 甲寅时<br>
+        己日 → 乙丑+乙亥时 / 庚日 → 丙子+丙戌时 / 辛日 → 丁酉时 / 壬日 → 戊申时 / 癸日 → 己未时<br>
+        <strong>断局要点：</strong>遇到五不遇时，断局结论须"降档"——即使是吉门吉星吉神，效力也大打折扣。择日决策遇到五不遇时，直接建议换时辰。<br>
+        <strong>例外：</strong>若用神得奇得门且落旺宫，可抵抗部分五不遇时的负面影响，但仍须谨慎。
+      </div>
+    </div>
+
+  </div>
+
+  <h3>七大特格局排查总览</h3>
+  <table>
+  <thead><tr><th>格局</th><th>本质</th><th>核心三字诀</th><th>吉凶转向</th><th>应期关键</th></tr></thead>
+  <tr><td><strong>伏吟</strong></td><td>天地人不动</td><td>守·等·静</td><td>吉事缓、凶事止</td><td>逢冲则动</td></tr>
+  <tr><td><strong>反吟</strong></td><td>天地人对冲</td><td>变·乱·反</td><td>吉事变、凶事翻</td><td>逢合则止</td></tr>
+  <tr><td><strong>空亡</strong></td><td>能量虚空</td><td>虚·空·待</td><td>吉减吉、凶减凶</td><td>填实则发</td></tr>
+  <tr><td><strong>入墓</strong></td><td>能量被关押</td><td>困·压·囚</td><td>吉神不吉、凶神减凶</td><td>冲墓则出</td></tr>
+  <tr><td><strong>击刑</strong></td><td>地支相刑</td><td>痛·争·磨</td><td>必有纠纷波折</td><td>逢合可缓</td></tr>
+  <tr><td><strong>门迫</strong></td><td>门堵了自己</td><td>阻·堵·卡</td><td>吉门变平、凶门更凶</td><td>用神化解</td></tr>
+  <tr><td><strong>五不遇时</strong></td><td>天克人</td><td>逆·悖·否</td><td>全盘降档、诸事不宜</td><td>换时辰为上策</td></tr>
+  </table>
+
+  <blockquote>
+    <strong>排查口诀：</strong>先看伏吟反吟定基调 → 再查空亡入墓看虚实 → 后看击刑门迫断困难 → 最后确认五不遇时判天时。<br>
+    七格局不会同时出现，但出现任何一个都必须在断局结论中<strong>重点标注</strong>——因为它们是改变吉凶走向的"分水岭"信号。
+  </blockquote>
+
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 断局实战口诀 -->
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="step-hdr">
+  <h2><span class="num">诀</span> 断局实战口诀</h2>
+  <p class="sub">断局三部曲 · 化繁为简 · 一针见血</p>
+</div>
+
+<div class="sec">
+
+  <div class="rhyme-card">
+    <div class="rhyme-text">
+      一看用神落何宫<br>
+      二看门星神干叠<br>
+      三看特格与大势<br>
+      四看生克与旺衰<br>
+      事为主来时为客<br>
+      一心一盘一事通
+    </div>
+    <div class="rhyme-note">—— 奇门断局六句诀，每日默诵三遍，断局时自然浮现</div>
+  </div>
+
+  <div class="em">
+    <strong>断局三部曲：</strong><br>
+    <strong>第一部 · 找主角</strong>（定用神）→ 确定盘中最关键的1-2个符号<br>
+    <strong>第二部 · 看环境</strong>（四维分析）→ 用神落宫的四层信息 + 日干时干生克<br>
+    <strong>第三部 · 落结论</strong>（综合判断）→ 串联信息输出一个确定可执行的结论 + 应期
+  </div>
+
+  <h3>断局避坑指南</h3>
+  <table>
+  <thead><tr><th>常见错误</th><th>为什么错</th><th>正确做法</th></tr></thead>
+  <tr><td>用神选错</td><td>问财却看开门，问病却看生门</td><td>牢记：什么类型的问题就用对应的专项用神</td></tr>
+  <tr><td>只看吉凶不看旺衰</td><td>吉门落死地，却说大吉——偏了</td><td>吉凶×旺衰 = 真实力度；弱吉不如无吉</td></tr>
+  <tr><td>忽略空亡</td><td>用神落空亡宫，却当有结论——空谈</td><td>空亡之宫待填实，未填之前结论须打"暂"字</td></tr>
+  <tr><td>孤立看一宫</td><td>只看用神落宫，不与日干时干联动</td><td>横看生克——日干与时干的关系才是断局灵魂</td></tr>
+  <tr><td>见凶即惊</td><td>看到白虎/死门就慌——断章取义</td><td>凶神凶门在旺宫且得奇，凶力可减；需通盘综合</td></tr>
+  <tr><td>忘记事情本身</td><td>沉浸在符号中忘记了"问什么"</td><td>时刻回归"事为主"——所有符号都要关联到事情上</td></tr>
+  </table>
+
+</div>
+
+</div>
+
+<footer><p>奇门遁甲 · 断局实战 ｜ 事为主时为客 · 一心一盘一事</p></footer>
+<script src="../共享样式/app.js"></script>
+</body>
+</html>

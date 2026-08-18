@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="梅花易数学习地图 — 观物取象，以数明理。六层进阶体系，从八卦基础到深潜入道。">
+<meta name="robots" content="noindex, nofollow">
+<title>梅花易数 · 学习地图</title>
+<link rel="stylesheet" href="../共享样式/base.css">
+<link rel="stylesheet" href="../共享样式/components.css">
+<style>
+/* ═══════════════════ 梅花易数 · 学习地图 页面样式 ═══════════════════ */
+
+body {
+  font-family: var(--font-cn);
+  background-image:
+    radial-gradient(ellipse 800px 500px at 50% 0%, rgba(212,176,106,.05) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 400px at 30% 100%, rgba(212,176,106,.02) 0%, transparent 60%);
+}
+
+/* ── 主内容区 ── */
+.main-container {
+  max-width: 980px; margin: 0 auto; padding: 28px 32px 40px;
+}
+
+/* ── 顶部导航在移动端偏移 ── */
+.topbar { padding-left: 56px; }
+
+/* ═══════════ Hero ═══════════ */
+.hero-meihua {
+  text-align: center; padding: 52px 28px 40px;
+  background: linear-gradient(155deg, var(--card), var(--card-alt));
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  margin-bottom: 36px; position: relative; overflow: hidden;
+}
+.hero-meihua::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, var(--gold-glow) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-meihua::after {
+  content: '☯'; position: absolute; bottom: -20px; right: -10px;
+  font-size: 8rem; opacity: .03; pointer-events: none;
+  transform: rotate(15deg);
+}
+.hero-meihua h1 {
+  font-size: 2.2rem; color: var(--gold-lt); letter-spacing: .08em;
+  font-weight: 700; position: relative; margin-bottom: 6px;
+}
+.hero-meihua .hero-sub {
+  color: var(--text-alt); font-size: .98rem; margin: 8px 0 20px; position: relative;
+  letter-spacing: .04em; line-height: 1.8;
+}
+.hero-meihua .hero-divider {
+  width: 60px; height: 1px; margin: 0 auto 20px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.hero-meihua .hero-author {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 20px; background: var(--gold-bg);
+  border: 1px solid rgba(212,176,106,.15); border-radius: 20px;
+  font-size: .82rem; color: var(--gold-lt); position: relative;
+}
+.hero-meihua .hero-author strong { color: #f0e6c8; font-size: .88rem; }
+.hero-meihua .hero-line {
+  max-width: 600px; margin: 16px auto 0; color: var(--text-dim);
+  font-size: .82rem; line-height: 1.85; position: relative;
+}
+
+/* ═══════════ 路线图 3×2 网格 ═══════════ */
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px; margin: 20px 0 0;
+}
+
+/* 路线图卡片装饰 */
+.roadmap-card {
+  position: relative; overflow: visible;
+}
+.roadmap-card .layer-num {
+  position: absolute; top: -14px; left: 20px;
+  font-size: .7rem; font-weight: 800; letter-spacing: .15em;
+  color: #fff; background: var(--gold-dk);
+  padding: 2px 14px; border-radius: 10px;
+  z-index: 2; white-space: nowrap;
+}
+.roadmap-card:nth-child(4) .layer-num,
+.roadmap-card:nth-child(5) .layer-num,
+.roadmap-card:nth-child(6) .layer-num {
+  background: var(--purple);
+}
+.roadmap-card .hub-card { height: 100%; }
+
+/* 阶段分隔标签 */
+.roadmap-stage-label {
+  display: none; /* desktop hides these, only shown on mobile */
+}
+
+/* ═══════════ 仪表盘容器 ═══════════ */
+.dash-wrap {
+  background: linear-gradient(155deg, var(--card), rgba(21,19,38,.9));
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 24px 28px; margin: 16px 0;
+}
+.dash-header {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px; margin-bottom: 16px;
+}
+.dash-summary {
+  display: flex; align-items: center; gap: 16px;
+}
+.dash-summary .big-num {
+  font-size: 2.4rem; font-weight: 800; color: var(--gold);
+  line-height: 1;
+}
+.dash-summary .big-label {
+  font-size: .78rem; color: var(--text-dim); letter-spacing: .04em;
+  line-height: 1.5;
+}
+.dash-summary .big-label span {
+  display: block; font-size: .88rem; color: var(--text-alt);
+}
+.dash-progress-wrap {
+  flex: 1; max-width: 320px; min-width: 200px;
+}
+.dash-progress-wrap .pct-label {
+  display: flex; justify-content: space-between; font-size: .72rem;
+  color: var(--text-dim); margin-bottom: 4px;
+}
+.dash-progress-wrap .pct-label strong { color: var(--gold); font-size: .88rem; }
+.dash-progress-bar {
+  height: 8px; background: var(--border); border-radius: 10px; overflow: hidden;
+}
+.dash-progress-fill {
+  height: 100%; border-radius: 10px;
+  background: linear-gradient(90deg, var(--gold-dk), var(--gold-lt));
+  transition: width .6s var(--ease);
+  box-shadow: 0 0 8px rgba(212,176,106,.2);
+}
+
+/* 单层进度卡片 */
+.layer-dash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px; margin-top: 14px;
+}
+.layer-dash-item {
+  text-align: center; padding: 14px 10px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); transition: all var(--dur);
+}
+.layer-dash-item:hover { border-color: var(--gold); background: var(--gold-bg); }
+.layer-dash-item.completed { border-color: rgba(78,168,104,.35); background: rgba(78,168,104,.06); }
+.layer-dash-item .ld-icon { font-size: 1.5rem; margin-bottom: 4px; }
+.layer-dash-item .ld-name { font-size: .72rem; color: var(--text-dim); font-weight: 600; letter-spacing: .03em; }
+.layer-dash-item .ld-status { font-size: .68rem; margin-top: 2px; }
+.layer-dash-item .ld-status.done { color: var(--green); }
+.layer-dash-item .ld-status.wait { color: var(--text-dim); }
+.layer-dash-item .ld-score { font-size: .78rem; font-weight: 700; color: var(--gold); margin-top: 4px; }
+
+/* ═══════════ 概览表格 ═══════════ */
+.overview-table {
+  width: 100%; border-collapse: collapse; font-size: .84rem;
+  margin: 14px 0; border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border);
+}
+.overview-table thead th {
+  background: linear-gradient(180deg, rgba(212,176,106,.12), rgba(212,176,106,.04));
+  color: var(--gold-lt); font-weight: 700; padding: 11px 14px;
+  text-align: left; font-size: .76rem; letter-spacing: .06em;
+  border-bottom: 2px solid var(--gold);
+}
+.overview-table tbody td {
+  padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,.04);
+  color: var(--text-alt); vertical-align: top;
+}
+.overview-table tbody tr:nth-child(even) td { background: rgba(255,255,255,.01); }
+.overview-table tbody tr:hover td { background: var(--gold-bg); color: var(--text); }
+.overview-table tbody tr:hover td:first-child { color: var(--gold-lt); font-weight: 700; }
+.overview-table .lv-num {
+  font-size: 1.2rem; font-weight: 800; color: var(--gold); white-space: nowrap;
+}
+.overview-table .lv-desc { line-height: 1.75; font-size: .82rem; }
+.overview-table .lv-tag { white-space: nowrap; }
+
+/* ═══════════ 页脚 ═══════════ */
+.map-footer {
+  text-align: center; padding: 28px 20px; color: var(--text-dim);
+  font-size: .78rem; border-top: 1px solid var(--border); margin-top: 36px;
+  line-height: 2;
+}
+.map-footer span { color: var(--gold); margin: 0 6px; opacity: .4; }
+
+/* ═══════════ 响应式：平板 ═══════════ */
+@media(max-width: 860px) {
+  .main-container { padding: 18px 14px; }
+  .hero-meihua { padding: 36px 18px 28px; }
+  .hero-meihua h1 { font-size: 1.55rem; }
+  .hero-meihua .hero-sub { font-size: .84rem; }
+  .hero-meihua .hero-author { font-size: .74rem; padding: 6px 14px; }
+  .hero-meihua .hero-author strong { font-size: .8rem; }
+  .hero-meihua .hero-line { font-size: .76rem; }
+
+  .roadmap-grid { grid-template-columns: 1fr; gap: 12px; }
+  .roadmap-card .layer-num { font-size: .64rem; }
+
+  .dash-wrap { padding: 18px 16px; }
+  .dash-header { flex-direction: column; align-items: flex-start; }
+  .dash-summary .big-num { font-size: 1.8rem; }
+  .dash-progress-wrap { max-width: 100%; }
+  .layer-dash-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+
+  .overview-table { font-size: .74rem; }
+  .overview-table thead th,
+  .overview-table tbody td { padding: 8px 10px; }
+
+  .topbar { padding-left: 50px; }
+}
+
+/* ═══════════ 响应式：手机 ═══════════ */
+@media(max-width: 480px) {
+  body { font-size: .88rem; line-height: 1.7; }
+  .main-container { padding: 10px 8px; }
+
+  .hero-meihua { padding: 28px 14px 22px; margin-bottom: 22px; }
+  .hero-meihua h1 { font-size: 1.25rem; letter-spacing: .04em; }
+  .hero-meihua .hero-sub { font-size: .76rem; }
+  .hero-meihua .hero-divider { width: 40px; margin-bottom: 12px; }
+  .hero-meihua .hero-author { font-size: .68rem; padding: 5px 12px; }
+  .hero-meihua .hero-author strong { font-size: .74rem; }
+  .hero-meihua .hero-line { font-size: .72rem; line-height: 1.7; }
+  .hero-meihua::after { font-size: 5rem; bottom: -12px; right: -6px; }
+
+  .sec-title { font-size: 1rem; }
+  .roadmap-grid { grid-template-columns: 1fr; gap: 10px; }
+  .roadmap-card .layer-num { font-size: .6rem; top: -10px; left: 14px; padding: 1px 10px; }
+
+  .dash-wrap { padding: 14px 12px; }
+  .dash-header { gap: 8px; }
+  .dash-summary .big-num { font-size: 1.5rem; }
+  .dash-summary .big-label { font-size: .7rem; }
+  .dash-summary .big-label span { font-size: .78rem; }
+  .dash-progress-wrap .pct-label { font-size: .66rem; }
+  .dash-progress-bar { height: 6px; }
+  .layer-dash-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .layer-dash-item { padding: 10px 6px; }
+  .layer-dash-item .ld-icon { font-size: 1.2rem; }
+  .layer-dash-item .ld-name { font-size: .64rem; }
+  .layer-dash-item .ld-status { font-size: .6rem; }
+
+  .overview-table { font-size: .68rem; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .overview-table table { min-width: 500px; }
+  .overview-table thead th,
+  .overview-table tbody td { padding: 6px 8px; }
+
+  .topbar { padding-left: 44px; }
+  .map-footer { font-size: .68rem; padding: 20px 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ 进度条 ═══════════ -->
+<div class="page-progress" id="pageProgress"></div>
+<button id="backTop">↑</button>
+
+<!-- ═══════════ 移动端导航按钮 ═══════════ -->
+<button class="nav-toggle" onclick="toggleMobileNav()" aria-label="菜单">☰</button>
+
+<!-- ═══════════ 移动端导航遮罩 ═══════════ -->
+<div class="nav-overlay" id="navOverlay" onclick="closeMobileNav()"></div>
+
+<!-- ═══════════ 移动端左侧导航 ═══════════ -->
+<nav class="mobile-nav" id="mobileNav">
+  <div class="mnav-header">
+    <div class="logo">🌸 梅花易数</div>
+    <div style="color:var(--text-dim);font-size:.64rem;margin-top:2px;">观物取象 · 以数明理</div>
+  </div>
+  <div class="mnav-section">页面导航</div>
+  <a href="#hero-section" class="mnav-item" onclick="closeMobileNav()">🏠 首页</a>
+  <a href="#roadmap" class="mnav-item" onclick="closeMobileNav()">🗺️ 学习路线图</a>
+  <a href="#dashboard" class="mnav-item" onclick="closeMobileNav()">📊 进度仪表盘</a>
+  <a href="#overview" class="mnav-item" onclick="closeMobileNav()">📋 层阶概览</a>
+  <div class="mnav-section">学习层级</div>
+  <a href="01-八卦基础.html" class="mnav-item">☯ 01 · 八卦基础</a>
+  <a href="02-起卦方法.html" class="mnav-item">🎯 02 · 起卦方法</a>
+  <a href="03-体用生克.html" class="mnav-item">⚖️ 03 · 体用生克</a>
+  <a href="04-断卦体系.html" class="mnav-item">📖 04 · 断卦体系</a>
+  <a href="05-应期占断.html" class="mnav-item">⏳ 05 · 应期占断</a>
+  <a href="06-深潜入道.html" class="mnav-item">🧠 06 · 深潜入道</a>
+  <div class="mnav-section">检验</div>
+  <a href="题库.html" class="mnav-item">📝 梅花题库</a>
+  <div class="mnav-section">链接</div>
+  <a href="../index.html" class="mnav-item">☯ 返回玄门</a>
+</nav>
+
+<!-- ═══════════ 顶部导航 ═══════════ -->
+<header class="topbar">
+  <a href="../index.html" class="topbar-brand">
+    <span class="icon">☯</span> 玄门
+  </a>
+  <nav class="topbar-nav">
+    <a href="#hero-section">首页</a>
+    <a href="#roadmap">路线图</a>
+    <a href="#dashboard">进度</a>
+    <a href="#overview">概览</a>
+    <a href="01-八卦基础.html">01 八卦</a>
+    <a href="02-起卦方法.html">02 起卦</a>
+    <a href="03-体用生克.html">03 体用</a>
+    <a href="04-断卦体系.html">04 断卦</a>
+    <a href="05-应期占断.html">05 应期</a>
+    <a href="06-深潜入道.html">06 深潜</a>
+    <a href="题库.html">题库</a>
+  </nav>
+</header>
+
+<!-- ═══════════ 主内容区 ═══════════ -->
+<div class="main-container">
+
+  <!-- ════════ HERO ════════ -->
+  <section class="hero-meihua" id="hero-section">
+    <h1>🌸 梅花易数 · 观物取象之学</h1>
+    <p class="hero-sub">一花一叶知天地消息，见微知著，妙契自然</p>
+    <div class="hero-divider"></div>
+    <div class="hero-author">
+      <span>创始人</span>
+      <strong>邵雍（邵康节）</strong>
+      <span style="color:var(--text-dim)">· 北宋五子之一</span>
+    </div>
+    <p class="hero-line">
+      梅花易数，相传为北宋大儒<strong>邵雍（1011-1077）</strong>所创，是中国古代占卜体系中最具哲学深度与诗意的一门学问。
+      其根植于《周易》八卦体系，以<strong>"数"</strong>为机、以<strong>"象"</strong>为用，
+      不假外物，即景起卦，观一叶落而知天下秋，闻一鸟鸣而悟万事机。
+      学习此术，不仅是掌握一种占断技能，更是修习一种<strong>观照世界的方式</strong>——物物皆易，事事含机。
+    </p>
+  </section>
+
+  <!-- ════════ 学习路线图 ════════ -->
+  <section id="roadmap">
+    <h2 class="sec-title">🗺️ 学习路线图</h2>
+    <p class="lead">
+      六层递进，由浅入深。每层约<strong>1周</strong>可完成，建议按照顺序逐层推进，
+      每一层掌握后再进入下一层，方能根基稳固、运用自如。
+    </p>
+
+    <div class="roadmap-grid">
+      <!-- 01 八卦基础 -->
+      <div class="roadmap-card">
+        <span class="layer-num">入门 · 1周</span>
+        <a href="01-八卦基础.html" class="hub-card">
+          <span class="icon">☯</span>
+          <h3>01 · 八卦基础</h3>
+          <p>八卦符号名称、取象歌、先后天方位、五行生克、天干地支、先天八卦数——搭建断卦所需的知识底座。</p>
+          <span class="hub-tag">入门 · 1周</span>
+        </a>
+      </div>
+
+      <!-- 02 起卦方法 -->
+      <div class="roadmap-card">
+        <span class="layer-num">核心 · 1周</span>
+        <a href="02-起卦方法.html" class="hub-card">
+          <span class="icon">🎯</span>
+          <h3>02 · 起卦方法</h3>
+          <p>年月日时法、数字法、物象法、声音法——掌握多种起卦方式，随时随地皆可起卦。</p>
+          <span class="hub-tag">核心 · 1周</span>
+        </a>
+      </div>
+
+      <!-- 03 体用生克 -->
+      <div class="roadmap-card">
+        <span class="layer-num">核心 · 1周</span>
+        <a href="03-体用生克.html" class="hub-card">
+          <span class="icon">⚖️</span>
+          <h3>03 · 体用生克</h3>
+          <p>体卦用卦的确定、五大生克格局、十二种旺衰组合——这是梅花易数断卦的核心逻辑。</p>
+          <span class="hub-tag">核心 · 1周</span>
+        </a>
+      </div>
+
+      <!-- 04 断卦体系 -->
+      <div class="roadmap-card">
+        <span class="layer-num">进阶 · 1周</span>
+        <a href="04-断卦体系.html" class="hub-card">
+          <span class="icon">📖</span>
+          <h3>04 · 断卦体系</h3>
+          <p>五层解读框架、本互变错综五卦关系、万物类象十大门类——建立完整的断卦思维框架。</p>
+          <span class="hub-tag">进阶 · 1周</span>
+        </a>
+      </div>
+
+      <!-- 05 应期占断 -->
+      <div class="roadmap-card">
+        <span class="layer-num">进阶 · 1周</span>
+        <a href="05-应期占断.html" class="hub-card">
+          <span class="icon">⏳</span>
+          <h3>05 · 应期占断</h3>
+          <p>五种应期计算方法、时间单位映射、动爻位置与应期速度——回答"何时发生"的关键技能。</p>
+          <span class="hub-tag">进阶 · 1周</span>
+        </a>
+      </div>
+
+      <!-- 06 深潜入道 -->
+      <div class="roadmap-card">
+        <span class="layer-num">精通 · 持续</span>
+        <a href="06-深潜入道.html" class="hub-card">
+          <span class="icon">🧠</span>
+          <h3>06 · 深潜入道</h3>
+          <p>五层境界修炼、常见误区纠正、直觉培养、三式贯通——从"术"入"道"，融会贯通。</p>
+          <span class="hub-tag">精通 · 持续</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ 进度仪表盘 ════════ -->
+  <section id="dashboard" style="margin-top: 40px;">
+    <h2 class="sec-title">📊 学习进度</h2>
+
+    <div class="dash-wrap">
+      <!-- 整体进度 -->
+      <div class="dash-header">
+        <div class="dash-summary">
+          <div class="big-num" id="dashDone">0/7</div>
+          <div class="big-label">
+            <span>已完成</span>
+            共 7 项（6层 + 题库）
+          </div>
+        </div>
+        <div class="dash-progress-wrap">
+          <div class="pct-label">
+            <span>总体完成度</span>
+            <strong id="dashPct">0%</strong>
+          </div>
+          <div class="dash-progress-bar">
+            <div class="dash-progress-fill" id="dashFill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 各层进度 -->
+      <div class="layer-dash-grid" id="layerDashGrid">
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ 层阶概览 ════════ -->
+  <section id="overview" style="margin-top: 40px;">
+    <h2 class="sec-title">📋 六层概览</h2>
+    <div class="tbl">
+      <table class="overview-table">
+        <thead>
+          <tr>
+            <th>层阶</th>
+            <th>名称</th>
+            <th>阶段</th>
+            <th>建议时长</th>
+            <th>核心内容</th>
+            <th>学习目标</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="lv-num">01</td>
+            <td><strong>八卦基础</strong></td>
+            <td><span class="tag tag-gold">入门</span></td>
+            <td>1周</td>
+            <td class="lv-desc">八卦符号与名称、取象歌记忆法、先天后天八卦方位、五行生克体系、天干地支历法、先天八卦数（乾1至坤8）</td>
+            <td>能够辨识八卦符号、背诵取象歌、理解五行生克关系，为后续起卦与断卦打下坚实的知识基础。</td>
+          </tr>
+          <tr>
+            <td class="lv-num">02</td>
+            <td><strong>起卦方法</strong></td>
+            <td><span class="tag tag-blue">核心</span></td>
+            <td>1周</td>
+            <td class="lv-desc">年月日时起卦法、数字起卦法、物象起卦法、声音方位起卦法、三数起卦规则、上卦下卦与动爻的确定方式</td>
+            <td>掌握多种起卦方式，能够在不同场景下灵活起卦，熟练计算上卦、下卦与动爻位置。</td>
+          </tr>
+          <tr>
+            <td class="lv-num">03</td>
+            <td><strong>体用生克</strong></td>
+            <td><span class="tag tag-blue">核心</span></td>
+            <td>1周</td>
+            <td class="lv-desc">体卦与用卦的确定原则、五大生克格局（生、克、比和、乘、侮）、十二种旺衰组合变化、体用生克吉凶判断法则</td>
+            <td>准确判断体用关系，能够根据生克格局推断事物发展的吉凶趋势，掌握梅花易数断卦的核心逻辑。</td>
+          </tr>
+          <tr>
+            <td class="lv-num">04</td>
+            <td><strong>断卦体系</strong></td>
+            <td><span class="tag tag-red">进阶</span></td>
+            <td>1周</td>
+            <td class="lv-desc">五层解读框架（体用→变卦→互卦→错卦→综卦）、本互变错综五卦关系、万物类象十大门类详解、取象决策树方法</td>
+            <td>能够系统性地解读一个卦象的各个层面，运用万物类象将卦象转化为具体事物的判断，建立完整的断卦思维框架。</td>
+          </tr>
+          <tr>
+            <td class="lv-num">05</td>
+            <td><strong>应期占断</strong></td>
+            <td><span class="tag tag-red">进阶</span></td>
+            <td>1周</td>
+            <td class="lv-desc">五种应期计算方法（生克法、数法、卦气法、动爻法、外应法）、时间单位映射规则、动爻位置与应期速度的关系、综合实战案例</td>
+            <td>掌握"何时发生"的判断技巧，能够根据卦象推断事件发生的时间范围，结合实战案例加深理解。</td>
+          </tr>
+          <tr>
+            <td class="lv-num">06</td>
+            <td><strong>深潜入道</strong></td>
+            <td><span class="tag tag-green">精通</span></td>
+            <td>持续</td>
+            <td class="lv-desc">五层境界修炼体系（术→技→艺→理→道）、常见错误与纠正、直觉培养与心法修炼、三大玄学体系贯通（奇门·紫微·梅花）</td>
+            <td>从"术"入"道"，超越技法层面的桎梏，培养直觉判断力，理解三式贯通的深层原理，实现真正的学以致用。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ════════ 页脚 ════════ -->
+  <footer class="map-footer">
+    <p>梅花易数<span>·</span>观物取象<span>·</span>以数明理</p>
+    <p style="font-size:.68rem;opacity:.5">"易者，象也。象也者，像也。" ——《周易·系辞》</p>
+  </footer>
+
+</div><!-- /main-container -->
+
+<!-- ═══════════ 脚本 ═══════════ -->
+<script src="../共享样式/app.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  /* ── 初始化层阶仪表盘 ── */
+  var layers = [
+    { id: '01', name: '八卦基础', icon: '☯', stage: '入门' },
+    { id: '02', name: '起卦方法', icon: '🎯', stage: '核心' },
+    { id: '03', name: '体用生克', icon: '⚖️', stage: '核心' },
+    { id: '04', name: '断卦体系', icon: '📖', stage: '进阶' },
+    { id: '05', name: '应期占断', icon: '⏳', stage: '进阶' },
+    { id: '06', name: '深潜入道', icon: '🧠', stage: '精通' },
+    { id: 'quiz', name: '梅花题库', icon: '📝', stage: '检验' }
+  ];
+
+  function buildLayerDashboard(data) {
+    var grid = document.getElementById('layerDashGrid');
+    if (!grid) return;
+
+    var html = '';
+    layers.forEach(function(l) {
+      var d = data[l.id];
+      var completed = d && d.completed;
+      var score = (d && d.score != null) ? d.score : null;
+      var cls = completed ? ' completed' : '';
+      var statusHtml = completed
+        ? '<div class="ld-status done">✓ 已完成</div>'
+        : '<div class="ld-status wait">○ 待学习</div>';
+      var scoreHtml = (score != null)
+        ? '<div class="ld-score">' + score + ' 分</div>'
+        : '';
+
+      html += '<div class="layer-dash-item' + cls + '">' +
+        '<div class="ld-icon">' + l.icon + '</div>' +
+        '<div class="ld-name">' + l.name + '</div>' +
+        statusHtml + scoreHtml +
+        '</div>';
+    });
+    grid.innerHTML = html;
+  }
+
+  /* ── 初始加载进度 ── */
+  function loadAndRender() {
+    var data = JSON.parse(localStorage.getItem('xm_progress_meihua') || '{}');
+    buildLayerDashboard(data);
+    if (typeof updateDashboard === 'function') {
+      updateDashboard('meihua');
+    }
+  }
+
+  loadAndRender();
+
+  /* ── 监听 localStorage 变化（跨标签页同步） ── */
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'xm_progress_meihua') {
+      loadAndRender();
+    }
+  });
+
+  /* ── 顶部导航高亮当前锚点 ── */
+  (function() {
+    var navLinks = document.querySelectorAll('.topbar-nav a[href^="#"]');
+    if (!navLinks.length) return;
+    var sections = [];
+    navLinks.forEach(function(a) {
+      var id = a.getAttribute('href').replace('#', '');
+      var el = document.getElementById(id);
+      if (el) sections.push({ id: id, el: el });
+    });
+    function onScrollNav() {
+      var cur = '';
+      sections.forEach(function(s) {
+        if (s.el.getBoundingClientRect().top < 120) cur = s.id;
+      });
+      navLinks.forEach(function(a) {
+        var id = a.getAttribute('href').replace('#', '');
+        a.classList.toggle('on', id === cur);
+      });
+    }
+    window.addEventListener('scroll', onScrollNav, { passive: true });
+    onScrollNav();
+  })();
+
+})();
+</script>
+
+</body>
+</html>

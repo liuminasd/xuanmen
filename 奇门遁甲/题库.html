@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>奇门遁甲题库 — 四阶练习系统</title>
+<style>
+:root{--bg:#0f0f1a;--card:#1a1a2e;--border:#2a2a4a;--text:#e0d8c8;--text-dim:#a09888;--gold:#c8a84e;--gold-lt:#e8d888;--green:#4a8;--red:#d44;--tab-bg:#2a2040;--tab-hv:#332850;--shadow:0 4px 24px rgba(0,0,0,0.5)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Serif SC","SimSun","STSong","Songti SC",serif;background:var(--bg);color:var(--text);min-height:100vh;background-image:radial-gradient(ellipse at 50% 0%,rgba(200,168,78,0.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(120,100,160,0.06) 0%,transparent 50%)}
+.container{max-width:880px;margin:0 auto;padding:20px 16px 40px}
+.header{text-align:center;padding:32px 0 20px;border-bottom:1px solid var(--border);margin-bottom:28px;position:relative}
+.header::after{content:"";position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:120px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.header h1{font-size:2rem;letter-spacing:6px;color:var(--gold);font-weight:400;margin-bottom:6px}
+.header .sub{font-size:.9rem;color:var(--text-dim);letter-spacing:3px}
+.scoreboard{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+.score-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 22px;text-align:center;min-width:80px;box-shadow:var(--shadow)}
+.score-card .num{font-size:1.6rem;font-weight:700;color:var(--gold-lt);font-family:"Georgia",serif}
+.score-card .label{font-size:.75rem;color:var(--text-dim);letter-spacing:2px;margin-top:2px}
+.score-card.total .num{color:#88c8f0}
+.score-card.wrongs .num{color:var(--red)}
+.tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+.tab-btn{background:var(--card);border:1px solid var(--border);color:var(--text-dim);padding:10px 26px;border-radius:24px;cursor:pointer;font-size:.95rem;letter-spacing:2px;font-family:inherit;transition:all .25s;user-select:none}
+.tab-btn:hover{background:var(--tab-hv);color:#d8c898;border-color:#5a4a3a}
+.tab-btn.active{background:var(--tab-bg);color:var(--gold-lt);border-color:var(--gold);box-shadow:0 0 12px rgba(200,168,78,.2)}
+.questions-wrap{display:flex;flex-direction:column;gap:18px}
+.q-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;box-shadow:var(--shadow);transition:border-color .3s}
+.q-card.done-correct{border-color:#3a6a4a}
+.q-card.done-wrong{border-color:#6a3a3a}
+.q-num{font-size:.75rem;color:var(--text-dim);letter-spacing:3px;margin-bottom:8px}
+.q-text{font-size:1.05rem;line-height:1.7;margin-bottom:16px;color:#f0e8d8}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt-btn{background:transparent;border:1px solid var(--border);color:var(--text);padding:10px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.93rem;text-align:left;transition:all .2s;user-select:none}
+.opt-btn:hover:not(.locked){background:#252540;border-color:#4a4a6a}
+.opt-btn.locked{cursor:default}
+.opt-btn.chosen-correct{background:#1a3a2a;border-color:var(--green);color:#a0f0c0}
+.opt-btn.chosen-wrong{background:#3a1a1a;border-color:var(--red);color:#f0a0a0}
+.opt-btn.show-correct{background:#1a2a1a;border-color:#6a8}
+.explain{margin-top:12px;padding:12px 16px;background:#12121f;border-radius:8px;border-left:3px solid var(--gold);font-size:.88rem;color:var(--text-dim);line-height:1.7;display:none}
+.explain.show{display:block}
+.actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px;margin-bottom:40px}
+.btn{background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 28px;border-radius:24px;cursor:pointer;font-family:inherit;font-size:.9rem;letter-spacing:2px;transition:all .25s;user-select:none}
+.btn:hover{background:var(--tab-hv);border-color:#5a4a3a}
+.btn.danger{border-color:#6a3030;color:#e09090}
+.btn.danger:hover{background:#2a1010;border-color:var(--red)}
+.wrong-book{margin-top:16px;border-top:1px solid var(--border);padding-top:24px}
+.wrong-book h3{text-align:center;color:var(--gold);font-weight:400;letter-spacing:4px;font-size:1rem;margin-bottom:16px}
+.wrong-item{background:#1a1018;border:1px solid #3a2028;border-radius:8px;padding:14px 18px;margin-bottom:10px}
+.wrong-item .level-tag{display:inline-block;font-size:.7rem;background:#2a1a20;color:#d09090;padding:2px 10px;border-radius:10px;letter-spacing:2px;margin-bottom:6px}
+.wrong-item .wq-text{font-size:.9rem;margin-bottom:4px}
+.wrong-item .wq-ans{font-size:.8rem;color:#a0c8a0}
+.wrong-book-empty{text-align:center;color:var(--text-dim);padding:20px;font-size:.9rem}
+@media(max-width:600px){.header h1{font-size:1.5rem;letter-spacing:3px}.tab-btn{padding:8px 16px;font-size:.82rem;letter-spacing:1px}.q-card{padding:14px 16px}.scoreboard{gap:10px}.score-card{padding:10px 16px;min-width:60px}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header"><h1>奇 门 遁 甲</h1><div class="sub">四阶题库 · 进阶练习系统</div></div>
+<div class="scoreboard">
+<div class="score-card total"><div class="num" id="doneCount">0</div><div class="label">已完成</div></div>
+<div class="score-card"><div class="num" id="correctCount">0</div><div class="label">正确</div></div>
+<div class="score-card wrongs"><div class="num" id="wrongCount">0</div><div class="label">错误</div></div>
+<div class="score-card"><div class="num" id="accuracy">--</div><div class="label">正确率</div></div>
+</div>
+<div class="tabs">
+<button class="tab-btn active" data-level="0">基础 · 本体</button>
+<button class="tab-btn" data-level="1">理解 · 机理</button>
+<button class="tab-btn" data-level="2">应用 · 断局</button>
+<button class="tab-btn" data-level="3">分析 · 综合</button>
+</div>
+<div class="questions-wrap" id="questionsWrap"></div>
+<div class="actions">
+<button class="btn" id="showWrongBook">错题本</button>
+<button class="btn danger" id="resetBtn">重置全部</button>
+</div>
+<div class="wrong-book" id="wrongBook" style="display:none;"><h3>错 题 本</h3><div id="wrongBookContent"></div></div>
+</div>
+
+<script>
+// ============================================================
+// 题库数据 — allQuestions[阶][题号] : {q, opts:[4选项], ans:正确索引, e:解析}
+// ============================================================
+var allQuestions = [
+  // ==================== [0] 基础·本体 (10题) ====================
+  [
+    {q:"八门之中，哪一个不属于「三吉门」？",opts:["惊门","开门","休门","生门"],ans:0,e:"三吉门为开门、休门、生门。惊门属金，主口舌官非，为凶门之一，不在三吉门之列。"},
+    {q:"九星中天蓬星位于后天八卦的哪一个宫位？",opts:["坎一宫","离九宫","震三宫","兑七宫"],ans:0,e:"天蓬星居坎一宫，五行属水。九星本位：天蓬坎一、天芮坤二、天冲震三、天辅巽四、天禽中五、天心乾六、天柱兑七、天任艮八、天英离九。"},
+    {q:"八神中的「九天」主要象征什么？",opts:["暗中庇护之事","贵人首领","高远飞扬、积极主动","婚姻合作"],ans:2,e:"九天主高远、飞扬、主动出击、远行之事，性属金，为吉神。值符为贵人首领，六合主婚姻合作，九地主暗中长久之事。"},
+    {q:"三奇中「丙奇」又被称为什么？",opts:["日奇","月奇","星奇","云奇"],ans:1,e:"三奇各有别名：乙奇为日奇，丙奇为月奇，丁奇为星奇。乙主柔顺，丙主威烈，丁主灵动机变。"},
+    {q:"六仪「戊」所遁藏的六甲之首是哪一位？",opts:["甲子","甲戌","甲申","甲午"],ans:0,e:"六甲遁仪：甲子遁戊、甲戌遁己、甲申遁庚、甲午遁辛、甲辰遁壬、甲寅遁癸。甲为元帅藏于六仪之下以避庚金之克。"},
+    {q:"九星之中五行属火的是哪一个？",opts:["天英星","天蓬星","天心星","天辅星"],ans:0,e:"天英星居离九宫，五行属火。九星五行：蓬水、芮土、冲木、辅木、禽土、心金、柱金、任土、英火。"},
+    {q:"八门中「死门」的五行属性是什么？",opts:["金","木","水","土"],ans:3,e:"死门居坤二宫，五行属土。八门五行：开门金、休门水、生门土、伤门木、杜门木、景门火、死门土、惊门金。"},
+    {q:"八神中「螣蛇」主要代表什么？",opts:["杀伐与阻碍","虚惊怪异、缠绕之事","暗中庇护","吉祥喜庆"],ans:1,e:"螣蛇为虚诈之神，主虚惊怪异、噩梦缠绕、疑虑不定等事，属火。白虎主杀伐阻碍，太阴主暗中庇护，六合主婚合喜庆。"},
+    {q:"甲辰旬的旬首遁藏于六仪中的哪一仪？",opts:["戊","己","庚","壬"],ans:3,e:"六甲遁仪：甲子戊、甲戌己、甲申庚、甲午辛、甲辰壬、甲寅癸。甲辰属壬仪。"},
+    {q:"天心星在奇门盘中主导哪一类事务最为得力？",opts:["征战杀伐","求医疗病","婚姻嫁娶","官非诉讼"],ans:1,e:"天心星居乾六宫属金，主医疗、治病、求医问药之事。古称天心星宜疗病合药，与天芮星（病星）相对，为医者之星。"}
+  ],
+  // ==================== [1] 理解·机理 (10题) ====================
+  [
+    {q:"时家转盘奇门定局最主要的依据是什么？",opts:["月相盈亏","节气与时辰干支","农历月份","黄道十二宫"],ans:1,e:"时家奇门以时辰为基本单位，定局依据节气确定阴阳遁和局数（用局表），再结合时辰干支确定值符和值使，此为排盘核心依据。"},
+    {q:"排地盘天干时，从哪一宫开始依照局数起「戊」？",opts:["永远从坎一宫","永远从离九宫","从局数对应的后天八卦宫位","从中五宫寄出"],ans:2,e:"阳遁顺排：从局数对应宫位起戊，顺飞九宫（己庚辛壬癸丁丙乙）。阴遁逆排：从局数对应宫位起戊，逆飞九宫。如阳遁三局从震三宫起戊。"},
+    {q:"用神选取的核心原则是什么？",opts:["只用日干判断","只用时干判断","根据所问之事选取对应的九宫符号","只看值符值使"],ans:2,e:"奇门用神体系丰富：问婚姻看六合、乙庚；问财运看戊、生门；问疾病看天芮、乙奇；问官运看开门、值符。灵活取用，不可拘泥一法。"},
+    {q:"「超神接气」是解决什么矛盾的方法？",opts:["阴阳二气的矛盾","干支纪日与节气时刻偏差","五行相克的矛盾","八门吉凶的矛盾"],ans:1,e:"奇门用局以节气为准，但干支纪日与节气交接时刻并非完全吻合。超神（干支先到节气后到）和接气（节气先到干支后到）即是调和此差异的法则。"},
+    {q:"天盘天干是通过什么机制来确定的？",opts:["直接按局数排布","旬首对应值符星，星携带地盘天干飞转","随机排布","按八门顺序走"],ans:1,e:"天盘天干由「星带天干飞」而来：确定时辰旬首，找到对应值符星，该星原宫位的地盘天干随值符星飞到值符落宫，其余各星依次携带原宫天干飞布形成天盘天干。"},
+    {q:"「伏吟」局的核心特征是什么？",opts:["八门全部反位","天盘天干与地盘天干完全相同","星门全部变换","只有值符保持不变"],ans:1,e:"伏吟即天盘天干与地盘天干完全一致，象征停滞不前、事情反复、不宜行动。有星伏吟、门伏吟之分，全伏吟最为显著。"},
+    {q:"八门在地盘的排布由什么因素决定其起始位置？",opts:["日干","时辰的地支（时支）","月令节气","年干"],ans:1,e:"八门排布以时支定直使门：找到时辰旬首对应的门为值使，根据时支在九宫中顺数至值使落宫，依八门顺序排列其余各门。时支是核心依据。"},
+    {q:"「反吟」局的核心特征是什么？",opts:["天地相合","天盘天干与地盘天干位置对冲","八门全部归位","星随门转"],ans:1,e:"反吟即天盘天干与地盘天干处于对冲位置（如子午冲），象征反复不定、变动剧烈。反吟主速、主快，事多反复，宜主动求变。"},
+    {q:"九星中值符星的确定方法是什么？",opts:["根据日干对应","根据时辰旬首对应的天盘星","根据八门推演","根据节气选定"],ans:1,e:"值符星确定：找到时辰所属旬首（六甲之一），该旬首遁于某仪，地盘该仪所在宫的星即为值符星。值符为九星之统领，天盘星以值符为首飞布。"},
+    {q:"奇门判断中「空亡」通常意味着什么？",opts:["事情加速发展","事有不实、落空、虚假之象","大吉大利","转危为安"],ans:1,e:"空亡即旬空中之宫，象征虚无、不实、落空。用神落空亡主事多不成或有名无实；但旺相不为空，逢填实或冲实时可解空。"}
+  ],
+  // ==================== [2] 应用·断局 (10题) ====================
+  [
+    {q:"某男测婚姻，局中六合落震宫，逢开门+乙奇+天辅星。乙为女方，宫位旺相，请问此婚姻如何？",opts:["大凶，难成","婚姻和美，可成","虽有波折，终成","女方不同意"],ans:1,e:"六合主婚姻落震宫（木），开门为吉门，乙奇为日奇（女方可人），天辅星为文曲星主柔顺。诸吉会合、宫旺无克，断婚姻和美可成。"},
+    {q:"测财运投资，戊（资本）落离宫+生门+天心星+值符，戊在离宫得火生土（生入），判断？",opts:["破财之兆","财运极佳，有贵人相助","只有小额收益","不宜投资"],ans:1,e:"戊为资本落离宫得火生土（生入），生门为利润增长，天心星为策划之星，值符为贵人。四象皆吉且宫位生戊，财运极佳宜果断投资。"},
+    {q:"测疾病，天芮星（病星）落坤宫+死门+白虎+庚金，坤宫土旺又逢死门，判断？",opts:["小病可愈","病情较重，需高度重视","已经痊愈","转院即可"],ans:1,e:"天芮病星落坤宫（土土比和），死门凶门+白虎凶神+庚金阻隔，四凶汇聚。坤为脾胃腹部，此象主病情沉重且顽固，切不可轻视须及时就医。"},
+    {q:"测出行，开门落兑宫+九天+地盘乙奇，开门金居兑宫金得地利，判断？",opts:["不宜出行","出行顺利，且宜远行","中途会发生变故","会迷路"],ans:1,e:"开门为出行吉门落兑宫得地利，九天主动主远行主高远，乙奇为日奇护佑。金金比和旺相，出行一路顺畅利远行和航空出行。"},
+    {q:"测考试，丁奇（文章考试之星）落巽宫+天辅星（文昌星）+景门（文章之门），丁奇得巽木生，判断？",opts:["成绩不理想","考试顺利，发挥出色","会缺考","题目太难"],ans:1,e:"丁奇为文章星，天辅为文昌考试之星，景门主文章策论。巽宫木生丁火（宫生星），三吉汇聚，考试运极佳文思泉涌发挥超常。"},
+    {q:"测官运升迁，值符落乾宫+开门+戊+丙，值符在乾宫得地，判断？",opts:["升迁无望","有贵人提拔，宜积极把握","会被贬职","原地不动"],ans:1,e:"值符为领导落乾宫得地（金金比和），开门为官禄吉门，戊为财禄丙为权威。乾为权力中枢诸吉汇聚，主有高层贵人赏识提拔升迁有望。"},
+    {q:"测失物，时干落艮宫+杜门+玄武，艮为止、杜门为隐匿、玄武为盗窃，判断？",opts:["很快就能找到","失物已被藏匿或盗走，难找回","失物从未丢失","在朋友那里"],ans:1,e:"杜门主藏匿不通，玄武为盗神，艮为止滞。时干落此组合，失物多半已被他人藏匿或顺手牵羊，寻回难度大，建议从隐蔽处搜索。"},
+    {q:"测诉讼官司，惊门落离宫+白虎+庚金，离火克惊门金，但白虎庚金凶猛，判断？",opts:["一定胜诉","败诉风险大，需谨慎应对","双方和解撤诉","诉讼会延期很久"],ans:1,e:"惊门为官司口舌，白虎主凶杀权威，庚为阻隔强硬之金。虽有离火克金，但白虎+庚势大主对方来势凶猛，己方压力极大不可轻敌。"},
+    {q:"测孕产，坤宫（母腹）+天芮星+生门+壬水，坤宫土旺，生门为吉，壬水为胎孕之水，判断？",opts:["难产","生产顺利，母子平安","需要剖腹产","胎儿不稳"],ans:1,e:"坤宫为母腹之位，生门为生养吉门，天芮星为孕育之星（非病时），壬水为胞胎之水。生门+坤宫主顺产无凶门凶神干扰，断母子平安。"},
+    {q:"测合伙投资，六合落坎宫+休门+戊，坎水宫生六合木（生入），休门为吉，判断？",opts:["合作破裂","合作可成但进展较缓","立即盈利","对方不可信"],ans:1,e:"六合主合伙落坎宫得水生（宫生星吉），休门为休养吉门主稳步推进，戊为资本。整体吉象但休门主缓，合作可成但宜稳步经营不宜急于求成。"}
+  ],
+  // ==================== [3] 分析·综合 (10题) ====================
+  [
+    {q:"综合婚姻分析：六合落震宫+乙奇，庚（男方）落兑宫+惊门，值使门杜门落艮宫。乙庚宫位对冲，请综合分析婚姻状况。",opts:["婚姻美满幸福","夫妻沟通不畅，有隔阂需调和","必然离婚","有第三者介入"],ans:1,e:"六合落震（木）逢乙奇主婚姻有吉根，但庚在兑（金）克震木且逢惊门主口舌争执。乙庚对冲说明男女双方各有立场冲突，杜门在艮（止）主沟通不畅。综合：婚姻存在但沟通有障碍需双方主动化解。"},
+    {q:"综合投资分析：戊落离宫+生门，时干落坤宫+死门+空亡，值符落坎宫+开门。请综合判断此投资。",opts:["大胆投资，必定获利","短期不吉但长期看好，需谨慎择时","完全放弃投资","追加更多资金"],ans:1,e:"戊+生门主资本有生发之机，但时干落死门+空亡主当前时机不佳、事有落空。值符+开门主未来有贵人和机遇。综合：当下不宜进场，待时机成熟（空亡填实）后再行动则利。"},
+    {q:"综合疾病分析：天芮落兑宫+死门+庚，乙奇（医药）落震宫+天心星+开门，病者年命落离宫+休门。离火克兑金，请综合判断。",opts:["无药可救","虽有凶险但有救治希望，宜向西就医","不治自愈","找偏方即可"],ans:1,e:"天芮+死门+庚主病重，但乙奇+天心星+开门主有名医良药可治（天心为医星开门为通达）。年命离火克病宫兑金为制病有力。综合：病情虽重向西（兑方）求医救治有望。"},
+    {q:"综合事业调动分析：开门落乾宫+九天+丙，日干落坤宫+休门，时干落巽宫+杜门。请综合判断调动事宜。",opts:["不可调动","调动可成，西北方向有利，但需等待时机","立刻辞职","不会发生变动"],ans:1,e:"开门+九天+丙在乾宫主事业有上升空间（乾为天九天为高远），但日干落休门主本人暂处休整状态，时干杜门主时机未通。综合：调动有利（宜向西北方）但需等杜门变通、休门转旺时再行动。"},
+    {q:"综合考试分析：丁奇落离宫+景门+天辅星，年命落震宫+生门+乙奇，时干落坎宫+惊门。年命生考试宫（木生火），请判断。",opts:["必然落榜","考试可过但需克服紧张焦虑","超常发挥","题目很简单"],ans:1,e:"丁奇+景门+天辅星在离宫主文运昌盛（离为文明），年命震木生离火为吉，但时干在坎宫+惊门主考试时心怀忐忑。综合：基础扎实文运有利但需调整心态克服临场紧张方能发挥正常水平。"},
+    {q:"综合出行分析：开门落艮宫+九天+乙奇，时干落坤宫+死门+白虎，日干落兑宫+休门。请综合判断出行吉凶。",opts:["绝对不宜出行","出行总体吉，但目的地方向需避开西南方","想走就走，没问题","路上会遇到贵人"],ans:1,e:"开门+九天+乙奇在艮主出行有吉护，但时干在坤+死门+白虎主目的地或当前时机有凶险（坤为西南方）。日干休门不错。综合：宜出行但避开西南方向，选择东北方（艮开门方向）更为稳妥。"},
+    {q:"综合官非分析：惊门落乾宫+白虎+庚，值符落离宫+开门+戊，时干落巽宫+杜门+螣蛇。请综合判断官司走向。",opts:["必胜无疑","官司不利，但有转机，需主动化解","完全不用理会","对方会自行撤诉"],ans:1,e:"惊门+白虎+庚在乾主官司来势凶猛（对方强势），但值符+开门+戊在离主官方清明规则有利。杜门+螣蛇主过程纠缠。综合：表面不利但暗含转机，宜通过合法途径主动化解不可消极应对。"},
+    {q:"综合失物分析：时干落兑宫+杜门+太阴，日干落震宫+休门，丁奇（信息）落离宫+景门。请综合判断失物去向。",opts:["失物已毁","失物在西方隐蔽处，有望找回，需细心搜索","已经被盗卖","会自动出现"],ans:1,e:"时干+杜门+太阴在兑宫主失物被藏在西侧阴暗隐蔽处（太阴为暗处），丁奇+景门在离主有线索可循。日干休门主本人不急不躁。综合：失物未毁在西方隐蔽角落处（柜子暗格）细心搜索有望寻回。"},
+    {q:"综合运势分析：日干落坎宫+休门+值符+乙，时干落离宫+景门+九天，太岁落震宫+生门+丙。请综合判断本年整体运势。",opts:["运势低迷","本年运势上扬，有贵人助力，宜积极进取","大凶之年小心谨慎","平平无奇"],ans:1,e:"日干+休门+值符+乙在坎宫主自身根基稳固且有贵人庇护；时干+景门+九天在离宫主前景光明远大；太岁+生门+丙在震宫主年运有生发之机、权威助力。三宫皆吉本年运势上扬宜积极行动。"},
+    {q:"综合开业分析：开门落巽宫+戊+丙+九天，生门落坤宫+乙+天心星，六合落乾宫+休门。请综合判断开业事宜。",opts:["不宜开张","开业大吉，宜选东南方位，择吉日可行","开张即亏损","再等等看"],ans:1,e:"开门+戊丙+九天在巽（东南）主事业开门即有利（戊为资本丙为权威九天为远大），生门+乙+天心在坤主财利稳健，六合+休门在乾主合作和谐。综合：开业大吉东南巽宫为最佳方位择吉日开业可图长远。"}
+  ]
+];
+
+// ============================================================ 状态管理 ============================================================
+var state = { currentLevel:0, answered:{}, answers:{}, correct:{} };
+var $wrap=document.getElementById('questionsWrap'),$done=document.getElementById('doneCount'),$correct=document.getElementById('correctCount');
+var $wrong=document.getElementById('wrongCount'),$accuracy=document.getElementById('accuracy');
+var $wrongBook=document.getElementById('wrongBook'),$wrongCont=document.getElementById('wrongBookContent');
+
+// ============================================================ 渲染题目 ============================================================
+function renderQuestions(level){
+  var qs=allQuestions[level],html='',labels=['A','B','C','D'];
+  for(var i=0;i<qs.length;i++){
+    var q=qs[i],key=level+'-'+i,done=state.answered[key],isCorrect=state.correct[key];
+    var cardClass=done?(isCorrect?'done-correct':'done-wrong'):'';
+    html+='<div class="q-card '+cardClass+'" id="card-'+key+'">';
+    html+='<div class="q-num">第 '+(i+1)+' 题</div><div class="q-text">'+q.q+'</div><div class="opts">';
+    for(var oi=0;oi<q.opts.length;oi++){
+      var cls='opt-btn';
+      if(done){cls+=' locked';if(oi===q.ans)cls+=' show-correct';if(oi===state.answers[key])cls+=isCorrect?' chosen-correct':' chosen-wrong';}
+      html+='<button class="'+cls+'" data-level="'+level+'" data-qi="'+i+'" data-oi="'+oi+'" '+(done?'disabled':'')+'>'+labels[oi]+'. '+q.opts[oi]+'</button>';
+    }
+    html+='</div><div class="explain'+(done?' show':'')+'" id="explain-'+key+'">'+q.e+'</div></div>';
+  }
+  $wrap.innerHTML=html;
+  var btns=document.querySelectorAll('.opt-btn:not(.locked)');
+  for(var b=0;b<btns.length;b++) btns[b].addEventListener('click',handleAnswer);
+}
+
+// ============================================================ 计分板 ============================================================
+function updateScoreboard(){
+  var td=0,tc=0;
+  for(var lv=0;lv<4;lv++) for(var qi=0;qi<10;qi++){var key=lv+'-'+qi;if(state.answered[key]){td++;if(state.correct[key])tc++;}}
+  $done.textContent=td;$correct.textContent=tc;$wrong.textContent=td-tc;
+  $accuracy.textContent=td>0?Math.round(tc/td*100)+'%':'--';
+}
+
+// ============================================================ 答题 ============================================================
+function handleAnswer(e){
+  var btn=e.currentTarget,level=parseInt(btn.dataset.level),qi=parseInt(btn.dataset.qi),oi=parseInt(btn.dataset.oi);
+  var key=level+'-'+qi;if(state.answered[key])return;
+  var q=allQuestions[level][qi],isCorrect=(oi===q.ans);
+  state.answered[key]=true;state.answers[key]=oi;state.correct[key]=isCorrect;
+  var card=document.getElementById('card-'+key);
+  card.className='q-card '+(isCorrect?'done-correct':'done-wrong');
+  var btns=card.querySelectorAll('.opt-btn');
+  for(var b=0;b<btns.length;b++){btns[b].classList.add('locked');btns[b].disabled=true;if(b===q.ans)btns[b].classList.add('show-correct');if(b===oi)btns[b].classList.add(isCorrect?'chosen-correct':'chosen-wrong');}
+  var exp=document.getElementById('explain-'+key);if(exp)exp.classList.add('show');
+  updateScoreboard();
+}
+
+// ============================================================ 错题本 ============================================================
+function renderWrongBook(){
+  var levelNames=['基础·本体','理解·机理','应用·断局','分析·综合'],items=[],labels=['A','B','C','D'];
+  for(var lv=0;lv<4;lv++) for(var qi=0;qi<10;qi++){var key=lv+'-'+qi;if(state.answered[key]&&!state.correct[key])items.push({lv:lv,qi:qi});}
+  if(items.length===0){$wrongCont.innerHTML='<div class="wrong-book-empty">暂无错题，继续保持！</div>';return;}
+  var html='';
+  for(var i=0;i<items.length;i++){
+    var q=allQuestions[items[i].lv][items[i].qi],chosen=state.answers[items[i].lv+'-'+items[i].qi];
+    html+='<div class="wrong-item"><span class="level-tag">'+levelNames[items[i].lv]+'</span>';
+    html+='<div class="wq-text">'+q.q+'</div>';
+    html+='<div class="wq-ans">你的选择：'+labels[chosen]+'. '+q.opts[chosen]+' &nbsp;|&nbsp; 正确答案：'+labels[q.ans]+'. '+q.opts[q.ans]+'</div></div>';
+  }
+  $wrongCont.innerHTML=html;
+}
+
+function toggleWrongBook(){
+  if($wrongBook.style.display==='none'){renderWrongBook();$wrongBook.style.display='block';$wrongBook.scrollIntoView({behavior:'smooth'});}
+  else $wrongBook.style.display='none';
+}
+
+// ============================================================ 标签切换 ============================================================
+function switchTab(level){
+  state.currentLevel=level;
+  var tabs=document.querySelectorAll('.tab-btn');for(var i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
+  document.querySelector('.tab-btn[data-level="'+level+'"]').classList.add('active');
+  renderQuestions(level);$wrongBook.style.display='none';window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ============================================================ 重置 ============================================================
+function resetAll(){
+  if(!confirm('确定要重置全部答题记录吗？此操作不可撤销。'))return;
+  state.answered={};state.answers={};state.correct={};
+  renderQuestions(state.currentLevel);updateScoreboard();$wrongBook.style.display='none';window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ============================================================ 事件绑定 ============================================================
+var tabBtns=document.querySelectorAll('.tab-btn');
+for(var i=0;i<tabBtns.length;i++){tabBtns[i].addEventListener('click',function(){switchTab(parseInt(this.dataset.level));});}
+document.getElementById('showWrongBook').addEventListener('click',toggleWrongBook);
+document.getElementById('resetBtn').addEventListener('click',resetAll);
+
+// ============================================================ 启动 ============================================================
+renderQuestions(0);updateScoreboard();
+</script>
+</body>
+</html>

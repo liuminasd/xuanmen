@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>梅花易数 · 第四层 · 断卦体系</title>
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --card-bg: #1a1a1a;
+    --text: #d4c8a8;
+    --heading: #e8d5a0;
+    --accent: #c9a84c;
+    --accent-glow: #e6c456;
+    --border: #3a3320;
+    --input-bg: #121212;
+    --highlight: #1e1b10;
+    --danger: #c44;
+    --muted: #8a8068;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Serif SC", "Source Han Serif SC", "宋体", SimSun, serif;
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  /* ---- 顶栏 ---- */
+  .topbar {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .breadcrumb {
+    font-size: 0.82rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.6rem;
+  }
+  .breadcrumb a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .topbar h1 {
+    font-size: 2.4rem;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: 0.10em;
+  }
+  .topbar .sub {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---- 卡片 ---- */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem 2.2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.45);
+  }
+  .card h2 {
+    font-size: 1.55rem;
+    color: var(--accent);
+    border-left: 4px solid var(--accent);
+    padding-left: 1rem;
+    margin-bottom: 1.3rem;
+    letter-spacing: 0.08em;
+  }
+  .card h3 {
+    font-size: 1.15rem;
+    color: var(--heading);
+    margin: 1.2rem 0 0.6rem;
+    letter-spacing: 0.06em;
+  }
+  .card p {
+    margin-bottom: 0.6rem;
+  }
+
+  /* ---- 公式区 ---- */
+  .formula {
+    background: #121006;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2rem 1.6rem;
+    margin: 1rem 0;
+    font-size: 1.05rem;
+    text-align: center;
+    letter-spacing: 0.06em;
+    color: var(--heading);
+  }
+  .formula em {
+    font-style: normal;
+    color: var(--accent-glow);
+    font-weight: 700;
+  }
+
+  /* ---- 重点标注 ---- */
+  .highlight-box {
+    background: linear-gradient(135deg, #221c0a 0%, #1a1608 100%);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 1rem 1.6rem;
+    margin: 1rem 0;
+    color: var(--accent-glow);
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.05rem;
+  }
+
+  /* ---- 信息提示 ---- */
+  .info-box {
+    background: linear-gradient(135deg, #0a1a1c 0%, #081416 100%);
+    border: 1px solid #2c5a60;
+    border-radius: 8px;
+    padding: 1rem 1.6rem;
+    margin: 1rem 0;
+    color: #7ec8d0;
+    font-size: 0.95rem;
+  }
+
+  /* ---- 表格 ---- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.93rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.6rem 0.7rem;
+    text-align: center;
+  }
+  th {
+    background: #1e1b10;
+    color: var(--heading);
+    font-weight: 700;
+  }
+  tr:nth-child(even) td {
+    background: #141414;
+  }
+  tr:hover td {
+    background: #1e1c12;
+  }
+
+  /* ---- 口诀卡片 ---- */
+  .koujue-card {
+    position: relative;
+    background: linear-gradient(135deg, #1a1608 0%, #120e04 50%, #1a1608 100%);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    margin: 1.5rem 0;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(201,168,76,0.12);
+  }
+  .koujue-card::before {
+    content: '口 诀';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #1a1608;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    padding: 2px 20px;
+    border-radius: 10px;
+  }
+  .koujue-card .verse {
+    font-size: 1.25rem;
+    color: var(--heading);
+    line-height: 2.2;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .koujue-card .verse .line {
+    display: block;
+    margin: 0.35rem 0;
+  }
+  .koujue-card .verse .hl-green  { color: #2ecc71; }
+  .koujue-card .verse .hl-gold   { color: var(--accent-glow); }
+  .koujue-card .verse .hl-yellow { color: #82b74b; }
+  .koujue-card .verse .hl-orange { color: #e67e22; }
+  .koujue-card .verse .hl-red    { color: #e74c3c; }
+
+  /* ── 五卦体系卡片 ── */
+  .wugua-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 1.5rem;
+    margin: 1rem 0;
+  }
+  .wugua-card {
+    background: #15150e;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.4rem 1.6rem;
+    transition: border-color 0.3s;
+  }
+  .wugua-card:hover {
+    border-color: var(--accent);
+  }
+  .wugua-card .gua-icon {
+    font-size: 2.4rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .wugua-card h3 {
+    font-size: 1.1rem;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.06em;
+  }
+  .wugua-card table {
+    font-size: 0.85rem;
+  }
+  .wugua-card table td:first-child {
+    width: 38%;
+    text-align: left;
+    padding-left: 1rem;
+    font-weight: 600;
+    color: var(--heading);
+  }
+
+  /* ── 流程图 ── */
+  .flow-chart {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 1.5rem 0;
+    padding: 1.5rem 0.5rem;
+    overflow-x: auto;
+  }
+  .flow-node {
+    background: var(--card-bg);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 0.9rem 1.2rem;
+    text-align: center;
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+  .flow-node .num {
+    display: inline-block;
+    width: 28px; height: 28px;
+    line-height: 28px;
+    background: var(--accent);
+    color: #1a1608;
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+  }
+  .flow-node .label {
+    font-size: 0.92rem;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .flow-arrow {
+    font-size: 1.6rem;
+    color: var(--accent);
+    margin: 0 0.3rem;
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+
+  /* ── 层详解折叠 ── */
+  .layer-detail {
+    background: #15150e;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0.8rem 0;
+    overflow: hidden;
+  }
+  .layer-detail .layer-header {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .layer-detail .layer-header:hover {
+    background: #1e1b10;
+  }
+  .layer-detail .layer-header .layer-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    background: var(--accent);
+    color: #1a1608;
+    border-radius: 50%;
+    font-weight: 800;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .layer-detail .layer-header .layer-title {
+    font-size: 1.05rem;
+    color: var(--heading);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    flex: 1;
+  }
+  .layer-detail .layer-header .layer-arrow {
+    font-size: 0.9rem;
+    color: var(--muted);
+    transition: transform 0.3s;
+  }
+  .layer-detail.open .layer-header .layer-arrow {
+    transform: rotate(180deg);
+  }
+  .layer-detail .layer-body {
+    display: none;
+    padding: 0 1.5rem 1.2rem;
+    border-top: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.9;
+  }
+  .layer-detail.open .layer-body {
+    display: block;
+  }
+
+  /* ── 心法案例 ── */
+  .case-card {
+    background: linear-gradient(135deg, #15120a 0%, #1a1608 100%);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 1.3rem 1.6rem;
+    margin: 1.2rem 0;
+  }
+  .case-card h4 {
+    color: var(--accent-glow);
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+  .case-card .case-result {
+    display: inline-block;
+    padding: 2px 14px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-left: 0.5rem;
+  }
+  .case-card .case-result.good {
+    background: rgba(46,204,113,0.18);
+    color: #2ecc71;
+  }
+  .case-card .case-result.bad {
+    background: rgba(231,76,60,0.18);
+    color: #e74c3c;
+  }
+  .case-card .logic-chain {
+    background: #0e0e0a;
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    margin: 0.6rem 0;
+    font-size: 0.9rem;
+    border: 1px solid var(--border);
+  }
+  .case-card .logic-chain span {
+    color: var(--muted);
+  }
+  .case-card .logic-chain .arrow {
+    color: var(--accent);
+    margin: 0 0.3rem;
+  }
+
+  /* ── 生体/克体表格颜色 ── */
+  .shengti-table td.sheng {
+    background: rgba(46,204,113,0.10) !important;
+    color: #2ecc71;
+    font-weight: 700;
+  }
+  .keti-table td.ke {
+    background: rgba(231,76,60,0.10) !important;
+    color: #e74c3c;
+    font-weight: 700;
+  }
+
+  /* ── 速查表 ── */
+  .quick-table td.name-col {
+    font-weight: 700;
+    color: var(--heading);
+    letter-spacing: 0.06em;
+  }
+  .quick-table td.good { background: rgba(46,204,113,0.12) !important; color: #2ecc71; font-weight:700; }
+  .quick-table td.mid  { background: rgba(130,183,75,0.10) !important; color: #82b74b; font-weight:700; }
+  .quick-table td.caution { background: rgba(230,126,34,0.12) !important; color: #e67e22; font-weight:700; }
+  .quick-table td.bad  { background: rgba(231,76,60,0.12) !important; color: #e74c3c; font-weight:700; }
+
+  /* ── 底部导航 ── */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--border);
+  }
+  .bottom-nav a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .bottom-nav a:hover {
+    background: var(--accent);
+    color: #1a1608;
+    border-color: var(--accent);
+  }
+  .bottom-nav .center-link {
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  /* ── 响应式 ── */
+  @media (max-width: 600px) {
+    .card { padding: 1.2rem 1rem; }
+    .topbar h1 { font-size: 1.6rem; }
+    .wugua-grid { grid-template-columns: 1fr; }
+    .flow-chart { gap: 0.3rem; }
+    .flow-node { min-width: 90px; padding: 0.6rem 0.8rem; }
+    .flow-node .label { font-size: 0.78rem; }
+    .flow-arrow { font-size: 1.1rem; margin: 0 0.1rem; }
+    table { font-size: 0.78rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ═══════════ 顶栏 ═══════════ -->
+  <div class="topbar">
+    <div class="breadcrumb">
+      <a href="index.html">梅花易数</a> &raquo; 第四层
+    </div>
+    <h1>断卦体系</h1>
+    <div class="sub">五卦参详 · 五层递进 · 圆机不拘体用</div>
+  </div>
+
+  <!-- ═══════════ 总纲口诀 ═══════════ -->
+  <div class="koujue-card">
+    <div class="verse">
+      <span class="line"><span class="hl-gold">一卦既成，万象森罗。</span></span>
+      <span class="line">本卦为始，互卦为通，变卦为终。</span>
+      <span class="line"><span class="hl-green">错卦反观</span>其理，<span class="hl-yellow">综卦易位</span>而察。</span>
+      <span class="line">体用为纲，<span class="hl-gold">然有圆机不拘体用者</span>，要在变通。</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第一部分：五卦体系
+       ═══════════════════════════════════════ -->
+  <div class="card" id="wugua">
+    <h2>一、五卦体系</h2>
+    <p>
+      梅花易数断卦，不只看一个卦。<strong>一卦既出，五卦同参</strong>——本卦、互卦、变卦为「<em>主三卦</em>」，错卦、综卦为「<em>辅二卦</em>」，合称<strong>五卦体系</strong>，从不同维度揭示事物全貌。
+    </p>
+
+    <div class="wugua-grid">
+
+      <!-- 本卦 -->
+      <div class="wugua-card">
+        <div class="gua-icon">☯</div>
+        <h3>本卦 · 起点</h3>
+        <table>
+          <tr><td>别称</td><td>正卦、主卦、大成卦</td></tr>
+          <tr><td>组成</td><td>直接由起卦数/年月日时/物数得出</td></tr>
+          <tr><td>含义</td><td>当前状态、事物本原、起点的全息映照</td></tr>
+          <tr><td>断法</td><td>先读卦名、卦辞；再分体用，定体卦用卦</td></tr>
+        </table>
+      </div>
+
+      <!-- 互卦 -->
+      <div class="wugua-card">
+        <div class="gua-icon">⟐</div>
+        <h3>互卦 · 过程</h3>
+        <table>
+          <tr><td>别称</td><td>中爻卦、交互卦</td></tr>
+          <tr><td>组成</td><td>本卦二三四爻为下互，三四五爻为上互</td></tr>
+          <tr><td>含义</td><td>中间过程、内里隐情、发展中的变数</td></tr>
+          <tr><td>断法</td><td>观互卦中体用关系，察中间是否生变</td></tr>
+        </table>
+      </div>
+
+      <!-- 变卦 -->
+      <div class="wugua-card">
+        <div class="gua-icon">⟳</div>
+        <h3>变卦 · 结果</h3>
+        <table>
+          <tr><td>别称</td><td>之卦、动爻卦</td></tr>
+          <tr><td>组成</td><td>本卦动爻阴阳互变后所得之卦</td></tr>
+          <tr><td>含义</td><td>最终结局、发展方向、变化的归宿</td></tr>
+          <tr><td>断法</td><td>变卦生克定吉凶，兼看变爻爻辞佐证</td></tr>
+        </table>
+      </div>
+
+      <!-- 错卦 -->
+      <div class="wugua-card">
+        <div class="gua-icon">☵☲</div>
+        <h3>错卦 · 反面</h3>
+        <table>
+          <tr><td>别称</td><td>旁通卦、对卦、伏卦</td></tr>
+          <tr><td>组成</td><td>本卦每爻阴阳全变（阳变阴，阴变阳）</td></tr>
+          <tr><td>含义</td><td>反面真相、隐藏危机、一体的另一面</td></tr>
+          <tr><td>断法</td><td>观错卦吉凶，知隐患所在、反面之理</td></tr>
+        </table>
+      </div>
+
+      <!-- 综卦 -->
+      <div class="wugua-card">
+        <div class="gua-icon">↕</div>
+        <h3>综卦 · 对方视角</h3>
+        <table>
+          <tr><td>别称</td><td>覆卦、倒卦、反易卦</td></tr>
+          <tr><td>组成</td><td>本卦上下颠倒（整个卦翻转180°）</td></tr>
+          <tr><td>含义</td><td>对方立场、从另一角度看、换位思考</td></tr>
+          <tr><td>断法</td><td>观综卦以知对方心意、事情另一视角</td></tr>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="highlight-box">
+      五卦并用，如五镜照物——<em>本卦</em>观其形，<em>互卦</em>察其变，<em>变卦</em>定其果，<em>错卦</em>明其反，<em>综卦</em>知其对。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第二部分：断卦五层框架
+       ═══════════════════════════════════════ -->
+  <div class="card" id="framework">
+    <h2>二、断卦五层框架</h2>
+    <p>
+      断卦如登楼，<strong>层层递进，由浅入深</strong>。每一层都有其独立的判断依据，下层可修正上层。五层合参，方得全貌。
+    </p>
+
+    <!-- 流程图 -->
+    <div class="flow-chart">
+      <div class="flow-node">
+        <div class="num">1</div>
+        <div class="label">卦名直读</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="num">2</div>
+        <div class="label">体用生克</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="num">3</div>
+        <div class="label">互卦参看</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="num">4</div>
+        <div class="label">变卦定果</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="num">5</div>
+        <div class="label">外应佐证</div>
+      </div>
+    </div>
+
+    <!-- 层1 -->
+    <div class="layer-detail open" id="layer1">
+      <div class="layer-header" onclick="toggleLayer('layer1')">
+        <div class="layer-num">1</div>
+        <div class="layer-title">卦名直读 —— 大象初判</div>
+        <div class="layer-arrow">▼</div>
+      </div>
+      <div class="layer-body">
+        <p>卦成之后，<strong>第一印象最为重要</strong>。不看体用，不查生克，直接读卦名、卦象、卦德。</p>
+        <ul style="padding-left:1.5rem; margin:0.6rem 0;">
+          <li><strong>读卦名：</strong>如得「泰」卦，名即通泰；得「否」卦，名即闭塞。卦名自带吉凶信息。</li>
+          <li><strong>读大象：</strong>上卦代表什么，下卦代表什么，上下组合呈现什么画面。如「火地晋」——日出地上，光明上进。</li>
+          <li><strong>读卦辞：</strong>《周易》卦辞是大象的权威注脚，不可忽视。</li>
+          <li><strong>直觉感应：</strong>看到卦的第一瞬间，心中浮现的意象——这是天人感应的第一信号。</li>
+        </ul>
+        <div class="info-box">
+          <strong>要诀：</strong>「初观其名，次察其象，再味其辞。」卦名直读是断卦的「第一感」，往往一语中的。此层不需复杂计算，心静则明。
+        </div>
+      </div>
+    </div>
+
+    <!-- 层2 -->
+    <div class="layer-detail" id="layer2">
+      <div class="layer-header" onclick="toggleLayer('layer2')">
+        <div class="layer-num">2</div>
+        <div class="layer-title">体用生克 —— 核心判断</div>
+        <div class="layer-arrow">▼</div>
+      </div>
+      <div class="layer-body">
+        <p>确定体卦（代表自己/所占之事的主体）和用卦（代表对方/外部环境），分析二者五行生克关系。</p>
+        <table>
+          <tr><th>关系</th><th>格局</th><th>含义</th><th>吉凶</th></tr>
+          <tr><td>用生体</td><td>生入</td><td>外力来助，事必有成，事半功倍</td><td class="shengti-table"><span class="sheng">大吉</span></td></tr>
+          <tr><td>体用比和</td><td>比和</td><td>内外同心，顺遂平稳，诸事可成</td><td class="shengti-table"><span class="sheng">吉</span></td></tr>
+          <tr><td>体生用</td><td>生出</td><td>耗损自身，费力劳心，事有拖延</td><td style="color:#e67e22;">小凶</td></tr>
+          <tr><td>体克用</td><td>克出</td><td>事可成但费力，需主动争取</td><td style="color:#82b74b;">中平</td></tr>
+          <tr><td>用克体</td><td>克入</td><td>外力压制，百事难成，凶多吉少</td><td style="color:#e74c3c;">大凶</td></tr>
+        </table>
+        <div class="info-box">
+          <strong>注意：</strong>体用生克是断卦的<em>主线</em>，但<strong>绝非唯一标准</strong>。遇有「圆机不拘体用」之情形（见第三部分），当以更高层次的心法调整判断。
+        </div>
+      </div>
+    </div>
+
+    <!-- 层3 -->
+    <div class="layer-detail" id="layer3">
+      <div class="layer-header" onclick="toggleLayer('layer3')">
+        <div class="layer-num">3</div>
+        <div class="layer-title">互卦参看 —— 过程明察</div>
+        <div class="layer-arrow">▼</div>
+      </div>
+      <div class="layer-body">
+        <p>互卦揭示事物<strong>发展过程中的隐情和变数</strong>，是用卦之外的第三视角。</p>
+        <ul style="padding-left:1.5rem; margin:0.6rem 0;">
+          <li><strong>互卦体用：</strong>互卦中同样可分体用——互体（本卦体爻所在的互卦部分）与互用（本卦用爻所在的互卦部分）。</li>
+          <li><strong>互卦生克：</strong>互体生互用 → 过程中有助缘；互用克互体 → 过程中有阻碍。</li>
+          <li><strong>互卦与本卦关系：</strong>互卦生本卦体 → 中途有贵人；互卦克本卦体 → 中途有波折。</li>
+          <li><strong>互卦卦象：</strong>互卦自身的大象也暗示过程中的关键事件类型。</li>
+        </ul>
+        <div class="info-box">
+          <strong>要诀：</strong>互卦重在「过程」，回答的是「<em>事情会经历什么</em>」。若互卦中见艮（山），则过程有阻；若见巽（风），则过程多变。
+        </div>
+      </div>
+    </div>
+
+    <!-- 层4 -->
+    <div class="layer-detail" id="layer4">
+      <div class="layer-header" onclick="toggleLayer('layer4')">
+        <div class="layer-num">4</div>
+        <div class="layer-title">变卦定果 —— 结局落定</div>
+        <div class="layer-arrow">▼</div>
+      </div>
+      <div class="layer-body">
+        <p>变卦是事物发展的<strong>最终归宿</strong>，决定了占断的终极结论。</p>
+        <ul style="padding-left:1.5rem; margin:0.6rem 0;">
+          <li><strong>变卦体用：</strong>变卦中重新分体用——变卦的体和用可能与本卦不同。</li>
+          <li><strong>变卦生克：</strong>变卦的体用生克关系，是结局吉凶的最直接指标。</li>
+          <li><strong>本→变对比：</strong>本卦体 vs 变卦体：看「我」的变化方向；本卦用 vs 变卦用：看「对方/环境」的变化方向。</li>
+          <li><strong>变爻爻辞：</strong>动爻之辞直接指向变化的关键节点和最终走向。</li>
+        </ul>
+        <table>
+          <tr><th>情景</th><th>含义</th></tr>
+          <tr><td>本卦体用吉 → 变卦体用也吉</td><td style="color:#2ecc71;">始终吉利，事必大成</td></tr>
+          <tr><td>本卦体用吉 → 变卦体用凶</td><td style="color:#e67e22;">先好后坏，结局堪忧</td></tr>
+          <tr><td>本卦体用凶 → 变卦体用吉</td><td style="color:#82b74b;">先难后易，终有好转</td></tr>
+          <tr><td>本卦体用凶 → 变卦体用也凶</td><td style="color:#e74c3c;">始终不利，宜早退避</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 层5 -->
+    <div class="layer-detail" id="layer5">
+      <div class="layer-header" onclick="toggleLayer('layer5')">
+        <div class="layer-num">5</div>
+        <div class="layer-title">外应佐证 —— 天人感应</div>
+        <div class="layer-arrow">▼</div>
+      </div>
+      <div class="layer-body">
+        <p>外应是梅花易数<strong>最具特色</strong>的断卦手段——占断当下，周围环境的一切变化皆可入卦，皆为天机。</p>
+        <ul style="padding-left:1.5rem; margin:0.6rem 0;">
+          <li><strong>动静应：</strong>断卦时突有响动（门响、鸟鸣、器物坠地），取其方位、声音五行入断。</li>
+          <li><strong>人物应：</strong>断卦时有人来（老人/小孩/官人/妇人），以其角色五行配卦。</li>
+          <li><strong>自然应：</strong>风雨雷电、日月星辰变化，阴阳寒暑之气。</li>
+          <li><strong>器物应：</strong>所见之物——圆物属金、长物属木、尖物属火等。</li>
+          <li><strong>三要十应：</strong>「三要」为耳、目、心；「十应」为天时、地理、人事、器物等十类外应。</li>
+        </ul>
+        <div class="highlight-box">
+          <strong>外应权重：</strong>外应与体用生克结论<em>一致时</em>——断语更坚定；<em>冲突时</em>——以外应为重！这是梅花易数区别于其他占法的核心特质。
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第三部分：不拘体用之心法（核心）
+       ═══════════════════════════════════════ -->
+  <div class="card" id="xinfa">
+    <h2>三、不拘体用之心法</h2>
+
+    <div class="koujue-card" style="margin-top:0;">
+      <div class="verse">
+        <span class="line"><span class="hl-gold">固以体用为主，然有不拘体用者。</span></span>
+        <span class="line">要在<span class="hl-green">圆机</span>，不可<span class="hl-red">执</span>！</span>
+      </div>
+    </div>
+
+    <p style="margin-bottom:1.5rem;">
+      体用生克是断卦的<strong>主线框架</strong>，但绝非铁律。梅花易数修到深处，讲究的是「<em>圆机活法</em>」——根据具体情境灵活变通，不可死守体用生克的公式。以下两则经典案例，足以说明此理的玄妙。
+    </p>
+
+    <!-- 案例1：西林寺额占 -->
+    <div class="case-card">
+      <h4>案例一：西林寺额占 <span class="case-result bad">断凶（体用皆吉而不取）</span></h4>
+      <p><strong>缘起：</strong>邵康节先生途经西林寺，见匾额「西林」二字，以笔画起卦——「西」七画为艮☶，「林」八画为坤☷，得<strong>山地剥䷖</strong>。</p>
+      <div class="logic-chain">
+        <span>体用分析</span> <span class="arrow">→</span>
+        体卦艮土 | 用卦坤土 | <strong style="color:#2ecc71;">体用比和 → 按理大吉</strong>
+      </div>
+      <div class="logic-chain">
+        <span>互卦分析</span> <span class="arrow">→</span>
+        互卦亦为坤☷ | <strong style="color:#2ecc71;">互卦亦比和 → 按理大吉</strong>
+      </div>
+      <div class="logic-chain" style="border-color: var(--accent);">
+        <span style="color:var(--accent-glow);">以理断之</span> <span class="arrow">→</span>
+        寺为<strong>纯阳之所</strong>（僧人聚集之地） | 山地剥䷖<strong>全为阴卦</strong>（艮坤皆阴） |
+        <strong style="color:#e74c3c;">纯阳之地见纯阴之卦 → 阴气侵阳 → 大凶！</strong>
+      </div>
+      <p style="margin-top:0.8rem;">
+        <strong>结论：</strong>康节先生断此寺当有阴人之祸（后果然）。此例中，<em>体用比和，互卦比和，按理皆吉，但以「寺庙纯阳」之「理」胜过了体用生克之「数」</em>——这就是「不拘体用」。
+      </p>
+      <div class="highlight-box">
+        启示：<em>占断不可脱离事物本身的道理</em>。体用是「数」，事理是「理」——数与理合则断语坚，数与理悖则<strong>以理为尊</strong>。
+      </div>
+    </div>
+
+    <!-- 案例2：今日动静占 -->
+    <div class="case-card">
+      <h4>案例二：今日动静占 <span class="case-result good">断吉（用克体而不取）</span></h4>
+      <p><strong>缘起：</strong>有人问康节先生「今日动静如何」，以时起卦得<strong>地风升䷭</strong>（上坤☷下巽☴），动爻在四。</p>
+      <div class="logic-chain">
+        <span>体用分析</span> <span class="arrow">→</span>
+        体卦巽木 | 用卦坤土 | 木克土 → 体克用 | <strong style="color:#82b74b;">按理中平偏吉</strong>
+      </div>
+      <div class="logic-chain">
+        <span>变卦分析</span> <span class="arrow">→</span>
+        动爻变后，地风升䷭ → 雷风恒䷟ | 变卦体巽木 用震木 → <strong style="color:#2ecc71;">体用比和，吉</strong>
+      </div>
+      <div class="logic-chain" style="border-color: var(--accent);">
+        <span style="color:var(--accent-glow);">外应入断</span> <span class="arrow">→</span>
+        断卦时<strong>忽闻门外有人送饮食来</strong> | 饮食为坤土之应 | 坤土在外，巽木在体 |
+        <strong style="color:#e74c3c;">用克体！</strong>
+      </div>
+      <div class="logic-chain" style="border-color: var(--accent-glow);">
+        <span style="color:var(--accent-glow);">圆机活断</span> <span class="arrow">→</span>
+        用克体虽凶，但<strong>外应「饮食之请」为实际吉事</strong> |
+        <strong style="color:#2ecc71;">外应大于体用生克 → 断为有饮食之喜！</strong>
+      </div>
+      <p style="margin-top:0.8rem;">
+        <strong>结论：</strong>康节先生断「今日当有饮食之请」。果然，当日有人设宴相邀。此例中，<em>体用关系为用克体（凶），但外应显示的实际事件为吉——外应的权重压过了体用生克的公式</em>。
+      </p>
+      <div class="highlight-box">
+        启示：<em>外应是「天机直显」</em>，比数理推算更直接、更可靠。当外应与体用生克矛盾时，<strong>以外应为断</strong>。
+      </div>
+    </div>
+
+    <!-- 总结 -->
+    <div class="formula" style="margin-top:1.5rem;">
+      体用为<em>常</em>，圆机为<em>变</em>。<br>
+      数为<em>骨</em>，理为<em>肉</em>，外应为<em>神</em>。<br>
+      三者合一，方为梅花真诀。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第四部分：各卦生体之应
+       ═══════════════════════════════════════ -->
+  <div class="card" id="shengti">
+    <h2>四、各卦生体之应</h2>
+    <p>
+      当<strong>用卦生体卦</strong>时（外力来生我），根据用卦所属八卦的不同，其具体事应各有不同。以下八表列明各卦生体时对应的人事吉兆。
+    </p>
+
+    <table class="shengti-table">
+      <thead>
+        <tr>
+          <th style="width:10%;">卦名</th>
+          <th style="width:10%;">五行</th>
+          <th style="width:18%;">生体格局</th>
+          <th style="width:32%;">具体事应</th>
+          <th style="width:30%;">详解</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-size:1.4rem;">☰</td>
+          <td>金</td>
+          <td class="sheng">乾金生体</td>
+          <td>功名、仕途、公门之喜</td>
+          <td>有贵人提携、官运亨通、考试高中、文书之喜。乾为天为君为父，主尊贵之事。</td>
+        </tr>
+        <tr>
+          <td style="font-size:1.4rem;">☷</td>
+          <td>土</td>
+          <td class="sheng">坤土生体</td>
+          <td>田土、房产、母辈之喜</td>
+          <td>田地房产增值、母亲安康、得长辈荫庇、衣食丰足。坤为地为母为众，主包容养育。</td>
+        </tr>
+        <tr>
+          <td style="font-size:1.4rem;">☳</td>
+          <td>木</td>
+          <td class="sheng">震木生体</td>
+          <td>山林、长子、行动之喜</td>
+          <td>山林之利、长子有喜、出行顺利、创业起步。震为雷为动为长子，主生机萌发。</td>
+        </tr>
+        <tr>
+          <td style="font-size:1.4rem;">☴</td>
+          <td>木</td>
+          <td class="sheng">巽木生体</td>
+          <td>商贾、长女、文書之喜</td>
+          <td>商业获利、合同签订、长女有喜、学业进步。巽为风为入为近利市三倍，主渗透通达。</td>
+        </tr>
+        <tr>
+          <td style="font-size:1.4rem;">☵</td>
+          <td>水</td>
+          <td class="sheng">坎水生体</td>
+          <td>舟楫、中男、财源之喜</td>
+          <td>水路之财、中男有喜、得暗财偏财、智谋得逞。坎为水为险为智，主流动之财。</td>
+        </tr>
+        <tr>
+          <td style="font-size:1.4rem;">☲</td>
+          <td>火</td>
+          <td class="sheng">离火生体</td>
+          <td>文书、中女、光明之喜</td>
+          <td>文章发表、中女有喜、名声远播、文书契约之利。离为火为明为文，主文明光辉。</td>
+        </tr>
+        <tr>
+          <td style="font-size:1.4rem;">☶</td>
+          <td>土</td>
+          <td class="sheng">艮土生体</td>
+          <td>山产、少男、静止之喜</td>
+          <td>山产矿产之利、少男有喜、置业安居、稳定之福。艮为山为止为少男，主厚重稳固。</td>
+        </tr>
+        <tr>
+          <td style="font-size:1.4rem;">☱</td>
+          <td>金</td>
+          <td class="sheng">兑金生体</td>
+          <td>口舌、少女、喜悦之喜</td>
+          <td>口才得利、少女有喜、宴饮娱乐、演说讲学之成。兑为泽为悦为少女，主欢欣和乐。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>用法：</strong>占断时，若判定「用生体」为吉，再查阅用卦属何卦，以其具体事应告知来占者，断语便精确如神。例如：用卦为乾 → 可断「当有官宦贵人之助」。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第五部分：各卦克体之应
+       ═══════════════════════════════════════ -->
+  <div class="card" id="keti">
+    <h2>五、各卦克体之应</h2>
+    <p>
+      当<strong>用卦克体卦</strong>时（外力来克我），根据用卦所属八卦的不同，其凶事类型各有不同。以下八表列明各卦克体时对应的凶险事应。
+    </p>
+
+    <table class="keti-table">
+      <thead>
+        <tr>
+          <th style="width:10%;">卦名</th>
+          <th style="width:10%;">五行</th>
+          <th style="width:18%;">克体格局</th>
+          <th style="width:32%;">具体事应</th>
+          <th style="width:30%;">详解</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-size:1.4rem;">☰</td>
+          <td>金</td>
+          <td class="ke">乾金克体</td>
+          <td>公事之忧、官非、长辈之厄</td>
+          <td>官司缠身、触犯公门、上司责难、父亲身体不安。乾为官府为威严，克体则威严成压力。</td>
+        </tr>
+        <tr>
+          <td style="font-size:1.4rem;">☷</td>
+          <td>土</td>
+          <td class="ke">坤土克体</td>
+          <td>田土之忧、房产纠纷、母病</td>
+          <td>田地争夺、房产纠纷、母亲患病、众人诽谤。坤为众为顺，克体则众口铄金、顺从反成压抑。</td>
+        </tr>
+        <tr>
+          <td style="font-size:1.4rem;">☳</td>
+          <td>木</td>
+          <td class="ke">震木克体</td>
+          <td>虚惊、长子之厄、风波</td>
+          <td>无故受惊、长子出事、突如其来的风波、雷电之灾。震为雷为惊，克体则动荡不安。</td>
+        </tr>
+        <tr>
+          <td style="font-size:1.4rem;">☴</td>
+          <td>木</td>
+          <td class="ke">巽木克体</td>
+          <td>风疾、商贾之失、口舌</td>
+          <td>伤风感冒、生意亏损、合同纠纷、长女有厄。巽为风为伏入，克体则风波暗侵、财利受损。</td>
+        </tr>
+        <tr>
+          <td style="font-size:1.4rem;">☵</td>
+          <td>水</td>
+          <td class="ke">坎水克体</td>
+          <td>水厄、盗贼、中男之厄</td>
+          <td>溺水之险、被盗失窃、中男出事、阴谋陷阱、肾病。坎为险为盗，克体则陷于险境。</td>
+        </tr>
+        <tr>
+          <td style="font-size:1.4rem;">☲</td>
+          <td>火</td>
+          <td class="ke">离火克体</td>
+          <td>火厄、文书之失、名声之损</td>
+          <td>火灾、文书丢失、名誉受损、中女有厄、眼疾。离为火为文，克体则文书生非、光明反噬。</td>
+        </tr>
+        <tr>
+          <td style="font-size:1.4rem;">☶</td>
+          <td>土</td>
+          <td class="ke">艮土克体</td>
+          <td>山难、阻塞、少男之厄</td>
+          <td>山路之险、求事阻隔、少男出事、结石肿块。艮为山为止，克体则前进不得、诸事阻塞。</td>
+        </tr>
+        <tr>
+          <td style="font-size:1.4rem;">☱</td>
+          <td>金</td>
+          <td class="ke">兑金克体</td>
+          <td>口舌之祸、少女之厄、毁折</td>
+          <td>口舌争讼、少女出事、金属刀伤、毁约失信。兑为毁折为口舌，克体则是非缠身、损伤不宁。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>用法：</strong>占断时，若判定「用克体」为凶，再查阅用卦属何卦，以其具体事应警示来占者。例如：用卦为坎 → 可断「当防水厄盗贼之患，中男尤须留意」。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       第六部分：六十四卦速查表（精选15卦）
+       ═══════════════════════════════════════ -->
+  <div class="card" id="quicklook">
+    <h2>六、六十四卦速查表（精选15卦）</h2>
+    <p>
+      以下精选<strong>15个常用卦</strong>，涵盖六十四卦中最具代表性的卦象，便览其卦名、卦象、卦德与吉凶。
+    </p>
+
+    <table class="quick-table">
+      <thead>
+        <tr>
+          <th>卦名</th>
+          <th>卦象</th>
+          <th>上卦</th>
+          <th>下卦</th>
+          <th>大象</th>
+          <th>卦德要点</th>
+          <th>吉凶</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name-col">乾为天 ䷀</td>
+          <td>☰☰</td>
+          <td>乾☰</td><td>乾☰</td>
+          <td>天行健</td>
+          <td>纯阳至刚，自强不息；得此卦者当勇猛精进</td>
+          <td class="good">大吉</td>
+        </tr>
+        <tr>
+          <td class="name-col">坤为地 ䷁</td>
+          <td>☷☷</td>
+          <td>坤☷</td><td>坤☷</td>
+          <td>地势坤</td>
+          <td>纯阴至柔，厚德载物；宜守不宜攻，以静制动</td>
+          <td class="good">吉</td>
+        </tr>
+        <tr>
+          <td class="name-col">水雷屯 ䷂</td>
+          <td>☵☳</td>
+          <td>坎☵</td><td>震☳</td>
+          <td>云雷屯</td>
+          <td>万事初生，艰难困苦；宜耐心经营，不可冒进</td>
+          <td class="caution">始难终吉</td>
+        </tr>
+        <tr>
+          <td class="name-col">山水蒙 ䷃</td>
+          <td>☶☵</td>
+          <td>艮☶</td><td>坎☵</td>
+          <td>山下出泉</td>
+          <td>蒙昧未开，启蒙求教；宜虚心请益，不可自以为是</td>
+          <td class="mid">中平</td>
+        </tr>
+        <tr>
+          <td class="name-col">水天需 ䷄</td>
+          <td>☵☰</td>
+          <td>坎☵</td><td>乾☰</td>
+          <td>云上于天</td>
+          <td>等待时机，饮食宴乐；时机未到不可强求</td>
+          <td class="mid">中平</td>
+        </tr>
+        <tr>
+          <td class="name-col">地天泰 ䷊</td>
+          <td>☷☰</td>
+          <td>坤☷</td><td>乾☰</td>
+          <td>天地交泰</td>
+          <td>阴阳和合，万事亨通；大吉大利，畅通无阻</td>
+          <td class="good">大吉</td>
+        </tr>
+        <tr>
+          <td class="name-col">天地否 ䷋</td>
+          <td>☰☷</td>
+          <td>乾☰</td><td>坤☷</td>
+          <td>天地不交</td>
+          <td>上下闭塞，小人道长；宜退守自保，不可妄动</td>
+          <td class="bad">凶</td>
+        </tr>
+        <tr>
+          <td class="name-col">火地晋 ䷢</td>
+          <td>☲☷</td>
+          <td>离☲</td><td>坤☷</td>
+          <td>明出地上</td>
+          <td>旭日东升，步步高升；仕途学业大吉</td>
+          <td class="good">吉</td>
+        </tr>
+        <tr>
+          <td class="name-col">地火明夷 ䷣</td>
+          <td>☷☲</td>
+          <td>坤☷</td><td>离☲</td>
+          <td>明入地中</td>
+          <td>光明受伤，宜韬光养晦；静待时机，不可出头</td>
+          <td class="bad">凶</td>
+        </tr>
+        <tr>
+          <td class="name-col">泽山咸 ䷞</td>
+          <td>☱☶</td>
+          <td>兑☱</td><td>艮☶</td>
+          <td>山上有泽</td>
+          <td>感应沟通，男女相悦；感情婚姻大吉</td>
+          <td class="good">吉</td>
+        </tr>
+        <tr>
+          <td class="name-col">雷风恒 ䷟</td>
+          <td>☳☴</td>
+          <td>震☳</td><td>巽☴</td>
+          <td>雷风相与</td>
+          <td>恒久不变，宜守常道；婚姻事业持久稳定</td>
+          <td class="mid">中平</td>
+        </tr>
+        <tr>
+          <td class="name-col">水火既济 ䷾</td>
+          <td>☵☲</td>
+          <td>坎☵</td><td>离☲</td>
+          <td>水在火上</td>
+          <td>事已成矣，但盛极将衰；宜保持警惕，居安思危</td>
+          <td class="caution">初吉终乱</td>
+        </tr>
+        <tr>
+          <td class="name-col">火水未济 ䷿</td>
+          <td>☲☵</td>
+          <td>离☲</td><td>坎☵</td>
+          <td>火在水上</td>
+          <td>事尚未成，正在途中；虽乱终有序，慎始慎终</td>
+          <td class="caution">始乱终吉</td>
+        </tr>
+        <tr>
+          <td class="name-col">山地剥 ䷖</td>
+          <td>☶☷</td>
+          <td>艮☶</td><td>坤☷</td>
+          <td>山附于地</td>
+          <td>阴长阳消，小人得势；宜退守待时（参西林寺例）</td>
+          <td class="bad">凶</td>
+        </tr>
+        <tr>
+          <td class="name-col">地雷复 ䷗</td>
+          <td>☷☳</td>
+          <td>坤☷</td><td>震☳</td>
+          <td>雷在地中</td>
+          <td>一阳来复，万象更新；衰极转盛，好运将至</td>
+          <td class="good">吉</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info-box">
+      <strong>使用说明：</strong>速查表用于快速定位卦的基本信息。实际断卦时，需结合五卦体系、体用生克、互变参照及外应，不可仅凭此表草率断定。
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       底部导航
+       ═══════════════════════════════════════ -->
+  <div class="bottom-nav">
+    <a href="03-体用.html">&larr; 第三层：体用生克精义</a>
+    <a href="index.html" class="center-link">返回学习地图</a>
+    <a href="05-应期.html">第五层：应期判断与十八类占断 &rarr;</a>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════
+     JavaScript：折叠交互
+     ═══════════════════════════════════════ -->
+<script>
+  // 折叠切换
+  function toggleLayer(id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.classList.toggle('open');
+    }
+  }
+
+  // 初始化：第一层默认展开，其余折叠
+  document.addEventListener('DOMContentLoaded', function() {
+    // layer1 在 HTML 中已设置 open class，其余无
+    // 确保互卦参看、变卦定果、外应佐证初始为折叠状态
+    var allLayers = document.querySelectorAll('.layer-detail');
+    var foundOpen = false;
+    allLayers.forEach(function(layer) {
+      if (!foundOpen && layer.classList.contains('open')) {
+        foundOpen = true;
+      } else if (foundOpen) {
+        layer.classList.remove('open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

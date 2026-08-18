@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="紫微斗数深潜 — 三大流派融合、ATP速断心法、精通路线图、常见误区、进阶书单、三体系贯通视角。">
+<title>紫微斗数 · 深潜精通</title>
+<link rel="stylesheet" href="../共享样式/base.css">
+<link rel="stylesheet" href="../共享样式/components.css">
+<style>
+  :root{--font-ui:"Noto Serif SC","Songti SC","STSong",serif}
+  body{font-family:var(--font-ui);padding-bottom:60px}
+
+  /* ── 顶栏 ── */
+  .topnav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(8,7,13,.98),rgba(12,11,21,.95));border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;backdrop-filter:blur(10px)}
+  .topnav-back{color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;padding:5px 12px;border:1px solid var(--gold);border-radius:14px;white-space:nowrap;transition:all .2s;flex-shrink:0}
+  .topnav-back:hover{background:var(--gold);color:#111}
+  .topnav-title{color:var(--text-dim);font-size:.76rem;letter-spacing:.06em;white-space:nowrap}
+  .topnav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .topnav-links a{color:var(--text-alt);text-decoration:none;font-size:.74rem;padding:4px 12px;border:1px solid var(--border);border-radius:12px;transition:all .2s}
+  .topnav-links a:hover,.topnav-links a.hot{border-color:var(--gold);color:var(--gold)}
+  .topnav-links a.hot{background:var(--gold-bg)}
+
+  /* ── 英雄区 ── */
+  .hero{text-align:center;padding:48px 20px 36px;border-bottom:1px solid var(--border);margin-bottom:32px;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:0;left:0;right:0;height:100%;background:radial-gradient(ellipse at 50% 0%,rgba(212,176,106,.04),transparent 70%);pointer-events:none}
+  .hero h1{font-size:2.4em;color:var(--gold-lt);letter-spacing:6px;font-weight:300}
+  .hero p{color:var(--text-dim);font-size:.9rem;letter-spacing:3px;margin-top:8px}
+  .hero .line{width:50px;height:1px;background:var(--gold);margin:14px auto;opacity:.4}
+  .hero .badge-row{margin-top:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .hero .badge-row span{font-size:.68rem;padding:4px 14px;border-radius:14px;letter-spacing:.08em}
+
+  .container{max-width:980px;margin:0 auto;padding:0 24px}
+
+  /* ── 阶段标题 ── */
+  .ph-hdr{margin:56px 0 28px;padding:0 0 14px;position:relative}
+  .ph-hdr::after{content:"";position:absolute;bottom:0;left:0;width:60px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+  .ph-hdr h2{font-size:1.4rem;color:var(--gold-lt);letter-spacing:4px;font-weight:300;display:flex;align-items:center;gap:12px}
+  .ph-hdr .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold-glow)}
+  .ph-hdr .sub{color:var(--text-dim);font-size:.76rem;margin-top:4px;letter-spacing:3px;padding-left:21px}
+
+  /* ── 通用内容区 ── */
+  .sec{margin:30px 0}
+  .sec h3{color:var(--gold);font-size:1.08rem;font-weight:400;letter-spacing:2px;margin:24px 0 12px;padding:0 0 0 14px;border-left:2px solid var(--gold)}
+  .sec h4{color:var(--gold-lt);font-size:.92rem;margin:18px 0 8px;font-weight:400}
+  .sec p{color:var(--text-alt);font-size:.86rem;margin:8px 0;line-height:2}
+  .sec p strong,.sec li strong{color:#e8d8b0;font-weight:500}
+  .sec ul,.sec ol{padding-left:22px;margin:8px 0}
+  .sec li{color:var(--text-alt);font-size:.84rem;margin:5px 0;line-height:1.9}
+
+  /* ── 信息块 ── */
+  .em{background:var(--card);border:1px solid rgba(212,176,106,.08);border-radius:var(--radius);padding:16px 20px;margin:14px 0;font-size:.84rem;color:var(--text-alt);line-height:1.9}
+  .em strong{color:var(--gold-lt)}
+  .q{background:var(--gold-bg);border-left:3px solid var(--gold);padding:13px 18px;border-radius:0 var(--radius) var(--radius) 0;margin:14px 0;font-size:.84rem;color:var(--text-alt);line-height:1.9}
+  .w{background:rgba(224,85,74,.03);border-left:3px solid var(--red);padding:13px 18px;border-radius:0 var(--radius) var(--radius) 0;margin:14px 0;font-size:.84rem}
+  .w strong{color:var(--red)}
+  .t{background:rgba(78,168,104,.03);border-left:3px solid var(--green);padding:13px 18px;border-radius:0 var(--radius) var(--radius) 0;margin:14px 0;font-size:.84rem}
+  .t strong{color:var(--green)}
+  .sum{background:linear-gradient(135deg,var(--gold-bg),rgba(212,176,106,.01));border:1px dashed rgba(212,176,106,.18);border-radius:var(--radius);padding:18px 22px;margin:22px 0;font-size:.84rem;line-height:1.95}
+  .sum strong{color:var(--gold-lt)}
+
+  /* ── 口诀卡片 ── */
+  .mnemonic{
+    background:linear-gradient(135deg,rgba(212,176,106,.08),rgba(212,176,106,.02));
+    border:1px solid rgba(212,176,106,.2);border-radius:var(--radius-lg);
+    padding:22px 26px;margin:20px 0;position:relative;overflow:hidden;
+    transition:all .3s;
+  }
+  .mnemonic::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+    background:linear-gradient(180deg,var(--gold),var(--gold-dk));border-radius:4px 0 0 4px}
+  .mnemonic:hover{border-color:var(--gold);box-shadow:0 6px 24px rgba(0,0,0,.35)}
+  .mnemonic .m-title{color:var(--gold);font-size:.88rem;font-weight:600;letter-spacing:3px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .mnemonic .m-type{display:inline-block;font-size:.62rem;padding:2px 10px;border-radius:8px;
+    background:var(--gold-bg);color:var(--gold);letter-spacing:.1em;font-weight:400}
+  .mnemonic .m-content{color:var(--gold-lt);font-size:.95rem;line-height:2.2;letter-spacing:.05em;
+    text-align:center;font-family:"KaiTi","STKaiti","Noto Serif SC",serif;font-weight:600;
+    text-shadow:0 0 20px rgba(212,176,106,.1)}
+  .mnemonic .m-explain{color:var(--text-dim);font-size:.76rem;margin-top:10px;line-height:1.85}
+  .mnemonic .m-explain strong{color:var(--text-alt)}
+
+  /* ── 三派对比卡片 ── */
+  .school-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:18px 0}
+  .school-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 18px;text-align:center;transition:all .35s;position:relative;overflow:hidden}
+  .school-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;transition:opacity .3s}
+  .school-card:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  .school-card .s-icon{font-size:2rem;margin-bottom:8px;display:block}
+  .school-card .s-name{font-size:1rem;font-weight:600;color:var(--gold-lt);letter-spacing:2px;margin-bottom:4px}
+  .school-card .s-sub{font-size:.68rem;color:var(--text-dim);letter-spacing:1px;margin-bottom:10px}
+  .school-card .s-desc{font-size:.78rem;color:var(--text-alt);line-height:1.8}
+  .school-card .s-tag{display:inline-block;margin-top:10px;font-size:.64rem;padding:3px 10px;border-radius:10px;letter-spacing:.05em}
+  .school-card.sanhe::before{background:linear-gradient(90deg,transparent,#5098c8,transparent)}
+  .school-card.sanhe .s-tag{background:var(--blue-bg);color:var(--blue)}
+  .school-card.feixing::before{background:linear-gradient(90deg,transparent,#e0554a,transparent)}
+  .school-card.feixing .s-tag{background:var(--red-bg);color:var(--red)}
+  .school-card.zihua::before{background:linear-gradient(90deg,transparent,#9b7ec4,transparent)}
+  .school-card.zihua .s-tag{background:rgba(155,126,196,.1);color:var(--purple)}
+
+  /* ── 表格 ── */
+  table{width:100%;border-collapse:collapse;font-size:.82em;margin:14px 0}
+  th{background:var(--gold-bg);color:var(--gold);padding:10px 14px;text-align:left;border-bottom:1px solid rgba(212,176,106,.15);font-weight:400;letter-spacing:1px;white-space:nowrap}
+  th:first-child{border-radius:var(--radius) 0 0 0}th:last-child{border-radius:0 var(--radius) 0 0}
+  td{padding:9px 14px;border-bottom:1px solid var(--border);vertical-align:top;font-size:.82rem}
+  tr:hover td{background:rgba(255,255,255,.01)}
+  td:first-child{color:#e0d8c0;font-weight:500;white-space:nowrap}
+
+  /* ── 网格 ── */
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:12px 0}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:12px 0}
+
+  /* ── 引用 ── */
+  blockquote{background:var(--card-alt);border-left:3px solid var(--gold);padding:14px 20px;
+    border-radius:0 var(--radius) var(--radius) 0;color:var(--text-alt);font-style:italic;font-size:.84rem;margin:16px 0;line-height:1.9}
+  blockquote .src{display:block;text-align:right;color:var(--text-dim);font-size:.74rem;margin-top:6px;font-style:normal}
+
+  /* ── 路线图 ── */
+  .roadmap{position:relative;padding:0 0 0 36px;margin:20px 0}
+  .roadmap::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold),rgba(212,176,106,.1))}
+  .road-item{position:relative;margin-bottom:28px}
+  .road-item::before{content:'';position:absolute;left:-26px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--card);border:2px solid var(--gold);box-shadow:0 0 8px var(--gold-glow);transition:all .3s}
+  .road-item.done::before{background:var(--gold);box-shadow:0 0 16px var(--gold-glow)}
+  .road-item .r-label{color:var(--text-dim);font-size:.68rem;letter-spacing:2px;margin-bottom:2px}
+  .road-item .r-title{color:var(--gold-lt);font-size:.95rem;font-weight:500;letter-spacing:1px}
+  .road-item .r-desc{color:var(--text-alt);font-size:.8rem;line-height:1.8;margin-top:4px}
+  .road-item .r-metric{display:inline-block;margin-top:6px;font-size:.72rem;padding:3px 10px;border-radius:10px;background:var(--gold-bg);color:var(--gold);letter-spacing:.05em}
+
+  /* ── 误区卡片 ── */
+  .myth-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:16px 0}
+  .myth-card{background:linear-gradient(155deg,var(--card),rgba(21,19,38,.95));border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;transition:all .3s}
+  .myth-card:hover{border-color:rgba(224,85,74,.2)}
+  .myth-card .my-num{font-size:.66rem;color:var(--red);letter-spacing:2px;margin-bottom:4px}
+  .myth-card .my-wrong{color:#f0706a;font-size:.82rem;font-weight:500;margin-bottom:4px;text-decoration:line-through;text-decoration-color:rgba(224,85,74,.3)}
+  .myth-card .my-right{color:var(--green);font-size:.78rem;line-height:1.7;margin-top:6px;padding-left:12px;border-left:2px solid rgba(78,168,104,.3)}
+
+  /* ── 书单 ── */
+  .book-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:16px 0}
+  .book-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;transition:all .3s;display:flex;gap:14px;align-items:flex-start}
+  .book-item:hover{border-color:var(--gold);transform:translateY(-2px)}
+  .book-item .b-rank{flex-shrink:0;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;color:var(--gold);background:var(--gold-bg);border:1px solid rgba(212,176,106,.2)}
+  .book-item .b-info h4{font-size:.88rem;color:var(--gold-lt);margin:0 0 4px;font-weight:400}
+  .book-item .b-info .b-author{font-size:.72rem;color:var(--text-dim);margin-bottom:4px}
+  .book-item .b-info .b-desc{font-size:.76rem;color:var(--text-alt);line-height:1.7}
+  .book-item .b-info .b-tag{display:inline-block;margin-top:4px;font-size:.62rem;padding:2px 8px;border-radius:8px;letter-spacing:.04em}
+  .b-tag.must{background:rgba(224,85,74,.08);color:var(--red)}
+  .b-tag.rec{background:var(--gold-bg);color:var(--gold)}
+  .b-tag.ref{background:var(--blue-bg);color:var(--blue)}
+
+  /* ── 三体系贯通 ── */
+  .sys-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:18px 0}
+  .sys-card{background:linear-gradient(160deg,var(--card),rgba(15,13,28,.98));border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 18px;text-align:center;transition:all .35s;position:relative;overflow:hidden}
+  .sys-card::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.2;transition:opacity .3s}
+  .sys-card:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  .sys-card:hover::after{opacity:.6}
+  .sys-card .sys-icon{font-size:2.4rem;margin-bottom:10px;display:block}
+  .sys-card .sys-name{font-size:1rem;font-weight:600;color:var(--gold-lt);letter-spacing:2px;margin-bottom:6px}
+  .sys-card .sys-domain{font-size:.68rem;color:var(--text-dim);letter-spacing:1px;margin-bottom:8px}
+  .sys-card .sys-point{font-size:.76rem;color:var(--text-alt);line-height:1.8}
+  .sys-card .sys-point strong{color:var(--gold-lt)}
+
+  /* ── 融合矩阵 ── */
+  .fusion-table{margin:20px 0;overflow-x:auto}
+  .fusion-table table{min-width:700px}
+  .fusion-table td.key-col{color:var(--gold);font-weight:600}
+  .fusion-table td .学派{display:inline-block;font-size:.62rem;padding:1px 6px;border-radius:4px;margin:0 2px}
+
+  /* ── 页脚 ── */
+  footer{text-align:center;padding:48px 20px;color:var(--text-dim);font-size:.74rem;letter-spacing:3px;border-top:1px solid var(--border);margin-top:56px}
+  footer .quote{font-style:italic;color:var(--gold-lt);font-size:.82rem;margin-bottom:10px;letter-spacing:1px}
+
+  /* ── 响应式 ── */
+  @media(max-width:860px){
+    .school-grid,.sys-grid{grid-template-columns:1fr}
+    .g2,.g3{grid-template-columns:1fr}
+    .topnav{padding:8px 12px;gap:8px}.topnav-links{margin-left:0}
+  }
+  @media(max-width:640px){
+    .hero h1{font-size:1.5em;letter-spacing:3px}
+    .hero p{font-size:.76rem;letter-spacing:1px}
+    .container{padding:0 14px}
+    .ph-hdr h2{font-size:1.15rem}
+    .mnemonic .m-content{font-size:.82rem}
+    table{font-size:.72em}td,th{padding:6px 8px}
+    .roadmap{padding-left:28px}
+    .road-item::before{left:-22px;width:12px;height:12px}
+  }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <a href="../index.html" class="topnav-back">← 玄门</a>
+  <span class="topnav-title">紫微斗数 · 深潜精通</span>
+  <div class="topnav-links">
+    <a href="index.html">总览</a>
+    <a href="01-星曜.html">星曜</a>
+    <a href="02-宫位.html">宫位</a>
+    <a href="03-四化.html">四化</a>
+    <a href="04-格局.html">格局</a>
+    <a href="05-断命.html">断命</a>
+    <a href="06-深潜.html" class="hot">深潜</a>
+    <a href="题库.html">题库</a>
+  </div>
+</header>
+
+<div class="page-progress" id="pageProgress"></div>
+<button id="backTop">↑</button>
+
+<div class="hero">
+  <h1>深 潜 精 通</h1>
+  <p>三派融合 · ATP心法 · 精通之道 · 三体系贯通</p>
+  <div class="line"></div>
+  <div class="badge-row">
+    <span class="tag tag-red">高阶</span>
+    <span class="tag tag-gold">融会贯通</span>
+    <span class="tag tag-blue">100→300盘</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 第一部分：三大流派融合详解 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<div class="ph-hdr"><h2><span class="dot"></span>三大流派融合</h2><p class="sub">三合定调 · 飞星抓时机 · 自化看心态 —— 三位一体，方见全貌</p></div>
+
+<div class="sec">
+  <blockquote>三合派看"命格高低"，飞星派看"何时发生"，自化派看"心态如何"。<strong>三派合一，如天、地、人三才并立，缺一则偏。</strong><span class="src">—— 斗数进阶心要</span></blockquote>
+
+  <!-- 三派概览卡片 -->
+  <div class="school-grid">
+    <div class="school-card sanhe">
+      <span class="s-icon">🏔️</span>
+      <div class="s-name">三合派</div>
+      <div class="s-sub">南派 · 星情格局</div>
+      <div class="s-desc">以<strong>星曜性情</strong>为本，<strong>三方四正</strong>为纲，<strong>格局</strong>定高低。看命格品质、性格底色、人生大势。静态分析，体系最完整。</div>
+      <span class="s-tag">定 调</span>
+    </div>
+    <div class="school-card feixing">
+      <span class="s-icon">⚡</span>
+      <div class="s-name">飞星派</div>
+      <div class="s-sub">北派 · 四化飞宫</div>
+      <div class="s-desc">以<strong>四化飞星</strong>为用，<strong>宫位叠化</strong>为技，<strong>三代四化</strong>串时间线。看事件发生的时空节点，精准到年月。</div>
+      <span class="s-tag">抓时机</span>
+    </div>
+    <div class="school-card zihua">
+      <span class="s-icon">🪞</span>
+      <div class="s-name">自化派</div>
+      <div class="s-sub">钦天 · 来因宫</div>
+      <div class="s-desc">以<strong>宫干自化</strong>为核心，<strong>来因宫</strong>定生命主题。看内心世界的波动——缘起缘灭、心态变化、选择与转折。</div>
+      <span class="s-tag">看心态</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── 三合派详解 ── -->
+<div class="sec">
+  <h3>一、三合派 —— 定调：命格高低与人生大势</h3>
+  <p>三合派是紫微斗数的<strong>根基</strong>。它以星曜的情感特性和三方四正的空间关系为核心，回答"<strong>这是一个什么样的人，有着怎样的命格</strong>"。</p>
+
+  <h4>核心工具链</h4>
+  <div class="g3">
+    <div class="em"><strong>① 星情体系</strong><br>十四主星各有性情：紫微=帝王气、天府=库藏德、天机=智谋变、武曲=刚毅财……每颗星入不同宫位，呈现不同的"人生剧本"。<br><br><strong>核心法则：</strong>庙旺利陷定强弱，星曜组合定吉凶。</div>
+    <div class="em"><strong>② 三方四正</strong><br>以任一宫位为原点，看<strong>对宫</strong>(冲照)、<strong>三合宫</strong>(拱照)的星曜配置。三方星曜汇聚=吉象集中；三方空劫煞聚=凶象聚集。<br><br><strong>核心法则：</strong>三方吉多则事成，四正煞重则事败。</div>
+    <div class="em"><strong>③ 格局体系</strong><br>星曜特殊组合形成的"命格模板"。三奇佳会(科权禄在三方)=大贵格；紫府同宫=君臣庆会格；火贪铃贪=暴发格……<br><br><strong>核心法则：</strong>成格者格局高，破格者一生多舛。</div>
+  </div>
+
+  <h4>三合派的优势与边界</h4>
+  <div class="g2">
+    <div class="t"><strong>✓ 优势：</strong>体系完整、论断全面、适合整体命格分析。初学者入门最佳选择。断性格、断事业方向、断婚姻质量——三合派最为稳妥。</div>
+    <div class="w"><strong>⚠ 边界：</strong>偏静态分析，难以精确锁定事件发生的时间窗口。同样命格的人为何命运不同？三合派难以回答——需要飞星派来补充。</div>
+  </div>
+</div>
+
+<!-- ── 飞星派详解 ── -->
+<div class="sec">
+  <h3>二、飞星派 —— 抓时机：事件发生的时空节点</h3>
+  <p>飞星派把紫微斗数从"静态写真"变成了<strong>"动态电影"</strong>。它以宫干飞出四化(禄权科忌)来追踪事件的起因、过程、结果，回答"<strong>什么时候会发生什么事</strong>"。</p>
+
+  <h4>核心心法</h4>
+  <div class="g2">
+    <div class="em">
+      <strong>🔑 一·宫干飞化</strong><br>
+      每个宫位都有天干，宫干飞出四化到其他宫，形成"因果链"。<br><br>
+      <strong>禄=缘起(开始)</strong>——两人为何相遇？化禄入何宫即缘起何处。<br>
+      <strong>权=过程(掌控)</strong>——事情如何发展？化权示强势/掌控。<br>
+      <strong>科=调和(情分)</strong>——有无情分在？化科示温和/情面。<br>
+      <strong>忌=终结(执着/困扰)</strong>——结局如何？化忌示卡点/结束。
+    </div>
+    <div class="em">
+      <strong>🔑 二·三代四化叠合</strong><br>
+      天干分三层：<strong>生年干</strong>(定数/大格局)、<strong>大限干</strong>(十年运程)、<strong>流年干</strong>(当年应事)。三干四化重叠的宫位——就是<strong>事件引爆点</strong>！<br><br>
+      生年禄+大限禄+流年禄同入一宫 → <strong>三重吉应，大事必成</strong><br>
+      生年忌+大限忌+流年忌同入一宫 → <strong>三重忌冲，大祸临头</strong>
+    </div>
+  </div>
+
+  <h4>飞星派实战十法</h4>
+  <table>
+    <thead><tr><th style="width:30px">#</th><th>技法名称</th><th>操作</th><th>应用场景</th></tr></thead>
+    <tr><td>1</td><td>一五九法</td><td>A宫干化忌入B宫，取B宫之1(本宫)、5(财帛)、9(官禄)三方断事</td><td>快速锁定事件性质</td></tr>
+    <tr><td>2</td><td>忌转忌追蹤</td><td>A化忌入B → B宫干再化忌入C → 追踪忌的落点链条</td><td>追查因果链条</td></tr>
+    <tr><td>3</td><td>禄随忌走</td><td>先看忌落何处，再追化禄是否同宫或对宫——禄忌交会处即关键</td><td>找"福祸交织"点</td></tr>
+    <tr><td>4</td><td>同类宫互飞</td><td>夫妻宫干飞化入交友宫 (同类阴阳宫互参)</td><td>六亲/人际论断</td></tr>
+    <tr><td>5</td><td>三合宫飞化</td><td>命宫干飞化入财帛/官禄 (三合方互查)</td><td>事业财运联动</td></tr>
+    <tr><td>6</td><td>冲照法</td><td>A宫化忌入B → 冲B之对宫C → C为最终受害者</td><td>间接影响的判定</td></tr>
+    <tr><td>7</td><td>叠宫引爆</td><td>本命+大限+流年三盘叠合，同宫位星曜四化共振</td><td>精确锁定应期</td></tr>
+    <tr><td>8</td><td>来因回推</td><td>从化忌落宫反推来因宫(生年干所在宫)</td><td>找事件的根源</td></tr>
+    <tr><td>9</td><td>天地人三盘</td><td>天盘(本命)+地盘(大限)+人盘(流年)三层同参</td><td>全面时间维度</td></tr>
+    <tr><td>10</td><td>七星定点</td><td>以禄权科忌+生年·大限·流年七星交汇定关键宫位</td><td>复杂事件的综合判断</td></tr>
+  </table>
+
+  <div class="t"><strong>飞星派的精髓：</strong>不是看"宫里有什麼星"，而是看"宫与宫之间如何流动"。一盘命盘就是一张能量流动图——四化是箭头，宫位是节点。</div>
+</div>
+
+<!-- ── 自化派详解 ── -->
+<div class="sec">
+  <h3>三、自化派 —— 看心态：内心的缘起缘灭</h3>
+  <p>自化派(钦天门)是紫微斗数中最<strong>细腻</strong>的流派。如果说三合派画了人生轮廓、飞星派标了事件节点，那么自化派绘制的是<strong>内心的气象图</strong>——为何同样事件，不同人有截然不同的感受和选择。</p>
+
+  <h4>自化的本质</h4>
+  <div class="em">
+    <strong>"自化"</strong> = 宫干在自己宫内飞出四化到其他宫。不同于"他宫来化"(被动接收)，自化是<strong>本宫主动出击</strong>——反映命主自身的<strong>主观意愿、心理活动、选择倾向</strong>。<br><br>
+    <strong>核心公式：自化禄 = "我想要"</strong> | <strong>自化权 = "我要掌控"</strong> | <strong>自化科 = "我在意情面"</strong> | <strong>自化忌 = "我执着/放不下"</strong>
+  </div>
+
+  <h4>来因宫 —— 生命的主题词</h4>
+  <div class="q">
+    <strong>来因宫</strong> = 生年天干所在的宫位。这是一个人<strong>此生最重要的生命课题</strong>。<br><br>
+    来因宫在命宫 → 一生主题是"自我实现"<br>
+    来因宫在夫妻 → 一生主题是"情感关系"<br>
+    来因宫在财帛 → 一生主题是"财富积累"<br>
+    来因宫在官禄 → 一生主题是"事业成就"<br>
+    来因宫在福德 → 一生主题是"精神修行"<br>
+    ……
+  </div>
+
+  <h4>自化实战三要</h4>
+  <div class="g3">
+    <div class="em"><strong>① 自化禄出</strong><br>化禄入他宫=我主动付出给那个领域。<br><em>例：</em>夫妻宫自化禄入子女宫→命主主动为子女/感情付出，享受其中。<br><strong>心法：</strong>"乐在其中，心甘情愿"。</div>
+    <div class="em"><strong>② 自化忌出</strong><br>化忌入他宫=我执著于那个领域，放不下。<br><em>例：</em>官禄宫自化忌入财帛→为赚钱执著于工作，压力巨大。<br><strong>心法：</strong>"心有千千结，解铃还须系铃人"。</div>
+    <div class="em"><strong>③ 自化冲照</strong><br>自化入某宫的同时冲其對宫=表面一套，内心一套。<br><em>例：</em>命宫自化禄入迁移(冲命)=外表开朗善交际，内心实则孤独。<br><strong>心法：</strong>"笑给别人看，哭给自己听"。</div>
+  </div>
+</div>
+
+<!-- ── 三派融合实战 ── -->
+<div class="sec">
+  <h3>四、三派融合 —— 三位一体的实战框架</h3>
+  <p>真正的精通，不是只懂一派，而是能根据问题<strong>灵活切换视角</strong>，甚至在一个命盘中同时用三派交叉验证。</p>
+
+  <div class="fusion-table">
+    <table>
+      <thead><tr><th>论断场景</th><th>第一步：三合定调</th><th>第二步：飞星抓机</th><th>第三步：自化看心</th></tr></thead>
+      <tr>
+        <td class="key-col">婚姻</td>
+        <td>看夫妻宫星曜+三方 → 配偶类型、婚姻品质</td>
+        <td>夫妻宫干飞化 → 婚期、争吵原因、第三者信号</td>
+        <td>夫妻宫自化 → 命主对婚姻的真实心态</td>
+      </tr>
+      <tr>
+        <td class="key-col">事业</td>
+        <td>看官禄宫星曜+命宫迁移 → 适合行业、成就上限</td>
+        <td>官禄宫干飞化+三代叠化 → 升迁年份、跳槽时机</td>
+        <td>官禄宫自化 → 对工作的真实热情 vs 厌倦</td>
+      </tr>
+      <tr>
+        <td class="key-col">财运</td>
+        <td>看财帛+田宅+福德三宫星曜 → 财运类型、守财能力</td>
+        <td>财帛宫干飞化+禄存/化禄追踪 → 暴富年份、破财预警</td>
+        <td>财帛宫自化 → 消费观、对金钱的欲望/恐惧</td>
+      </tr>
+      <tr>
+        <td class="key-col">健康</td>
+        <td>看疾厄宫星曜 → 先天体质、易患疾病类型</td>
+        <td>疾厄宫干飞化+忌入位置 → 发病年份、病因指向</td>
+        <td>疾厄宫自化 → 对健康的态度(重视/忽视)</td>
+      </tr>
+      <tr>
+        <td class="key-col">迁移</td>
+        <td>看迁移宫星曜 → 外出运、远方机遇</td>
+        <td>迁移宫干飞化+流年叠合 → 出行/移民时机</td>
+        <td>迁移宫自化 → 是真的想走还是被迫离开</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="sum">
+    <strong>三派融合口诀：</strong><br>
+    三合看<strong>命</strong>定高低，飞星看<strong>运</strong>抓时机，自化看<strong>心</strong>知冷暖。<br>
+    三合断<strong>事</strong>之有无，飞星断<strong>时</strong>之早晚，自化断<strong>人</strong>之取舍。<br>
+    <strong>三灯齐照，方无阴影。</strong>
+  </div>
+
+  <h3>五、流派之争 —— 三个核心分歧</h3>
+  <p>斗数并非铁板一块，内部有<strong>三个争论多年的核心分歧</strong>。理解它们，能帮你辨别各家说法背后的立场，避免"听一家之言"。</p>
+
+  <div class="fusion-table">
+    <table>
+      <thead><tr><th>争议焦点</th><th>一方主张</th><th>另一方主张</th></tr></thead>
+      <tr>
+        <td class="key-col">断命核心是"星曜"还是"四化"？</td>
+        <td>三合派：主看星曜庙旺、格局</td>
+        <td>四化派：飞星四化才是核心</td>
+      </tr>
+      <tr>
+        <td class="key-col">斗数起源多早？</td>
+        <td>传统叙事：陈抟所创千年</td>
+        <td>考据派：《全书》实为明代作品</td>
+      </tr>
+      <tr>
+        <td class="key-col">共盘（同命盘者命运不同）怎么解？</td>
+        <td>技术修正派：加父母生肖/三时断</td>
+        <td>兼容派：配合八字等其他术数</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="sum">
+    <strong>附 · 本机资料共识：</strong><br>
+    紫微斗数预测法有<strong>三合、奇门、河洛</strong>之分，已是斗数名家共识。
+    研究斗数从命理入手进展慢，<strong>ATP 斗数速断</strong>（应用中学习、理法并重）来得更快。
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 第二部分：ATP速断心法进阶 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<div class="ph-hdr"><h2><span class="dot"></span>ATP速断心法 · 进阶</h2><p class="sub">斗数玄关一窍 —— 日干化忌定来意 · 宫干飞化追细节</p></div>
+
+<div class="sec">
+  <blockquote>ATP速断的核心，不是死记硬背，而是<strong>训练一种"直觉"——看到盘，自动跳出关键信号</strong>。这需要大量案例的积累和刻意练习。<span class="src">—— 《ATP斗数速断》</span></blockquote>
+
+  <h3>一、ATP速断的底层逻辑</h3>
+  <p>ATP速断之所以能"用自己的命盘预测任何人的事"，其底层逻辑在于<strong>时空全息原理</strong>：任何一个时空点都包含了全宇宙的信息。你起心动念的那一刻，时空盘中就已经编码了答案。</p>
+
+  <div class="g2">
+    <div class="em">
+      <strong>🔑 核心一：日干化忌 = 来意探测器</strong><br><br>
+      <strong>原理：</strong>日干代表"当天"的能量主旋律。日干化忌落入何宫——就是当天最突出的<strong>问题/困扰/执著</strong>所在。<br><br>
+      <strong>准确率依据：</strong>大量实战统计，日干化忌断来意准确率可达<strong>85%~90%</strong>。它不是玄学，是统计学。<br><br>
+      <strong>用法：</strong>来人求测 → 排出流时盘 → 看日干化忌落宫 → 结合该宫含义断言来意 → 再用宫干飞化追踪细节。
+    </div>
+    <div class="em">
+      <strong>🔑 核心二：能量传导链</strong><br><br>
+      日干化忌(来意) → 该宫宫干再飞化 → 落宫再飞化 → 形成<strong>忌-忌-忌</strong>传导链。<br><br>
+      传导链的<strong>终点宫位</strong> = 问题的最终落脚点/结果。<br>
+      传导链经过的<strong>宫位</strong> = 问题的关联因素。<br><br>
+      <strong>实战意义：</strong>不是孤立地看一个宫，而是追踪能量的完整流动路径。如同中医的"经络"——不通则痛，找到堵塞点。
+    </div>
+  </div>
+
+  <h3>二、ATP速断五步精要</h3>
+  <div class="roadmap">
+    <div class="road-item done">
+      <div class="r-label">STEP 1</div>
+      <div class="r-title">进入功态 —— 清静无为</div>
+      <div class="r-desc">放下杂念，心诚则灵。不预设答案，不主观臆断。<strong>"虚室生白"</strong>——清空内心，真相自现。这是所有预测术的共同前提。</div>
+    </div>
+    <div class="road-item done">
+      <div class="r-label">STEP 2</div>
+      <div class="r-title">起数成象 —— 流时分定</div>
+      <div class="r-desc">用<strong>当前年月日时</strong>起流时盘（不需对方生辰）。太岁入卦 + 斗君流月 + 流日流时。一个时辰可细分为30等分，足够定位不同的人和事。</div>
+    </div>
+    <div class="road-item">
+      <div class="r-label">STEP 3</div>
+      <div class="r-title">判断解码 —— 星+化+宫三维</div>
+      <div class="r-desc"><strong>星情看大局</strong>(三合)→ <strong>四化追来龙去脉</strong>(飞星)→ <strong>宫位定领域</strong>(三方四正)。三维交叉验证，信息一致则大胆断言。</div>
+    </div>
+    <div class="road-item">
+      <div class="r-label">STEP 4</div>
+      <div class="r-title">解说传达 —— 条理分明</div>
+      <div class="r-desc">先讲大势(三合定调) → 再讲时机(飞星应期) → 后讲心态(自化解读)。<strong>先说好的，再说需要留意的</strong>——给人希望，也给人警醒。</div>
+    </div>
+    <div class="road-item">
+      <div class="r-label">STEP 5</div>
+      <div class="r-title">应验反馈 —— 实践检验</div>
+      <div class="r-desc">每一次预测后<strong>必须记录反馈</strong>。对在哪？错在哪？为什么错？建立个人案例库，统计应验率。实践是检验真理的唯一标准。</div>
+    </div>
+  </div>
+
+  <h3>三、ATP三大辅助法精讲</h3>
+  <div class="g3">
+    <div class="q">
+      <strong>⏱ 时间起数法</strong><br><br>
+      用预测当下的时间直接起盘，不需生辰。<br><br>
+      <strong>进阶：</strong>一个时辰(2小时)内可细分多盘——不同的人在不同时刻来问，用不同的流分(5分钟/10分钟)起盘区分。<br><br>
+      <strong>心法：</strong>"其大无外，其小无内"——任一时间切片都包含全息信息。
+    </div>
+    <div class="q">
+      <strong>🌿 奇门外应法</strong><br><br>
+      "不动不占，不问不占"——<br>观察环境中的<strong>异常现象</strong>作外应。<br><br>
+      风吹门动→变动之象<br>
+      电话铃响→消息将至<br>
+      小孩哭闹→口舌是非<br><br>
+      <strong>心法：</strong>"灵机一动"即潜意识信息转为显意识信号。
+    </div>
+    <div class="q">
+      <strong>🌸 梅花易数法</strong><br><br>
+      万物类象 + 斗数星情 <strong>互参互证</strong>。<br><br>
+      贪狼=巽卦(风/入/长女)<br>
+      武曲=乾卦(金/刚/权威)<br>
+      天同=兑卦(泽/悦/少女)<br><br>
+      <strong>心法：</strong>分类训练——集中攻克一个领域(如感情)，通了再触类旁通到其他领域。
+    </div>
+  </div>
+
+  <!-- ATP速断口诀 -->
+  <div class="mnemonic">
+    <div class="m-title">⚡ ATP速断总诀 <span class="m-type">心法口诀</span></div>
+    <div class="m-content">
+      日干化忌定来意，宫干再飞追踪迹。<br>
+      星情大局三合判，四化时机飞星觅。<br>
+      自化方知心腹事，三盘叠合断应期。<br>
+      莫执一法废万法，活用灵变是真谛。
+    </div>
+    <div class="m-explain">
+      <strong>逐句解读：</strong>第1句=ATP核心(日干化忌)；第2句=追踪法(宫干再飞)；第3句=三合派的作用(星情大局)；第4句=飞星派的作用(四化时机)；第5句=自化派的作用(内心世界)；第6句=三盘叠合锁定应期；第7-8句=总纲——<strong>不要死执一种方法，灵活运用才是真正的灵魂。</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 第三部分："活用灵变 方为灵魂" 专栏 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<div class="ph-hdr"><h2><span class="dot"></span>活用灵变 方为灵魂</h2><p class="sub">从技法到心法 · 从会断到断妙</p></div>
+
+<div class="sec">
+
+  <blockquote>任何易学预测术的灵魂都在于<strong>活用和灵变</strong>；任何易学书刊提供的学术也只能是基础知识，高深的预测术还是要靠自己<strong>融会贯通</strong>，不断实践总结和提高的。<span class="src">——《紫微斗数全书》前言</span></blockquote>
+
+  <h3>一、技法 vs 心法 —— 那道看不见的门槛</h3>
+  <div class="g2">
+    <div>
+      <h4>📐 技法的层次</h4>
+      <p style="color:var(--text-alt);line-height:2;font-size:.84rem">
+        <strong>初级阶段：</strong>翻书查表——星在何宫主何事，口诀说什么就断什么。<br>
+        <strong>中级阶段：</strong>灵活组合——多个信号叠加，权重排序，抓主要矛盾。<br>
+        <strong>高级阶段：</strong>无招胜有招——看到盘，脑中自动浮现画面，不需逐条对照。
+      </p>
+    </div>
+    <div>
+      <h4>🕯 心法的层次</h4>
+      <p style="color:var(--text-alt);line-height:2;font-size:.84rem">
+        <strong>第一阶段·信：</strong>相信斗数体系，不被"这不科学"的质疑动摇。<br>
+        <strong>第二阶段·通：</strong>打通各派壁垒，看到三合+飞星+自化的内在统一。<br>
+        <strong>第三阶段·化：</strong>把斗数内化为一种<strong>思维方式</strong>——用宫位思考人生、用四化理解因果。
+      </p>
+    </div>
+  </div>
+
+  <h3>二、活用灵变的三条铁律</h3>
+  <div class="g3">
+    <div class="em">
+      <strong>铁律一：以问题为导向</strong><br><br>
+      不要拿着技法去找问题，而要<strong>根据问题选技法</strong>。<br><br>
+      问婚姻→先用三合看配偶类型，再用飞星看婚期；<br>
+      问财运→先用三合看财运层次，再用飞星找暴富年份；<br>
+      问纠纷→直接用飞星追踪忌的传导链。<br><br>
+      <strong>技法为问题服务，非问题迁就技法。</strong>
+    </div>
+    <div class="em">
+      <strong>铁律二：交叉验证</strong><br><br>
+      单一信号<strong>不做判断</strong>——至少两个以上独立信号指向同一结论时才下断言。<br><br>
+      三合+飞星同时指向破财 → 可断<br>
+      飞星+自化同时指向感情危机 → 可断<br>
+      仅一个信号孤立出现 → 暂保留，继续观察<br><br>
+      <strong>宁可多验证，不可妄下断语。</strong>
+    </div>
+    <div class="em">
+      <strong>铁律三：反馈闭环</strong><br><br>
+      每一次论断，<strong>必须事后核实</strong>。断对→记下成功模式；断错→找出错误根源。<br><br>
+      是星曜解读偏差？<br>
+      是四化追踪遗漏？<br>
+      是宫位定位不准？<br>
+      是时间应期计算错误？<br><br>
+      <strong>无反馈，无进步。</strong>
+    </div>
+  </div>
+
+  <h3>三、"断妙"的五个维度</h3>
+  <table>
+    <thead><tr><th style="width:50px">维度</th><th>断准(会断)</th><th>断妙(精通)</th></tr></thead>
+    <tr><td class="key-col">准度</td><td>事件性质判断正确</td><td>事件性质 + 时间窗口 + 程度深浅全部命中</td></tr>
+    <tr><td class="key-col">速度</td><td>翻书查表，5~10分钟出结论</td><td>一眼扫盘，30秒内抓关键信号</td></tr>
+    <tr><td class="key-col">深度</td><td>只回答"会怎样"</td><td>回答"为什么会这样"+"如何应对"+"何时转折"</td></tr>
+    <tr><td class="key-col">温度</td><td>机械式报告，照本宣科</td><td>因人而异，给对方力量而非恐惧，给人方向而非宿命</td></tr>
+    <tr><td class="key-col">广度</td><td>只会断某一领域(如感情)</td><td>事业/财运/婚姻/健康/六亲/流年全领域贯通</td></tr>
+  </table>
+
+  <div class="sum">
+    <strong>灵魂之问：</strong>你是在"算命"，还是在"读命"？<br>
+    <strong>算命</strong> = 机械地对照口诀，给出冷冰冰的结论。算命的尽头是宿命论。<br>
+    <strong>读命</strong> = 把命盘当作一本打开的书，读出其中的故事、情感、挣扎与希望。读命的尽头是<strong>对人性的深刻理解</strong>。<br><br>
+    <strong>"活用灵变，方为灵魂"——灵魂不在技法里，在你对生命本身的理解里。</strong>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 第四部分：精通路线图 (100→300盘) -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<div class="ph-hdr"><h2><span class="dot"></span>精通路线图 · 量化指标</h2><p class="sub">100盘入门 → 200盘断准 → 300盘形成风格</p></div>
+
+<div class="sec">
+
+  <blockquote>精通没有捷径，但有<strong>清晰的路径</strong>。100个命盘是一个分水岭——在此之前，你在学斗数；在此之后，斗数在你身上"活"了。<span class="src">—— 斗数教学心得</span></blockquote>
+
+  <h3>一、三阶段量化路线</h3>
+
+  <div class="roadmap">
+    <div class="road-item done">
+      <div class="r-label">第一阶段 · 0→100盘</div>
+      <div class="r-title">入门期 · "会断"</div>
+      <div class="r-desc">
+        <strong>目标：</strong>能独立完成一次完整的命盘论断，不翻书、不查表。<br>
+        <strong>核心任务：</strong><br>
+        · 背诵十四主星在12宫的基本含义（168个组合）<br>
+        · 记住十天干四化口诀（40组）<br>
+        · 掌握十二宫的基本含义和六条主线<br>
+        · 理解三方四正的空间关系<br>
+        · 每断一盘必须写<strong>书面分析</strong>，事后追踪反馈
+      </div>
+      <div class="r-metric">应验率目标：≥50% | 单盘耗时：15~30分钟</div>
+    </div>
+
+    <div class="road-item">
+      <div class="r-label">第二阶段 · 100→200盘</div>
+      <div class="r-title">精进期 · "断准"</div>
+      <div class="r-desc">
+        <strong>目标：</strong>主要人生大事(婚姻/事业/财运)论断准确率达到70%以上。<br>
+        <strong>核心任务：</strong><br>
+        · 开始学习飞星四化追踪——训练"忌的传导链"直觉<br>
+        · 引入三代四化叠合——本命+大限+流年的三维透视<br>
+        · 建立个人<strong>案例库</strong>——分类存档(感情/事业/财运/健康)<br>
+        · 每次断错必须<strong>复盘</strong>——找到错因并记录<br>
+        · 开始接触自化派——理解"心"的维度
+      </div>
+      <div class="r-metric">应验率目标：≥70% | 单盘耗时：8~15分钟</div>
+    </div>
+
+    <div class="road-item">
+      <div class="r-label">第三阶段 · 200→300盘</div>
+      <div class="r-title">贯通期 · "断妙"</div>
+      <div class="r-desc">
+        <strong>目标：</strong>三派融会贯通，形成<strong>个人独特的论断风格</strong>。准确率80%以上。<br>
+        <strong>核心任务：</strong><br>
+        · 三派自由切换——根据问题类型选择最合适的切入角度<br>
+        · 建立<strong>专精领域</strong>——找到自己最擅长的领域(感情/事业/健康择一深耕)<br>
+        · 开始写<strong>个人心得笔记</strong>——记录自己发现的规律<br>
+        · 跨体系互参——将奇门、梅花、六爻的思路融入斗数<br>
+        · 带徒弟/写文章——输出倒逼输入
+      </div>
+      <div class="r-metric">应验率目标：≥80% | 单盘耗时：3~8分钟 | 专精领域：≥85%</div>
+    </div>
+
+    <div class="road-item">
+      <div class="r-label">300盘+</div>
+      <div class="r-title">大师之路 · "从心所欲"</div>
+      <div class="r-desc">
+        <strong>目标：</strong>看到命盘如同看到一个人的人生电影。不再需要"逐条对照"，直觉直断。<br>
+        <strong>标志特征：</strong>扫一眼盘 → 秒抓关键信号 → 30秒出框架结论 → 3分钟完成完整论断。<br>
+        <strong>持续精进：</strong>永远保持学习心态——每位来问者都是你的老师，每张盘都是新的探索。
+      </div>
+      <div class="r-metric">永无止境 · 终身修行</div>
+    </div>
+  </div>
+
+  <h3>二、量化自检表</h3>
+  <table>
+    <thead><tr><th>阶段</th><th>累计盘数</th><th>应验率</th><th>单盘速度</th><th>三派掌握</th><th>专精领域</th><th>带教能力</th></tr></thead>
+    <tr><td class="key-col">入门</td><td>0-100</td><td>≥50%</td><td>15-30min</td><td>三合为主</td><td>无</td><td>不能</td></tr>
+    <tr><td class="key-col">精进</td><td>100-200</td><td>≥70%</td><td>8-15min</td><td>三合+飞星</td><td>探索中</td><td>基础答疑</td></tr>
+    <tr><td class="key-col">贯通</td><td>200-300</td><td>≥80%</td><td>3-8min</td><td>三派融合</td><td>1-2个领域≥85%</td><td>可带初级</td></tr>
+    <tr><td class="key-col">大师</td><td>300+</td><td>≥85%</td><td>≤3min</td><td>出神入化</td><td>全能+独创</td><td>著书立说</td></tr>
+  </table>
+
+  <div class="q"><strong>重要提醒：</strong>数量只是指标之一，<strong>质量更重要</strong>。一盘深入分析+反馈复盘，胜过十盘走马观花。每断一盘都要有"这一盘我学到了什么"的总结。</div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 第五部分：常见误区 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<div class="ph-hdr"><h2><span class="dot"></span>常见误区 · 十诫</h2><p class="sub">避开这些坑，少走三年弯路</p></div>
+
+<div class="sec">
+
+  <div class="myth-grid">
+    <div class="myth-card">
+      <div class="my-num">误区 一</div>
+      <div class="my-wrong">只看命宫，不看三方四正</div>
+      <div class="my-right">命宫只是"我"，三方四正才是"我的世界"。官禄+财帛+迁移=一个人完整的生存状态。单宫论断如同盲人摸象。</div>
+    </div>
+    <div class="myth-card">
+      <div class="my-num">误区 二</div>
+      <div class="my-wrong">见煞星就断凶，见吉星就断好</div>
+      <div class="my-right">煞星在特定格局中反而是"成事之因"——火贪格没有火星怎成暴发？擎羊在官禄=执行力超强。星无绝对的吉凶，关键是<strong>组合与位置</strong>。</div>
+    </div>
+    <div class="myth-card">
+      <div class="my-num">误区 三</div>
+      <div class="my-wrong">死扣格局，忽视四化流动</div>
+      <div class="my-right">格局再好，四化忌入关键宫位照样破格。格局再差，四化禄权科连环相生也能逆袭。格局是<strong>框架</strong>，四化是<strong>动能</strong>，两者必须同看。</div>
+    </div>
+    <div class="myth-card">
+      <div class="my-num">误区 四</div>
+      <div class="my-wrong">化忌就是坏事</div>
+      <div class="my-right">化忌=<strong>执著/专注/放不下</strong>。化忌入官禄=极度专注事业(未必不好)，化忌入夫妻=太在乎感情(深情)。忌的吉凶取决于<strong>程度和对象</strong>。</div>
+    </div>
+    <div class="myth-card">
+      <div class="my-num">误区 五</div>
+      <div class="my-wrong">一个信号就下断言</div>
+      <div class="my-right">单信号断事=赌概率。至少需要<strong>两条以上独立信号</strong>都指向同一结论，才能下断语。宁可说"信息不足暂不下结论"，也不要瞎猜。</div>
+    </div>
+    <div class="myth-card">
+      <div class="my-num">误区 六</div>
+      <div class="my-wrong">三派对立，非此即彼</div>
+      <div class="my-right">三合/飞星/自化不是互斥的，是<strong>互补</strong>的。如同相机——三合是广角镜(全景)，飞星是长焦镜(特写)，自化是滤镜(色调)。三镜齐用才是好照片。</div>
+    </div>
+    <div class="myth-card">
+      <div class="my-num">误区 七</div>
+      <div class="my-wrong">忽略来因宫，只看表面事件</div>
+      <div class="my-right">来因宫是<strong>生命的底层代码</strong>——它解释了为什么这个人一生都在重复某种模式。不断婚姻→来因宫可能在夫妻；不断破财→来因宫可能在财帛。治标不治本，断事不断根。</div>
+    </div>
+    <div class="myth-card">
+      <div class="my-num">误区 八</div>
+      <div class="my-wrong">断事不论心，冷冰冰给结论</div>
+      <div class="my-right">同一事件，不同人心态天差地别——这就是<strong>自化</strong>的领域。告诉对方"你今年会破财"是恐吓，告诉对方"你今年财运有波动，建议保守投资"是帮助。论断的温度决定你的高度。</div>
+    </div>
+    <div class="myth-card">
+      <div class="my-num">误区 九</div>
+      <div class="my-wrong">只学不练，永远在"准备中"</div>
+      <div class="my-right">斗数是<strong>实战型</strong>学问。看100本书不如断100张盘。每学一个新概念就立刻找3张盘验证——<strong>边学边练，学了就用</strong>。ATP的精髓就在于"拿来就用"。</div>
+    </div>
+    <div class="myth-card">
+      <div class="my-num">误区 十</div>
+      <div class="my-wrong">迷信大师，丧失独立思考</div>
+      <div class="my-right">师者是引路人，不是终审法官。每个论断习惯、每条经验法则都需要<strong>用自己的案例库去验证</strong>。大师说的=参考，自己验证过的=你的真知。从"信师"到"自信"——这是成熟的标志。</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 第六部分：进阶书单 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<div class="ph-hdr"><h2><span class="dot"></span>进阶书单 · 从入门到大师</h2><p class="sub">按学习阶段分级推荐</p></div>
+
+<div class="sec">
+
+  <h3>一、入门奠基（0→100盘阶段）</h3>
+  <div class="book-list">
+    <div class="book-item">
+      <div class="b-rank">01</div>
+      <div class="b-info">
+        <h4>《紫微斗数全书》</h4>
+        <div class="b-author">陈抟老祖 著 / 多版本</div>
+        <div class="b-desc">斗数源头经典。星曜性情、十二宫义、格局论述的根基所在。建议选择现代注释版，古文底子好可读影印本。</div>
+        <span class="b-tag must">必读</span>
+      </div>
+    </div>
+    <div class="book-item">
+      <div class="b-rank">02</div>
+      <div class="b-info">
+        <h4>《紫微斗数精成全集》</h4>
+        <div class="b-author">大德山人 编著</div>
+        <div class="b-desc">最适合自学的系统教材。从阴阳五行到排盘到断命，由浅入深，体系完整。上册打基础，下册学实战。</div>
+        <span class="b-tag must">必读</span>
+      </div>
+    </div>
+    <div class="book-item">
+      <div class="b-rank">03</div>
+      <div class="b-info">
+        <h4>《ATP斗数速断》</h4>
+        <div class="b-author">苏文涛 著</div>
+        <div class="b-desc">ATP速断体系的原始教材。"用自己的命盘断任何人的事"的革命性方法。48小时入门的神奇手册。</div>
+        <span class="b-tag must">必读</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>二、飞星精进（100→200盘阶段）</h3>
+  <div class="book-list">
+    <div class="book-item">
+      <div class="b-rank">04</div>
+      <div class="b-info">
+        <h4>《紫微斗数飞星四化》</h4>
+        <div class="b-author">翁福裕 著</div>
+        <div class="b-desc">飞星派的系统入门。宫干飞化、忌转忌追踪、天地人三盘叠合的完整方法论。案例丰富，适合进阶学习。</div>
+        <span class="b-tag rec">推荐</span>
+      </div>
+    </div>
+    <div class="book-item">
+      <div class="b-rank">05</div>
+      <div class="b-info">
+        <h4>《紫微斗数四化飞星心法》</h4>
+        <div class="b-author">楚皇 著</div>
+        <div class="b-desc">四化飞星的深度解析。侧重"心法"层面——不是简单地告诉你化禄入某宫会发生什么，而是教你理解能量流动的本质。</div>
+        <span class="b-tag rec">推荐</span>
+      </div>
+    </div>
+    <div class="book-item">
+      <div class="b-rank">06</div>
+      <div class="b-info">
+        <h4>《紫微斗数四化飞星实战》</h4>
+        <div class="b-author">炎一 著</div>
+        <div class="b-desc">大量真实案例+逐盘分析。从日干化忌定来意到宫干追踪细节的全流程演示。适合有一定基础后做案例训练。</div>
+        <span class="b-tag rec">推荐</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>三、自化深造（200→300盘阶段）</h3>
+  <div class="book-list">
+    <div class="book-item">
+      <div class="b-rank">07</div>
+      <div class="b-info">
+        <h4>《钦天四化紫微斗数》</h4>
+        <div class="b-author">钟义明 著</div>
+        <div class="b-desc">钦天门(自化派)的经典著作。来因宫、自化禄权科忌、宫位自化冲照——打开内心世界之门的钥匙。</div>
+        <span class="b-tag rec">推荐</span>
+      </div>
+    </div>
+    <div class="book-item">
+      <div class="b-rank">08</div>
+      <div class="b-info">
+        <h4>《紫微斗数自化心法》</h4>
+        <div class="b-author">许铨仁 著</div>
+        <div class="b-desc">自化派的深度解读。侧重"心"的层面——自化不是技术，而是理解人性的工具。来因宫论命的经典之作。</div>
+        <span class="b-tag rec">推荐</span>
+      </div>
+    </div>
+  </div>
+
+  <h3>四、参考拓展</h3>
+  <div class="book-list">
+    <div class="book-item">
+      <div class="b-rank">09</div>
+      <div class="b-info">
+        <h4>《紫微斗数流年运程》</h4>
+        <div class="b-author">多作者</div>
+        <div class="b-desc">专门针对大限、流年、流月、流日、流时的精细论断技法。适合有了基础框架后，做时间维度的深度学习。</div>
+        <span class="b-tag ref">参考</span>
+      </div>
+    </div>
+    <div class="book-item">
+      <div class="b-rank">10</div>
+      <div class="b-info">
+        <h4>《斗数骨髓赋》注解</h4>
+        <div class="b-author">古赋 / 多版本注解</div>
+        <div class="b-desc">斗数古文赋文的经典集。包括《骨髓赋》《形性赋》《太微赋》等。古文精炼，字字珠玑，反复研读每有新知。</div>
+        <span class="b-tag ref">参考</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="q">
+    <strong>读书心法：</strong>不要贪多嚼不烂。<strong>一本书读三遍，胜过三本书读一遍</strong>。<br>
+    第一遍：通读，建立框架 → 第二遍：带着问题读(断过几十张盘后) → 第三遍：融会贯通，发现之前忽略的细节。<br>
+    最好的阅读时机是——<strong>断盘中遇到困惑时回头查书</strong>，这时收获最大。
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 第七部分：三体系贯通视角 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<div class="ph-hdr"><h2><span class="dot"></span>三体系贯通视角</h2><p class="sub">奇门遁甲 · 紫微斗数 · 梅花易数 —— 天地人三才合一</p></div>
+
+<div class="sec">
+
+  <blockquote>奇门看<strong>天时地利</strong>，紫微看<strong>人和命数</strong>，梅花看<strong>象数机微</strong>。三学贯通，不是三门学问的简单叠加，而是一种<strong>全新的认知维度</strong>——从"算命"走向"明理"。<span class="src">——《玄门三式》</span></blockquote>
+
+  <!-- 三体系概览 -->
+  <div class="sys-grid">
+    <div class="sys-card">
+      <span class="sys-icon">🏛️</span>
+      <div class="sys-name">奇门遁甲</div>
+      <div class="sys-domain">天时 · 地利 · 时空选择</div>
+      <div class="sys-point">
+        <strong>核心：</strong>九宫·八门·九星·八神<br>
+        <strong>看：</strong>时空吉凶、方位选择<br>
+        <strong>与紫微互补：</strong>紫微说"命"，奇门说"运"——命好不如运好。奇门告诉你<strong>什么时候、去什么方向</strong>最有利。
+      </div>
+    </div>
+    <div class="sys-card">
+      <span class="sys-icon">⭐</span>
+      <div class="sys-name">紫微斗数</div>
+      <div class="sys-domain">人和 · 命数 · 人生轨迹</div>
+      <div class="sys-point">
+        <strong>核心：</strong>十四主星·十二宫·四化<br>
+        <strong>看：</strong>命格高低、人生大事<br>
+        <strong>与奇门互补：</strong>奇门看"时机"，紫微看"底蕴"——时机再好，命格承载不了也抓不住。紫微告诉你<strong>你是谁、你能做什么</strong>。
+      </div>
+    </div>
+    <div class="sys-card">
+      <span class="sys-icon">🌸</span>
+      <div class="sys-name">梅花易数</div>
+      <div class="sys-domain">象数 · 机微 · 万物类象</div>
+      <div class="sys-point">
+        <strong>核心：</strong>八卦·体用·生克·万物类象<br>
+        <strong>看：</strong>具体一事的吉凶成败<br>
+        <strong>与紫微互补：</strong>紫微看"一生"，梅花看"一事"——大事看盘，小事起卦。梅花告诉你<strong>这件事成不成、什么时候成</strong>。
+      </div>
+    </div>
+  </div>
+
+  <h3>一、三学同参的核心原理</h3>
+  <div class="g2">
+    <div class="em">
+      <strong>🔗 原理一：全息对应</strong><br><br>
+      同一个时空点，无论用哪种方法切入，获取的都是<strong>同一套信息的不同侧面</strong>。<br><br>
+      紫微的"官禄宫化忌" = 奇门的"开门临白虎" = 梅花的"乾金克体"——三套语言，讲的是同一件事：<strong>事业受阻</strong>。<br><br>
+      <strong>实测技巧：</strong>遇到重大决策，三学各起一盘/一卦。如果三者结论一致 = 高确定性，果断行动。如果结论矛盾 = 重新审视问题的定义。
+    </div>
+    <div class="em">
+      <strong>🔗 原理二：层次分工</strong><br><br>
+      三学在时间维度上各有<strong>最佳覆盖范围</strong>：<br><br>
+      <strong>紫微斗数：</strong>一生尺度的命格分析 + 十年/一年尺度的运势<br>
+      <strong>奇门遁甲：</strong>一月/一日/一时辰尺度的时空吉凶<br>
+      <strong>梅花易数：</strong>一事一卦的即时决疑<br><br>
+      <strong>实操策略：</strong>大方向用紫微看→具体行动时机用奇门选→即时决疑用梅花断。
+    </div>
+  </div>
+
+  <h3>二、跨体系实战对照表</h3>
+  <table>
+    <thead><tr><th>论断领域</th><th>紫微斗数</th><th>奇门遁甲</th><th>梅花易数</th></tr></thead>
+    <tr>
+      <td class="key-col">事业发展</td>
+      <td>官禄宫+命宫+迁移 三星联动<br>四化追踪升迁时机</td>
+      <td>开门落宫 + 值符星<br>选择有利方位出行</td>
+      <td>以体卦为问事人<br>用卦为事业方向</td>
+    </tr>
+    <tr>
+      <td class="key-col">感情婚姻</td>
+      <td>夫妻宫+福德宫<br>桃花星+红鸾天喜</td>
+      <td>休门落宫 + 乙庚合<br>六合宫为媒人</td>
+      <td>体用生克看关系走向<br>互卦看过程，变卦看结局</td>
+    </tr>
+    <tr>
+      <td class="key-col">财运投资</td>
+      <td>财帛+田宅+福德<br>火贪/铃贪暴发格</td>
+      <td>生门落宫 + 戊土<br>看财星是否得地</td>
+      <td>体克用=求财可得<br>用克体=投资失利</td>
+    </tr>
+    <tr>
+      <td class="key-col">健康疾病</td>
+      <td>疾厄宫星曜+忌冲<br>星曜对应身体部位</td>
+      <td>天芮星落宫 + 乙奇<br>看宫位五行生克</td>
+      <td>体卦被克=身体有患<br>卦象对应身体部位</td>
+    </tr>
+    <tr>
+      <td class="key-col">出行迁移</td>
+      <td>迁移宫星曜+四化<br>流年迁移宫叠合</td>
+      <td>出行方位看八门吉凶<br>时干落宫为去向</td>
+      <td>外应+方位起卦<br>出行吉凶即时判断</td>
+    </tr>
+    <tr>
+      <td class="key-col">官司诉讼</td>
+      <td>父母宫(文书)+巨门(口舌)<br>廉贞化忌=诉讼信号</td>
+      <td>惊门落宫 + 白虎<br>景门=诉状文书</td>
+      <td>兑卦/离卦=口舌官司<br>体用强弱定胜负</td>
+    </tr>
+  </table>
+
+  <h3>三、三学贯通的终极心法</h3>
+
+  <div class="mnemonic">
+    <div class="m-title">🌌 三学贯通诀 <span class="m-type">总纲心法</span></div>
+    <div class="m-content">
+      奇门择<strong>时</strong>定方位，紫微察<strong>命</strong>知穷通。<br>
+      梅花触<strong>机</strong>断一事，三学归<strong>一</strong>见真空。<br>
+      天地人盘本无二，卦象星曜理相同。<br>
+      莫在名相中打转，<strong>明心见性</strong>是真宗。
+    </div>
+    <div class="m-explain">
+      <strong>逐句解读：</strong>奇门=时空选择(何时何地)、紫微=命格分析(何人何事)、梅花=即时决疑(一事一断)。<br>
+      三学看似不同，实则都在描述同一个<strong>"道"</strong>——宇宙运行的规律 + 人生命运的密码。<br>
+      真正的贯通，不是三门都学好，而是通过三门学问，看懂<strong>同一套底层逻辑在不同维度的展现</strong>。<br>
+      <strong>最后两句是最重要的：</strong>不要被"奇门""紫微""梅花"这些名称困住。它们只是指月的手指，不是月亮本身。<br>
+      真正的精髓在于——<strong>通过术数，认识自己、理解世界、明心见性。</strong>
+    </div>
+  </div>
+
+  <div class="sum">
+    <strong>三学贯通 · 实操建议：</strong><br><br>
+    <strong>日常训练：</strong>每天固定拿出一张命盘(可以是自己的)，同时用紫微看命格、奇门看当日吉凶、梅花起一卦看明日之事——<strong>一题三做，对照验证</strong>。<br><br>
+    <strong>重大决策：</strong>先用紫微看大运是否支持(十年尺度)→ 再用奇门选最佳行动时间和方位(日/时尺度)→ 如果还有疑问，用梅花做最后确认(一事一卦)。<br><br>
+    <strong>终极态度：</strong>术数是指南针，不是镣铐。你才是命运的主人——术数帮你<strong>看清局势</strong>，但<strong>选择权永远在你手中</strong>。
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 尾声 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+
+<div class="ph-hdr"><h2><span class="dot"></span>结语 · 深潜即见光明</h2></div>
+
+<div class="sec">
+  <div class="mnemonic">
+    <div class="m-title">🏮 深潜箴言 <span class="m-type">收官</span></div>
+    <div class="m-content">
+      三合飞星与自化，三灯齐照影无遮。<br>
+      ATP速断抓来意，活用灵变是心法。<br>
+      百盘入门三百通，融会贯通自成家。<br>
+      更将三学归一念，斗数尽头是心花。
+    </div>
+  </div>
+
+  <blockquote>
+    学斗数的最高境界，不是成为"算命高手"，而是通过十二宫看清自己的人生剧本，通过四化理解因果循环，通过三派融合明白——<strong>一切皆有可能，一切皆有定数，而你能做的，是在定数之中活出最大的自由。</strong>
+    <span class="src">—— 深潜篇 · 结语</span>
+  </blockquote>
+</div>
+
+</div>
+
+<footer>
+  <p class="quote">"活用灵变，方为灵魂"</p>
+  <p>紫微斗数 · 深潜精通 ｜ 06 · 三派融合 · 三体系贯通</p>
+</footer>
+
+<script src="../共享样式/app.js"></script>
+</body>
+</html>

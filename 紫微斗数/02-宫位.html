@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="紫微斗数 · 宫位篇 — 十二宫六条主线、对宫联看法则、来因宫心法(飞星派独门)、三方四正、故事卡口诀卡。">
+<title>紫微斗数 · 宫位篇</title>
+<link rel="stylesheet" href="../共享样式/base.css">
+<link rel="stylesheet" href="../共享样式/components.css">
+<style>
+  :root{--font-ui:"Noto Serif SC","Songti SC","STSong",serif}
+  body{font-family:var(--font-ui);padding-bottom:60px}
+
+  .hero{text-align:center;padding:40px 20px 32px;border-bottom:1px solid var(--border);margin-bottom:32px}
+  .hero h1{font-size:2.2em;color:var(--gold-lt);letter-spacing:5px;font-weight:300}
+  .hero p{color:var(--text-dim);font-size:.9rem;letter-spacing:2px;margin-top:6px}
+  .hero .line{width:50px;height:1px;background:var(--gold);margin:12px auto;opacity:.4}
+
+  .container{max-width:960px;margin:0 auto;padding:0 24px}
+
+  .ph-hdr{margin:52px 0 24px;padding:0 0 12px;position:relative}
+  .ph-hdr::after{content:"";position:absolute;bottom:0;left:0;width:60px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+  .ph-hdr h2{font-size:1.35rem;color:var(--gold-lt);letter-spacing:3px;font-weight:300;display:flex;align-items:center;gap:12px}
+  .ph-hdr .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold-glow)}
+  .ph-hdr .sub{color:var(--text-dim);font-size:.76rem;margin-top:4px;letter-spacing:2px;padding-left:20px}
+
+  .sec{margin:30px 0}
+  .sec h3{color:var(--gold);font-size:1.05rem;font-weight:400;letter-spacing:2px;margin:20px 0 10px;padding:0 0 0 14px;border-left:2px solid var(--gold)}
+  .sec h4{color:var(--gold-lt);font-size:.92rem;margin:16px 0 8px;font-weight:400}
+  .sec p{color:var(--text-alt);font-size:.86rem;margin:8px 0;line-height:1.9}
+  .sec p strong,.sec li strong{color:#e8d8b0;font-weight:500}
+  .sec ul,.sec ol{padding-left:22px;margin:8px 0}
+  .sec li{color:var(--text-alt);font-size:.84rem;margin:4px 0;line-height:1.8}
+
+  .em{background:var(--card);border:1px solid rgba(212,176,106,.08);border-radius:var(--radius);padding:15px 18px;margin:12px 0;font-size:.84rem;color:var(--text-alt)}
+  .em strong{color:var(--gold-lt)}
+  .q{background:var(--gold-bg);border-left:2px solid var(--gold);padding:11px 16px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;font-size:.84rem;color:var(--text-alt)}
+  .q strong{color:var(--gold-lt)}
+  .w{background:rgba(224,85,74,.03);border-left:2px solid var(--red);padding:11px 16px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;font-size:.84rem}
+  .w strong{color:var(--red)}
+  .sum{background:linear-gradient(135deg,var(--gold-bg),rgba(212,176,106,.01));border:1px dashed rgba(212,176,106,.15);border-radius:var(--radius);padding:16px 20px;margin:20px 0;font-size:.84rem}
+  .sum strong{color:var(--gold-lt)}
+
+  table{width:100%;border-collapse:collapse;font-size:.82em;margin:12px 0}
+  th{background:var(--gold-bg);color:var(--gold);padding:9px 12px;text-align:left;border-bottom:1px solid rgba(212,176,106,.15);font-weight:400;letter-spacing:1px}
+  th:first-child{border-radius:var(--radius) 0 0 0}th:last-child{border-radius:0 var(--radius) 0 0}
+  td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  tr:hover td{background:rgba(255,255,255,.01)}
+  td:first-child{color:#e0d8c0;font-weight:500;white-space:nowrap}
+
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0}
+
+  footer{text-align:center;padding:40px 20px;color:var(--text-dim);font-size:.74rem;letter-spacing:2px;border-top:1px solid var(--border);margin-top:48px}
+
+  @media(max-width:720px){.g2{grid-template-columns:1fr}}
+  @media(max-width:640px){
+    .hero h1{font-size:1.5em}.container{padding:0 12px}
+    .ph-hdr h2{font-size:1.15rem}table{font-size:.72em}td,th{padding:6px 8px}
+  }
+  .with-sidebar{margin-left:0!important}
+  .topnav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(8,7,13,.98),rgba(12,11,21,.95));border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;backdrop-filter:blur(10px)}
+  .topnav-back{color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;padding:5px 12px;border:1px solid var(--gold);border-radius:14px;white-space:nowrap;transition:all .2s;flex-shrink:0}
+  .topnav-back:hover{background:var(--gold);color:#111}
+  .topnav-title{color:var(--text-dim);font-size:.76rem;letter-spacing:.06em;white-space:nowrap}
+  .topnav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .topnav-links a{color:var(--text-alt);text-decoration:none;font-size:.74rem;padding:4px 12px;border:1px solid var(--border);border-radius:12px;transition:all .2s}
+  .topnav-links a:hover{border-color:var(--gold);color:var(--gold)}
+  @media(max-width:600px){.topnav{padding:8px 10px;gap:8px}.topnav-links{margin-left:0}}
+
+  /* ── 十二宫盘可视化 ── */
+  .palace-ring{position:relative;width:100%;max-width:500px;margin:24px auto;aspect-ratio:1;user-select:none}
+  .palace-ring svg{width:100%;height:100%}
+  .palace-ring .click-hint{text-align:center;color:var(--text-dim);font-size:.72rem;margin-top:6px;letter-spacing:1px}
+  .palace-ring .sector{cursor:pointer;transition:all .2s}
+  .palace-ring .sector:hover{filter:brightness(1.6)}
+  .palace-ring .sector.active{filter:brightness(1.8) drop-shadow(0 0 12px var(--gold-glow))}
+  .palace-ring .sector-label{fill:var(--text);font-size:13px;pointer-events:none}
+  .palace-ring .sector-label.title{fill:var(--gold-lt);font-size:15px;font-weight:700}
+
+  /* ── 对宫连线动画 ── */
+  .opp-pair{display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 0;flex-wrap:wrap}
+  .opp-pair .palace-badge{padding:8px 18px;border-radius:20px;font-size:.82rem;font-weight:600;letter-spacing:1px}
+  .opp-pair .yin-badge{background:rgba(80,152,200,.12);border:1px solid rgba(80,152,200,.25);color:var(--blue)}
+  .opp-pair .yang-badge{background:rgba(224,85,74,.08);border:1px solid rgba(224,85,74,.2);color:var(--red)}
+  .opp-pair .connector{color:var(--gold);font-size:1.1rem;letter-spacing:2px}
+
+  /* ── 来因宫特殊样式 ── */
+  .reason-hero{background:linear-gradient(160deg,rgba(212,176,106,.08),rgba(212,176,106,.01),rgba(80,152,200,.04));border:1px solid rgba(212,176,106,.2);border-radius:var(--radius-lg);padding:28px 24px;margin:20px 0;position:relative;overflow:hidden}
+  .reason-hero::before{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--gold),var(--blue),transparent)}
+  .reason-hero .icon-hdr{font-size:1.8rem;margin-bottom:8px;display:block}
+  .reason-hero h3{font-size:1.2rem;color:var(--gold-lt);letter-spacing:3px;font-weight:400;border:none;padding:0;margin:4px 0}
+  .reason-hero .tagline{color:var(--blue);font-size:.84rem;letter-spacing:2px;margin-bottom:12px}
+  .reason-hero p{font-size:.84rem;line-height:1.9}
+
+  /* ── 12宫来因解读卡片 ── */
+  .reason-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin:16px 0}
+  .reason-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;transition:all .25s;cursor:default}
+  .reason-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.25)}
+  .reason-card .rc-num{font-size:.62rem;color:var(--text-dim);letter-spacing:2px;margin-bottom:4px}
+  .reason-card .rc-title{font-size:.95rem;color:var(--gold);font-weight:600;margin-bottom:6px}
+  .reason-card .rc-desc{font-size:.8rem;color:var(--text-alt);line-height:1.75}
+  .reason-card .rc-tag{display:inline-block;margin-top:8px;font-size:.68rem;padding:2px 10px;border-radius:10px;background:var(--gold-bg);color:var(--gold);letter-spacing:.04em}
+
+  /* ── 三方四正可视化 ── */
+  .trio-viz{display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap;margin:16px 0}
+  .trio-group{text-align:center}
+  .trio-group .trio-label{font-size:.72rem;color:var(--text-dim);letter-spacing:2px;margin-bottom:8px}
+  .trio-group .trio-palaces{display:flex;flex-direction:column;gap:6px}
+  .trio-palace{padding:10px 20px;border-radius:8px;font-size:.82rem;font-weight:600;text-align:center;transition:all .2s}
+  .trio-main{background:var(--gold-bg);border:2px solid var(--gold);color:var(--gold-lt)}
+  .trio-sub{background:var(--card);border:1px solid var(--border-lt);color:var(--text-alt)}
+  .trio-opp{background:rgba(224,85,74,.06);border:1px solid rgba(224,85,74,.2);color:var(--red)}
+  .trio-clip{background:rgba(80,152,200,.06);border:1px solid rgba(80,152,200,.2);color:var(--blue)}
+
+  /* ── 故事卡 ── */
+  .story-card{background:linear-gradient(135deg,var(--card),var(--card-alt));border:1px solid var(--border-lt);border-radius:var(--radius-lg);padding:24px;margin:16px 0;position:relative}
+  .story-card .story-icon{font-size:1.5rem;margin-bottom:8px;display:block}
+  .story-card .story-tag{position:absolute;top:14px;right:18px;font-size:.62rem;color:var(--text-dim);letter-spacing:2px;background:var(--gold-bg);padding:3px 10px;border-radius:10px}
+  .story-card h4{font-size:1rem;color:var(--gold);margin-bottom:10px;font-weight:400;letter-spacing:1px}
+  .story-card p{font-size:.84rem;color:var(--text-alt);line-height:1.9}
+
+  /* ── 口诀卡 ── */
+  .mnemonic-card{background:linear-gradient(160deg,rgba(212,176,106,.06),rgba(212,176,106,.01));border:1.5px dashed rgba(212,176,106,.15);border-radius:var(--radius);padding:18px 22px;margin:12px 0}
+  .mnemonic-card .m-icon{font-size:1.2rem;margin-right:8px}
+  .mnemonic-card .m-title{color:var(--gold);font-size:.78rem;letter-spacing:3px;margin-bottom:8px;display:flex;align-items:center}
+  .mnemonic-card .m-text{font-size:.88rem;color:var(--gold-lt);letter-spacing:1px;line-height:2;text-align:center;font-weight:500}
+
+  /* ── 阴阳对比表 ── */
+  .yin-yang-table td:first-child{background:rgba(80,152,200,.04)}
+  .yin-yang-table td:last-child{background:rgba(224,85,74,.02)}
+
+  /* ── 交互：宫位详情弹层 ── */
+  .palace-detail{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:200;
+    background:var(--card-alt);border:1px solid var(--border-lt);border-radius:var(--radius-lg);
+    padding:24px;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.5);
+    display:none}
+  .palace-detail.show{display:block}
+  .palace-detail h4{color:var(--gold);font-size:1rem;margin-bottom:8px;letter-spacing:2px}
+  .palace-detail p{color:var(--text-alt);font-size:.82rem;line-height:1.8}
+  .palace-detail .close-btn{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--text-dim);
+    font-size:1.3rem;cursor:pointer;transition:color .2s}
+  .palace-detail .close-btn:hover{color:var(--gold)}
+  .overlay{position:fixed;inset:0;z-index:199;background:rgba(0,0,0,.6);display:none}
+  .overlay.show{display:block}
+
+  /* ── 进度条与回到顶部 ── */
+  .page-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-lt));z-index:101;transition:width .15s linear;border-radius:0 2px 2px 0}
+  #backTop{position:fixed;bottom:30px;right:30px;width:40px;height:40px;border-radius:50%;
+    background:var(--card);color:var(--gold);border:1px solid var(--border-lt);
+    font-size:1.1rem;cursor:pointer;z-index:101;display:none;transition:all .2s;align-items:center;justify-content:center}
+  #backTop:hover{background:var(--gold);color:#111}
+  #backTop.show{display:flex}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <a href="../index.html" class="topnav-back">← 玄门</a>
+  <span class="topnav-title">紫微斗数 · 宫位篇</span>
+  <div class="topnav-links">
+    <a href="index.html">总览</a>
+    <a href="01-星曜.html">星曜</a>
+    <a href="02-宫位.html">宫位</a>
+    <a href="03-四化.html">四化</a>
+    <a href="04-格局.html">格局</a>
+    <a href="05-断命.html">断命</a>
+    <a href="06-深潜.html">深潜</a>
+    <a href="题库.html">题库</a>
+  </div>
+</header>
+
+<div class="page-progress" id="pageProgress"></div>
+<button id="backTop">↑</button>
+
+<div class="hero">
+  <h1>宫位篇</h1>
+  <p>十二宫 · 六条主线 · 对宫联看 · 来因宫 · 三方四正</p>
+  <div class="line"></div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════ 第一部分：十二宫总览 ═══════════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>一、十二宫 · 人事十二面</h2><p class="sub">一张命盘 = 一部人生百科全书</p></div>
+
+<div class="sec">
+
+<div class="em">
+  <strong>天地人三才之道：</strong>一张紫微斗数命盘将人一生十二件大事尽收其中。十二个宫位不是孤立的格子，而是一个有机的整体——彼此对拱、三合、夹辅，形成一个精密的"人生能量网络"。理解宫位，是进入紫微斗数殿堂的第一把钥匙。
+</div>
+
+<!-- 十二宫盘可视化 -->
+<div class="palace-ring" id="palaceRing"></div>
+<div class="click-hint"><span style="color:var(--gold);">▲</span> 点击宫位查看详解（交互式命盘示意图）</div>
+
+<!-- 弹层 -->
+<div class="overlay" id="overlay"></div>
+<div class="palace-detail" id="palaceDetail">
+  <button class="close-btn" id="closeDetail">✕</button>
+  <h4 id="detailTitle"></h4>
+  <p id="detailBody"></p>
+</div>
+
+</div>
+
+<!-- ═══════════ 第二部分：六条主线 ═══════════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>二、十二宫六条主线</h2><p class="sub">阴阳互根 · 内外相应 · 一呼一吸间见真机</p></div>
+
+<div class="sec">
+
+<div class="em">
+  <strong>核心法则：</strong>十二宫两两配对形成六条主线，每条主线一端为「阴/内」——代表内在世界、自我感受、隐藏面；另一端为「阳/外」——代表外在世界、社会表现、显现面。阴阳互为表里，一荣俱荣，一损俱损。
+</div>
+
+<table class="yin-yang-table">
+<thead>
+  <tr>
+    <th style="width:22%">主线</th>
+    <th style="width:26%">阴 / 内（里）</th>
+    <th style="width:24%">⇄ 对宫 ⇄</th>
+    <th style="width:28%">阳 / 外（表）</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><strong>① 自我线</strong></td>
+    <td><span style="color:var(--blue)">命宫</span><br><small style="color:var(--text-dim)">内在性格·天赋·命格根基</small></td>
+    <td style="text-align:center;color:var(--gold);font-size:1.1rem;">⇄ 对拱 ⇄</td>
+    <td><span style="color:var(--red)">迁移宫</span><br><small style="color:var(--text-dim)">外在表现·社会形象·外出际遇</small></td>
+  </tr>
+  <tr>
+    <td><strong>② 财富线</strong></td>
+    <td><span style="color:var(--blue)">兄弟宫</span><br><small style="color:var(--text-dim)">手足情谊·亲密关系·现金流</small></td>
+    <td style="text-align:center;color:var(--gold);font-size:1.1rem;">⇄ 对拱 ⇄</td>
+    <td><span style="color:var(--red)">仆役宫</span><br><small style="color:var(--text-dim)">朋友·合作伙伴·社会资源</small></td>
+  </tr>
+  <tr>
+    <td><strong>③ 家庭线</strong></td>
+    <td><span style="color:var(--blue)">夫妻宫</span><br><small style="color:var(--text-dim)">配偶·婚姻·情感世界</small></td>
+    <td style="text-align:center;color:var(--gold);font-size:1.1rem;">⇄ 对拱 ⇄</td>
+    <td><span style="color:var(--red)">官禄宫</span><br><small style="color:var(--text-dim)">事业·社会地位·公众形象</small></td>
+  </tr>
+  <tr>
+    <td><strong>④ 身心线</strong></td>
+    <td><span style="color:var(--blue)">子女宫</span><br><small style="color:var(--text-dim)">子女·生育·内心欲望·创作</small></td>
+    <td style="text-align:center;color:var(--gold);font-size:1.1rem;">⇄ 对拱 ⇄</td>
+    <td><span style="color:var(--red)">田宅宫</span><br><small style="color:var(--text-dim)">家庭·房产·根基·晚年归宿</small></td>
+  </tr>
+  <tr>
+    <td><strong>⑤ 福寿线</strong></td>
+    <td><span style="color:var(--blue)">财帛宫</span><br><small style="color:var(--text-dim)">赚钱能力·物质享受·金钱观</small></td>
+    <td style="text-align:center;color:var(--gold);font-size:1.1rem;">⇄ 对拱 ⇄</td>
+    <td><span style="color:var(--red)">福德宫</span><br><small style="color:var(--text-dim)">精神世界·福气·晚年享福度</small></td>
+  </tr>
+  <tr>
+    <td><strong>⑥ 健康线</strong></td>
+    <td><span style="color:var(--blue)">疾厄宫</span><br><small style="color:var(--text-dim)">身体健康·疾病·体质</small></td>
+    <td style="text-align:center;color:var(--gold);font-size:1.1rem;">⇄ 对拱 ⇄</td>
+    <td><span style="color:var(--red)">父母宫</span><br><small style="color:var(--text-dim)">父母·长辈·遗传·上司关系</small></td>
+  </tr>
+</tbody>
+</table>
+
+<h4>六条主线的"阴阳互根"法则</h4>
+<div class="sum">
+  <strong>🔑 对宫联看第一法则 —— 镜像原理：</strong>对宫如同命宫的镜子，一阴一阳、一内一外。看命宫必须兼看迁移宫——内在性格与外在表现是否一致？看夫妻宫必须兼看官禄宫——婚姻与事业是否平衡？<strong>任何一个宫位出了问题，必先审视其对宫状态。</strong>比如夫妻宫煞星聚集，若官禄宫吉星旺盛，说明此人以事业为重而忽略了家庭，问题可以调和；若夫妻宫与官禄宫双双凶煞，则婚姻事业两败俱伤。
+</div>
+
+<h4>六条主线的特殊联动</h4>
+<table>
+<thead><tr><th>主线</th><th>联动法则</th><th>实战要点</th></tr></thead>
+<tr>
+  <td>自我线</td>
+  <td>命宫定基调，迁移宫看施展。命好迁差 → 怀才不遇；命差迁好 → 外强中干。</td>
+  <td>大限走到迁移宫时，人生出现重大转折（如出国、换城市、出社会）。</td>
+</tr>
+<tr>
+  <td>财富线</td>
+  <td>兄弟宫主亲密圈子的财力支持，仆役宫主泛社会人际的资源获取。</td>
+  <td>兄弟宫化禄 = 得手足/密友之财；仆役宫化忌 = 被朋友拖累破财。</td>
+</tr>
+<tr>
+  <td>家庭线</td>
+  <td>夫妻与官禄互为镜像——传统"男主外女主内"的核心逻辑。</td>
+  <td>女命夫妻宫强+官禄宫弱 → 宜相夫教子；男命反之则难成家。</td>
+</tr>
+<tr>
+  <td>身心线</td>
+  <td>子女宫看"付出与创造"，田宅宫看"收获与归宿"。</td>
+  <td>子女宫强田宅宫弱 → 创造多但无根基；田宅强子女弱 → 守成有余开创不足。</td>
+</tr>
+<tr>
+  <td>福寿线</td>
+  <td>财帛是"看得见的钱"，福德是"看不见的福"。</td>
+  <td>财帛宫吉而福德宫凶 → 有钱但不快乐；福德吉而财帛凶 → 穷开心。</td>
+</tr>
+<tr>
+  <td>健康线</td>
+  <td>疾厄是"自己的身体"，父母是"基因的传承"。</td>
+  <td>父母宫凶煞 → 遗传病风险；疾厄宫凶煞 → 后天作伤。</td>
+</tr>
+</table>
+
+</div>
+
+<!-- ═══════════ 第三部分：来因宫 ═══════════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>三、来因宫 · 飞星派独门心法</h2><p class="sub">命盘12宫，只有一个来因宫——它是你此生所有故事的起笔处</p></div>
+
+<div class="sec">
+
+<div class="reason-hero">
+  <span class="icon-hdr">⭐</span>
+  <h3>来因宫 —— 飞星派的灵魂</h3>
+  <div class="tagline">生年天干所在之宫 = 此生使命的原点</div>
+  <p>在飞星四化派（梁若瑜一脉）体系中，<strong>来因宫</strong>是命盘中最特殊的一个宫位。它由出生年的天干决定——<strong>生年天干落在哪个宫位，那个宫位就是来因宫</strong>。它不是一个"状态描述"，而是一个<strong>动态指令</strong>：此宫干所飞出的四化，是你这一生必须走的路；所有宫干的四化最终也将在来因宫汇集。来因宫是<strong>起点</strong>，也是<strong>终极指向</strong>。</p>
+</div>
+
+<h4>来因宫的三重定义</h4>
+
+<div class="em">
+  <strong>第一重：起点 —— 人生使命的起笔处。</strong>来因宫所在宫位决定了你此生最核心的课题领域。如果你的来因宫在夫妻宫，那么你这一生的主线故事就是"婚姻与情感"——无论你事业多么成功，最终绕不过这个课题。来因宫在官禄宫，命主此生就是来"做事"的，事业是贯穿一生的主线。<br><br>
+  <strong>第二重：路径 —— 四化能量从此出发。</strong>来因宫的宫干四化，是命盘中第一顺序的四化。因为来因宫的天干就是<strong>生年天干</strong>，所以来因宫的四化，天然就是<strong>生年四化</strong>。这意味着：生年四化从来因宫飞出，注入其他宫位，描绘了你人生故事的具体展开路径。<br><br>
+  <strong>第三重：归宿 —— 所有宫干四化最终回归于此。</strong>飞星派有一个深刻的法则：命盘上十二宫的天干都可以飞四化去影响其他宫位，但无论飞得有多远、有多复杂，最终都会在<strong>来因宫的宫干</strong>面前"止步"。来因宫是天干四化能量流动的<strong>终点站</strong>。像一个漩涡的中心——能量从四面八方汇聚而来。
+</div>
+
+<div class="sum">
+  <strong>🔑 来因宫心法口诀：</strong>"来因者，命之所从来。生年天干落何宫，此宫即为此生之根。此宫四化为命盘第一动，十二宫四化终归于此。不解来因，不足以言飞星。"
+</div>
+
+<h4>十二宫来因 · 人生使命解读</h4>
+<p>以下是十二个宫位轮值来因宫时，各自所揭示的人生核心课题与使命方向：</p>
+
+<div class="reason-grid">
+
+<div class="reason-card">
+  <div class="rc-num">来因宫之一</div>
+  <div class="rc-title">🏠 命宫为来因</div>
+  <div class="rc-desc">此生使命是<strong>做自己</strong>。你本身就是故事的主角，不需要依附任何人或事。命宫来因的人天生自带光芒，走到哪里都是焦点。生年四化从命宫飞出——你的人生剧本由你自己执笔。<br>关键词：<strong>自我实现 · 独立人格 · 主角命格</strong></div>
+  <span class="rc-tag">我命由我</span>
+</div>
+
+<div class="reason-card">
+  <div class="rc-num">来因宫之二</div>
+  <div class="rc-title">🤝 兄弟宫为来因</div>
+  <div class="rc-desc">此生使命是<strong>经营亲密关系</strong>。你的成就离不开身边的小圈子——手足、闺蜜、合伙人。兄弟宫来因的人，一生都有"被需要"的感觉。<br>关键词：<strong>手足情深 · 合作共赢 · 圈层力量</strong></div>
+  <span class="rc-tag">因缘际会</span>
+</div>
+
+<div class="reason-card">
+  <div class="rc-num">来因宫之三</div>
+  <div class="rc-title">💑 夫妻宫为来因</div>
+  <div class="rc-desc">此生使命是<strong>通过婚姻/亲密关系完成自我成长</strong>。你的配偶是你人生最重要的"课题老师"。婚姻质量直接决定你这一生的幸福感。<br>关键词：<strong>婚姻修炼 · 情感课题 · 借对方完善自己</strong></div>
+  <span class="rc-tag">以情入道</span>
+</div>
+
+<div class="reason-card">
+  <div class="rc-num">来因宫之四</div>
+  <div class="rc-title">👶 子女宫为来因</div>
+  <div class="rc-desc">此生使命是<strong>创造与传承</strong>。子女、作品、事业接班人——你的人生以"产出"来衡量。子女宫来因的人，创作欲极强。<br>关键词：<strong>生育 · 创作 · 培养下一代 · 留下作品</strong></div>
+  <span class="rc-tag">生生不息</span>
+</div>
+
+<div class="reason-card">
+  <div class="rc-num">来因宫之五</div>
+  <div class="rc-title">💰 财帛宫为来因</div>
+  <div class="rc-desc">此生使命是<strong>与金钱打交道</strong>。不是简单的"有钱"或"没钱"，而是你这一生绕不开"赚钱"这个主题。金钱是你的人生主线。<br>关键词：<strong>财富经营 · 物质世界 · 以财验道</strong></div>
+  <span class="rc-tag">借假修真</span>
+</div>
+
+<div class="reason-card">
+  <div class="rc-num">来因宫之六</div>
+  <div class="rc-title">🏥 疾厄宫为来因</div>
+  <div class="rc-desc">此生使命是<strong>关注身体与健康</strong>。你的身体是你最忠实的信号系统。疾厄来因的人，往往对医道、修行、养生有天然的感应。<br>关键词：<strong>身体健康 · 修行 · 以身证道</strong></div>
+  <span class="rc-tag">以身入道</span>
+</div>
+
+<div class="reason-card">
+  <div class="rc-num">来因宫之七</div>
+  <div class="rc-title">✈ 迁移宫为来因</div>
+  <div class="rc-desc">此生使命是<strong>走出去、不断变化</strong>。你的人生舞台不在家乡，在远方。迁移来因的人，注定漂泊，但漂泊本身就是修行。<br>关键词：<strong>远行 · 变化 · 四海为家 · 社会形象</strong></div>
+  <span class="rc-tag">四海为家</span>
+</div>
+
+<div class="reason-card">
+  <div class="rc-num">来因宫之八</div>
+  <div class="rc-title">👥 仆役宫为来因</div>
+  <div class="rc-desc">此生使命是<strong>服务众生、广结善缘</strong>。你的人生成就取决于你帮助了多少人。仆役来因的人，天生是"为人民服务"的命。<br>关键词：<strong>社会服务 · 广结善缘 · 众生为业</strong></div>
+  <span class="rc-tag">众生为业</span>
+</div>
+
+<div class="reason-card">
+  <div class="rc-num">来因宫之九</div>
+  <div class="rc-title">🏛 官禄宫为来因</div>
+  <div class="rc-desc">此生使命是<strong>成就事业</strong>。你生来就是做事的人，事业是你人生的主干道。官禄来因的人不能闲着，一闲就出问题。<br>关键词：<strong>事业成就 · 社会地位 · 以事立身</strong></div>
+  <span class="rc-tag">事功立命</span>
+</div>
+
+<div class="reason-card">
+  <div class="rc-num">来因宫之十</div>
+  <div class="rc-title">🏡 田宅宫为来因</div>
+  <div class="rc-desc">此生使命是<strong>建立根据地</strong>。家、房产、家族——你的人生需要一块坚实的土地来扎根。田宅来因的人，对"家"有极深的执念。<br>关键词：<strong>家庭根基 · 房产 · 归属感 · 晚年归宿</strong></div>
+  <span class="rc-tag">安土重迁</span>
+</div>
+
+<div class="reason-card">
+  <div class="rc-num">来因宫之十一</div>
+  <div class="rc-title">🧘 福德宫为来因</div>
+  <div class="rc-desc">此生使命是<strong>追求精神世界的圆满</strong>。物质不是你的终极目标，精神富足才是。福德来因的人天生有佛缘、道缘。<br>关键词：<strong>精神修行 · 福报 · 内在世界 · 晚年智慧</strong></div>
+  <span class="rc-tag">以心证道</span>
+</div>
+
+<div class="reason-card">
+  <div class="rc-num">来因宫之十二</div>
+  <div class="rc-title">👴 父母宫为来因</div>
+  <div class="rc-desc">此生使命是<strong>与"权威"和解</strong>。父母、师长、上司、政府——你的一生绕不开"上级关系"。父母来因的人，原生家庭影响极其深远。<br>关键词：<strong>原生家庭 · 权威关系 · 传承与反哺</strong></div>
+  <span class="rc-tag">追本溯源</span>
+</div>
+
+</div>
+
+<h4>来因宫实战应用三法则</h4>
+<div class="em">
+  <strong>法则一：来因宫看人生主线。</strong>拿到一张命盘，先看来因宫在哪一宫——这一宫决定命主此生最核心的"故事线"。比如来因宫在官禄宫的人，你跟他谈感情不如谈事业；来因宫在夫妻宫的人，事业再成功，婚姻不美满也是遗憾。<br><br>
+  <strong>法则二：来因宫四化看能量流向。</strong>来因宫宫干飞出的四化（即生年四化），标注了命主此生能量的"投入方向"。化禄所入之宫 = 命中福泽所在；化忌所入之宫 = 此生执着所在（不是坏事，是"功课"）。<br><br>
+  <strong>法则三：来因宫看收束点。</strong>飞星派在论断时，所有宫干交互飞化的结果，最终要"回归"来因宫。比如夫妻宫化忌入迁移宫，若迁移宫恰好是来因宫——则婚姻问题直接触及命主的核心课题，严重程度加倍。
+</div>
+
+</div>
+
+<!-- ═══════════ 第四部分：三方四正 ═══════════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>四、三方四正 · 宫位合参体系</h2><p class="sub">三合方 + 对宫 + 夹宫 = 完整的宫位分析框架</p></div>
+
+<div class="sec">
+
+<div class="em">
+  <strong>什么是三方四正？</strong>紫微斗数分析任何一个宫位时，不是只看这一个宫。而必须同时审查其「三方」（三合方的三个宫位）和「四正」（三方+对宫），合起来共四个宫位，构成对这个宫位的完整判断。这是宫位分析的"标准配置"。
+</div>
+
+<h4>三方：三合方（地支三合局）</h4>
+<p>地支按<strong>申子辰、巳酉丑、亥卯未、寅午戍</strong>分成四组三合局。命盘上，任意三个相差120度（隔四宫）的宫位即构成一组三合方。</p>
+
+<h4>十二宫的三合方归属</h4>
+<table>
+<thead><tr><th>三合局</th><th>三个宫位</th><th>五行属性</th><th>组合意义</th></tr></thead>
+<tr>
+  <td><strong>申子辰</strong>·水局</td>
+  <td>命宫 · 财帛宫 · 官禄宫</td>
+  <td style="color:var(--blue)">水（流通·智谋）</td>
+  <td><strong>"命财官"三合 —— 人生三大支柱。</strong>命宫为根基，财帛为资源，官禄为施展。三者互为犄角，缺一则不稳。</td>
+</tr>
+<tr>
+  <td><strong>巳酉丑</strong>·金局</td>
+  <td>迁移宫 · 福德宫 · 夫妻宫</td>
+  <td style="color:var(--gold)">金（刚健·决断）</td>
+  <td><strong>"迁福妻"三合 —— 人生质量的坐标。</strong>迁移为外在际遇，福德为内在享受，夫妻为人伦之始。</td>
+</tr>
+<tr>
+  <td><strong>亥卯未</strong>·木局</td>
+  <td>子女宫 · 疾厄宫 · 父母宫</td>
+  <td style="color:var(--green)">木（生长·传承）</td>
+  <td><strong>"子疾父"三合 —— 血脉传承链。</strong>父母为来处，子女为去处，疾厄为身体承载。三代人的生命连线。</td>
+</tr>
+<tr>
+  <td><strong>寅午戍</strong>·火局</td>
+  <td>兄弟宫 · 田宅宫 · 仆役宫</td>
+  <td style="color:var(--red)">火（热闹·人缘）</td>
+  <td><strong>"兄田仆"三合 —— 人际关系网。</strong>兄弟为至亲，仆役为泛交，田宅为根基之所聚。</td>
+</tr>
+</table>
+
+<h4>四正 = 三方 + 对宫</h4>
+<p>任何一个宫位，加上它的两个三合宫，再加上它的对宫，共四个位置，构成了这个宫的"四正"。</p>
+<p><strong>实例：</strong>分析<strong>命宫</strong>的四正 → 命宫 + 财帛宫（三合）+ 官禄宫（三合）+ 迁移宫（对宫）。</p>
+
+<div class="trio-viz">
+  <div class="trio-group">
+    <div class="trio-label">三合一</div>
+    <div class="trio-palaces">
+      <span class="trio-main">命宫</span>
+      <span class="trio-sub">财帛宫</span>
+      <span class="trio-sub">官禄宫</span>
+    </div>
+  </div>
+  <div style="color:var(--gold);font-size:1.3rem;">+</div>
+  <div class="trio-group">
+    <div class="trio-label">对宫</div>
+    <div class="trio-palaces">
+      <span class="trio-opp">迁移宫</span>
+    </div>
+  </div>
+  <div style="color:var(--gold);font-size:1.3rem;">=</div>
+  <div class="trio-group">
+    <div class="trio-label">四正（完整判断）</div>
+    <div class="trio-palaces">
+      <span class="trio-main">命宫</span>
+      <span class="trio-sub">财帛宫</span>
+      <span class="trio-sub">官禄宫</span>
+      <span class="trio-opp">迁移宫</span>
+    </div>
+  </div>
+</div>
+
+<h4>夹宫 —— 左右邻宫的夹辅之力</h4>
+<p>任何一个宫位的前一宫和后一宫，一左一右将该宫"夹"在中间。夹宫的星曜组合，会对被夹宫产生加持或压制作用。</p>
+
+<div class="trio-viz">
+  <div class="trio-group">
+    <div class="trio-label">前一宫（夹）</div>
+    <div class="trio-palaces">
+      <span class="trio-clip">父母宫</span>
+    </div>
+  </div>
+  <div class="trio-group">
+    <div class="trio-label">本宫</div>
+    <div class="trio-palaces">
+      <span class="trio-main">命宫</span>
+    </div>
+  </div>
+  <div class="trio-group">
+    <div class="trio-label">后一宫（夹）</div>
+    <div class="trio-palaces">
+      <span class="trio-clip">兄弟宫</span>
+    </div>
+  </div>
+</div>
+
+<table>
+<thead><tr><th>夹宫类型</th><th>组合</th><th>效应</th></tr></thead>
+<tr><td><strong>吉星夹</strong></td><td>左辅右弼夹 / 天魁天钺夹 / 文昌文曲夹</td><td style="color:var(--green)">被夹之宫如虎添翼，吉力倍增</td></tr>
+<tr><td><strong>煞星夹</strong></td><td>擎羊陀罗夹 / 火星铃星夹 / 地空地劫夹</td><td style="color:var(--red)">被夹之宫四面楚歌，压力重重</td></tr>
+<tr><td><strong>四化夹</strong></td><td>禄权科忌任意两化夹一宫</td><td>禄权夹=大吉；忌煞夹=大凶</td></tr>
+<tr><td><strong>刑囚夹印</strong></td><td>廉贞+天刑夹天相</td><td style="color:var(--red)">天相受困，官非牢狱之象</td></tr>
+<tr><td><strong>日月夹</strong></td><td>太阳太阴夹一宫</td><td style="color:var(--green)">光明普照，得天时之助（需日月庙旺）</td></tr>
+<tr><td><strong>科权禄夹</strong></td><td>化科、化权、化禄其中二化夹一宫</td><td style="color:var(--green)">三吉夹辅，被夹宫位大放异彩</td></tr>
+</table>
+
+<h4>三方四正综合运用流程</h4>
+<div class="em">
+  <strong>第一步：定本宫。</strong>确定要分析的宫位（如问婚姻 → 夫妻宫）。<br>
+  <strong>第二步：看本宫。</strong>宫内主星+辅星+四化，判断基本吉凶。<br>
+  <strong>第三步：看对宫。</strong>冲照之力如何？是助力（吉化来照）还是压力（忌煞来冲）？<br>
+  <strong>第四步：看三合。</strong>两个三合方宫位的星曜，是来帮本宫还是来拖后腿？<br>
+  <strong>第五步：看夹宫。</strong>前后邻宫是吉星夹辅还是煞星夹制？<br>
+  <strong>第六步：综合判断。</strong>本宫+对宫+三合+夹宫 → 四维一体，得出完整结论。
+</div>
+
+</div>
+
+<!-- ═══════════ 第五部分：故事卡 ═══════════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>五、故事卡 · 宫位里的命运叙事</h2><p class="sub">让玄理在真实人生中落地生根</p></div>
+
+<div class="sec">
+
+<div class="story-card">
+  <span class="story-icon">📖</span>
+  <span class="story-tag">故事卡一</span>
+  <h4>命宫VS迁移宫 —— 两个面孔的张先生</h4>
+  <p>张先生命宫坐<strong>天同太阴</strong>，性格温和、不喜争斗，在家中是出了名的"好好先生"。但他的迁移宫坐<strong>七杀+擎羊</strong>——一出门就像换了一个人：做事果断、雷厉风行、甚至有些冷酷。家人看到他在公司的样子都惊讶不已。这个案例完美诠释了<strong>"命宫是里，迁移宫是表"</strong>——一个人的内在与外在不同，并非虚伪，而是宫位配置使然。<strong>对宫联看</strong>告诉我们：永远不要只从一个面去判断一个人。</p>
+</div>
+
+<div class="story-card">
+  <span class="story-icon">📖</span>
+  <span class="story-tag">故事卡二</span>
+  <span class="story-title"></span>
+  <h4>来因宫的力量 —— 为情所困的企业家</h4>
+  <p>王总白手起家，公司估值过亿，商场上呼风唤雨。但年过四十，三次婚姻均以失败告终。排开命盘一看：<strong>来因宫在夫妻宫</strong>，且夫妻宫化忌入迁移宫。这意味着他此生的核心课题就是"婚姻"，无论事业做得多大，这个问题必须面对、无法绕开。后来他暂停公司业务一年，专心处理情感问题、接受心理咨询，终于在第三次婚姻中找到了平衡。<strong>来因宫</strong>告诉我们——有些课，迟早要补。</p>
+</div>
+
+<div class="story-card">
+  <span class="story-icon">📖</span>
+  <span class="story-tag">故事卡三</span>
+  <h4>三方四正的验证 —— 考运背后的宫位联动</h4>
+  <p>李同学平时成绩很好，但一到重要考试就发挥失常。命盘上：<strong>命宫</strong>（本宫）天机文昌——聪明无碍；<strong>官禄宫</strong>（三合）太阳庙旺——学业根基扎实；但<strong>迁移宫</strong>（对宫）有擎羊+地空来冲——一到"外出考试"（迁移）就出问题。加上大限走到<strong>财帛宫</strong>（另一三合方）逢化忌——考试焦虑来自"考不好就没前途"的经济压力。三合+对宫+大限四化一结合，答案清晰无比。<strong>只看本宫是片面的，三方四正才能看全。</strong></p>
+</div>
+
+<div class="story-card">
+  <span class="story-icon">📖</span>
+  <span class="story-tag">故事卡四</span>
+  <h4>夹宫的威力 —— 被"夹"住的婚姻</h4>
+  <p>赵女士的夫妻宫本身不错，天同坐守、太阴庙旺，按理应该婚姻美满。但她一直单身到35岁。细看发现：夫妻宫的<strong>前一宫（子女宫）有陀罗，后一宫（财帛宫）有擎羊</strong>——夫妻宫被"羊陀夹"！羊陀夹夫妻，感情路上左右为难、进退维谷。每一次恋爱到谈婚论嫁，总有一个"来自家庭的阻力"（前一宫子女宫代表原生家庭）和一个"来自经济的压力"（后一宫财帛宫代表金钱）同时夹击。这就是<strong>夹宫之力</strong>——夫妻宫自己没问题，但被前后夹住动弹不得。</p>
+</div>
+
+</div>
+
+<!-- ═══════════ 第六部分：口诀卡 ═══════════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>六、口诀卡 · 刻在骨子里的法则</h2><p class="sub">背到不需要思考，就是你的了</p></div>
+
+<div class="sec">
+
+<div class="mnemonic-card">
+  <div class="m-title"><span class="m-icon">🔖</span>十二宫速记口诀</div>
+  <div class="m-text">
+    一命二兄三夫妻，四子五财六疾厄；<br>
+    七迁八仆九官禄，十田十一福十二父。
+  </div>
+</div>
+
+<div class="mnemonic-card">
+  <div class="m-title"><span class="m-icon">🔖</span>六条主线口诀</div>
+  <div class="m-text">
+    命迁移迁自我线，兄仆对拱财富连；<br>
+    夫妻官禄家庭线，子田对看身心牵；<br>
+    财帛福德福寿线，疾厄父母健康线。<br>
+    一阴一阳谓之道，对宫同看是真言。
+  </div>
+</div>
+
+<div class="mnemonic-card">
+  <div class="m-title"><span class="m-icon">🔖</span>来因宫口诀（飞星派心传）</div>
+  <div class="m-text">
+    生年天干落何宫，来因在此莫放松；<br>
+    四化从此先飞出，十二宫干尽归宗。<br>
+    来因在命我为尊，来因在夫妻为根；<br>
+    来因在官事为重，来因在福心为门。<br>
+    不解来因空论命，飞星到此方见真。
+  </div>
+</div>
+
+<div class="mnemonic-card">
+  <div class="m-title"><span class="m-icon">🔖</span>三方四正口诀</div>
+  <div class="m-text">
+    三合一方隔四宫，申子辰与巳酉丑；<br>
+    亥卯未连寅午戍，命财官是一局中。<br>
+    四正加看对宫位，冲照之力不可轻；<br>
+    再有夹宫左右看，前后吉凶定分明。<br>
+    本对合夹四合参，宫位分析始见真。
+  </div>
+</div>
+
+<div class="mnemonic-card">
+  <div class="m-title"><span class="m-icon">🔖</span>夹宫速断口诀</div>
+  <div class="m-text">
+    左辅右弼夹贵人，天魁天钺夹科名；<br>
+    文昌文曲夹文星，日月夹照大光明。<br>
+    擎羊陀罗夹是劫，火星铃星夹是灾；<br>
+    地空地劫夹落空，禄权夹贵忌夹哀。
+  </div>
+</div>
+
+<div class="mnemonic-card">
+  <div class="m-title"><span class="m-icon">🔖</span>宫位分析总诀</div>
+  <div class="m-text">
+    看宫先看对宫面，三合左右不可偏；<br>
+    来因定下终生线，四化飞星一线牵。<br>
+    阴宫向内阳向外，阴阳合参是真诠；<br>
+    十二宫位如棋局，一子动时全局连。
+  </div>
+</div>
+
+</div>
+
+<!-- ═══════════ 总结 ═══════════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>七、宫位心法总结</h2><p class="sub">从"知道"到"悟到"</p></div>
+
+<div class="sec">
+
+<div class="sum">
+  <strong>🎯 宫位学习的三个层次：</strong><br><br>
+  <strong>第一层（认知层）：</strong>记住十二宫的位置和名称，知道每个宫代表什么——这是基础功。<br><br>
+  <strong>第二层（关联层）：</strong>理解六条主线的阴阳对拱关系、三方四正的合参体系——这是分析功。<br><br>
+  <strong>第三层（心法层）：</strong>领悟来因宫作为人生主线的深意，理解所有宫位最终在来因宫收束——这是悟道层。<br><br>
+  三层贯通，则宫位出神入化。
+</div>
+
+<div class="em">
+  <strong>传承者寄语：</strong>宫位不是死的，是活的。十二宫是一个有机的生命体——你动了命宫，迁移宫会变；你动了夫妻宫，官禄宫会动。宫位之间的关系，比单个宫位的状态更为重要。<strong>紫微斗数的精髓，不在"看一个宫"，而在"看一个局"。</strong>
+</div>
+
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  玄门学习平台 · 紫微斗数 · 宫位篇<br>
+  十二宫位 · 六条主线 · 对宫联看 · 来因宫心法 · 三方四正
+</footer>
+
+<!-- ═══════════ JavaScript ═══════════ -->
+<script>
+(function(){
+  // ── 进度条 ──
+  const progressBar = document.getElementById('pageProgress');
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', function(){
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docH > 0 ? Math.min(100, (scrollTop / docH) * 100) : 0;
+    progressBar.style.width = pct + '%';
+    backTop.classList.toggle('show', scrollTop > 400);
+  });
+  backTop.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  // ── 十二宫环：SVG绘制 ──
+  (function drawPalaceRing(){
+    var container = document.getElementById('palaceRing');
+    if(!container) return;
+    var W = 500, H = 500, cx = W/2, cy = H/2, rOuter = 210, rInner = 100, rMid = (rOuter+rInner)/2;
+
+    var palaces = [
+      {name:'命宫',short:'命',angleStart:-90,angleEnd:-60,color:'#d4b06a',desc:'本命元神所在。一个人的性格、天赋、命格根基。十二宫之首，一切论断的出发点。'},
+      {name:'兄弟宫',short:'兄',angleStart:-60,angleEnd:-30,color:'#5098c8',desc:'兄弟姐妹、母亲、亲密合伙人。也代表现金流与银行存款。化禄在此 = 手足为贵人。'},
+      {name:'夫妻宫',short:'夫',angleStart:-30,angleEnd:0,color:'#9b7ec4',desc:'配偶、婚姻、情感生活。也代表一个人的异性缘与感情模式。看婚姻必先看此宫。'},
+      {name:'子女宫',short:'子',angleStart:0,angleEnd:30,color:'#4ea868',desc:'子女、生育、学生、下属。也代表创作、享乐、性生活。化权在此 = 子女有成。'},
+      {name:'财帛宫',short:'财',angleStart:30,angleEnd:60,color:'#d4b06a',desc:'赚钱能力、理财方式、金钱观念。与福德宫互为表里——有钱不代表有福。'},
+      {name:'疾厄宫',short:'疾',angleStart:60,angleEnd:90,color:'#e0554a',desc:'身体健康、疾病、体质、意外伤害。也代表一个人的脾气和潜意识。'},
+      {name:'迁移宫',short:'迁',angleStart:90,angleEnd:120,color:'#e8d09f',desc:'外出际遇、社会形象、交通旅行。命宫的镜子——内在与外在不同才是常态。'},
+      {name:'仆役宫',short:'仆',angleStart:120,angleEnd:150,color:'#5098c8',desc:'朋友、下属、合作伙伴。泛指泛社会人际关系。化忌在此 = 交友不慎。'},
+      {name:'官禄宫',short:'官',angleStart:150,angleEnd:180,color:'#d4b06a',desc:'事业、工作、社会地位。夫妻宫的镜子——在古代男主外女主内。'},
+      {name:'田宅宫',short:'田',angleStart:180,angleEnd:210,color:'#4ea868',desc:'家庭、房产、祖业、晚年归宿。也代表一个人的"根据地"和安全感。'},
+      {name:'福德宫',short:'福',angleStart:210,angleEnd:240,color:'#9b7ec4',desc:'精神世界、福气、享受、晚年运势。财帛宫的镜子——精神富足才是真富。'},
+      {name:'父母宫',short:'父',angleStart:240,angleEnd:270,color:'#e0554a',desc:'父母、师长、上司、官府。也代表遗传、学历、文书运。疾厄宫的镜子。'}
+    ];
+
+    // 对宫索引映射
+    var oppIdx = [6,7,8,9,10,11,0,1,2,3,4,5];
+
+    // 环宽
+    var ringW = rOuter - rInner;
+    var svgNS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(svgNS,'svg');
+    svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    svg.setAttribute('width','100%');
+    svg.setAttribute('height','100%');
+
+    // 中心文字
+    var centerText = document.createElementNS(svgNS,'text');
+    centerText.setAttribute('x',cx); centerText.setAttribute('y',cy-6);
+    centerText.setAttribute('text-anchor','middle');
+    centerText.setAttribute('fill','#d4b06a');
+    centerText.setAttribute('font-size','16');
+    centerText.setAttribute('font-weight','600');
+    centerText.setAttribute('letter-spacing','3');
+    centerText.textContent = '紫微斗数';
+    svg.appendChild(centerText);
+    var centerText2 = document.createElementNS(svgNS,'text');
+    centerText2.setAttribute('x',cx); centerText2.setAttribute('y',cy+16);
+    centerText2.setAttribute('text-anchor','middle');
+    centerText2.setAttribute('fill','#6b6590');
+    centerText2.setAttribute('font-size','11');
+    centerText2.textContent = '十二宫位图';
+    svg.appendChild(centerText2);
+
+    function toRad(deg){ return deg * Math.PI / 180; }
+
+    // 绘制扇区和对宫连线
+    palaces.forEach(function(p,i){
+      var a1 = toRad(p.angleStart), a2 = toRad(p.angleEnd);
+      var x1o = cx + rOuter * Math.cos(a1), y1o = cy + rOuter * Math.sin(a1);
+      var x2o = cx + rOuter * Math.cos(a2), y2o = cy + rOuter * Math.sin(a2);
+      var x1i = cx + rInner * Math.cos(a1), y1i = cy + rInner * Math.sin(a1);
+      var x2i = cx + rInner * Math.cos(a2), y2i = cy + rInner * Math.sin(a2);
+      var large = (p.angleEnd - p.angleStart) > 180 ? 1 : 0;
+      var d = 'M '+x1o+' '+y1o+' A '+rOuter+' '+rOuter+' 0 '+large+' 1 '+x2o+' '+y2o+
+              ' L '+x2i+' '+y2i+' A '+rInner+' '+rInner+' 0 '+large+' 0 '+x1i+' '+y1i+' Z';
+
+      var path = document.createElementNS(svgNS,'path');
+      path.setAttribute('d',d);
+      path.setAttribute('fill', p.color);
+      path.setAttribute('fill-opacity','0.18');
+      path.setAttribute('stroke', p.color);
+      path.setAttribute('stroke-opacity','0.35');
+      path.setAttribute('stroke-width','1');
+      path.setAttribute('data-palace-idx',i);
+      path.setAttribute('class','sector');
+      path.setAttribute('style','cursor:pointer;transition:all .2s');
+      path.addEventListener('click',function(){ showDetail(i); });
+      svg.appendChild(path);
+
+      // 宫位名称标签
+      var midAng = toRad((p.angleStart+p.angleEnd)/2);
+      var tx = cx + rMid * Math.cos(midAng);
+      var ty = cy + rMid * Math.sin(midAng);
+      var label = document.createElementNS(svgNS,'text');
+      label.setAttribute('x',tx); label.setAttribute('y',ty+5);
+      label.setAttribute('text-anchor','middle');
+      label.setAttribute('fill','#e8e4f4');
+      label.setAttribute('font-size','13');
+      label.setAttribute('font-weight','500');
+      label.setAttribute('pointer-events','none');
+      label.textContent = p.short;
+      svg.appendChild(label);
+    });
+
+    // 绘制对宫连线（虚线）
+    for(var i=0;i<6;i++){
+      var j = oppIdx[i];
+      var midA1 = toRad((palaces[i].angleStart+palaces[i].angleEnd)/2);
+      var midA2 = toRad((palaces[j].angleStart+palaces[j].angleEnd)/2);
+      var line = document.createElementNS(svgNS,'line');
+      line.setAttribute('x1', cx + (rInner-8) * Math.cos(midA1));
+      line.setAttribute('y1', cy + (rInner-8) * Math.sin(midA1));
+      line.setAttribute('x2', cx + (rInner-8) * Math.cos(midA2));
+      line.setAttribute('y2', cy + (rInner-8) * Math.sin(midA2));
+      line.setAttribute('stroke','#d4b06a');
+      line.setAttribute('stroke-opacity','0.2');
+      line.setAttribute('stroke-width','1');
+      line.setAttribute('stroke-dasharray','4,4');
+      svg.appendChild(line);
+    }
+
+    container.appendChild(svg);
+
+    // ── 点击弹层 ──
+    var overlay = document.getElementById('overlay');
+    var detail = document.getElementById('palaceDetail');
+    var detailTitle = document.getElementById('detailTitle');
+    var detailBody = document.getElementById('detailBody');
+    var closeBtn = document.getElementById('closeDetail');
+
+    window.showDetail = function(idx){
+      var p = palaces[idx];
+      var opp = palaces[oppIdx[idx]];
+      detailTitle.textContent = p.name + '（第'+(idx+1)+'宫）';
+      detailBody.innerHTML = '<strong>本质：</strong>'+p.desc+'<br><br>'+
+        '<strong style="color:var(--gold)">⇄ 对宫（'+opp.name+'）：</strong>'+opp.desc+'<br><br>'+
+        '<em style="color:var(--text-dim)">对宫联看法则：分析'+p.name+'时，必须兼看'+opp.name+'的状态，二者互为镜像、互为表里。</em>';
+      overlay.classList.add('show');
+      detail.classList.add('show');
+    };
+    closeBtn.addEventListener('click',function(){
+      overlay.classList.remove('show');
+      detail.classList.remove('show');
+    });
+    overlay.addEventListener('click',function(){
+      overlay.classList.remove('show');
+      detail.classList.remove('show');
+    });
+  })();
+
+})();
+</script>
+
+</body>
+</html>

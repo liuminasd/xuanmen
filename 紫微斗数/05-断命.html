@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="紫微斗数断命 — 十步断命法完整流程、专题论断速查、大限流年推算、完整命盘案例分析。">
+<title>紫微斗数 · 断命</title>
+<link rel="stylesheet" href="../共享样式/base.css">
+<link rel="stylesheet" href="../共享样式/components.css">
+<style>
+  :root{--font-ui:"Noto Serif SC","Songti SC","STSong",serif}
+  body{font-family:var(--font-ui);padding-bottom:60px}
+  .breadcrumb{padding:16px 24px;font-size:.78rem}
+  .breadcrumb a{color:var(--text-dim);text-decoration:none}
+  .breadcrumb a:hover{color:var(--gold)}
+  .breadcrumb span{color:var(--text-dim);margin:0 6px}
+
+  .hero{text-align:center;padding:40px 20px 32px;border-bottom:1px solid var(--border);margin-bottom:32px}
+  .hero h1{font-size:2.2em;color:var(--gold-lt);letter-spacing:5px;font-weight:300}
+  .hero p{color:var(--text-dim);font-size:.9rem;letter-spacing:2px;margin-top:6px}
+  .hero .line{width:50px;height:1px;background:var(--gold);margin:12px auto;opacity:.4}
+
+  .container{max-width:960px;margin:0 auto;padding:0 24px}
+
+  .ph-hdr{margin:52px 0 24px;padding:0 0 12px;position:relative}
+  .ph-hdr::after{content:"";position:absolute;bottom:0;left:0;width:60px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+  .ph-hdr h2{font-size:1.35rem;color:var(--gold-lt);letter-spacing:3px;font-weight:300;display:flex;align-items:center;gap:12px}
+  .ph-hdr .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold-glow)}
+  .ph-hdr .sub{color:var(--text-dim);font-size:.76rem;margin-top:4px;letter-spacing:2px;padding-left:20px}
+
+  .sec{margin:30px 0}
+  .sec h3{color:var(--gold);font-size:1.05rem;font-weight:400;letter-spacing:2px;margin:20px 0 10px;padding:0 0 0 14px;border-left:2px solid var(--gold)}
+  .sec h4{color:var(--gold-lt);font-size:.92rem;margin:16px 0 8px;font-weight:400}
+  .sec p{color:var(--text-alt);font-size:.86rem;margin:8px 0;line-height:1.9}
+  .sec p strong,.sec li strong{color:#e8d8b0;font-weight:500}
+  .sec ul,.sec ol{padding-left:22px;margin:8px 0}
+  .sec li{color:var(--text-alt);font-size:.84rem;margin:4px 0;line-height:1.8}
+
+  .em{background:var(--card);border:1px solid rgba(212,176,106,.08);border-radius:var(--radius);padding:15px 18px;margin:12px 0;font-size:.84rem;color:var(--text-alt)}
+  .em strong{color:var(--gold-lt)}
+  .q{background:var(--gold-bg);border-left:2px solid var(--gold);padding:11px 16px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;font-size:.84rem;color:var(--text-alt)}
+  .q strong{color:var(--gold-lt)}
+  .w{background:rgba(224,85,74,.03);border-left:2px solid var(--red);padding:11px 16px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;font-size:.84rem}
+  .w strong{color:var(--red)}
+  .t{background:rgba(78,168,104,.03);border-left:2px solid var(--green);padding:11px 16px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;font-size:.84rem}
+  .t strong{color:var(--green)}
+  .sum{background:linear-gradient(135deg,var(--gold-bg),rgba(212,176,106,.01));border:1px dashed rgba(212,176,106,.15);border-radius:var(--radius);padding:16px 20px;margin:20px 0;font-size:.84rem}
+  .sum strong{color:var(--gold-lt)}
+
+  /* 口诀卡片 */
+  .mnemonic{
+    background:linear-gradient(135deg,rgba(212,176,106,.08),rgba(212,176,106,.02));
+    border:1px solid rgba(212,176,106,.2);border-radius:var(--radius-lg);
+    padding:20px 24px;margin:18px 0;position:relative;overflow:hidden;
+    transition:all .3s;
+  }
+  .mnemonic::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+    background:linear-gradient(180deg,var(--gold),var(--gold-dk));border-radius:4px 0 0 4px}
+  .mnemonic:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+  .mnemonic .m-title{color:var(--gold);font-size:.88rem;font-weight:600;letter-spacing:3px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .mnemonic .m-type{display:inline-block;font-size:.62rem;padding:2px 8px;border-radius:8px;
+    background:var(--gold-bg);color:var(--gold);letter-spacing:.1em;font-weight:400}
+  .mnemonic .m-content{color:var(--gold-lt);font-size:.95rem;line-height:2.1;letter-spacing:.05em;
+    text-align:center;font-family:"KaiTi","STKaiti","Noto Serif SC",serif;font-weight:600;
+    text-shadow:0 0 20px rgba(212,176,106,.1)}
+  .mnemonic .m-explain{color:var(--text-dim);font-size:.76rem;margin-top:10px;line-height:1.8}
+  .mnemonic .m-explain strong{color:var(--text-alt)}
+
+  table{width:100%;border-collapse:collapse;font-size:.82em;margin:12px 0}
+  th{background:var(--gold-bg);color:var(--gold);padding:9px 12px;text-align:left;border-bottom:1px solid rgba(212,176,106,.15);font-weight:400;letter-spacing:1px}
+  th:first-child{border-radius:var(--radius) 0 0 0}th:last-child{border-radius:0 var(--radius) 0 0}
+  td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  tr:hover td{background:rgba(255,255,255,.01)}
+  td:first-child{color:#e0d8c0;font-weight:500;white-space:nowrap}
+
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:10px 0}
+  .g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:10px 0}
+
+  /* 十步流程图 */
+  .steps-flow{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;justify-content:center}
+  .steps-flow .sf-step{flex:1;min-width:80px;max-width:100px;text-align:center;
+    padding:12px 6px;background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);transition:all .25s}
+  .steps-flow .sf-step:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 4px 16px rgba(0,0,0,.3)}
+  .steps-flow .sf-num{font-size:1.3rem;color:var(--gold);font-weight:300;margin-bottom:2px}
+  .steps-flow .sf-label{font-size:.66rem;color:var(--text-dim);line-height:1.4}
+
+  /* 专题快速参考卡 */
+  .ref-card{border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;
+    margin:10px 0;transition:all .25s;background:var(--card)}
+  .ref-card:hover{border-color:var(--gold);box-shadow:0 2px 12px rgba(0,0,0,.2)}
+  .ref-card .ref-icon{font-size:1.6rem;margin-bottom:6px}
+  .ref-card .ref-title{color:var(--gold);font-size:.9rem;font-weight:600;margin-bottom:8px}
+  .ref-card .ref-keys{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}
+  .ref-card .ref-keys span{font-size:.7rem;padding:2px 8px;border-radius:8px;
+    border:1px solid var(--border);color:var(--text-alt);white-space:nowrap}
+  .ref-card .ref-keys span.吉{border-color:rgba(78,168,104,.3);color:var(--green);background:rgba(78,168,104,.06)}
+  .ref-card .ref-keys span.凶{border-color:rgba(224,85,74,.3);color:var(--red);background:rgba(224,85,74,.06)}
+  .ref-card .ref-keys span.平{border-color:rgba(80,152,200,.3);color:var(--blue);background:rgba(80,152,200,.06)}
+
+  /* 案例卡片 */
+  .case-card{background:linear-gradient(155deg,var(--card),rgba(21,19,38,.95));
+    border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px 24px;margin:18px 0}
+  .case-card .case-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .case-card .case-num{width:36px;height:36px;border-radius:50%;background:var(--gold-bg);
+    border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;
+    color:var(--gold);font-weight:700;font-size:.9rem;flex-shrink:0}
+  .case-card .case-title{color:var(--gold-lt);font-size:1rem;font-weight:500;letter-spacing:1px}
+  .case-card .case-meta{color:var(--text-dim);font-size:.74rem}
+  .case-card h4{color:var(--gold);font-size:.88rem;margin:14px 0 6px}
+  .case-card p,.case-card li{font-size:.84rem;color:var(--text-alt);line-height:1.85}
+  .case-card .case-timeline{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+  .case-card .case-event{flex:1;min-width:140px;padding:10px 12px;
+    background:rgba(212,176,106,.04);border:1px dashed rgba(212,176,106,.12);
+    border-radius:var(--radius-sm);font-size:.78rem;color:var(--text-alt);text-align:center}
+  .case-card .case-event strong{display:block;color:var(--gold-lt);font-size:.82rem;margin-bottom:4px}
+
+  blockquote{background:var(--card-alt);border-left:2px solid var(--gold);padding:13px 18px;
+    border-radius:0 var(--radius) var(--radius) 0;color:var(--text-alt);font-style:italic;font-size:.84rem;margin:14px 0}
+  blockquote .src{display:block;text-align:right;color:var(--text-dim);font-size:.74rem;margin-top:6px;font-style:normal}
+
+  footer{text-align:center;padding:40px 20px;color:var(--text-dim);font-size:.74rem;letter-spacing:2px;border-top:1px solid var(--border);margin-top:48px}
+
+  @media(max-width:720px){.g2,.g3{grid-template-columns:1fr}.steps-flow .sf-step{min-width:60px}}
+  @media(max-width:640px){
+    .hero h1{font-size:1.5em}.container{padding:0 12px}
+    .ph-hdr h2{font-size:1.15rem}.mnemonic .m-content{font-size:.85rem}
+    table{font-size:.72em}td,th{padding:6px 8px}
+  }
+  .with-sidebar{margin-left:0!important}
+  .topnav{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(8,7,13,.98),rgba(12,11,21,.95));border-bottom:1px solid var(--border);padding:8px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;backdrop-filter:blur(10px)}
+  .topnav-back{color:var(--gold);text-decoration:none;font-size:.8rem;font-weight:600;padding:5px 12px;border:1px solid var(--gold);border-radius:14px;white-space:nowrap;transition:all .2s;flex-shrink:0}
+  .topnav-back:hover{background:var(--gold);color:#111}
+  .topnav-title{color:var(--text-dim);font-size:.76rem;letter-spacing:.06em;white-space:nowrap}
+  .topnav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .topnav-links a{color:var(--text-alt);text-decoration:none;font-size:.74rem;padding:4px 12px;border:1px solid var(--border);border-radius:12px;transition:all .2s}
+  .topnav-links a:hover{border-color:var(--gold);color:var(--gold)}
+  @media(max-width:600px){.topnav{padding:8px 10px;gap:8px}.topnav-links{margin-left:0}}
+
+  /* 大限流年时间轴 */
+  .timeline-viz{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0;justify-content:center}
+  .timeline-viz .tl-block{flex:1;min-width:70px;max-width:90px;padding:10px 4px;
+    text-align:center;background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius-sm);font-size:.7rem;color:var(--text-alt);transition:all .2s}
+  .timeline-viz .tl-block:hover{border-color:var(--gold);background:var(--gold-bg)}
+  .timeline-viz .tl-age{font-size:.85rem;color:var(--gold-lt);font-weight:600;display:block}
+  .timeline-viz .tl-decade{font-size:.62rem;color:var(--text-dim);margin-top:2px}
+  .timeline-viz .tl-active{border-color:var(--gold)!important;box-shadow:0 0 8px var(--gold-glow)}
+
+  /* 信号指示器 */
+  .sig-indicator{display:inline-flex;align-items:center;gap:4px;font-size:.74rem}
+  .sig-indicator .dot-sig{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .sig-indicator .dot-sig.good{background:var(--green);box-shadow:0 0 6px rgba(78,168,104,.4)}
+  .sig-indicator .dot-sig.warn{background:var(--red);box-shadow:0 0 6px rgba(224,85,74,.4)}
+  .sig-indicator .dot-sig.mix{background:var(--gold);box-shadow:0 0 6px rgba(212,176,106,.4)}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <a href="../index.html" class="topnav-back">← 玄门</a>
+  <span class="topnav-title">紫微斗数 · 断命</span>
+  <div class="topnav-links">
+    <a href="index.html">总览</a>
+    <a href="01-星曜.html">星曜</a>
+    <a href="02-宫位.html">宫位</a>
+    <a href="03-四化.html">四化</a>
+    <a href="04-格局.html">格局</a>
+    <a href="05-断命.html">断命</a>
+    <a href="06-深潜.html">深潜</a>
+    <a href="题库.html">题库</a>
+  </div>
+</header>
+
+<div class="page-progress" id="pageProgress"></div>
+<button id="backTop">↑</button>
+
+<div class="hero">
+  <h1>断 命</h1>
+  <p>十步断命法 · 专题速查 · 大限流年 · 案例实战</p>
+  <div class="line"></div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 核心口诀 ═══ -->
+<div class="ph-hdr"><h2><span class="dot"></span>断命总纲</h2><p class="sub">四句真言 · 贯穿始终</p></div>
+
+<div class="mnemonic">
+  <div class="m-title">🔑 斗数断命十六字真言 <span class="m-type">核心口诀</span></div>
+  <div class="m-content">
+    宫位定人事&emsp;星情定吉凶<br>
+    四化寻契机&emsp;行运看变化
+  </div>
+  <div class="m-explain">
+    <strong>宫位定人事：</strong>十二宫各司其职——命宫看本体、夫妻看婚姻、财帛看财运……宫位决定"论什么事"。<br>
+    <strong>星情定吉凶：</strong>星曜是吉凶的主体——紫微天府为吉、廉贞破军多变动……星曜决定"事情好坏"。<br>
+    <strong>四化寻契机：</strong>禄权科忌是变化的引信——化禄是机会、化忌是问题发生点，四化决定"何时何事触发"。<br>
+    <strong>行运看变化：</strong>大限流年层层叠加——原局是根基、大限是十年趋势、流年是当年应期，行运决定"何时发生"。
+  </div>
+</div>
+
+<!-- ═══════ 第一部分：十步断命法 ═══════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>第一部分 · 十步断命法</h2><p class="sub">系统化完整论断流程 · 从命盘到结论的十步阶梯</p></div>
+
+<!-- 十步概览 -->
+<div class="steps-flow">
+  <div class="sf-step"><div class="sf-num">①</div><div class="sf-label">立根基</div></div>
+  <div class="sf-step"><div class="sf-num">②</div><div class="sf-label">观性情</div></div>
+  <div class="sf-step"><div class="sf-num">③</div><div class="sf-label">定出身</div></div>
+  <div class="sf-step"><div class="sf-num">④</div><div class="sf-label">查事业</div></div>
+  <div class="sf-step"><div class="sf-num">⑤</div><div class="sf-label">断财运</div></div>
+  <div class="sf-step"><div class="sf-num">⑥</div><div class="sf-label">观婚姻</div></div>
+  <div class="sf-step"><div class="sf-num">⑦</div><div class="sf-label">察健康</div></div>
+  <div class="sf-step"><div class="sf-num">⑧</div><div class="sf-label">排大限</div></div>
+  <div class="sf-step"><div class="sf-num">⑨</div><div class="sf-label">断流年</div></div>
+  <div class="sf-step"><div class="sf-num">⑩</div><div class="sf-label">汇总论</div></div>
+</div>
+
+<div class="sec">
+
+<!-- 第1步：立根基 -->
+<h3>第一步 · 立根基</h3>
+<p><strong>核心任务：</strong>看命宫及三方四正（命宫→财帛→官禄），判断命格强弱与层次。</p>
+<div class="g2">
+  <div>
+    <h4>判断要点</h4>
+    <ul>
+      <li><strong>命宫主星：</strong>十四主星中何星坐守？单星还是双星？</li>
+      <li><strong>庙旺利陷：</strong>星曜落入何地支宫位？庙旺则强，落陷则弱</li>
+      <li><strong>三方四正：</strong>命宫/财帛/官禄+对宫迁移宫的星曜组合</li>
+      <li><strong>辅佐煞曜：</strong>左右昌曲魁钺（吉辅）vs 羊陀火铃空劫（煞曜）</li>
+      <li><strong>四化引动：</strong>命宫及三方是否有生年四化？化禄/化权/化科/化忌</li>
+    </ul>
+  </div>
+  <div>
+    <h4>命格层次速判</h4>
+    <div class="em">
+      <strong>上等命格信号：</strong>紫微/天府+左右昌曲魁钺在三方会照 → 格局高，有领导才能<br>
+      <strong>中等命格信号：</strong>主星庙旺+无煞冲破 → 平稳有成<br>
+      <strong>下等命格信号：</strong>主星落陷+羊陀火铃空劫夹命 → 一生多波折
+    </div>
+    <div class="w"><strong>注意：</strong>所谓"命无必吉、煞无必凶"，需结合整体宫位与大限判断。命宫弱但大限走得好，同样可有成就。</div>
+  </div>
+</div>
+
+<!-- 第2步：观性情 -->
+<h3>第二步 · 观性情</h3>
+<p><strong>核心任务：</strong>通过命宫+福德宫+身宫判断命主性格特质与处事方式。</p>
+<div class="g2">
+  <div>
+    <h4>性情星曜速查</h4>
+    <table>
+      <thead><tr><th>类型</th><th>星曜</th><th>性情特征</th></tr></thead>
+      <tr><td>领袖型</td><td>紫微/天府</td><td>自尊心强、稳重、有领导欲</td></tr>
+      <tr><td>智谋型</td><td>天机/巨门</td><td>聪明善谋、口才好、心思活络</td></tr>
+      <tr><td>行动型</td><td>武曲/七杀/破军</td><td>刚毅果断、敢闯敢拼、执行力强</td></tr>
+      <tr><td>圆融型</td><td>天同/太阴/天相</td><td>温和善良、善协调、不喜冲突</td></tr>
+      <tr><td>才艺型</td><td>贪狼/廉贞</td><td>多才多艺、桃花旺、善交际</td></tr>
+      <tr><td>清高型</td><td>太阳/天梁</td><td>正直热心、有担当、好管闲事</td></tr>
+    </table>
+  </div>
+  <div>
+    <h4>性情判断技巧</h4>
+    <ul>
+      <li><strong>命宫为主：</strong>命宫主星决定核心性格</li>
+      <li><strong>福德宫为辅：</strong>反映内心世界、精神追求和消费观念</li>
+      <li><strong>身宫为后天：</strong>身宫（在哪个宫位）反映后天重心与行为倾向</li>
+      <li><strong>迁移宫为外显：</strong>对宫迁移——在外人面前的呈现方式</li>
+      <li><strong>四化调节：</strong>化权增强主见，化科增强文雅，化禄增强随和，化忌增强执着</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 第3步：定出身 -->
+<h3>第三步 · 定出身</h3>
+<p><strong>核心任务：</strong>看父母宫+田宅宫+兄弟宫，判断原生家庭条件和早年运势。</p>
+<div class="g2">
+  <div>
+    <h4>出身判断要点</h4>
+    <ul>
+      <li><strong>父母宫：</strong>看父母社会地位、与父母缘分、文书学历运</li>
+      <li><strong>田宅宫：</strong>看祖业有无、家庭环境、房产运</li>
+      <li><strong>兄弟宫：</strong>看兄弟姐妹助力、朋友起步阶段</li>
+      <li><strong>命宫：</strong>三方有禄存/化禄 → 少年得志、家境优渥</li>
+    </ul>
+  </div>
+  <div>
+    <div class="em">
+      <strong>富庶出身：</strong>田宅宫紫微/天府/禄存/化禄 → 祖业丰厚、家境殷实<br>
+      <strong>书香门第：</strong>父母宫文昌文曲/天梁/化科 → 父母有文化、学历高<br>
+      <strong>白手起家：</strong>田宅宫空劫/化忌、父母宫煞重 → 需靠自己打拼<br>
+      <strong>家运起伏：</strong>田宅宫天机/破军 → 家运多变、可能有搬迁
+    </div>
+  </div>
+</div>
+
+<!-- 第4步：查事业 -->
+<h3>第四步 · 查事业</h3>
+<p><strong>核心任务：</strong>官禄宫+命宫+迁移宫三宫联看，判断事业方向和成就。</p>
+<div class="g2">
+  <div>
+    <h4>事业方向判断</h4>
+    <table>
+      <thead><tr><th>类型</th><th>核心信号</th><th>适合领域</th></tr></thead>
+      <tr><td>从政为官</td><td>紫微/天府/太阳庙+天相+魁钺</td><td>政府/国企/大型机构</td></tr>
+      <tr><td>经商创业</td><td>武曲+贪狼/破军+禄存/化禄</td><td>商业/金融/贸易</td></tr>
+      <tr><td>技术专业</td><td>天机/七杀/破军+文昌/文曲</td><td>IT/工程/科研/设计</td></tr>
+      <tr><td>文教艺术</td><td>文昌/文曲/贪狼+廉贞+化科</td><td>教育/文艺/传媒</td></tr>
+      <tr><td>法律咨询</td><td>天梁/巨门+天相+魁钺</td><td>法律/咨询/审计</td></tr>
+      <tr><td>医疗健康</td><td>天梁+天同/太阴+昌曲</td><td>医疗/养生/心理</td></tr>
+    </table>
+  </div>
+  <div>
+    <h4>事业运程信号</h4>
+    <div class="em">
+      <strong>升迁佳期：</strong>紫微+化权、太阳庙旺+化禄在大限官禄宫<br>
+      <strong>贵人助力：</strong>左辅右弼/天魁天钺在三方会照官禄<br>
+      <strong>跳槽信号：</strong>官禄化忌/天机坐官禄 → 职业多变<br>
+      <strong>事业危机：</strong>官禄宫空劫+化忌+火铃 → 事业受阻、有失业风险<br>
+      <strong>成名时机：</strong>文昌/文曲+化科在大限官禄/迁移 → 名声鹊起
+    </div>
+    <div class="w"><strong>关键提示：</strong>官禄宫好但迁移宫差 → 有才能但不被外界认可；迁移宫好但官禄宫差 → 名气大于实力。三宫不可偏废。</div>
+  </div>
+</div>
+
+<!-- 第5步：断财运 -->
+<h3>第五步 · 断财运</h3>
+<p><strong>核心任务：</strong>财帛宫+田宅宫+福德宫三宫联看，判断财运格局与理财能力。</p>
+<div class="g2">
+  <div>
+    <h4>财星等级</h4>
+    <table>
+      <thead><tr><th>等级</th><th>星曜组合</th><th>财运特征</th></tr></thead>
+      <tr><td>一等财</td><td>武曲+化禄/禄存</td><td>正财极旺、收入丰厚</td></tr>
+      <tr><td>二等财</td><td>太阴庙旺+禄存</td><td>善于积蓄、财富稳健增长</td></tr>
+      <tr><td>三等财</td><td>天府+化禄</td><td>善于理财、资产多元</td></tr>
+      <tr><td>暴发财</td><td>贪狼+火星/铃星（火贪/铃贪）</td><td>横发暴富但来得快去得也快</td></tr>
+      <tr><td>守成财</td><td>禄存独坐无煞冲破</td><td>稳定收入、不富不穷</td></tr>
+    </table>
+  </div>
+  <div>
+    <h4>财运三宫联动</h4>
+    <div class="em">
+      <strong>财帛宫（来财）：</strong>看收入来源与挣钱能力——是正财(工资)还是偏财(投资)<br>
+      <strong>田宅宫（守财）：</strong>看财富积累与资产——是能存钱还是左手进右手出<br>
+      <strong>福德宫（享财）：</strong>看消费观与财路格局——是节俭还是挥霍、是享受还是焦虑
+    </div>
+    <div class="w">
+      <strong>⚠ 破财信号速查：</strong><br>
+      财帛化忌 → 漏财破财 | 空劫在财帛 → 财来财去 | 火铃在财帛 → 冲动破财<br>
+      田宅化忌 → 房产纠纷/存不住钱 | 福德化忌 → 为钱烦恼、消费过度
+    </div>
+    <div class="t">
+      <strong>✅ 富格速查：</strong><br>
+      财帛宫+田宅宫+福德宫 三宫皆吉 → 富裕命格<br>
+      禄存/化禄守财帛 + 天府守田宅 + 天同/太阴守福德 → 一生财福双全
+    </div>
+  </div>
+</div>
+
+<!-- 第6步：观婚姻 -->
+<h3>第六步 · 观婚姻</h3>
+<p><strong>核心任务：</strong>夫妻宫+福德宫+迁移宫三宫联看，判断婚姻质量与缘分时机。</p>
+<div class="g2">
+  <div>
+    <h4>配偶特征速查</h4>
+    <table>
+      <thead><tr><th>星曜</th><th>配偶特征</th><th>婚姻状态</th></tr></thead>
+      <tr><td>紫微/天府</td><td>配偶条件好、有地位</td><td>稳定但可能强势</td></tr>
+      <tr><td>太阳(庙)</td><td>开朗大方、事业有成</td><td>光明磊落、互敬互爱</td></tr>
+      <tr><td>太阴(庙)</td><td>温柔美丽、贤惠体贴</td><td>和谐美满</td></tr>
+      <tr><td>天同</td><td>性格温和、知足常乐</td><td>平淡是真</td></tr>
+      <tr><td>廉贞</td><td>外貌出众、有魅力</td><td>易有感情波折</td></tr>
+      <tr><td>巨门</td><td>口才好、心思重</td><td>多口舌争执</td></tr>
+      <tr><td>七杀/破军</td><td>个性强烈、有魄力</td><td>婚姻多变动</td></tr>
+    </table>
+  </div>
+  <div>
+    <h4>婚姻核心信号</h4>
+    <div class="em">
+      <strong>优质信号：</strong>紫府在夫妻 → 配偶条件好 | 太阳太阴庙旺 → 夫妻和谐<br>
+      <strong>桃花信号：</strong>贪狼(正桃花·才艺型) | 廉贞(次桃花·感性型) | 天姚(风流) | 红鸾(正缘) | 天喜(喜庆) | 咸池(烂桃花)
+    </div>
+    <div class="w">
+      <strong>⚠ 婚灾信号：</strong><br>
+      夫妻宫化忌 → 婚姻关系紧张、沟通困难<br>
+      廉贞化忌在夫妻 → 感情困扰、第三者问题<br>
+      寡宿/孤辰在夫妻 → 晚婚或孤独感<br>
+      羊陀火铃在夫妻 → 争吵、暴力、分离
+    </div>
+    <div class="t">
+      <strong>✅ 婚期判断：</strong><br>
+      大限夫妻宫化禄 + 流年红鸾天喜入夫妻宫/命宫 → 婚期最强信号！<br>
+      流年夫妻宫见红鸾/天喜/文昌化科 → 当年有结婚机会
+    </div>
+  </div>
+</div>
+
+<!-- 第7步：察健康 -->
+<h3>第七步 · 察健康</h3>
+<p><strong>核心任务：</strong>疾厄宫+父母宫（父疾线/文书线），判断先天体质与潜在疾病。</p>
+<div class="g2">
+  <div>
+    <h4>星曜与身体部位对应</h4>
+    <table>
+      <thead><tr><th>星曜</th><th>对应部位</th><th>易患疾病</th></tr></thead>
+      <tr><td>太阳</td><td>心/眼/头部</td><td>心脏病、眼疾、高血压</td></tr>
+      <tr><td>太阴</td><td>肾/妇科/血液</td><td>肾病、妇科病、贫血</td></tr>
+      <tr><td>巨门</td><td>口/消化/呼吸</td><td>口腔病、胃病、气管炎</td></tr>
+      <tr><td>天机</td><td>肝/神经/手足</td><td>肝病、神经衰弱、手足伤</td></tr>
+      <tr><td>武曲</td><td>肺/骨骼/鼻</td><td>肺病、骨折、鼻炎</td></tr>
+      <tr><td>廉贞</td><td>血液/免疫/皮肤</td><td>血液病、过敏、皮肤病</td></tr>
+      <tr><td>贪狼</td><td>肝/生殖/泌尿</td><td>肝病、生殖系统、肾病</td></tr>
+      <tr><td>七杀</td><td>骨骼/外伤</td><td>骨折、意外伤害、手术</td></tr>
+      <tr><td>破军</td><td>生殖/泌尿</td><td>妇科、泌尿系统</td></tr>
+      <tr><td>天梁</td><td>脾胃/脊柱</td><td>胃病、脊椎病</td></tr>
+    </table>
+  </div>
+  <div>
+    <h4>健康判断要点</h4>
+    <ul>
+      <li><strong>疾厄宫为主：</strong>坐何星曜、有无煞星冲破</li>
+      <li><strong>父疾线（父母+疾厄）：</strong>两宫对拱，看遗传病和文书运</li>
+      <li><strong>煞星入疾厄：</strong>羊陀 → 外伤手术 | 火铃 → 急性炎症 | 空劫 → 慢性消耗</li>
+      <li><strong>化忌入疾厄：</strong>身体有明显的薄弱环节</li>
+      <li><strong>命宫+疾厄同时受冲：</strong>大凶，需特别关注健康</li>
+    </ul>
+    <div class="w">
+      <strong>⚠ 危疾信号：</strong>疾厄宫化忌+火铃/羊陀同宫 → 重大疾病风险<br>
+      <strong>⚠ 意外信号：</strong>迁移宫七杀+擎羊 → 车祸/意外伤害<br>
+      <strong>⚠ 手术信号：</strong>疾厄宫见天刑/白虎+羊陀 → 手术住院
+    </div>
+  </div>
+</div>
+
+<!-- 第8步：排大限 -->
+<h3>第八步 · 排大限</h3>
+<p><strong>核心任务：</strong>按五行局排出各十年大限所在宫位，结合大限四化分析十年运势起伏。</p>
+<div class="g2">
+  <div>
+    <h4>大限排法口诀</h4>
+    <div class="em">
+      <strong>阳男阴女顺行、阴男阳女逆行。</strong><br>
+      从命宫起，每宫管十年。五行局定起运岁数：<br>
+      水二局2岁起 | 木三局3岁起 | 金四局4岁起<br>
+      土五局5岁起 | 火六局6岁起
+    </div>
+    <h4>大限分析要点</h4>
+    <ul>
+      <li><strong>大限命宫：</strong>该十年主运宫位，星曜+四化定十年基调</li>
+      <li><strong>大限四化：</strong>大限天干产生四化，叠加在原局之上</li>
+      <li><strong>大限三方：</strong>大限命宫的三方四正——该十年的财、官、迁移</li>
+      <li><strong>大限与四柱对冲：</strong>大限命宫若与生年四柱发生刑冲克害，防该大限不顺</li>
+      <li><strong>好大限标志：</strong>大限命宫主星庙旺+化禄/化权/化科+吉星会照</li>
+    </ul>
+  </div>
+  <div>
+    <h4>大限吉凶速判</h4>
+    <table>
+      <thead><tr><th>大限类型</th><th>核心信号</th><th>运程特征</th></tr></thead>
+      <tr><td>好运大限</td><td>紫微/天府/太阳庙+化禄/化权</td><td>事业上升、财运亨通</td></tr>
+      <tr><td>平运大限</td><td>天相/天同+无煞冲破</td><td>平稳发展、无大起伏</td></tr>
+      <tr><td>变动大限</td><td>天机/破军/七杀</td><td>多有变动、宜顺势而为</td></tr>
+      <tr><td>波折大限</td><td>巨门+化忌/廉贞化忌+煞重</td><td>口舌是非、波折不断</td></tr>
+      <tr><td>桃花大限</td><td>贪狼+红鸾/天喜/咸池</td><td>桃花旺、情感事件多</td></tr>
+      <tr><td>财运大限</td><td>武曲+化禄/禄存守大限财帛</td><td>财运高峰期</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 第9步：断流年 -->
+<h3>第九步 · 断流年</h3>
+<p><strong>核心任务：</strong>结合流年太岁、小限、斗君，精准定位当年吉凶事件。</p>
+<div class="g2">
+  <div>
+    <h4>流年论断体系</h4>
+    <div class="em">
+      <strong>三大流年工具：</strong><br>
+      ① <strong>流年太岁：</strong>以当年干支定流年命宫，看太岁所在宫位的星曜四化<br>
+      ② <strong>小限：</strong>以生年年支为起点，男命逆行/女命顺行（每岁一宫）<br>
+      ③ <strong>斗君：</strong>定流年正月之宫——从流年太岁宫起正月，逆数至生月，再顺数至生时即为斗君（正月宫位）
+    </div>
+  </div>
+  <div>
+    <h4>流年判断权重</h4>
+    <div class="em">
+      <strong>流年太岁 → 最重要（70%）</strong>：看当年整体运势<br>
+      <strong>小限 → 辅助（20%）</strong>：与太岁同参，加强判断<br>
+      <strong>斗君 → 细化（10%）</strong>：定正月后逐月顺数，看具体月份
+    </div>
+  </div>
+</div>
+
+<!-- 斗君详解 -->
+<div class="sec">
+<h3>斗君 · 流月定位法</h3>
+<div class="g2">
+  <div>
+    <h4>斗君起法</h4>
+    <div class="q">
+      <strong>步骤一：</strong>以流年太岁所在宫位为起点（当作正月）<br>
+      <strong>步骤二：</strong>逆数（逆时针）至命主出生月份所在宫位<br>
+      <strong>步骤三：</strong>从该宫位顺数（顺时针）至出生时辰所在宫位<br>
+      <strong>结果：</strong>该宫即为当年<strong>斗君</strong>（正月宫位）<br>
+      <strong>逐月：</strong>斗君宫 = 正月 → 下一宫 = 二月 → 依次顺数至十二月
+    </div>
+  </div>
+  <div>
+    <h4>小限起法</h4>
+    <div class="q">
+      <strong>男命：</strong>以生年年支所在宫位为1岁起点，<strong>逆数</strong>（逆时针）→ 2岁在下一宫 → 3岁再下一宫……<br>
+      <strong>女命：</strong>以生年年支所在宫位为1岁起点，<strong>顺数</strong>（顺时针）→ 2岁在下一宫 → 3岁再下一宫……
+    </div>
+    <div class="w"><strong>注意：</strong>小限主要作为流年太岁的辅助参考，两者吉凶同参。若流年太岁吉而小限凶，说明虽有困难但总体向好；反之亦然。</div>
+  </div>
+</div>
+</div>
+
+<!-- 第10步：汇总论 -->
+<h3>第十步 · 汇总论</h3>
+<p><strong>核心任务：</strong>将前九步结论整合，给出全面命理总结与建议。</p>
+<div class="g2">
+  <div>
+    <h4>汇总框架</h4>
+    <ol>
+      <li><strong>命格总结：</strong>命宫强弱+格局层次，一句话概括</li>
+      <li><strong>性格标签：</strong>核心性格特质（2-3个关键词）</li>
+      <li><strong>事业路径：</strong>最佳行业方向+发展时机</li>
+      <li><strong>财运特征：</strong>财源模式+注意事项</li>
+      <li><strong>婚姻状况：</strong>配偶特征+婚期+注意事项</li>
+      <li><strong>健康关注：</strong>薄弱环节+保健建议</li>
+      <li><strong>大运曲线：</strong>各十年运程起伏+关键转折点</li>
+      <li><strong>当前流年：</strong>本年重点关注事项</li>
+      <li><strong>趋吉避凶建议：</strong>具体可操作建议</li>
+    </ol>
+  </div>
+  <div>
+    <h4>汇总原则</h4>
+    <div class="em">
+      <strong>① 先总后分：</strong>先说整体命格层次，再分项细论<br>
+      <strong>② 吉凶并陈：</strong>有吉说吉、有凶说凶，不偏不倚<br>
+      <strong>③ 轻重有序：</strong>最突出的特点先说（无论吉凶）<br>
+      <strong>④ 给出建议：</strong>不止于论断，还要给出趋避建议<br>
+      <strong>⑤ 留有余地：</strong>命理是趋势而非定数，"一命二运三风水四积德五读书"
+    </div>
+    <blockquote>善断者，不在星多，而在<strong>抓住关键</strong>。一个命盘，能说准最核心的三五件事，胜过面面俱到却事事不准。<span class="src">——斗数断命心法</span></blockquote>
+  </div>
+</div>
+
+</div>
+
+<!-- ═══════ 第二部分：专题论断 ═══════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>第二部分 · 专题论断速查</h2><p class="sub">四大专题核心信号一网打尽 · 快速查阅</p></div>
+
+<div class="sec">
+
+<!-- 事业专题 -->
+<h3>💼 事业专题</h3>
+<div class="g2">
+  <div class="ref-card">
+    <div class="ref-icon">🏛</div>
+    <div class="ref-title">从政为官</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">紫微/天府/天相在官禄+魁钺+无煞冲破</p>
+    <div class="ref-keys">
+      <span class="吉">紫微+天相</span><span class="吉">天府+魁钺</span><span class="吉">太阳庙旺</span><span class="吉">化权</span>
+    </div>
+    <div class="t" style="font-size:.76rem"><strong>升迁信号：</strong>紫微+化权在大限官禄、太阳庙旺+化禄 → 官运亨通</div>
+  </div>
+  <div class="ref-card">
+    <div class="ref-icon">💹</div>
+    <div class="ref-title">经商创业</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">武曲+贪狼/破军+禄存/化禄 + 迁移宫吉</p>
+    <div class="ref-keys">
+      <span class="吉">武曲+化禄</span><span class="吉">贪狼+禄存</span><span class="吉">火贪/铃贪</span><span class="平">破军+昌曲</span>
+    </div>
+    <div class="t" style="font-size:.76rem"><strong>暴发信号：</strong>火贪格/铃贪格 → 横发致富；但须田宅宫稳固守财</div>
+  </div>
+  <div class="ref-card">
+    <div class="ref-icon">🔧</div>
+    <div class="ref-title">技术专业</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">天机/七杀/破军+文昌/文曲 → 技术精英</p>
+    <div class="ref-keys">
+      <span class="吉">天机+昌曲</span><span class="吉">七杀+文曲</span><span class="平">破军+文昌</span><span class="吉">化科</span>
+    </div>
+    <div class="w" style="font-size:.76rem"><strong>注意：</strong>官禄化忌 → 工作压力大/频繁跳槽；官禄空劫 → 事业多变</div>
+  </div>
+  <div class="ref-card">
+    <div class="ref-icon">🎨</div>
+    <div class="ref-title">文教艺术</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">文昌文曲+贪狼廉贞+化科 → 文艺创作</p>
+    <div class="ref-keys">
+      <span class="吉">文昌+化科</span><span class="吉">贪狼+文曲</span><span class="吉">廉贞+昌曲</span><span class="平">天梁+文昌</span>
+    </div>
+    <div class="t" style="font-size:.76rem"><strong>成名信号：</strong>文昌/文曲+化科在大限官禄/迁移 → 名声远扬</div>
+  </div>
+</div>
+
+<!-- 财运专题 -->
+<h3>💰 财运专题</h3>
+<div class="g2">
+  <div class="ref-card">
+    <div class="ref-icon">🏦</div>
+    <div class="ref-title">正财旺相</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">工资/薪水型收入·稳定可靠</p>
+    <div class="ref-keys">
+      <span class="吉">武曲+化禄</span><span class="吉">禄存守财帛</span><span class="吉">天府+化禄</span><span class="吉">太阴庙旺</span>
+    </div>
+    <ul style="font-size:.76rem;color:var(--text-alt);padding-left:16px">
+      <li>武曲化禄在财帛 → 正财运最佳信号</li>
+      <li>禄存独坐财帛无煞冲破 → 稳定收入</li>
+      <li>太阴庙旺财帛 → 善于积蓄、细水长流</li>
+    </ul>
+  </div>
+  <div class="ref-card">
+    <div class="ref-icon">🎰</div>
+    <div class="ref-title">偏财暴发</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">投资/投机型收入·大起大落</p>
+    <div class="ref-keys">
+      <span class="平">火贪格</span><span class="平">铃贪格</span><span class="吉">贪狼+化禄</span><span class="凶">火铃+空劫</span>
+    </div>
+    <ul style="font-size:.76rem;color:var(--text-alt);padding-left:16px">
+      <li>贪狼+火星/铃星 → 暴发/暴富格</li>
+      <li>但需田宅宫稳固，否则来得快去得快</li>
+      <li>空劫+火铃在财帛 → 投机风险极大</li>
+    </ul>
+  </div>
+  <div class="ref-card">
+    <div class="ref-icon">⚠</div>
+    <div class="ref-title">破财信号</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">漏财/破财/财务危机警示</p>
+    <div class="ref-keys">
+      <span class="凶">财帛化忌</span><span class="凶">空劫在财帛</span><span class="凶">火铃在财帛</span><span class="凶">田宅化忌</span>
+    </div>
+    <ul style="font-size:.76rem;color:var(--text-alt);padding-left:16px">
+      <li>财帛化忌 → 持续漏财、入不敷出</li>
+      <li>空劫在财帛 → 左手进右手出</li>
+      <li>田宅化忌 → 房产问题、积蓄困难</li>
+    </ul>
+  </div>
+  <div class="ref-card">
+    <div class="ref-icon">🔑</div>
+    <div class="ref-title">富格三要素</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">财帛+田宅+福德 三宫同吉</p>
+    <div class="ref-keys">
+      <span class="吉">财帛有财星</span><span class="吉">田宅有库星</span><span class="吉">福德有福星</span>
+    </div>
+    <div class="em" style="font-size:.76rem"><strong>三宫联判法则：</strong>财帛好+田宅好+福德好 = 真富。缺一不可。财好田差=富而不守；田好福差=有钱无福享。</div>
+  </div>
+</div>
+
+<!-- 婚姻专题 -->
+<h3>💕 婚姻专题</h3>
+<div class="g2">
+  <div class="ref-card">
+    <div class="ref-icon">💍</div>
+    <div class="ref-title">美满婚姻</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">夫妻和谐·白头偕老</p>
+    <div class="ref-keys">
+      <span class="吉">紫府在夫妻</span><span class="吉">太阳太阴庙旺</span><span class="吉">天同守夫妻</span><span class="吉">化科在夫妻</span>
+    </div>
+    <ul style="font-size:.76rem;color:var(--text-alt);padding-left:16px">
+      <li>紫微/天府在夫妻 → 配偶条件优秀</li>
+      <li>太阳庙旺 → 夫妻光明磊落、互敬互爱</li>
+      <li>化科在夫妻 → 相敬如宾、互相成就</li>
+    </ul>
+  </div>
+  <div class="ref-card">
+    <div class="ref-icon">🌹</div>
+    <div class="ref-title">桃花缘分</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">桃花星辨识与情感机会</p>
+    <div class="ref-keys">
+      <span class="吉">红鸾</span><span class="吉">天喜</span><span class="平">贪狼</span><span class="平">廉贞</span><span class="凶">天姚</span><span class="凶">咸池</span>
+    </div>
+    <ul style="font-size:.76rem;color:var(--text-alt);padding-left:16px">
+      <li>红鸾/天喜 → 正缘桃花、婚庆喜事</li>
+      <li>贪狼/廉贞 → 桃花旺但需辨正偏</li>
+      <li>天姚/咸池 → 烂桃花/酒色之灾</li>
+    </ul>
+  </div>
+  <div class="ref-card">
+    <div class="ref-icon">⏰</div>
+    <div class="ref-title">婚期判断</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">何时结婚·关键信号</p>
+    <div class="ref-keys">
+      <span class="吉">大限夫妻化禄</span><span class="吉">流年红鸾入命夫</span><span class="吉">文昌化科</span><span class="吉">天喜入夫妻</span>
+    </div>
+    <div class="t" style="font-size:.76rem"><strong>最强婚期信号：</strong>大限夫妻宫化禄 + 流年红鸾入夫妻宫或命宫 → 婚期！</div>
+  </div>
+  <div class="ref-card">
+    <div class="ref-icon">⚡</div>
+    <div class="ref-title">婚姻危机</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">警示信号·提前防范</p>
+    <div class="ref-keys">
+      <span class="凶">夫妻化忌</span><span class="凶">廉贞化忌</span><span class="凶">寡宿孤辰</span><span class="凶">羊陀在夫妻</span>
+    </div>
+    <ul style="font-size:.76rem;color:var(--text-alt);padding-left:16px">
+      <li>夫妻化忌 → 沟通困难、关系紧张</li>
+      <li>廉贞化忌 → 感情困扰、第三者风险</li>
+      <li>羊陀在夫妻 → 争吵、家庭暴力风险</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 健康专题 -->
+<h3>🏥 健康专题</h3>
+<div class="g2">
+  <div class="ref-card">
+    <div class="ref-icon">🫀</div>
+    <div class="ref-title">心脑血管</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">太阳/廉贞+火铃在疾厄 → 心血管风险</p>
+    <div class="ref-keys">
+      <span class="凶">太阳+火铃</span><span class="凶">廉贞+擎羊</span><span class="平">疾厄化忌</span>
+    </div>
+    <div class="w" style="font-size:.76rem"><strong>特别注意：</strong>太阳落陷+疾厄煞重 → 高血压/心脏病高危</div>
+  </div>
+  <div class="ref-card">
+    <div class="ref-icon">🩻</div>
+    <div class="ref-title">骨骼外伤</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">武曲/七杀+擎羊/天刑 → 骨骼/外伤</p>
+    <div class="ref-keys">
+      <span class="凶">武曲+擎羊</span><span class="凶">七杀+天刑</span><span class="凶">白虎+羊陀</span>
+    </div>
+    <div class="w" style="font-size:.76rem"><strong>意外信号：</strong>迁移宫七杀+擎羊 → 交通意外；疾厄天刑+白虎 → 手术</div>
+  </div>
+  <div class="ref-card">
+    <div class="ref-icon">🧠</div>
+    <div class="ref-title">神经消化</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">天机/巨门 → 神经衰弱·消化系统</p>
+    <div class="ref-keys">
+      <span class="平">天机+空劫</span><span class="平">巨门+化忌</span><span class="凶">天机化忌</span>
+    </div>
+    <div class="w" style="font-size:.76rem"><strong>注意：</strong>天机化忌在疾厄 → 神经衰弱/失眠；巨门化忌 → 消化系统疾病</div>
+  </div>
+  <div class="ref-card">
+    <div class="ref-icon">🩸</div>
+    <div class="ref-title">妇科/泌尿</div>
+    <p style="font-size:.78rem;color:var(--text-dim)">太阴/贪狼/破军 → 妇科·生殖·泌尿</p>
+    <div class="ref-keys">
+      <span class="平">太阴落陷</span><span class="凶">贪狼+化忌</span><span class="平">破军+煞</span>
+    </div>
+    <div class="w" style="font-size:.76rem"><strong>注意：</strong>太阴落陷+疾厄煞重 → 妇科问题；贪狼化忌 → 生殖系统</div>
+  </div>
+</div>
+
+</div>
+
+<!-- ═══════ 第三部分：大限流年推算 ═══════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>第三部分 · 大限流年推算详解</h2><p class="sub">大限+小限+流年+斗君 · 四层运限体系</p></div>
+
+<div class="sec">
+
+<h3>一、大限推算（十年运）</h3>
+<div class="g2">
+  <div>
+    <h4>大限起法</h4>
+    <div class="q">
+      <strong>起运岁数：</strong>由五行局决定 → 水二局2岁、木三局3岁、金四局4岁、土五局5岁、火六局6岁<br>
+      <strong>运行方向：</strong>阳男阴女 → 顺行（顺时针）；阴男阳女 → 逆行（逆时针）<br>
+      <strong>每宫十年：</strong>从命宫开始，每顺时针/逆时针走一宫管十年<br>
+      <strong>阴阳判定：</strong>生年天干 → 甲丙戊庚壬为阳年；乙丁己辛癸为阴年
+    </div>
+  </div>
+  <div>
+    <h4>大限四化</h4>
+    <div class="em">
+      每个大限所在宫位的<strong>天干</strong>产生该大限的<strong>四化飞星</strong>（禄权科忌），叠加到原局星曜之上。<br><br>
+      <strong>示例：</strong>大限命宫在甲辰宫 → 甲天干四化 = 廉贞化禄 + 破军化权 + 武曲化科 + 太阳化忌 → 该十年这些星曜所在宫位被引动。
+    </div>
+  </div>
+</div>
+
+<h3>二、小限推算（岁运）</h3>
+<div class="g2">
+  <div>
+    <h4>小限起法</h4>
+    <div class="q">
+      <strong>起点：</strong>以生年年支所在宫位为1岁<br>
+      <strong>男命：</strong>逆行（逆时针）→ 每增一岁走一宫<br>
+      <strong>女命：</strong>顺行（顺时针）→ 每增一岁走一宫<br>
+      <strong>作用：</strong>小限配合大限和流年太岁，三方共参增强判断
+    </div>
+  </div>
+  <div>
+    <h4>小限+大限+流年联用法</h4>
+    <div class="sum">
+      <strong>三合一判断法：</strong><br>
+      ① <strong>大限定十年基调</strong>（大方向）→ ② <strong>流年太岁定当年主事</strong>（应期）→ ③ <strong>小限定细节</strong>（辅助验证）<br>
+      三重信号重合 → 事件发生的概率极高<br>
+      <strong>例：</strong>大限夫妻化禄（婚运十年来临）+ 流年红鸾入命（今年桃花旺）+ 小限到夫妻宫（岁运亦到）→ 婚期不可挡！
+    </div>
+  </div>
+</div>
+
+<h3>三、斗君推算（流月运）</h3>
+<div class="g2">
+  <div>
+    <h4>斗君完整推算法</h4>
+    <div class="q">
+      <strong>第1步：</strong>以流年太岁所在宫位作为<strong>正月（寅月）</strong>的起点<br>
+      <strong>第2步：</strong>从该宫<strong>逆数</strong>（逆时针）至命主<strong>出生月份</strong>所在宫位<br>
+      <strong>第3步：</strong>从该宫<strong>顺数</strong>（顺时针）至命主<strong>出生时辰</strong>所在宫位<br>
+      <strong>第4步：</strong>所得宫位即为当年<strong>斗君</strong>——该宫为正月，下一宫为二月，依次顺数至十二月
+    </div>
+  </div>
+  <div>
+    <h4>斗君使用示例</h4>
+    <div class="em">
+      <strong>例：</strong>命主生于五月午时，求2024甲辰年斗君。<br>
+      ① 2024甲辰年太岁在<strong>辰宫</strong>（当作正月起点）<br>
+      ② 从辰宫逆数至五月 → 辰(正)→卯(二)→寅(三)→丑(四)→<strong>子(五)</strong> ← 停在子宫<br>
+      ③ 从子宫顺数至午时 → 子(子)→丑(丑)→寅(寅)→卯(卯)→辰(辰)→巳(巳)→<strong>午(午)</strong> ← 停在午宫<br>
+      ④ <strong>午宫 = 斗君（正月）</strong> → 未宫(二月)→申(三)→酉(四)→戍(五)→亥(六)→子(七)→丑(八)→寅(九)→卯(十)→辰(十一)→巳(十二)
+    </div>
+  </div>
+</div>
+
+<h3>四、三代四化叠加体系</h3>
+<div class="sum">
+  <strong>核心原理：</strong>原局四化（根基）+ 大限四化（十年引动）+ 流年四化（当年触发）= 三重叠加定吉凶。<br><br>
+  <strong>叠加规则：</strong><br>
+  ① 三代四化<strong>同星同宫</strong> → 事件力量极强，几乎必然发生<br>
+  ② 三代四化<strong>互冲</strong>（如本命化禄被流年化忌冲）→ 好事被打断<br>
+  ③ 原局无四化 → 以大限四化为主；大限无四化 → 以流年四化为主<br>
+  ④ 禄权科忌<strong>相叠</strong>（如同宫同时有禄+科）→ 事件复合、层次丰富<br><br>
+  <strong>实战口诀：</strong>"原局定有无，大限定趋势，流年定应期。三化同宫事必成，反向相冲事必败。"
+</div>
+
+</div>
+
+<!-- ═══════ 第四部分：完整命盘分析案例 ═══════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>第四部分 · 完整命盘分析案例</h2><p class="sub">两个真实命盘 · 十步断命法实战演示</p></div>
+
+<div class="sec">
+
+<!-- 案例一 -->
+<div class="case-card">
+  <div class="case-header">
+    <div class="case-num">1</div>
+    <div>
+      <div class="case-title">案例一：商界精英 · 武曲天府坐命</div>
+      <div class="case-meta">乾造 · 阳年男命顺行 · 金四局4岁起运</div>
+    </div>
+  </div>
+
+  <h4>一、命盘概要</h4>
+  <p><strong>命宫（未）：</strong>武曲+天府 庙旺坐守。三方：财帛宫(亥)天相+禄存，官禄宫(卯)紫微+破军+文昌。</p>
+  <p><strong>迁移宫（丑）：</strong>廉贞+七杀。福德宫(酉)：天同庙旺。夫妻宫(巳)：太阳庙旺。</p>
+
+  <h4>二、十步断命</h4>
+  <table>
+    <thead><tr><th>步骤</th><th>论断</th><th>判词</th></tr></thead>
+    <tr>
+      <td>① 立根基</td>
+      <td>武曲天府在未宫庙旺坐命，三方会紫微破军+文昌+天相禄存</td>
+      <td><strong class="吉" style="font-size:inherit">上等命格</strong> — 武府同宫为"将星得地"，财官双美</td>
+    </tr>
+    <tr>
+      <td>② 观性情</td>
+      <td>武曲刚毅+天府稳重 → 外刚内稳，执行力强且善于谋划</td>
+      <td>刚柔并济、领袖气质，但武曲过刚需防固执</td>
+    </tr>
+    <tr>
+      <td>③ 定出身</td>
+      <td>父母宫天梁+文昌 → 书香门第；田宅宫太阴 → 家运尚可</td>
+      <td>出身中等偏上，父母有文化底蕴</td>
+    </tr>
+    <tr>
+      <td>④ 查事业</td>
+      <td>官禄紫微+破军+文昌 → 有改革魄力+文化修养，适合企业高管/创业</td>
+      <td><strong class="吉" style="font-size:inherit">事业运旺</strong> — 宜金融/地产/大型企业管理</td>
+    </tr>
+    <tr>
+      <td>⑤ 断财运</td>
+      <td>财帛天相+禄存 → 稳定持续;田宅太阴渐积;福德天同享福</td>
+      <td><strong class="吉" style="font-size:inherit">财运亨通</strong> — 三宫皆吉，富格已成</td>
+    </tr>
+    <tr>
+      <td>⑥ 观婚姻</td>
+      <td>夫妻太阳庙旺+迁移廉贞七杀 → 配偶开朗大方、条件好</td>
+      <td>婚姻质量佳，配偶为事业助力</td>
+    </tr>
+    <tr>
+      <td>⑦ 察健康</td>
+      <td>疾厄宫天机 → 注意肝/神经；整体无煞重，体质尚可</td>
+      <td>总体健康，注意作息规律防神经衰弱</td>
+    </tr>
+    <tr>
+      <td>⑧ 排大限</td>
+      <td>4-13命宫(武府)→14-23父母(天梁)→24-33福德(天同)→34-43田宅(太阴)→44-53官禄(紫破)→54-63交友→64-73迁移(廉杀)</td>
+      <td><strong>黄金期：</strong>44-53岁官禄大限，紫微破军发力，事业顶峰</td>
+    </tr>
+    <tr>
+      <td>⑨ 断流年</td>
+      <td>当前大限在官禄(44-53)，紫破坐守+文昌，流年视太岁而定</td>
+      <td>官禄大限逢化权年份 → 重大升迁/事业突破</td>
+    </tr>
+    <tr>
+      <td>⑩ 汇总论</td>
+      <td colspan="2">武府坐命、紫破在官、天相禄存在财 → <strong>财官双美上格</strong>。宜金融/地产/管理，中年事业巅峰。注意武曲过刚需修柔和，天机在疾厄需养生。</td>
+    </tr>
+  </table>
+
+  <div class="case-timeline">
+    <div class="case-event"><strong>4~13岁</strong>命宫大限 · 武府<br>少年早慧</div>
+    <div class="case-event"><strong>14~23岁</strong>父母大限 · 天梁<br>学业有成</div>
+    <div class="case-event"><strong>24~33岁</strong>福德大限 · 天同<br>积累期</div>
+    <div class="case-event"><strong>34~43岁</strong>田宅大限 · 太阴<br>置业成家</div>
+    <div class="case-event"><strong>44~53岁</strong>官禄大限 · 紫破<br>⭐事业巅峰</div>
+    <div class="case-event"><strong>54~63岁</strong>交友大限<br>人脉变现</div>
+    <div class="case-event"><strong>64~73岁</strong>迁移大限 · 廉杀<br>晚年变动</div>
+  </div>
+</div>
+
+<!-- 案例二 -->
+<div class="case-card">
+  <div class="case-header">
+    <div class="case-num">2</div>
+    <div>
+      <div class="case-title">案例二：文艺才女 · 廉贞贪狼坐命</div>
+      <div class="case-meta">坤造 · 阴年女命逆行 · 火六局6岁起运</div>
+    </div>
+  </div>
+
+  <h4>一、命盘概要</h4>
+  <p><strong>命宫（亥）：</strong>廉贞+贪狼 落陷。三方：财帛宫(卯)天机+太阴庙旺，官禄宫(未)天同+天梁。</p>
+  <p><strong>迁移宫（巳）：</strong>七杀+火星。夫妻宫(酉)：紫微+破军。福德宫(丑)：巨门+文昌+文曲。</p>
+
+  <h4>二、十步断命</h4>
+  <table>
+    <thead><tr><th>步骤</th><th>论断</th><th>判词</th></tr></thead>
+    <tr>
+      <td>① 立根基</td>
+      <td>廉贞贪狼在亥宫落陷坐命（泛水桃花格），煞星不重但有火星在迁移</td>
+      <td><strong class="平" style="font-size:inherit">中等命格</strong> — 桃花格+文艺星，靠才艺立身</td>
+    </tr>
+    <tr>
+      <td>② 观性情</td>
+      <td>廉贞感性+贪狼多才 → 情感丰富、多才多艺、善交际、有艺术细胞</td>
+      <td>才貌双全、社交达人，但需防感情用事</td>
+    </tr>
+    <tr>
+      <td>③ 定出身</td>
+      <td>父母宫天相+天魁 → 父母端正有助力；田宅宫天机 → 家运中平</td>
+      <td>出身中等，父母关爱有加</td>
+    </tr>
+    <tr>
+      <td>④ 查事业</td>
+      <td>官禄天同+天梁 → 适合服务/教育/文艺类；命宫廉贪 → 偏才艺路线</td>
+      <td><strong>宜：</strong>演艺/设计/传媒/教育，不宜高强度竞争行业</td>
+    </tr>
+    <tr>
+      <td>⑤ 断财运</td>
+      <td>财帛天机太阴庙旺 → 靠脑力+审美挣钱；福德巨门昌曲 → 精神消费多</td>
+      <td>财运中等偏上，适合知识/技能变现</td>
+    </tr>
+    <tr>
+      <td>⑥ 观婚姻</td>
+      <td>夫妻紫微+破军 → 配偶有能力但个性强；命宫廉贪桃花重 → 感情经历丰富</td>
+      <td><strong class="w" style="font-size:inherit">注意：</strong>婚姻需包容经营，晚婚为佳</td>
+    </tr>
+    <tr>
+      <td>⑦ 察健康</td>
+      <td>疾厄宫太阳落陷 → 注意心脏/眼；廉贪在命 → 注意肝/生殖</td>
+      <td>注意心血管和妇科保健</td>
+    </tr>
+    <tr>
+      <td>⑧ 排大限</td>
+      <td>逆行：6-15命宫(廉贪)→16-25父母(天相)→26-35福德(巨门昌曲)→36-45田宅(天机)→46-55官禄(同梁)→56-65交友→66-75迁移(杀火)</td>
+      <td><strong>黄金期：</strong>26-35岁福德大限(巨门昌曲)，才华爆发、名声鹊起</td>
+    </tr>
+    <tr>
+      <td>⑨ 断流年</td>
+      <td>福德大限(26-35)中，巨门+文昌文曲 → 才艺展现期，逢化科/红鸾年 → 事业感情双丰收</td>
+      <td>抓住26-35黄金十年，厚积薄发</td>
+    </tr>
+    <tr>
+      <td>⑩ 汇总论</td>
+      <td colspan="2">廉贪泛水桃花命格 → 以才艺立身，宜文艺/设计/传媒/教育。财帛天机太阴庙旺→靠脑力审美挣钱。26-35为才华爆发期。晚婚为佳、注意心脏保健。<strong>命格虽中平但大限走势好，后天努力可成大器。</strong></td>
+    </tr>
+  </table>
+
+  <div class="case-timeline">
+    <div class="case-event"><strong>6~15岁</strong>命宫大限 · 廉贪<br>才艺萌芽</div>
+    <div class="case-event"><strong>16~25岁</strong>父母大限 · 天相<br>学业发展</div>
+    <div class="case-event"><strong>26~35岁</strong>福德大限 · 巨门昌曲<br>⭐才华爆发</div>
+    <div class="case-event"><strong>36~45岁</strong>田宅大限 · 天机<br>成家置业</div>
+    <div class="case-event"><strong>46~55岁</strong>官禄大限 · 同梁<br>事业稳定</div>
+    <div class="case-event"><strong>56~65岁</strong>交友大限<br>人脉收获</div>
+    <div class="case-event"><strong>66~75岁</strong>迁移大限 · 杀火<br>注意安全</div>
+  </div>
+</div>
+
+</div>
+
+<!-- ═══════ 第五部分：断命心法 ═══════ -->
+<div class="ph-hdr"><h2><span class="dot"></span>第五部分 · 断命心法荟萃</h2><p class="sub">从技法到心法 · 历代口诀与实战经验</p></div>
+
+<div class="sec">
+
+<!-- 总口诀再现 -->
+<div class="mnemonic">
+  <div class="m-title">🎯 斗数断命十六字真言 <span class="m-type">总纲</span></div>
+  <div class="m-content">
+    宫位定人事&emsp;星情定吉凶<br>
+    四化寻契机&emsp;行运看变化
+  </div>
+  <div class="m-explain">
+    <strong>此十六字贯穿整个断命过程，是紫微斗数论断的最高心法。</strong>无论面对何种命盘、何种问题，始终以四句话为纲领：先看宫位确定论什么，再看星情判好坏，三看四化找触发点，四看大限流年定时间。四者缺一不可，顺序不可颠倒。
+  </div>
+</div>
+
+<!-- 断命十要 -->
+<h3>断命十要</h3>
+<div class="g2">
+  <div>
+    <ol>
+      <li><strong>格局为先：</strong>先看命宫三方四正格局，定命格层次</li>
+      <li><strong>庙陷为要：</strong>星曜庙旺利陷决定力量强弱</li>
+      <li><strong>吉煞并看：</strong>有吉看吉、有煞看煞，不偏废</li>
+      <li><strong>四化为机：</strong>四化是变化的关键引信</li>
+      <li><strong>夹宫莫忘：</strong>两邻宫对中间宫的夹辅/夹制作用</li>
+    </ol>
+  </div>
+  <div>
+    <ol start="6">
+      <li><strong>三代叠参：</strong>本命+大限+流年三层叠加</li>
+      <li><strong>宫位互通：</strong>一宫有事、对宫/三合皆受影响</li>
+      <li><strong>星宫配合：</strong>星为主、宫为用，星宫不可分离</li>
+      <li><strong>活盘活用：</strong>同一命盘可用于测他人他事（ATP）</li>
+      <li><strong>留有余地：</strong>命理是趋势，不是绝对定数</li>
+    </ol>
+  </div>
+</div>
+
+<!-- 常见误区 -->
+<h3>断命常见误区</h3>
+<div class="g2">
+  <div class="w">
+    <strong>❌ 见煞就断凶：</strong>煞星须看整体配置——七杀+昌曲可为"文武全才"，不可单星论命。
+  </div>
+  <div class="w">
+    <strong>❌ 见吉就说好：</strong>吉星过重也可能"过犹不及"——多禄存反而懒惰、化禄过重反而不珍惜。
+  </div>
+  <div class="w">
+    <strong>❌ 只看原局不看大限：</strong>原局差的命盘，走好大限照样有成就；反之，好命盘走坏大限也会低谷。
+  </div>
+  <div class="w">
+    <strong>❌ 迷信单一信号：</strong>任何论断都需要"三重验证"——至少三个宫位/星曜/四化信号指向同一结论，才能下定论。
+  </div>
+</div>
+
+<blockquote>
+  斗数之妙，不在星多，而在<strong>活变</strong>。宫位静而人事动，星曜定而四化变。善学者以静观动、以定推变，则命理可明矣。
+  <span class="src">——《紫微斗数断命心法》</span>
+</blockquote>
+
+</div>
+
+</div>
+
+<footer><p>紫微斗数 · 断命 ｜ 宫位定人事 · 星情定吉凶 · 四化寻契机 · 行运看变化</p></footer>
+<script src="../共享样式/app.js"></script>
+</body>
+</html>

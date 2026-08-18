@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>紫微斗数 · 星曜总览</title>
+<style>
+  :root {
+    --bg: #0f0c08;
+    --card-bg: #1a1510;
+    --gold: #c9a84c;
+    --gold-light: #e4c76b;
+    --gold-dark: #8a6d2b;
+    --text: #e0d6c0;
+    --text-dim: #9a8e7a;
+    --text-bright: #f5edd8;
+    --purple: #8b5cf6;
+    --purple-light: #a78bfa;
+    --wood: #4caf50;
+    --fire: #ef4444;
+    --earth: #d4a853;
+    --metal: #f0c060;
+    --water: #3b82f6;
+    --accent: #e85d5d;
+    --border: #2a2218;
+    --shadow: 0 2px 12px rgba(0,0,0,0.5);
+    --radius: 10px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 100%, rgba(139,92,246,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(239,68,68,0.04) 0%, transparent 50%);
+    color: var(--text);
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'SimSun', 'STSong', 'Songti SC', serif;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 24px 60px;
+  }
+
+  /* ── 页头 ── */
+  .hero {
+    text-align: center;
+    padding: 48px 20px 32px;
+    position: relative;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+  }
+  .hero h1 {
+    font-size: 2.4em;
+    color: var(--gold-light);
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    text-shadow: 0 0 40px rgba(201,168,76,0.25);
+  }
+  .hero .subtitle {
+    margin-top: 10px;
+    color: var(--text-dim);
+    font-size: 0.95em;
+    letter-spacing: 0.08em;
+  }
+  .hero .badge {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 4px 16px;
+    border: 1px solid var(--gold-dark);
+    border-radius: 20px;
+    color: var(--gold);
+    font-size: 0.8em;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── 区段标题 ── */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 48px 0 24px;
+    font-size: 1.5em;
+    color: var(--gold-light);
+    letter-spacing: 0.06em;
+  }
+  .section-title .icon { font-size: 1.2em; }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ════════════════════════════════════════ */
+  /*  十四主星 秘诀卡片网格                 */
+  /* ════════════════════════════════════════ */
+  .stars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+  }
+
+  .star-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 18px 16px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.25s, box-shadow 0.25s;
+    cursor: default;
+  }
+  .star-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold-dark);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.15);
+  }
+  .star-card .card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .star-card .star-name {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: 0.08em;
+  }
+  .star-card .star-py {
+    font-size: 0.75em;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+  .star-card .wuxing-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-size: 0.72em;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    background: var(--earth);
+    color: #1a1510;
+  }
+  .star-card .wuxing-tag.w-wood  { background: var(--wood);  color: #fff; }
+  .star-card .wuxing-tag.w-fire  { background: var(--fire);  color: #fff; }
+  .star-card .wuxing-tag.w-earth { background: var(--earth); color: #1a1510; }
+  .star-card .wuxing-tag.w-metal { background: var(--metal); color: #1a1510; }
+  .star-card .wuxing-tag.w-water { background: var(--water); color: #fff; }
+
+  .star-card .secret {
+    font-size: 1em;
+    color: var(--gold-light);
+    font-weight: 600;
+    margin: 10px 0 8px;
+    padding: 8px 12px;
+    background: rgba(201,168,76,0.06);
+    border-left: 3px solid var(--gold-dark);
+    border-radius: 0 4px 4px 0;
+    letter-spacing: 0.04em;
+  }
+  .star-card .trait {
+    font-size: 0.82em;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+    line-height: 1.6;
+  }
+  .star-card .trait strong { color: var(--text); }
+  .star-card .miaowang {
+    font-size: 0.75em;
+    color: var(--purple-light);
+    margin-top: 2px;
+    letter-spacing: 0.03em;
+  }
+  .star-card .miaowang span {
+    display: inline-block;
+    padding: 1px 6px;
+    background: rgba(139,92,246,0.12);
+    border-radius: 2px;
+    margin: 0 2px;
+  }
+
+  .star-card .avatar {
+    font-size: 0.75em;
+    color: var(--gold);
+    margin-top: 7px;
+    padding-top: 7px;
+    border-top: 1px dashed rgba(201,168,76,0.28);
+    letter-spacing: 0.03em;
+  }
+  .star-card .avatar strong { color: var(--gold-light); }
+  .star-card .avatar .avatar-note { color: var(--text-dim); margin-left: 4px; font-size: 0.92em; }
+
+  .star-card .card-stripe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    opacity: 0.7;
+  }
+  .star-card .card-stripe.s-wood  { background: var(--wood); }
+  .star-card .card-stripe.s-fire  { background: var(--fire); }
+  .star-card .card-stripe.s-earth { background: var(--earth); }
+  .star-card .card-stripe.s-metal { background: var(--metal); }
+  .star-card .card-stripe.s-water { background: var(--water); }
+
+  /* ── 吉化角标 ── */
+  .star-card .sihua-badge {
+    display: inline-flex;
+    gap: 3px;
+  }
+  .star-card .sihua-char {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    font-size: 0.6em;
+    font-weight: 700;
+    display: inline-flex; align-items: center; justify-content: center;
+    letter-spacing: 0;
+  }
+  .sihua-lu    { background: #22c55e; color: #052e16; }
+  .sihua-quan  { background: #f59e0b; color: #1a0f00; }
+  .sihua-ke    { background: #6366f1; color: #fff; }
+  .sihua-ji    { background: #6b7280; color: #fff; }
+
+  /* ════════════════════════════════════════ */
+  /*  分组表 (北斗/南斗/中天)                */
+  /* ════════════════════════════════════════ */
+  .group-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 20px;
+  }
+  .group-table-wrap {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .group-table-wrap .group-header {
+    padding: 14px 18px;
+    font-size: 1.1em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--text-bright);
+    border-bottom: 1px solid var(--border);
+  }
+  .group-header.h-beidou { background: rgba(201,168,76,0.08); }
+  .group-header.h-nandou { background: rgba(139,92,246,0.08); }
+  .group-header.h-zhongtian { background: rgba(239,68,68,0.08); }
+
+  .group-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85em;
+  }
+  .group-table th {
+    background: rgba(0,0,0,0.2);
+    padding: 10px 12px;
+    text-align: left;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    font-size: 0.8em;
+    border-bottom: 1px solid var(--border);
+  }
+  .group-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(42,34,24,0.5);
+    vertical-align: top;
+  }
+  .group-table tr:hover td { background: rgba(255,255,255,0.015); }
+  .group-table .star-cell { font-weight: 700; color: var(--text-bright); white-space: nowrap; }
+
+  /* ════════════════════════════════════════ */
+  /*  辅佐八曜 & 六煞星                     */
+  /* ════════════════════════════════════════ */
+  .aux-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .aux-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    transition: border-color 0.25s;
+  }
+  .aux-card:hover { border-color: var(--gold-dark); }
+  .aux-card .aux-name {
+    font-size: 1.15em;
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
+  }
+  .aux-card .aux-py {
+    font-size: 0.7em;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+  .aux-card .aux-wuxing {
+    display: inline-block;
+    font-size: 0.7em;
+    padding: 1px 8px;
+    border-radius: 3px;
+    margin: 6px 0;
+    background: rgba(201,168,76,0.15);
+    color: var(--gold-light);
+  }
+  .aux-card .aux-body {
+    font-size: 0.82em;
+    color: var(--text-dim);
+    line-height: 1.65;
+    margin-top: 6px;
+  }
+  .aux-card .aux-body strong { color: var(--text); }
+
+  /* 六煞星用暗红色调 */
+  .sha-section .aux-card { border-left: 3px solid rgba(239,68,68,0.3); }
+  .sha-section .aux-card:hover { border-left-color: var(--accent); }
+
+  /* ════════════════════════════════════════ */
+  /*  关键认知 提醒区                        */
+  /* ════════════════════════════════════════ */
+  .insight-box {
+    background: linear-gradient(135deg, rgba(255,80,80,0.08) 0%, rgba(201,168,76,0.04) 100%);
+    border: 1px solid rgba(255,80,80,0.25);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    margin: 36px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .insight-box .insight-icon {
+    font-size: 1.8em;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .insight-box .insight-content h3 {
+    color: var(--accent);
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    letter-spacing: 0.06em;
+  }
+  .insight-box .insight-content p {
+    font-size: 0.9em;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .insight-box .insight-content em {
+    color: var(--gold-light);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* ════════════════════════════════════════ */
+  /*  闪卡区域                               */
+  /* ════════════════════════════════════════ */
+  .flashcards-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .flashcard {
+    width: 200px;
+    height: 130px;
+    perspective: 800px;
+    cursor: pointer;
+  }
+  .flashcard .card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+  }
+  .flashcard.flipped .card-inner { transform: rotateY(180deg); }
+
+  .flashcard .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    border: 1px solid var(--border);
+  }
+  .flashcard .card-front {
+    background: var(--card-bg);
+    z-index: 2;
+  }
+  .flashcard .card-front .fc-name {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: 0.1em;
+  }
+  .flashcard .card-front .fc-group {
+    font-size: 0.7em;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    margin-top: 6px;
+  }
+  .flashcard .card-back {
+    background: linear-gradient(160deg, #1a1510 0%, #1f1a14 100%);
+    transform: rotateY(180deg);
+    border-color: var(--gold-dark);
+    text-align: center;
+  }
+  .flashcard .card-back .fc-secret {
+    font-size: 0.95em;
+    font-weight: 600;
+    color: var(--gold-light);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+  .flashcard .card-back .fc-wuxing {
+    font-size: 0.72em;
+    color: var(--text-dim);
+    margin-top: 8px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: rgba(201,168,76,0.1);
+  }
+
+  .flashcard-hint {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.78em;
+    margin-bottom: 14px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── 全局闪卡翻转按钮 ── */
+  .flip-all-btn {
+    display: block;
+    margin: 8px auto 20px;
+    padding: 8px 22px;
+    background: transparent;
+    border: 1px solid var(--gold-dark);
+    color: var(--gold);
+    font-family: inherit;
+    font-size: 0.85em;
+    border-radius: 20px;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: 0.2s;
+  }
+  .flip-all-btn:hover {
+    background: rgba(201,168,76,0.1);
+    border-color: var(--gold);
+  }
+
+  /* ── 响应式 ── */
+  @media (max-width: 640px) {
+    .stars-grid { grid-template-columns: 1fr; }
+    .group-section { grid-template-columns: 1fr; }
+    .aux-grid { grid-template-columns: 1fr; }
+    .flashcard { width: 160px; height: 110px; }
+    .flashcard .card-front .fc-name { font-size: 1.3em; }
+    .flashcard .card-back .fc-secret { font-size: 0.8em; }
+    .hero h1 { font-size: 1.6em; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ═══════════════════ 页头 ═══════════════════ -->
+  <div class="hero">
+    <h1>紫微斗数 · 星曜总览</h1>
+    <p class="subtitle">十四主星 · 辅佐八曜 · 六煞星</p>
+    <span class="badge">卷一 · 星曜篇</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  一、十四主星一句话秘诀卡片               -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-title">
+    <span class="icon">⭐</span> 十四主星 · 一句话秘诀
+  </div>
+
+  <div class="stars-grid" id="starsGrid">
+    <!-- JS 动态生成 -->
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  二、北斗 / 南斗 / 中天 分组表              -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-title">
+    <span class="icon">🧭</span> 北斗 · 南斗 · 中天 分组
+  </div>
+
+  <div class="group-section" id="groupSection">
+    <!-- JS 动态生成 -->
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  三、辅佐八曜 逐一详解                     -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-title">
+    <span class="icon">🛡️</span> 辅佐八曜 · 逐一详解
+  </div>
+
+  <div class="aux-grid" id="auxGrid">
+    <!-- JS 动态生成 -->
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  四、六煞星 详解                           -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-title">
+    <span class="icon">🔥</span> 六煞星 · 逐一详解
+  </div>
+
+  <div class="aux-grid sha-section" id="shaGrid">
+    <!-- JS 动态生成 -->
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  关键认知：天府天相七杀全无四化             -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="insight-box">
+    <div class="insight-icon">⚠️</div>
+    <div class="insight-content">
+      <h3>🔑 关键认知：三颗永不四化的主星</h3>
+      <p>
+        <em>天府</em>、<em>天相</em>、<em>七杀</em> ——
+        此三颗主星<strong>全无四化</strong>（不化禄、不化权、不化科、不化忌）。
+        无论天干为何，这三个星曜永远不会参与四化飞星的发动。
+        命盘中的四化只可能落在其余十一颗主星之上，
+        牢记这一点可避免排盘时的根本性错误。
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  五、封神化身记忆法                         -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-title">
+    <span class="icon">🎭</span> 封神化身记忆法
+  </div>
+
+  <div class="insight-box" style="background:linear-gradient(135deg,rgba(201,168,76,0.10) 0%,rgba(201,168,76,0.03) 100%);border-color:rgba(201,168,76,0.30);">
+    <div class="insight-icon">🧠</div>
+    <div class="insight-content">
+      <h3 style="color:var(--gold-light);">用《封神演义》人物锚定星性</h3>
+      <p>
+        星性抽象难记？<strong>借一位活生生的封神人物来锚定它</strong>。
+        十四主星各对应一位《封神演义》人物——紫微是<em>伯邑考</em>（尊贵却早逝）、
+        天机是<em>姜子牙</em>（善谋）、贪狼是<em>妲己</em>（欲望）、破军是<em>纣王</em>（破旧）……
+        人物一出场，星的性格立刻立体，比死记"帝王星、智星、桃花星"快得多。
+      </p>
+    </div>
+  </div>
+
+  <div class="group-section" id="avatarSection">
+    <!-- JS 动态生成 -->
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--  六、闪卡 14 张                            -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-title">
+    <span class="icon">🃏</span> 闪卡记忆 · 14 张
+  </div>
+
+  <p class="flashcard-hint">👆 点击卡片翻转 &nbsp;|&nbsp; 正面 = 星名 &nbsp;|&nbsp; 反面 = 秘诀 + 五行</p>
+
+  <button class="flip-all-btn" id="flipAllBtn">🔄 全部翻转</button>
+
+  <div class="flashcards-wrap" id="flashcardsWrap">
+    <!-- JS 动态生成 -->
+  </div>
+
+</div> <!-- /container -->
+
+<script>
+// ═══════════════════════════════════════════════
+//  数据定义
+// ═══════════════════════════════════════════════
+
+const starsData = [
+  // ── 北斗星系 (6颗) ──
+  {
+    id: 'ziwei',   name: '紫微',   py: 'zǐ wēi',
+    wuxing: '己土',  wuClass: 'earth', wuShort: '土',
+    group: '北斗',   groupOrder: 1,
+    secret: '注定站在中央',
+    trait: '帝王之星，<strong>尊贵威严</strong>，天生领袖。坐命者气场强大、自尊心强、喜掌控局面。',
+    miaowang: '庙 <span>午</span> · 旺 <span>丑</span><span>未</span>',
+    sihua: ['权','科'],
+    noSihua: false
+  },
+  {
+    id: 'tianji',   name: '天机',   py: 'tiān jī',
+    wuxing: '乙木',  wuClass: 'wood', wuShort: '木',
+    group: '北斗',   groupOrder: 2,
+    secret: '脑子永远比嘴快',
+    trait: '谋略之星，<strong>智慧善变</strong>，反应迅捷。坐命者心思缜密、好奇心强、但易多虑。',
+    miaowang: '庙 <span>巳</span> · 旺 <span>亥</span><span>酉</span>',
+    sihua: ['禄','权','科','忌'],
+    noSihua: false
+  },
+  {
+    id: 'taiyang',  name: '太阳',   py: 'tài yáng',
+    wuxing: '丙火',  wuClass: 'fire', wuShort: '火',
+    group: '北斗',   groupOrder: 3,
+    secret: '把光都给了别人',
+    trait: '光热之星，<strong>博爱热情</strong>，牺牲奉献。坐命者开朗大方、乐于助人、但易耗己。',
+    miaowang: '庙 <span>午</span> · 旺 <span>卯</span><span>辰</span>',
+    sihua: ['禄','权','忌'],
+    noSihua: false
+  },
+  {
+    id: 'wuqu',     name: '武曲',   py: 'wǔ qǔ',
+    wuxing: '辛金',  wuClass: 'metal', wuShort: '金',
+    group: '北斗',   groupOrder: 4,
+    secret: '冷面热心账本清',
+    trait: '财帛之星，<strong>刚毅果断</strong>，精于理财。坐命者执行力强、重原则、面冷心热。',
+    miaowang: '庙 <span>酉</span> · 旺 <span>申</span><span>子</span>',
+    sihua: ['禄','权','科','忌'],
+    noSihua: false
+  },
+  {
+    id: 'tiantong', name: '天同',   py: 'tiān tóng',
+    wuxing: '壬水',  wuClass: 'water', wuShort: '水',
+    group: '北斗',   groupOrder: 5,
+    secret: '懒得跟你争',
+    trait: '福寿之星，<strong>温和享福</strong>，与世无争。坐命者性情温顺、知足常乐、略带懒散。',
+    miaowang: '庙 <span>亥</span> · 旺 <span>子</span><span>丑</span>',
+    sihua: ['禄','权','忌'],
+    noSihua: false
+  },
+  {
+    id: 'lianzhen', name: '廉贞',   py: 'lián zhēn',
+    wuxing: '丁火',  wuClass: 'fire', wuShort: '火',
+    group: '北斗',   groupOrder: 6,
+    secret: '一身傲骨不低头',
+    trait: '次桃花·囚星，<strong>刚烈忠贞</strong>，宁折不弯。坐命者执著坚韧、重情重义、极要面子。',
+    miaowang: '庙 <span>寅</span> · 旺 <span>午</span><span>戌</span>',
+    sihua: ['禄','忌'],
+    noSihua: false
+  },
+  // ── 南斗星系 (6颗) ──
+  {
+    id: 'tianfu',   name: '天府',   py: 'tiān fǔ',
+    wuxing: '戊土',  wuClass: 'earth', wuShort: '土',
+    group: '南斗',   groupOrder: 1,
+    secret: '家底厚实不张扬',
+    trait: '库藏之星，<strong>稳重包容</strong>，厚积薄发。坐命者大气从容、善于守成、低调内敛。',
+    miaowang: '庙 <span>辰</span> · 旺 <span>丑</span><span>未</span>',
+    sihua: [],
+    noSihua: true   // ★ 无四化
+  },
+  {
+    id: 'taiyin',   name: '太阴',   py: 'tài yīn',
+    wuxing: '癸水',  wuClass: 'water', wuShort: '水',
+    group: '南斗',   groupOrder: 2,
+    secret: '温柔如水润无声',
+    trait: '月华之星，<strong>温柔细腻</strong>，善解人意。坐命者内敛含蓄、情感丰富、审美不俗。',
+    miaowang: '庙 <span>酉</span> · 旺 <span>亥</span><span>子</span>',
+    sihua: ['禄','权','科','忌'],
+    noSihua: false
+  },
+  {
+    id: 'tanlang',  name: '贪狼',   py: 'tān láng',
+    wuxing: '甲木',  wuClass: 'wood', wuShort: '木',
+    group: '南斗',   groupOrder: 3,
+    secret: '我要的就必须得到',
+    trait: '正桃花·欲望之星，<strong>多才多艺</strong>，交际高手。坐命者魅力四射、追新求变、贪多务得。',
+    miaowang: '庙 <span>寅</span> · 旺 <span>卯</span><span>未</span>',
+    sihua: ['禄','权','忌'],
+    noSihua: false
+  },
+  {
+    id: 'jumen',    name: '巨门',   py: 'jù mén',
+    wuxing: '癸水',  wuClass: 'water', wuShort: '水',
+    group: '南斗',   groupOrder: 4,
+    secret: '嘴巴就是我的武器',
+    trait: '暗曜·口舌之星，<strong>辩才无碍</strong>，是非分明。坐命者口才出众、心思深沉、易惹口舌。',
+    miaowang: '庙 <span>子</span> · 旺 <span>丑</span><span>亥</span>',
+    sihua: ['禄','权','忌'],
+    noSihua: false
+  },
+  {
+    id: 'tianxiang',name: '天相',   py: 'tiān xiàng',
+    wuxing: '壬水',  wuClass: 'water', wuShort: '水',
+    group: '南斗',   groupOrder: 5,
+    secret: '永远在替人擦屁股',
+    trait: '印绶·辅佐之星，<strong>忠厚协调</strong>，善后能手。坐命者乐于服务、有求必应、但易为人作嫁。',
+    miaowang: '庙 <span>申</span> · 旺 <span>子</span><span>辰</span>',
+    sihua: [],
+    noSihua: true   // ★ 无四化
+  },
+  {
+    id: 'tianliang',name: '天梁',   py: 'tiān liáng',
+    wuxing: '戊土',  wuClass: 'earth', wuShort: '土',
+    group: '南斗',   groupOrder: 6,
+    secret: '路见不平一声吼',
+    trait: '荫星·寿星，<strong>正直仗义</strong>，济弱扶倾。坐命者正义感强、有长者风、爱管"闲事"。',
+    miaowang: '庙 <span>丑</span> · 旺 <span>未</span><span>巳</span>',
+    sihua: ['禄','权','科'],
+    noSihua: false
+  },
+  // ── 中天星系 (2颗) ──
+  {
+    id: 'qisha',    name: '七杀',   py: 'qī shā',
+    wuxing: '庚金',  wuClass: 'metal', wuShort: '金',
+    group: '中天',   groupOrder: 1,
+    secret: '挡我者死',
+    trait: '将星·肃杀之星，<strong>刚猛决绝</strong>，执行力爆表。坐命者勇往直前、不服输、但易冲动。',
+    miaowang: '庙 <span>申</span> · 旺 <span>子</span><span>寅</span>',
+    sihua: [],
+    noSihua: true   // ★ 无四化
+  },
+  {
+    id: 'pojun',    name: '破军',   py: 'pò jūn',
+    wuxing: '癸水',  wuClass: 'water', wuShort: '水',
+    group: '中天',   groupOrder: 2,
+    secret: '不破不立我先来',
+    trait: '耗星·先锋之星，<strong>破旧立新</strong>，敢于冒险。坐命者敢闯敢拼、不喜束缚、人生大起大落。',
+    miaowang: '庙 <span>子</span> · 旺 <span>午</span><span>申</span>',
+    sihua: ['禄','权'],
+    noSihua: false
+  }
+];
+
+// ── 封神化身记忆法（十四主星 ×《封神演义》人物）──
+const avatarMap = {
+  '紫微': { name: '伯邑考', note: '周文王长子，俊美多才却早逝' },
+  '天机': { name: '姜子牙', note: '姜太公钓鱼，愿者上钩' },
+  '太阳': { name: '比干',   note: '七窍玲珑心，赤胆忠心' },
+  '武曲': { name: '周武王', note: '承前启后，开创格局' },
+  '天同': { name: '周文王', note: '姬昌，一代仁君' },
+  '廉贞': { name: '费仲',   note: '纣王宠臣' },
+  '天府': { name: '姜皇后', note: '纣王之妻，度量宽宏' },
+  '太阴': { name: '黄飞虎之妻', note: '贞洁殉节' },
+  '贪狼': { name: '妲己',   note: '欲望之神' },
+  '巨门': { name: '马千金', note: '姜子牙之妻，泼妇' },
+  '天相': { name: '闻太师', note: '三朝元老' },
+  '天梁': { name: '李天王', note: '托塔天王' },
+  '七杀': { name: '黄飞虎', note: '倒戈武将' },
+  '破军': { name: '纣王',   note: '殷商基业毁于一旦' }
+};
+
+// ── 辅佐八曜 ──
+const auxStars = [
+  {
+    name: '左辅', py: 'zuǒ fǔ',
+    wuxing: '戊土',
+    desc: '<strong>左辅</strong>——阳土，北斗助星。主贵人之力来自<strong>同辈、下属、平级</strong>的助力。性格敦厚稳重，善于配合，是成事背后的推手。入命则人缘佳、多得帮手、办事有底。'
+  },
+  {
+    name: '右弼', py: 'yòu bì',
+    wuxing: '癸水',
+    desc: '<strong>右弼</strong>——阴水，北斗助星。主贵人之力来自<strong>长辈、上级、暗中</strong>的扶持。性格灵活机巧，善于暗中协调。入命则常有"不知不觉中有人帮"的运势。'
+  },
+  {
+    name: '文昌', py: 'wén chāng',
+    wuxing: '辛金',
+    desc: '<strong>文昌</strong>——阳金，南斗文星。主<strong>正统学术、科举功名、文书契约</strong>。擅长逻辑思维、规范写作。入命则学业有成、文笔出众、重秩序与章程。'
+  },
+  {
+    name: '文曲', py: 'wén qǔ',
+    wuxing: '癸水',
+    desc: '<strong>文曲</strong>——阴水，北斗文星。主<strong>才艺风流、口才表达、异路功名</strong>。擅长艺术感知、即兴发挥。入命则才思敏捷、能言善辩、偏才出众。'
+  },
+  {
+    name: '天魁', py: 'tiān kuí',
+    wuxing: '丙火',
+    desc: '<strong>天魁</strong>——阳火，南斗贵人。主<strong>阳贵、明面上的贵人</strong>，多为男性长辈或上级。属"天降之贵"，来得直接、大方、公开。入命则贵人运强、遇事有援。'
+  },
+  {
+    name: '天钺', py: 'tiān yuè',
+    wuxing: '丁火',
+    desc: '<strong>天钺</strong>——阴火，南斗贵人。主<strong>阴贵、暗中相助的贵人</strong>，多为女性长辈或幕后力量。来得委婉、间接、不张扬。入命则暗中有助、逢凶化吉。'
+  },
+  {
+    name: '禄存', py: 'lù cún',
+    wuxing: '己土',
+    desc: '<strong>禄存</strong>——阴土，北斗财星。主<strong>稳定积蓄之财</strong>，正财正禄。保守务实、积少成多。入命则财运稳健，但禄存前有擎羊后有陀罗——财路自带是非夹击。'
+  },
+  {
+    name: '天马', py: 'tiān mǎ',
+    wuxing: '丙火',
+    desc: '<strong>天马</strong>——阳火，中天驿马星。主<strong>奔波、走动、迁移、变动</strong>。不喜静止，一生多动。入命则好动好走、适合外勤/交通/贸易行业，须看与何星同宫定吉凶。'
+  }
+];
+
+// ── 六煞星 ──
+const shaStars = [
+  {
+    name: '擎羊', py: 'qíng yáng',
+    wuxing: '庚金·阳金',
+    desc: '<strong>擎羊</strong>——阳金之煞。北斗刑星，属<strong>明刀明枪的冲突</strong>。性格刚烈急躁、做事冲动、易与人正面冲突。入命则性情躁进，但若与武曲/七杀同宫，反能激发出超强行动力。'
+  },
+  {
+    name: '陀罗', py: 'tuó luó',
+    wuxing: '辛金·阴金',
+    desc: '<strong>陀罗</strong>——阴金之煞。北斗忌星，属<strong>暗中拖延的磨难</strong>。性格执拗纠缠、做事拖沓、是非不断。入命则事多反复、进度受阻，但也因此磨练出超常的耐心与细致。'
+  },
+  {
+    name: '火星', py: 'huǒ xīng',
+    wuxing: '丙火·阳火',
+    desc: '<strong>火星</strong>——阳火之煞。南斗火煞，属<strong>突发性的剧烈变故</strong>。来势凶猛、去得也快。入命则脾气火爆、行动突兀，但其爆发力若善加引导，可成事业突破的关键推力。'
+  },
+  {
+    name: '铃星', py: 'líng xīng',
+    wuxing: '丁火·阴火',
+    desc: '<strong>铃星</strong>——阴火之煞。南斗火煞，属<strong>暗中积蓄的怨气</strong>。不似火星之骤发，而是长期积压后一次性引爆。入命则心机深沉、记仇、善隐忍，心理压力需主动疏导。'
+  },
+  {
+    name: '地空', py: 'dì kōng',
+    wuxing: '阴火',
+    desc: '<strong>地空</strong>——阴火之煞。中天空亡之星，主<strong>理想落空、半途而废</strong>。想法天马行空却不落地，容易虎头蛇尾。入命则灵感丰富但执行力弱，须有强星同宫才能把想法变现。'
+  },
+  {
+    name: '地劫', py: 'dì jié',
+    wuxing: '阳火',
+    desc: '<strong>地劫</strong>——阳火之煞。中天劫煞之星，主<strong>突如其来的损失与波折</strong>。比地空更猛烈，直接"劫"走已有之物。入命则人生多波折、需经大起大落后方见真章，所谓"劫后重生"。'
+  }
+];
+
+// ═══════════════════════════════════════════════
+//  渲染函数
+// ═══════════════════════════════════════════════
+
+// ── 1. 十四主星秘诀卡片 ──
+function renderStarsGrid() {
+  const grid = document.getElementById('starsGrid');
+  let html = '';
+  starsData.forEach(s => {
+    const av = avatarMap[s.name] || { name: '—', note: '' };
+    const sihuaChars = { '禄':'禄','权':'权','科':'科','忌':'忌' };
+    const sihuaCls   = { '禄':'sihua-lu','权':'sihua-quan','科':'sihua-ke','忌':'sihua-ji' };
+    const sihuaHTML = s.sihua.length > 0
+      ? s.sihua.map(c => `<span class="sihua-char ${sihuaCls[c]}">${sihuaChars[c]}</span>`).join('')
+      : '';
+
+    const noSihuaBadge = s.noSihua
+      ? '<span style="display:inline-block;margin-left:6px;font-size:0.65em;color:#ef4444;border:1px solid rgba(239,68,68,0.4);border-radius:3px;padding:0 5px;" title="此星永不四化">无化</span>'
+      : '';
+
+    html += `
+      <div class="star-card">
+        <div class="card-stripe s-${s.wuClass}"></div>
+        <div class="card-top">
+          <div>
+            <span class="star-name">${s.name}</span>
+            <span class="star-py">${s.py}</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <span class="sihua-badge">${sihuaHTML}</span>
+            ${noSihuaBadge}
+          </div>
+        </div>
+        <span class="wuxing-tag w-${s.wuClass}">${s.wuxing}</span>
+        <span style="font-size:0.7em;color:var(--text-dim);margin-left:6px;">${s.group}</span>
+        <div class="secret">"${s.secret}"</div>
+        <div class="trait">${s.trait}</div>
+        <div class="miaowang">🏛️ 庙旺：${s.miaowang}</div>
+        <div class="avatar">🎭 封神化身：<strong>${av.name}</strong><span class="avatar-note">${av.note}</span></div>
+      </div>
+    `;
+  });
+  grid.innerHTML = html;
+}
+
+// ── 2. 北斗/南斗/中天 分组表 ──
+function renderGroups() {
+  const section = document.getElementById('groupSection');
+  const groups = {
+    '北斗': { cls: 'h-beidou', emoji: '🐉', desc: '北斗主' },
+    '南斗': { cls: 'h-nandou', emoji: '🐢', desc: '南斗主' },
+    '中天': { cls: 'h-zhongtian', emoji: '⚡', desc: '中天主' }
+  };
+
+  let html = '';
+  for (const [gname, ginfo] of Object.entries(groups)) {
+    const members = starsData.filter(s => s.group === gname).sort((a,b) => a.groupOrder - b.groupOrder);
+    html += `<div class="group-table-wrap">
+      <div class="group-header ${ginfo.cls}">${ginfo.emoji} ${gname}星系 — ${ginfo.desc}${members.length}颗</div>
+      <table class="group-table">
+        <thead><tr>
+          <th>序号</th><th>星名</th><th>拼音</th><th>五行</th><th>核心特质</th><th>庙旺宫</th><th>四化</th><th>封神化身</th>
+        </tr></thead>
+        <tbody>`;
+    members.forEach((s, i) => {
+      const av = avatarMap[s.name] || { name: '—' };
+      const sihuaStr = s.noSihua
+        ? '<span style="color:#ef4444;">— 无四化 —</span>'
+        : s.sihua.map(c => {
+            const map = {'禄':'化禄','权':'化权','科':'化科','忌':'化忌'};
+            return map[c];
+          }).join(' · ');
+      html += `<tr>
+        <td>${i+1}</td>
+        <td class="star-cell">${s.name}</td>
+        <td style="font-size:0.75em;color:var(--text-dim);">${s.py}</td>
+        <td>${s.wuxing}</td>
+        <td style="font-size:0.8em;">${s.trait.replace(/<[^>]*>/g,'')}</td>
+        <td style="font-size:0.78em;">${s.miaowang.replace(/<[^>]*>/g,'')}</td>
+        <td style="font-size:0.78em;">${sihuaStr}</td>
+        <td style="font-size:0.78em;color:var(--gold-light);">${av.name}</td>
+      </tr>`;
+    });
+    html += `</tbody></table></div>`;
+  }
+  section.innerHTML = html;
+}
+
+// ── 3. 辅佐八曜 ──
+function renderAux() {
+  const grid = document.getElementById('auxGrid');
+  let html = '';
+  auxStars.forEach(a => {
+    html += `<div class="aux-card">
+      <div class="aux-name">${a.name}</div>
+      <div class="aux-py">${a.py}</div>
+      <span class="aux-wuxing">${a.wuxing}</span>
+      <div class="aux-body">${a.desc}</div>
+    </div>`;
+  });
+  grid.innerHTML = html;
+}
+
+// ── 4. 六煞星 ──
+function renderSha() {
+  const grid = document.getElementById('shaGrid');
+  let html = '';
+  shaStars.forEach(a => {
+    html += `<div class="aux-card">
+      <div class="aux-name">${a.name}</div>
+      <div class="aux-py">${a.py}</div>
+      <span class="aux-wuxing">${a.wuxing}</span>
+      <div class="aux-body">${a.desc}</div>
+    </div>`;
+  });
+  grid.innerHTML = html;
+}
+
+// ── 5. 闪卡 ──
+let allFlipped = false;
+
+function renderFlashcards() {
+  const wrap = document.getElementById('flashcardsWrap');
+  let html = '';
+  starsData.forEach((s, idx) => {
+    const av = avatarMap[s.name] || { name: '—' };
+    html += `
+      <div class="flashcard" id="fc-${idx}" onclick="toggleCard(${idx})">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="fc-name">${s.name}</div>
+            <div class="fc-group">${s.group}星系</div>
+          </div>
+          <div class="card-face card-back">
+            <div class="fc-secret">"${s.secret}"</div>
+            <div class="fc-wuxing">${s.wuxing} · ${s.group}</div>
+            <div style="font-size:0.7em;color:var(--gold);margin-top:5px;">🎭 ${av.name}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  wrap.innerHTML = html;
+}
+
+// ── 6. 封神化身记忆法对照表 ──
+function renderAvatarTable() {
+  const section = document.getElementById('avatarSection');
+  if (!section) return;
+  const groups = [
+    { name: '紫微星系 · 六星', keys: ['紫微','天机','太阳','武曲','天同','廉贞'], cls: 'h-beidou', emoji: '👑' },
+    { name: '天府星系 · 八星', keys: ['天府','太阴','贪狼','巨门','天相','天梁','七杀','破军'], cls: 'h-nandou', emoji: '🏛️' }
+  ];
+  let html = '';
+  groups.forEach(g => {
+    html += `<div class="group-table-wrap">
+      <div class="group-header ${g.cls}">${g.emoji} ${g.name}</div>
+      <table class="group-table">
+        <thead><tr><th>主星</th><th>封神化身</th><th>一句话记忆注</th></tr></thead>
+        <tbody>`;
+    g.keys.forEach(name => {
+      const av = avatarMap[name];
+      if (!av) return;
+      html += `<tr>
+        <td class="star-cell">${name}</td>
+        <td style="color:var(--gold-light);font-weight:600;">${av.name}</td>
+        <td style="font-size:0.8em;color:var(--text-dim);">${av.note}</td>
+      </tr>`;
+    });
+    html += `</tbody></table></div>`;
+  });
+  section.innerHTML = html;
+}
+
+function toggleCard(idx) {
+  const card = document.getElementById('fc-' + idx);
+  if (card) {
+    card.classList.toggle('flipped');
+  }
+}
+
+function flipAll() {
+  allFlipped = !allFlipped;
+  const btn = document.getElementById('flipAllBtn');
+  btn.textContent = allFlipped ? '🔄 全部翻回' : '🔄 全部翻转';
+  starsData.forEach((_, idx) => {
+    const card = document.getElementById('fc-' + idx);
+    if (card) {
+      if (allFlipped) {
+        card.classList.add('flipped');
+      } else {
+        card.classList.remove('flipped');
+      }
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════
+//  初始化
+// ═══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  renderStarsGrid();
+  renderGroups();
+  renderAux();
+  renderSha();
+  renderFlashcards();
+  renderAvatarTable();
+
+  document.getElementById('flipAllBtn').addEventListener('click', flipAll);
+});
+</script>
+
+</body>
+</html>
