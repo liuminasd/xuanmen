@@ -844,9 +844,9 @@ function getSanYuan(riGan, riZhi) {
   }
   const fuTouZhi = (riZhi + 12 - steps) % 12;
 
-  // 符头地支定三元
-  if ([0, 6].includes(fuTouZhi)) return 0;    // 子午 → 上元
-  if ([2, 8].includes(fuTouZhi)) return 1;    // 寅申 → 中元
+  // 符头地支定三元：子午卯酉→上元，寅申巳亥→中元，辰戌丑未→下元
+  if ([0, 3, 6, 9].includes(fuTouZhi)) return 0;    // 子午卯酉 → 上元
+  if ([2, 5, 8, 11].includes(fuTouZhi)) return 1;   // 寅申巳亥 → 中元
   return 2; // 辰戌丑未 → 下元
 }
 
