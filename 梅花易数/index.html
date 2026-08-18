@@ -148,7 +148,7 @@ body {
 .layer-dash-item {
   text-align: center; padding: 14px 10px;
   background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius-sm); transition: all var(--dur);
+  border-radius: var(--radius-sm); transition: all var(--dur); cursor: pointer;
 }
 .layer-dash-item:hover { border-color: var(--gold); background: var(--gold-bg); }
 .layer-dash-item.completed { border-color: rgba(78,168,104,.35); background: rgba(78,168,104,.06); }
@@ -555,7 +555,7 @@ body {
         ? '<div class="ld-score">' + score + ' 分</div>'
         : '';
 
-      html += '<div class="layer-dash-item' + cls + '">' +
+      html += '<div class="layer-dash-item' + cls + '" onclick="toggleLayer(\'' + l.id + '\')" title="点击切换完成状态">' +
         '<div class="ld-icon">' + l.icon + '</div>' +
         '<div class="ld-name">' + l.name + '</div>' +
         statusHtml + scoreHtml +
@@ -566,12 +566,39 @@ body {
 
   /* ── 初始加载进度 ── */
   function loadAndRender() {
-    var data = JSON.parse(localStorage.getItem('xm_progress_meihua') || '{}');
+    var data = loadProgress();
     buildLayerDashboard(data);
     if (typeof updateDashboard === 'function') {
       updateDashboard('meihua');
     }
   }
+
+  function loadProgress() {
+    try {
+      return JSON.parse(localStorage.getItem('xm_progress_meihua') || '{}');
+    } catch (e) { return {}; }
+  }
+
+  function saveProgress(data) {
+    try {
+      localStorage.setItem('xm_progress_meihua', JSON.stringify(data));
+    } catch (e) {}
+  }
+
+  function toggleLayer(id) {
+    var data = loadProgress();
+    if (data[id] && data[id].completed) {
+      data[id].completed = false;
+    } else {
+      data[id] = data[id] || {};
+      data[id].completed = true;
+      data[id].ts = Date.now();
+    }
+    saveProgress(data);
+    loadAndRender();
+  }
+
+  window.toggleLayer = toggleLayer;
 
   loadAndRender();
 

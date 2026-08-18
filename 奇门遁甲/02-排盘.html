@@ -715,6 +715,10 @@ function zhiToGong(zhiIdx) {
   return map[zhiIdx];
 }
 
+// 马星地支映射（日支索引 0-11 → 三合局马星地支索引）
+// 申子辰→寅(2)、寅午戌→申(8)、亥卯未→巳(4)、巳酉丑→亥(11)
+const MA_XING_ZHI = [2, 11, 8, 4, 2, 11, 8, 4, 2, 11, 8, 4];
+
 // 计算马星所在宫位
 function getMaXing(zhiIdx) {
   // 申子辰 → 马在寅(地支索引2) → 寅落艮8宫
@@ -732,11 +736,12 @@ function getMaXing(zhiIdx) {
 
 // 计算日干支
 function calcRiGanZhi(year, month, day) {
-  // 基于 1900年1月1日 = 甲戌日
+  // 基于 1900年1月1日 = 甲戌日（六十甲子序号10，甲子=0）
+  // 原公式 diffDays % 60 把基准日误当甲子，导致日柱恒定偏差 10 天，故须 +10 补偿
   const base = new Date(1900, 0, 1);
   const target = new Date(year, month - 1, day);
   const diffDays = Math.round((target - base) / (1000 * 60 * 60 * 24));
-  const idx = ((diffDays % 60) + 60) % 60;
+  const idx = ((diffDays + 10) % 60 + 60) % 60;
   return { gan: idx % 10, zhi: idx % 12 };
 }
 
@@ -759,12 +764,13 @@ function calcNianGanZhi(year) {
 
 // 计算月干支（农历近似，用节气月）
 function calcYueGanZhi(yearGan, month) {
-  // 寅月=正月(公历2月)
-  const yueZhi = (month + 10) % 12; // 公历2月=寅月(0) → 1月=丑,2=寅,3=卯...
+  // 寅月=正月(公历2月)，月支直接取 DI_ZHI 索引（子=0,丑=1,寅=2）
+  const yueZhi = month % 12; // 公历2月=寅(2), 1月=丑(1), 12月=子(0)
   // 五虎遁
   const wuHuMap = [2, 4, 6, 8, 0]; // 甲己→丙(2), 乙庚→戊(4), 丙辛→庚(6), 丁壬→壬(8), 戊癸→甲(0)
-  const baseGan = wuHuMap[yearGan % 5];
-  const yueGan = (baseGan + yueZhi) % 10;
+  const baseGan = wuHuMap[yearGan % 5]; // 寅月(正月)之干
+  const yueXu = (yueZhi + 10) % 12; // 从寅月起算的月序数：寅=0,卯=1,...,丑=11
+  const yueGan = (baseGan + yueXu) % 10;
   return { gan: yueGan, zhi: yueZhi };
 }
 
@@ -928,7 +934,6 @@ function paiPan(year, month, day, shiChenIndex) {
   const xunShouZhiMap = {0:0, 10:1, 8:2, 6:3, 4:4, 2:5}; // 六甲旬首地支索引
   const xunShouZhiIdx = [0,10,8,6,4,2][xunInfo.xunLiuJiaIdx];
   let stepsFromXunShou = (shiGZ.zhi - xunShouZhiIdx + 12) % 12;
-  if (stepsFromXunShou === 0) stepsFromXunShou = 0;
 
   // 值使门从原宫起, 阳顺阴逆数 stepsFromXunShou + 1 格
   const zhiShiMenGong = zhiShiMen.gong === 5 ? 2 : zhiShiMen.gong;
@@ -938,6 +943,8 @@ function paiPan(year, month, day, shiChenIndex) {
   } else {
     targetMenGong = niFei(zhiShiMenGong, stepsFromXunShou);
   }
+  // 中5宫无门，值使门若落中5宫则寄坤2（与"八门只8个、中宫取坤2门"的盘面约定一致）
+  if (targetMenGong === 5) targetMenGong = 2;
 
   // 人盘八门
   const renPan = {};
@@ -1018,8 +1025,16 @@ function doPaiPan() {
   const day   = parseInt(document.getElementById('sim-day').value);
   const shi   = parseInt(document.getElementById('sim-hour').value);
 
-  if (isNaN(year) || isNaN(month) || isNaN(day)) {
+  if (isNaN(year) || isNaN(month) || isNaN(day) || isNaN(shi)) {
     alert('请输入有效的公历日期');
+    return;
+  }
+
+  // 范围校验：年 1900-2100、月 1-12、日 1-当月实际天数、时支 0-11
+  // 否则 new Date 会把 2月30日、13月、32日 静默进位成下月/下年，导致排盘结果错位
+  const daysInMonth = new Date(year, month, 0).getDate();
+  if (year < 1900 || year > 2100 || month < 1 || month > 12 || day < 1 || day > daysInMonth || shi < 0 || shi > 11) {
+    alert('请输入有效的公历日期（年 1900-2100，月 1-12，日 1-' + daysInMonth + '）');
     return;
   }
 
@@ -1040,7 +1055,7 @@ function doPaiPan() {
     <strong>值使：</strong>${result.zhiShiMen}<br>
     <strong>日柱空亡：</strong>${result.xunKongZhi.map(z=>DI_ZHI[z]).join('、')} ·
     <strong>时柱空亡：</strong>${result.shiXunKongZhi.map(z=>DI_ZHI[z]).join('、')} ·
-    <strong>马星：</strong>${DI_ZHI[result.riGZ.zhi]}日 → 马在${DI_ZHI[[2,8,4,6][Math.floor((result.riGZ.zhi % 12) / 3)]] || DI_ZHI[result.maXingGong]} → ${GONG_NAMES[result.maXingGong]}宫
+    <strong>马星：</strong>${DI_ZHI[result.riGZ.zhi]}日 → 马在${DI_ZHI[MA_XING_ZHI[result.riGZ.zhi]]} → ${GONG_NAMES[result.maXingGong]}宫
   `;
 
   // 渲染九宫格

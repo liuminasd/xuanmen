@@ -5,6 +5,11 @@
 (function() {
   'use strict';
 
+  // 安全解析 localStorage 进度数据：损坏时返回空对象，避免 JSON.parse 抛异常中断调用链
+  function safeParse(raw) {
+    try { return JSON.parse(raw || '{}'); } catch (e) { return {}; }
+  }
+
   /* ── 进度条 + 回到顶部 ── */
   var bar = document.getElementById('pageProgress') || document.getElementById('progress');
   var topBtn = document.getElementById('backTop');
@@ -12,7 +17,8 @@
   function onScroll() {
     if (bar) {
       var h = document.documentElement;
-      var pct = Math.round(h.scrollTop / (h.scrollHeight - h.clientHeight) * 100);
+      var denom = h.scrollHeight - h.clientHeight;
+      var pct = denom > 0 ? Math.round(h.scrollTop / denom * 100) : 0;
       bar.style.width = pct + '%';
     }
     if (topBtn) topBtn.classList.toggle('visible', window.scrollY > 400);
@@ -105,26 +111,28 @@
       }
       if (!text) return;
 
-      navigator.clipboard.writeText(text).then(function() {
+      function markCopied() {
         btn.classList.add('done');
         btn.textContent = '✓ 已复制';
         setTimeout(function() {
           btn.classList.remove('done');
           btn.textContent = '📋 复制';
         }, 2000);
-      }).catch(function() {
-        // 降级方案
+      }
+      function fallbackCopy() {
         var ta = document.createElement('textarea');
         ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
         document.body.appendChild(ta); ta.select();
-        document.execCommand('copy'); document.body.removeChild(ta);
-        btn.classList.add('done');
-        btn.textContent = '✓ 已复制';
-        setTimeout(function() {
-          btn.classList.remove('done');
-          btn.textContent = '📋 复制';
-        }, 2000);
-      });
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        markCopied();
+      }
+      // 先判断 Clipboard API 是否存在（非安全上下文下 navigator.clipboard 为 undefined）
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(markCopied).catch(fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
     });
   });
 
@@ -220,7 +228,7 @@
     async saveProgress(system, page, completed, score) {
       // 始终存 localStorage
       var key = 'xm_progress_' + system;
-      var data = JSON.parse(localStorage.getItem(key) || '{}');
+      var data = safeParse(localStorage.getItem(key));
       data[page] = { completed: completed, score: score, ts: Date.now() };
       localStorage.setItem(key, JSON.stringify(data));
       // 尝试同步到后端
@@ -228,14 +236,14 @@
     },
     async loadProgress(system) {
       var key = 'xm_progress_' + system;
-      return JSON.parse(localStorage.getItem(key) || '{}');
+      return safeParse(localStorage.getItem(key));
     }
   };
 
   /* ── 进度仪表盘更新 ── */
   window.updateDashboard = function(system) {
     var key = 'xm_progress_' + system;
-    var data = JSON.parse(localStorage.getItem(key) || '{}');
+    var data = safeParse(localStorage.getItem(key));
     var pages = ['01','02','03','04','05','06','quiz'];
     var done = pages.filter(function(p) { return data[p] && data[p].completed; });
     var el = document.getElementById('dashDone');
