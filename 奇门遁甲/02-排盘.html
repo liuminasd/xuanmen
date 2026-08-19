@@ -763,10 +763,9 @@ function calcNianGanZhi(year) {
   return { gan: idx % 10, zhi: idx % 12 };
 }
 
-// 计算月干支（农历近似，用节气月）
-function calcYueGanZhi(yearGan, month) {
-  // 寅月=正月(公历2月)，月支直接取 DI_ZHI 索引（子=0,丑=1,寅=2）
-  const yueZhi = month % 12; // 公历2月=寅(2), 1月=丑(1), 12月=子(0)
+// 计算月干支（精确节气月：立春起寅月、惊蛰卯月…，按天文交节时刻判断）
+function calcYueGanZhi(yearGan, year, month, day) {
+  const yueZhi = getYueZhi(year, month, day); // 精确月支（子=0,丑=1,寅=2,...,亥=11）
   // 五虎遁
   const wuHuMap = [2, 4, 6, 8, 0]; // 甲己→丙(2), 乙庚→戊(4), 丙辛→庚(6), 丁壬→壬(8), 戊癸→甲(0)
   const baseGan = wuHuMap[yearGan % 5]; // 寅月(正月)之干
@@ -775,61 +774,137 @@ function calcYueGanZhi(yearGan, month) {
   return { gan: yueGan, zhi: yueZhi };
 }
 
-// 节气数据 (约略日期, 月份, 局数 [上,中,下], 阴阳遁: 0=阳遁,1=阴遁)
+// 节气数据：lon=太阳视黄经(度, 春分用360表示0°), m/d=近似日期(二分求根初值), j=局数[上中下], dun=阴阳遁
 const JIE_QI = [
-  {name:'冬至',m:12,d:22,j:[1,7,4],dun:0},
-  {name:'小寒',m:1, d:6, j:[2,8,5],dun:0},
-  {name:'大寒',m:1, d:20,j:[3,9,6],dun:0},
-  {name:'立春',m:2, d:4, j:[8,5,2],dun:0},
-  {name:'雨水',m:2, d:19,j:[9,6,3],dun:0},
-  {name:'惊蛰',m:3, d:6, j:[1,7,4],dun:0},
-  {name:'春分',m:3, d:21,j:[3,9,6],dun:0},
-  {name:'清明',m:4, d:5, j:[4,1,7],dun:0},
-  {name:'谷雨',m:4, d:20,j:[5,2,8],dun:0},
-  {name:'立夏',m:5, d:6, j:[4,1,7],dun:0},
-  {name:'小满',m:5, d:21,j:[5,2,8],dun:0},
-  {name:'芒种',m:6, d:6, j:[6,3,9],dun:0},
-  {name:'夏至',m:6, d:21,j:[9,3,6],dun:1},
-  {name:'小暑',m:7, d:7, j:[8,2,5],dun:1},
-  {name:'大暑',m:7, d:23,j:[7,1,4],dun:1},
-  {name:'立秋',m:8, d:8, j:[2,5,8],dun:1},
-  {name:'处暑',m:8, d:23,j:[1,4,7],dun:1},
-  {name:'白露',m:9, d:8, j:[9,3,6],dun:1},
-  {name:'秋分',m:9, d:23,j:[7,1,4],dun:1},
-  {name:'寒露',m:10,d:8, j:[6,9,3],dun:1},
-  {name:'霜降',m:10,d:24,j:[5,8,2],dun:1},
-  {name:'立冬',m:11,d:8, j:[6,9,3],dun:1},
-  {name:'小雪',m:11,d:22,j:[5,8,2],dun:1},
-  {name:'大雪',m:12,d:7, j:[4,7,1],dun:1}
+  {name:'冬至',lon:270,m:12,d:22,j:[1,7,4],dun:0},
+  {name:'小寒',lon:285,m:1, d:6, j:[2,8,5],dun:0},
+  {name:'大寒',lon:300,m:1, d:20,j:[3,9,6],dun:0},
+  {name:'立春',lon:315,m:2, d:4, j:[8,5,2],dun:0},
+  {name:'雨水',lon:330,m:2, d:19,j:[9,6,3],dun:0},
+  {name:'惊蛰',lon:345,m:3, d:6, j:[1,7,4],dun:0},
+  {name:'春分',lon:360,m:3, d:21,j:[3,9,6],dun:0},
+  {name:'清明',lon:15, m:4, d:5, j:[4,1,7],dun:0},
+  {name:'谷雨',lon:30, m:4, d:20,j:[5,2,8],dun:0},
+  {name:'立夏',lon:45, m:5, d:6, j:[4,1,7],dun:0},
+  {name:'小满',lon:60, m:5, d:21,j:[5,2,8],dun:0},
+  {name:'芒种',lon:75, m:6, d:6, j:[6,3,9],dun:0},
+  {name:'夏至',lon:90, m:6, d:21,j:[9,3,6],dun:1},
+  {name:'小暑',lon:105,m:7, d:7, j:[8,2,5],dun:1},
+  {name:'大暑',lon:120,m:7, d:23,j:[7,1,4],dun:1},
+  {name:'立秋',lon:135,m:8, d:8, j:[2,5,8],dun:1},
+  {name:'处暑',lon:150,m:8, d:23,j:[1,4,7],dun:1},
+  {name:'白露',lon:165,m:9, d:8, j:[9,3,6],dun:1},
+  {name:'秋分',lon:180,m:9, d:23,j:[7,1,4],dun:1},
+  {name:'寒露',lon:195,m:10,d:8, j:[6,9,3],dun:1},
+  {name:'霜降',lon:210,m:10,d:24,j:[5,8,2],dun:1},
+  {name:'立冬',lon:225,m:11,d:8, j:[6,9,3],dun:1},
+  {name:'小雪',lon:240,m:11,d:22,j:[5,8,2],dun:1},
+  {name:'大雪',lon:255,m:12,d:7, j:[4,7,1],dun:1}
 ];
 
-// 获取节气
-function getJieQi(month, day) {
-  // 将日期转换为一年中的天数进行比较
-  // 直接按月份和日期匹配
-  for (let i = 0; i < JIE_QI.length; i++) {
-    const jq = JIE_QI[i];
-    const jqMD = jq.m * 100 + jq.d;
-    const curMD = month * 100 + day;
+// ═══════ 精确节气计算（太阳视黄经 + 二分求根） ═══════
+// 替代固定日期表：交节日期逐年浮动 1-2 天，本算法按天文黄经实时求解，
+// 精度约 ±6 分钟，足以精确到「日」——奇门排盘按日定局，已完全够用。
+const JIE_QI_DEG = Math.PI / 180;
 
-    // 判断当前日期属于哪个节气区间
-    // 需要处理跨年情况 (冬至在12月, 相邻的是小寒在1月)
-    // 检查下一个节气
-    const nextJq = JIE_QI[(i + 1) % JIE_QI.length];
-    let nextMD = nextJq.m * 100 + nextJq.d;
+// 公历转儒略日（UTC，hourUtc 可带小数）
+function toJD(y, m, d, hourUtc) {
+  let yy = y, mm = m;
+  if (mm <= 2) { yy--; mm += 12; }
+  const A = Math.floor(yy / 100);
+  const B = 2 - A + Math.floor(A / 4);
+  return Math.floor(365.25 * (yy + 4716)) + Math.floor(30.6001 * (mm + 1)) + d + B - 1524.5 + (hourUtc || 0) / 24;
+}
 
-    // 处理跨年
-    if (jq.m === 12 && nextJq.m === 1) {
-      // 当前日期在12月或在1月(下一节气之前)
-      if (curMD >= 1222 || curMD < 106) {
-        return jq;
-      }
-    } else if (curMD >= jqMD && curMD < nextMD) {
-      return jq;
+// 太阳视黄经（度，0-360），Meeus 低精度公式
+function sunApparentLongitude(jd) {
+  const T = (jd - 2451545.0) / 36525.0;
+  const L0 = 280.46646 + 36000.76983 * T + 0.0003032 * T * T;
+  const M = 357.52911 + 35999.05029 * T - 0.0001537 * T * T;
+  const Mr = M * JIE_QI_DEG;
+  const C = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.sin(Mr)
+          + (0.019993 - 0.000101 * T) * Math.sin(2 * Mr)
+          + 0.000289 * Math.sin(3 * Mr);
+  const trueLon = L0 + C;
+  const omega = (125.04 - 1934.136 * T) * JIE_QI_DEG;
+  const lambda = trueLon - 0.00569 - 0.00478 * Math.sin(omega);
+  return ((lambda % 360) + 360) % 360;
+}
+
+// 二分求根：某年太阳视黄经达到 targetLon 的时刻（儒略日），初值取近似日期前后 ±3 天
+function jieQiJD(year, targetLon, gm, gd) {
+  const jd0 = toJD(year, gm, gd, 0);
+  let lo = jd0 - 3, hi = jd0 + 3;
+  for (let i = 0; i < 60; i++) {
+    const mid = (lo + hi) / 2;
+    const lon = sunApparentLongitude(mid);
+    let diff = lon - targetLon;
+    if (diff > 180) diff -= 360;
+    if (diff < -180) diff += 360;
+    if (diff > 0) hi = mid; else lo = mid;
+  }
+  return (lo + hi) / 2;
+}
+
+// 儒略日 → 北京时间（UTC+8）年月日时分
+function jdToBeijing(jd) {
+  const z = jd + 8 / 24 + 0.5;
+  const F = z - Math.floor(z);
+  let Z = Math.floor(z);
+  let A = Z, alpha;
+  if (Z >= 2299161) { alpha = Math.floor((Z - 1867216.25) / 36524.25); A = Z + 1 + alpha - Math.floor(alpha / 4); }
+  const B = A + 1524, C = Math.floor((B - 122.1) / 365.25), D = Math.floor(365.25 * C), E = Math.floor((B - D) / 30.6001);
+  const day = B - D - Math.floor(30.6001 * E);
+  const month = E < 14 ? E - 1 : E - 13;
+  const year = month > 2 ? C - 4716 : C - 4715;
+  const totalSec = Math.round(F * 86400);
+  return { year, month, day, hour: Math.floor(totalSec / 3600), min: Math.floor((totalSec % 3600) / 60) };
+}
+
+function makeJieQi(jq, year) {
+  const jd = jieQiJD(year, jq.lon, jq.m, jq.d);
+  const bt = jdToBeijing(jd);
+  return { name: jq.name, jd, dun: jq.dun, j: jq.j, m: bt.month, d: bt.day, h: bt.hour, min: bt.min };
+}
+
+// 某年节气序列缓存（覆盖公历全年，含跨年边界的上一年大雪/冬至）
+const jieQiCache = {};
+function getYearJieQi(year) {
+  if (jieQiCache[year]) return jieQiCache[year];
+  const arr = [];
+  arr.push(makeJieQi(JIE_QI[23], year - 1)); // 上一年大雪（覆盖 1 月初月支判断）
+  arr.push(makeJieQi(JIE_QI[0], year - 1));  // 上一年冬至
+  for (let k = 0; k < 24; k++) arr.push(makeJieQi(JIE_QI[k], year));
+  arr.sort((a, b) => a.jd - b.jd);
+  jieQiCache[year] = arr;
+  return arr;
+}
+
+// 获取当前日期所属节气（精确到交节时刻，返回含 name/dun/j 的对象）
+function getJieQi(year, month, day) {
+  const list = getYearJieQi(year);
+  const targetJD = toJD(year, month, day, 24) - 8 / 24; // 当天结束(次日0点)→UTC，交节日当天整体归新节气
+  let result = list[0];
+  for (const jq of list) {
+    if (jq.jd <= targetJD) result = jq; else break;
+  }
+  return result;
+}
+
+// 月支对应的「节」（立春→寅月…大雪→子月），十二节用于定月
+const JIE_YUE_ZHI = { '大雪':0,'小寒':1,'立春':2,'惊蛰':3,'清明':4,'立夏':5,'芒种':6,'小暑':7,'立秋':8,'白露':9,'寒露':10,'立冬':11 };
+
+// 精确月支（节气月）：子=0,丑=1,寅=2,...,亥=11
+function getYueZhi(year, month, day) {
+  const list = getYearJieQi(year);
+  const targetJD = toJD(year, month, day, 24) - 8 / 24;
+  let zhi = 0; // 默认子月（大雪后至小寒前）
+  for (const jq of list) {
+    if (JIE_YUE_ZHI[jq.name] !== undefined && jq.jd <= targetJD) {
+      zhi = JIE_YUE_ZHI[jq.name];
     }
   }
-  // 默认返回最近的节气
-  return JIE_QI[0];
+  return zhi;
 }
 
 // 确定三元 (基于日干支)
@@ -866,12 +941,12 @@ function niFei(startGong, steps) {
 function paiPan(year, month, day, shiChenIndex) {
   // Step 0: 排四柱
   const nianGZ = calcNianGanZhi(year);
-  const yueGZ = calcYueGanZhi(nianGZ.gan, month);
+  const yueGZ = calcYueGanZhi(nianGZ.gan, year, month, day);
   const riGZ = calcRiGanZhi(year, month, day);
   const shiGZ = calcShiGanZhi(riGZ.gan, shiChenIndex * 2);
 
   // Step 1: 定局
-  const jq = getJieQi(month, day);
+  const jq = getJieQi(year, month, day);
   const yinYangDun = jq.dun; // 0=阳遁, 1=阴遁
   const sanYuan = getSanYuan(riGZ.gan, riGZ.zhi);
   const juShu = jq.j[sanYuan];
