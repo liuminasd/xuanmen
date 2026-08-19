@@ -631,6 +631,14 @@
   renderDashboard();
   updateHubCards();
 
+  /* ═══ 跨标签页进度同步 ═══ */
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'xm_progress_qimen') {
+      renderDashboard();
+      updateHubCards();
+    }
+  });
+
   /* ═══ 键盘 Esc 关闭导航 ═══ */
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
