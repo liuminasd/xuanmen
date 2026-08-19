@@ -676,8 +676,9 @@ const BA_MEN = [
   {name:'惊门',gong:7},{name:'生门',gong:8}
 ];
 
-// 八神顺序
+// 八神顺序（阳遁用白虎/玄武，阴遁用勾陈/朱雀）
 const BA_SHEN = ['值符','螣蛇','太阴','六合','白虎','玄武','九地','九天'];
+const BA_SHEN_YIN = ['值符','螣蛇','太阴','六合','勾陈','朱雀','九地','九天'];
 
 // 六甲旬 → 对应的六仪
 const XUN_YI_MAP = {0:'戊',1:'己',2:'庚',3:'辛',4:'壬',5:'癸'};
@@ -980,6 +981,7 @@ function paiPan(year, month, day, shiChenIndex) {
 
   // Step 6: 安神盘
   const shenPan = {};
+  const shenList = (yinYangDun === 0) ? BA_SHEN : BA_SHEN_YIN; // 阴遁白虎→勾陈、玄武→朱雀
   const zhiFuShenGong = shiGanGong; // 值符神与天盘值符同宫
   for (let i = 0; i < 8; i++) {
     let gong = zhiFuShenGong;
@@ -988,7 +990,7 @@ function paiPan(year, month, day, shiChenIndex) {
       // 跳过中5宫（八神只排八宫，中5寄坤2，与八门排布约定一致）
       if (gong === 5) gong = (yinYangDun === 0) ? shunFei(gong, 1) : niFei(gong, 1);
     }
-    shenPan[gong] = BA_SHEN[i];
+    shenPan[gong] = shenList[i];
   }
 
   // 空亡
